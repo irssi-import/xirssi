@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # did we have gtk-2.0.m4?
 rm -f gtk-2.0.m4
 error=`aclocal $ACLOCAL_FLAGS 2>&1`
