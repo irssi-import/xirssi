@@ -1,17 +1,22 @@
- - moving split windows up/down doesn't move their title
- - make utf8 optional
- - popups:
-   - fix nicklist popup
-   - add url popup
-   - figure out some clean way to do popups :)
+ - hilight colors in window activity aren't handled..
+   they come as %codes, how to change them to rgb values?
+   core changes required to parse them i think..
+
+ - window moving:
+   - moving split windows up/down doesn't move their title
+   - allow moving tabs by dnd like galeon
+   - add "window drag" button and remove those arrow up/down buttons. drag
+     button could be used to move the window anywhere
+   - .. should we change window's refnum when moving?
+
+ - charset stuff:
+   - channel-specific charset settings
+   - convert nick info to utf8 for nicklist (some servers support non-ascii
+     nicks) and statusbar (realname especially)
+
+ - add url popup menu
  - fix pango criticals (or rather wait for gtk+ people fix it)
- - keyboard:
-   - move stuff from gui-entry.c to gui-keyboard.c
-   - allow using hyper/super/all keyboard combos == fix gui_key2str() and
-     move it to gui-keyboard.c too
- - allow moving tabs by dnd like galeon
- - add "window drag" button and remove those arrow up/down buttons. drag
-   button could be used to move the window anywhere
+ - keyboard: fix yank_from_cutbuffer
  - add a combobox containing all windows / window items in the tab, so
    you can use it to switch to another channel or split window and easily
    see which is currently active
