@@ -5,6 +5,33 @@
 <entry>
 <date>2002-06-06</date>
 <weekday>Thursday</weekday>
+<time>22:28</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-entry.h</name>
+<revision>1.4</revision>
+</file>
+<file>
+<name>src/gui-frame.c</name>
+<revision>1.25</revision>
+</file>
+<file>
+<name>src/gui-keyboard.c</name>
+<revision>1.12</revision>
+</file>
+<file>
+<name>src/gui-keyboard.h</name>
+<revision>1.3</revision>
+</file>
+<commondir>src/</commondir>
+<msg>More fixes with handling dead key presses. Automatic completions should work
+with space key again.
+</msg>
+</entry>
+
+<entry>
+<date>2002-06-06</date>
+<weekday>Thursday</weekday>
 <time>22:10</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
