@@ -37,15 +37,21 @@
 static void statusbar_push_nick(GtkStatusbar *statusbar, Nick *nick)
 {
 	unsigned int id;
-	char *str;
+	GString *str;
 
 	id = gtk_statusbar_get_context_id(statusbar, STATUSBAR_CONTEXT);
 
-	str = g_strdup_printf("Nick: %s  -  Host: %s  -  Name: %s",
-			      nick->nick, nick->host, nick->realname);
+	str = g_string_new(NULL);
+	g_string_sprintfa(str, "Nick: %s", nick->nick);
+
+	if (nick->host != NULL)
+		g_string_sprintfa(str, "  -  Host: %s", nick->host);
+	if (nick->realname != NULL)
+		g_string_sprintfa(str, "  -  Name: %s", nick->realname);
+
 	gtk_statusbar_pop(statusbar, id);
-	gtk_statusbar_push(statusbar, id, str);
-	g_free(str);
+	gtk_statusbar_push(statusbar, id, str->str);
+	g_string_free(str, TRUE);
 }
 
 static void statusbar_pop_nick(GtkStatusbar *statusbar)

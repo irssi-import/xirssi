@@ -27,9 +27,9 @@
 #include "gui-nicklist.h"
 #include "gui-nicklist-view.h"
 
-#include "op.xpm"
-#include "halfop.xpm"
-#include "voice.xpm"
+#include "ball-green.h"
+#include "ball-orange.h"
+#include "ball-yellow.h"
 
 static GdkPixbuf *op_pixbuf, *voice_pixbuf, *halfop_pixbuf;
 
@@ -184,9 +184,12 @@ static void gui_nicklist_changed(Channel *channel, Nick *nick)
 
 void gui_nicklists_init(void)
 {
-        op_pixbuf = gdk_pixbuf_new_from_xpm_data(op_xpm);
-        halfop_pixbuf = gdk_pixbuf_new_from_xpm_data(halfop_xpm);
-        voice_pixbuf = gdk_pixbuf_new_from_xpm_data(voice_xpm);
+	op_pixbuf = gdk_pixbuf_new_from_inline(sizeof(ball_green),
+					       ball_green, FALSE, NULL);
+	halfop_pixbuf = gdk_pixbuf_new_from_inline(sizeof(ball_orange),
+						   ball_orange, FALSE, NULL);
+	voice_pixbuf = gdk_pixbuf_new_from_inline(sizeof(ball_yellow),
+						  ball_yellow, FALSE, NULL);
 
 	signal_add("nicklist new", (SIGNAL_FUNC) gui_nicklist_add);
 	signal_add("nicklist remove", (SIGNAL_FUNC) gui_nicklist_remove);

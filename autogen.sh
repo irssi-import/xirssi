@@ -3,3 +3,6 @@ autoheader
 autoconf
 automake --add-missing
 
+cd pixmaps
+./generate.sh
+cd ..

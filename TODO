@@ -12,15 +12,29 @@
  - charset stuff:
    - channel-specific charset settings
    - convert nick info to utf8 for nicklist (some servers support non-ascii
-     nicks) and statusbar (realname especially)
+     nicks) and statusbar (realname especially) and topic
 
  - keyboard:
    - fix yank_from_cutbuffer
    - redirections don't work
+   - pgup/pgdown
+
+ - popups
+   - channel/query popup for parting etc.
+   - gui-context-channel.c for joining etc. probably irc-specific so it
+     works with @#channel stuff in /whois etc.. also possibility to ask the
+     channel topic with /list
 
  - fix pango criticals (or rather wait for gtk+ people fix it)
- - add a combobox containing all windows / window items in the tab, so
+ - add a pulldown menu containing all windows / window items in the tab, so
    you can use it to switch to another channel or split window and easily
    see which is currently active
  - statusbar
  - lots of irc-specific stuff
+ - nicklist: show ignored people with overstrike font, show away people
+   with grey color (0.9 stuff maybe)
+ - show notify list under nicklist
+
+ - when connecting to server, the window won't scroll down sometimes..
+   and first window's width isn't updated immediately after showing nicklist
+   so it prints /names list too wide
