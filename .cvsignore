@@ -38,3 +38,4 @@ configure-stamp
 glib.m4
 glib-2.0.m4
 config-plugin.h
+config-plugin.h.in
