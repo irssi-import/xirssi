@@ -50,7 +50,6 @@ static void sig_activity(Window *window)
 
 static void tab_update_activity(Tab *tab)
 {
-	GtkWidget *label;
 	GdkColor color;
 	GList *tmp;
 	int data_level;
@@ -82,8 +81,7 @@ static void tab_update_activity(Tab *tab)
 	}
 
 	/* change the tab's color */
-	label = gtk_notebook_get_tab_label(tab->frame->notebook, tab->widget);
-	gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &color);
+	gtk_widget_modify_fg(GTK_WIDGET(tab->label), GTK_STATE_NORMAL, &color);
 }
 
 static void sig_activity_update(Window *window)
