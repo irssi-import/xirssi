@@ -48,11 +48,15 @@ static gboolean event_destroy(GtkWidget *window, Frame *frame)
 	g_object_set_data(G_OBJECT(frame->widget), "Frame", NULL);
 	g_free(frame);
 
-	if (frames == NULL) {
+	return FALSE;
+}
+
+static gboolean event_delete(GtkWidget *window, Frame *frame)
+{
+	if (frames->next == NULL) {
 		/* last window killed - quit */
 		signal_emit("command quit", 1, "");
 	}
-
 	return FALSE;
 }
 
@@ -145,6 +149,8 @@ Frame *gui_frame_new(int show)
 
 	g_signal_connect(G_OBJECT(window), "destroy",
 			 G_CALLBACK(event_destroy), frame);
+	g_signal_connect(G_OBJECT(window), "delete_event",
+			 G_CALLBACK(event_delete), frame);
 	g_signal_connect(G_OBJECT(window), "focus_in_event",
 			 G_CALLBACK(event_focus), frame);
 	g_signal_connect_after(GTK_OBJECT(window), "key_press_event",
