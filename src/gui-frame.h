@@ -6,6 +6,7 @@ struct _Frame {
 
 	GtkWindow *window;
 	GtkNotebook *notebook;
+	GtkWidget *menubar;
 	GtkStatusbar *statusbar;
 	Entry *entry;
 	Itemlist *itemlist;

@@ -156,7 +156,7 @@ static gboolean event_switch_page(GtkWidget *notebook, GtkNotebookPage *page,
 
 Frame *gui_frame_new(int show)
 {
-	GtkWidget *window, *vbox, *hbox, *menubar, *notebook, *statusbar;
+	GtkWidget *window, *vbox, *hbox, *notebook, *statusbar;
 	Frame *frame;
 
 	frame = g_new0(Frame, 1);
@@ -184,8 +184,8 @@ Frame *gui_frame_new(int show)
 	gtk_container_add(GTK_CONTAINER(window), vbox);
 
 	/* menu */
-	menubar = gui_menu_bar_new();
-	gtk_box_pack_start(GTK_BOX(vbox), menubar, FALSE, FALSE, 0);
+	frame->menubar = gui_menu_bar_new();
+	gtk_box_pack_start(GTK_BOX(vbox), frame->menubar, FALSE, FALSE, 0);
 
 	/* notebook */
 	notebook = gtk_notebook_new();

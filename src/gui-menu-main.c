@@ -25,6 +25,10 @@
 #include "dialogs.h"
 #include "setup.h"
 
+#include "gui-frame.h"
+#include "gui-tab.h"
+#include "gui-nicklist-view.h"
+
 #define FAQ_URL "http://nl.irssi.org/?page=docs&doc=faq"
 #define STARTUP_HOWTO_URL "http://irssi.org/?page=docs&doc=startup-HOWTO"
 
@@ -69,6 +73,8 @@ static MenuItem items[] = {
 
 static void menu_callback(void *user_data, const char *item_data, int action)
 {
+	GtkWidget *widget;
+
 	switch (action) {
 	case ACTION_QUIT:
 		signal_emit("command quit", 1, "");
@@ -78,10 +84,26 @@ static void menu_callback(void *user_data, const char *item_data, int action)
 		break;
 
 	case ACTION_VIEW_MENUBAR:
+		if (GTK_WIDGET_VISIBLE(active_frame->menubar))
+			gtk_widget_hide(active_frame->menubar);
+		else
+			gtk_widget_show(active_frame->menubar);
 		break;
 	case ACTION_VIEW_STATUSBAR:
+		if (GTK_WIDGET_VISIBLE(active_frame->statusbar))
+			gtk_widget_hide(GTK_WIDGET(active_frame->statusbar));
+		else
+			gtk_widget_show(GTK_WIDGET(active_frame->statusbar));
 		break;
 	case ACTION_VIEW_NICKLIST:
+		if (active_frame->active_tab->nicklist->nicklist == NULL)
+			break;
+
+		widget = active_frame->active_tab->nicklist->widget;
+		if (GTK_WIDGET_VISIBLE(widget))
+			gtk_widget_hide(GTK_WIDGET(widget));
+		else
+			gtk_widget_show(GTK_WIDGET(widget));
 		break;
 
 	case ACTION_FAQ:
