@@ -1,3 +1,7 @@
+2002-05-09 19:06  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-frame.c: default tab position is now at bottom.
+
 2002-05-09 18:52  Timo Sirainen <tss@iki.fi>
 
 	* src/dialog-about.c: minor update
