@@ -15,8 +15,7 @@ xpm_pixmaps = \
 	detach-box.xpm \
 	move.xpm
 
-pixmaps = \
-	$(xpm_pixmaps) \
+generated_pixmaps = \
 	ball-blue.h \
 	ball-lightblue.h \
 	ball-pink.h \
@@ -36,7 +35,7 @@ EXTRA_DIST = \
 	ball-orange.png \
 	ball-red.png
 
-all: $(pixmaps)
+all: $(generated_pixmaps)
 
 clean-generic:
-	rm -f $(pixmaps)
+	rm -f $(generated_pixmaps)
