@@ -340,7 +340,6 @@ void ignore_dialog_show(Ignore *ignore)
 					gui_tree_strcase_sort_func, NULL, NULL);
 	gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(store),
 					     0, GTK_SORT_ASCENDING);
-	ignore_channels_store_fill(store, ignore);
 
 	view = g_object_get_data(obj, "channel_tree");
 	g_object_set_data(G_OBJECT(view), "store", store);
@@ -387,6 +386,8 @@ void ignore_dialog_show(Ignore *ignore)
 		/* set pattern after regexp, so the invalid state is
 		   checked properly */
 		gui_entry_set_from(obj, "pattern", ignore->pattern);
+
+		ignore_channels_store_fill(store, ignore);
 
 		if (ignore->unignore_time != 0) {
 			diff = ignore->unignore_time - time(NULL);
