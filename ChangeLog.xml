@@ -5,6 +5,24 @@
 <entry>
 <date>2002-05-16</date>
 <weekday>Thursday</weekday>
+<time>04:20</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-itemlist.c</name>
+<revision>1.4</revision>
+</file>
+<file>
+<name>src/gui-window-view.c</name>
+<revision>1.11</revision>
+</file>
+<commondir>src/</commondir>
+<msg>name -&gt; visible_name fixes
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-16</date>
+<weekday>Thursday</weekday>
 <time>01:21</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
