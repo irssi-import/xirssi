@@ -24,6 +24,8 @@ if test x$IRSSI_INCLUDE = x; then
     IRSSI_INCLUDE=".."
   elif test -f ../irssi/irssi-config; then
     IRSSI_INCLUDE="../irssi"
+  elif test -f ../../irssi/irssi-config; then
+    IRSSI_INCLUDE="../../irssi"
   fi
 fi
 
