@@ -57,9 +57,9 @@ create_preferences (void)
   GtkWidget *scrolledwindow2;
   GtkWidget *channels_tree;
   GtkWidget *vbuttonbox2;
-  GtkWidget *button5;
-  GtkWidget *button6;
-  GtkWidget *button7;
+  GtkWidget *channel_add;
+  GtkWidget *channel_edit;
+  GtkWidget *channel_remove;
   GtkWidget *label5;
   GtkWidget *label43;
   GtkWidget *page_connect_settings;
@@ -105,12 +105,12 @@ create_preferences (void)
   GtkWidget *page_autolog;
   GtkWidget *frame37;
   GtkWidget *table14;
-  GtkWidget *checkbutton1;
-  GtkWidget *entry1;
+  GtkWidget *autolog;
+  GtkWidget *autolog_level;
   GtkWidget *label119;
   GtkWidget *label120;
-  GtkWidget *button42;
-  GtkWidget *entry2;
+  GtkWidget *level0;
+  GtkWidget *autolog_path;
   GtkWidget *hseparator12;
   GtkWidget *label121;
   GtkWidget *label122;
@@ -127,8 +127,6 @@ create_preferences (void)
   GtkWidget *label132;
   GtkWidget *label133;
   GtkWidget *label50;
-  GtkWidget *empty_notebook_page;
-  GtkWidget *label52;
   GtkWidget *page_advanced_logging;
   GtkWidget *hbox8;
   GtkWidget *frame13;
@@ -243,8 +241,8 @@ create_preferences (void)
   GtkWidget *scrolledwindow9;
   GtkWidget *completion_tree;
   GtkWidget *vbuttonbox10;
-  GtkWidget *button31;
-  GtkWidget *button32;
+  GtkWidget *completion_add;
+  GtkWidget *completion_remove;
   GtkWidget *label71;
   GtkWidget *label99;
   GtkWidget *page_aliases;
@@ -491,23 +489,23 @@ create_preferences (void)
   gtk_button_box_set_layout (GTK_BUTTON_BOX (vbuttonbox2), GTK_BUTTONBOX_START);
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (vbuttonbox2), 5);
 
-  button5 = gtk_button_new_with_mnemonic ("Add...");
-  gtk_widget_set_name (button5, "button5");
-  gtk_widget_show (button5);
-  gtk_container_add (GTK_CONTAINER (vbuttonbox2), button5);
-  GTK_WIDGET_SET_FLAGS (button5, GTK_CAN_DEFAULT);
+  channel_add = gtk_button_new_with_mnemonic ("Add...");
+  gtk_widget_set_name (channel_add, "channel_add");
+  gtk_widget_show (channel_add);
+  gtk_container_add (GTK_CONTAINER (vbuttonbox2), channel_add);
+  GTK_WIDGET_SET_FLAGS (channel_add, GTK_CAN_DEFAULT);
 
-  button6 = gtk_button_new_with_mnemonic ("Edit...");
-  gtk_widget_set_name (button6, "button6");
-  gtk_widget_show (button6);
-  gtk_container_add (GTK_CONTAINER (vbuttonbox2), button6);
-  GTK_WIDGET_SET_FLAGS (button6, GTK_CAN_DEFAULT);
+  channel_edit = gtk_button_new_with_mnemonic ("Edit...");
+  gtk_widget_set_name (channel_edit, "channel_edit");
+  gtk_widget_show (channel_edit);
+  gtk_container_add (GTK_CONTAINER (vbuttonbox2), channel_edit);
+  GTK_WIDGET_SET_FLAGS (channel_edit, GTK_CAN_DEFAULT);
 
-  button7 = gtk_button_new_with_mnemonic ("Remove");
-  gtk_widget_set_name (button7, "button7");
-  gtk_widget_show (button7);
-  gtk_container_add (GTK_CONTAINER (vbuttonbox2), button7);
-  GTK_WIDGET_SET_FLAGS (button7, GTK_CAN_DEFAULT);
+  channel_remove = gtk_button_new_with_mnemonic ("Remove");
+  gtk_widget_set_name (channel_remove, "channel_remove");
+  gtk_widget_show (channel_remove);
+  gtk_container_add (GTK_CONTAINER (vbuttonbox2), channel_remove);
+  GTK_WIDGET_SET_FLAGS (channel_remove, GTK_CAN_DEFAULT);
 
   label5 = gtk_label_new ("Channels");
   gtk_widget_set_name (label5, "label5");
@@ -803,17 +801,17 @@ create_preferences (void)
   gtk_table_set_row_spacings (GTK_TABLE (table14), 3);
   gtk_table_set_col_spacings (GTK_TABLE (table14), 7);
 
-  checkbutton1 = gtk_check_button_new_with_mnemonic ("Use automatic logging");
-  gtk_widget_set_name (checkbutton1, "checkbutton1");
-  gtk_widget_show (checkbutton1);
-  gtk_table_attach (GTK_TABLE (table14), checkbutton1, 0, 3, 0, 1,
+  autolog = gtk_check_button_new_with_mnemonic ("Use automatic logging");
+  gtk_widget_set_name (autolog, "autolog");
+  gtk_widget_show (autolog);
+  gtk_table_attach (GTK_TABLE (table14), autolog, 0, 3, 0, 1,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
-  entry1 = gtk_entry_new ();
-  gtk_widget_set_name (entry1, "entry1");
-  gtk_widget_show (entry1);
-  gtk_table_attach (GTK_TABLE (table14), entry1, 1, 2, 2, 3,
+  autolog_level = gtk_entry_new ();
+  gtk_widget_set_name (autolog_level, "autolog_level");
+  gtk_widget_show (autolog_level);
+  gtk_table_attach (GTK_TABLE (table14), autolog_level, 1, 2, 2, 3,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -835,17 +833,17 @@ create_preferences (void)
   gtk_label_set_justify (GTK_LABEL (label120), GTK_JUSTIFY_LEFT);
   gtk_misc_set_alignment (GTK_MISC (label120), 1, 0.5);
 
-  button42 = gtk_button_new_with_mnemonic ("Change...");
-  gtk_widget_set_name (button42, "button42");
-  gtk_widget_show (button42);
-  gtk_table_attach (GTK_TABLE (table14), button42, 2, 3, 2, 3,
+  level0 = gtk_button_new_with_mnemonic ("Change...");
+  gtk_widget_set_name (level0, "level0");
+  gtk_widget_show (level0);
+  gtk_table_attach (GTK_TABLE (table14), level0, 2, 3, 2, 3,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
-  entry2 = gtk_entry_new ();
-  gtk_widget_set_name (entry2, "entry2");
-  gtk_widget_show (entry2);
-  gtk_table_attach (GTK_TABLE (table14), entry2, 1, 3, 1, 2,
+  autolog_path = gtk_entry_new ();
+  gtk_widget_set_name (autolog_path, "autolog_path");
+  gtk_widget_show (autolog_path);
+  gtk_table_attach (GTK_TABLE (table14), autolog_path, 1, 3, 1, 2,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -987,16 +985,6 @@ create_preferences (void)
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 4), label50);
   gtk_label_set_justify (GTK_LABEL (label50), GTK_JUSTIFY_LEFT);
 
-  empty_notebook_page = gtk_vbox_new (FALSE, 0);
-  gtk_widget_show (empty_notebook_page);
-  gtk_container_add (GTK_CONTAINER (prefs_notebook), empty_notebook_page);
-
-  label52 = gtk_label_new ("");
-  gtk_widget_set_name (label52, "label52");
-  gtk_widget_show (label52);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 5), label52);
-  gtk_label_set_justify (GTK_LABEL (label52), GTK_JUSTIFY_LEFT);
-
   page_advanced_logging = gtk_frame_new (NULL);
   gtk_widget_set_name (page_advanced_logging, "page_advanced_logging");
   gtk_widget_show (page_advanced_logging);
@@ -1095,7 +1083,7 @@ create_preferences (void)
   label54 = gtk_label_new ("");
   gtk_widget_set_name (label54, "label54");
   gtk_widget_show (label54);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 6), label54);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 5), label54);
   gtk_label_set_justify (GTK_LABEL (label54), GTK_JUSTIFY_LEFT);
 
   page_ignores = gtk_frame_new (NULL);
@@ -1160,7 +1148,7 @@ create_preferences (void)
   label55 = gtk_label_new ("");
   gtk_widget_set_name (label55, "label55");
   gtk_widget_show (label55);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 7), label55);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 6), label55);
   gtk_label_set_justify (GTK_LABEL (label55), GTK_JUSTIFY_LEFT);
 
   page_highlighting = gtk_vbox_new (FALSE, 10);
@@ -1268,7 +1256,7 @@ create_preferences (void)
   label73 = gtk_label_new ("");
   gtk_widget_set_name (label73, "label73");
   gtk_widget_show (label73);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 8), label73);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 7), label73);
   gtk_label_set_justify (GTK_LABEL (label73), GTK_JUSTIFY_LEFT);
 
   page_input_settings = gtk_vbox_new (FALSE, 0);
@@ -1332,7 +1320,7 @@ create_preferences (void)
   label95 = gtk_label_new ("");
   gtk_widget_set_name (label95, "label95");
   gtk_widget_show (label95);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 9), label95);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 8), label95);
   gtk_label_set_justify (GTK_LABEL (label95), GTK_JUSTIFY_LEFT);
 
   page_windows = gtk_vbox_new (FALSE, 0);
@@ -1506,7 +1494,7 @@ create_preferences (void)
   label96 = gtk_label_new ("");
   gtk_widget_set_name (label96, "label96");
   gtk_widget_show (label96);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 10), label96);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 9), label96);
   gtk_label_set_justify (GTK_LABEL (label96), GTK_JUSTIFY_LEFT);
 
   page_queries = gtk_vbox_new (FALSE, 0);
@@ -1584,7 +1572,7 @@ create_preferences (void)
   label97 = gtk_label_new ("");
   gtk_widget_set_name (label97, "label97");
   gtk_widget_show (label97);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 11), label97);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 10), label97);
   gtk_label_set_justify (GTK_LABEL (label97), GTK_JUSTIFY_LEFT);
 
   page_completion = gtk_vbox_new (FALSE, 10);
@@ -1675,17 +1663,17 @@ create_preferences (void)
   gtk_button_box_set_layout (GTK_BUTTON_BOX (vbuttonbox10), GTK_BUTTONBOX_START);
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (vbuttonbox10), 7);
 
-  button31 = gtk_button_new_with_mnemonic ("Add");
-  gtk_widget_set_name (button31, "button31");
-  gtk_widget_show (button31);
-  gtk_container_add (GTK_CONTAINER (vbuttonbox10), button31);
-  GTK_WIDGET_SET_FLAGS (button31, GTK_CAN_DEFAULT);
+  completion_add = gtk_button_new_with_mnemonic ("Add");
+  gtk_widget_set_name (completion_add, "completion_add");
+  gtk_widget_show (completion_add);
+  gtk_container_add (GTK_CONTAINER (vbuttonbox10), completion_add);
+  GTK_WIDGET_SET_FLAGS (completion_add, GTK_CAN_DEFAULT);
 
-  button32 = gtk_button_new_with_mnemonic ("Remove");
-  gtk_widget_set_name (button32, "button32");
-  gtk_widget_show (button32);
-  gtk_container_add (GTK_CONTAINER (vbuttonbox10), button32);
-  GTK_WIDGET_SET_FLAGS (button32, GTK_CAN_DEFAULT);
+  completion_remove = gtk_button_new_with_mnemonic ("Remove");
+  gtk_widget_set_name (completion_remove, "completion_remove");
+  gtk_widget_show (completion_remove);
+  gtk_container_add (GTK_CONTAINER (vbuttonbox10), completion_remove);
+  GTK_WIDGET_SET_FLAGS (completion_remove, GTK_CAN_DEFAULT);
 
   label71 = gtk_label_new ("Word Completions");
   gtk_widget_set_name (label71, "label71");
@@ -1696,7 +1684,7 @@ create_preferences (void)
   label99 = gtk_label_new ("");
   gtk_widget_set_name (label99, "label99");
   gtk_widget_show (label99);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 12), label99);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 11), label99);
   gtk_label_set_justify (GTK_LABEL (label99), GTK_JUSTIFY_LEFT);
 
   page_aliases = gtk_frame_new (NULL);
@@ -1755,7 +1743,7 @@ create_preferences (void)
   label101 = gtk_label_new ("");
   gtk_widget_set_name (label101, "label101");
   gtk_widget_show (label101);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 13), label101);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 12), label101);
   gtk_label_set_justify (GTK_LABEL (label101), GTK_JUSTIFY_LEFT);
 
   page_keyboard = gtk_frame_new (NULL);
@@ -1820,7 +1808,7 @@ create_preferences (void)
   label102 = gtk_label_new ("");
   gtk_widget_set_name (label102, "label102");
   gtk_widget_show (label102);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 14), label102);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 13), label102);
   gtk_label_set_justify (GTK_LABEL (label102), GTK_JUSTIFY_LEFT);
 
   page_window_output = gtk_vbox_new (FALSE, 10);
@@ -1923,7 +1911,7 @@ create_preferences (void)
   label103 = gtk_label_new ("");
   gtk_widget_set_name (label103, "label103");
   gtk_widget_show (label103);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 15), label103);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 14), label103);
   gtk_label_set_justify (GTK_LABEL (label103), GTK_JUSTIFY_LEFT);
 
   page_irc_dcc = gtk_vbox_new (FALSE, 0);
@@ -2120,7 +2108,7 @@ create_preferences (void)
   label134 = gtk_label_new ("");
   gtk_widget_set_name (label134, "label134");
   gtk_widget_show (label134);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 16), label134);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 15), label134);
   gtk_label_set_justify (GTK_LABEL (label134), GTK_JUSTIFY_LEFT);
 
   page_irc_defaults = gtk_vbox_new (FALSE, 0);
@@ -2198,7 +2186,7 @@ create_preferences (void)
   label135 = gtk_label_new ("");
   gtk_widget_set_name (label135, "label135");
   gtk_widget_show (label135);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 17), label135);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 16), label135);
   gtk_label_set_justify (GTK_LABEL (label135), GTK_JUSTIFY_LEFT);
 
   dialog_action_area1 = GTK_DIALOG (preferences)->action_area;
@@ -2249,9 +2237,9 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, scrolledwindow2, "scrolledwindow2");
   GLADE_HOOKUP_OBJECT (preferences, channels_tree, "channels_tree");
   GLADE_HOOKUP_OBJECT (preferences, vbuttonbox2, "vbuttonbox2");
-  GLADE_HOOKUP_OBJECT (preferences, button5, "button5");
-  GLADE_HOOKUP_OBJECT (preferences, button6, "button6");
-  GLADE_HOOKUP_OBJECT (preferences, button7, "button7");
+  GLADE_HOOKUP_OBJECT (preferences, channel_add, "channel_add");
+  GLADE_HOOKUP_OBJECT (preferences, channel_edit, "channel_edit");
+  GLADE_HOOKUP_OBJECT (preferences, channel_remove, "channel_remove");
   GLADE_HOOKUP_OBJECT (preferences, label5, "label5");
   GLADE_HOOKUP_OBJECT (preferences, label43, "label43");
   GLADE_HOOKUP_OBJECT (preferences, page_connect_settings, "page_connect_settings");
@@ -2295,12 +2283,12 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, page_autolog, "page_autolog");
   GLADE_HOOKUP_OBJECT (preferences, frame37, "frame37");
   GLADE_HOOKUP_OBJECT (preferences, table14, "table14");
-  GLADE_HOOKUP_OBJECT (preferences, checkbutton1, "checkbutton1");
-  GLADE_HOOKUP_OBJECT (preferences, entry1, "entry1");
+  GLADE_HOOKUP_OBJECT (preferences, autolog, "autolog");
+  GLADE_HOOKUP_OBJECT (preferences, autolog_level, "autolog_level");
   GLADE_HOOKUP_OBJECT (preferences, label119, "label119");
   GLADE_HOOKUP_OBJECT (preferences, label120, "label120");
-  GLADE_HOOKUP_OBJECT (preferences, button42, "button42");
-  GLADE_HOOKUP_OBJECT (preferences, entry2, "entry2");
+  GLADE_HOOKUP_OBJECT (preferences, level0, "level0");
+  GLADE_HOOKUP_OBJECT (preferences, autolog_path, "autolog_path");
   GLADE_HOOKUP_OBJECT (preferences, hseparator12, "hseparator12");
   GLADE_HOOKUP_OBJECT (preferences, label121, "label121");
   GLADE_HOOKUP_OBJECT (preferences, label122, "label122");
@@ -2317,7 +2305,6 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, label132, "label132");
   GLADE_HOOKUP_OBJECT (preferences, label133, "label133");
   GLADE_HOOKUP_OBJECT (preferences, label50, "label50");
-  GLADE_HOOKUP_OBJECT (preferences, label52, "label52");
   GLADE_HOOKUP_OBJECT (preferences, page_advanced_logging, "page_advanced_logging");
   GLADE_HOOKUP_OBJECT (preferences, hbox8, "hbox8");
   GLADE_HOOKUP_OBJECT (preferences, frame13, "frame13");
@@ -2430,8 +2417,8 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, scrolledwindow9, "scrolledwindow9");
   GLADE_HOOKUP_OBJECT (preferences, completion_tree, "completion_tree");
   GLADE_HOOKUP_OBJECT (preferences, vbuttonbox10, "vbuttonbox10");
-  GLADE_HOOKUP_OBJECT (preferences, button31, "button31");
-  GLADE_HOOKUP_OBJECT (preferences, button32, "button32");
+  GLADE_HOOKUP_OBJECT (preferences, completion_add, "completion_add");
+  GLADE_HOOKUP_OBJECT (preferences, completion_remove, "completion_remove");
   GLADE_HOOKUP_OBJECT (preferences, label71, "label71");
   GLADE_HOOKUP_OBJECT (preferences, label99, "label99");
   GLADE_HOOKUP_OBJECT (preferences, page_aliases, "page_aliases");
@@ -2516,42 +2503,43 @@ create_preferences (void)
 }
 
 GtkWidget*
-create_dialog_add_network (void)
+create_dialog_network_settings (void)
 {
-  GtkWidget *dialog_add_network;
+  GtkWidget *dialog_network_settings;
   GtkWidget *dialog_vbox2;
   GtkWidget *table12;
-  GtkWidget *label104;
-  GtkWidget *label105;
+  GtkWidget *name;
+  GtkWidget *username;
+  GtkWidget *realname;
+  GtkWidget *autosendcmd;
+  GtkWidget *own_host;
+  GtkWidget *protocol_combo;
+  GtkWidget *protocol;
+  GtkWidget *nick;
   GtkWidget *label106;
   GtkWidget *label107;
   GtkWidget *label108;
   GtkWidget *label109;
   GtkWidget *label110;
-  GtkWidget *name;
-  GtkWidget *nick;
-  GtkWidget *username;
-  GtkWidget *realname;
-  GtkWidget *autosendcmd;
-  GtkWidget *own_host;
   GtkWidget *hseparator7;
   GtkWidget *hseparator8;
-  GtkWidget *protocol_combo;
-  GtkWidget *protocol;
+  GtkWidget *label136;
+  GtkWidget *label137;
+  GtkWidget *image2;
   GtkWidget *dialog_action_area2;
   GtkWidget *cancelbutton2;
   GtkWidget *okbutton2;
 
-  dialog_add_network = gtk_dialog_new ();
-  gtk_widget_set_name (dialog_add_network, "dialog_add_network");
-  gtk_window_set_title (GTK_WINDOW (dialog_add_network), "Add Network");
+  dialog_network_settings = gtk_dialog_new ();
+  gtk_widget_set_name (dialog_network_settings, "dialog_network_settings");
+  gtk_window_set_title (GTK_WINDOW (dialog_network_settings), "Network Settings");
 
-  dialog_vbox2 = GTK_DIALOG (dialog_add_network)->vbox;
+  dialog_vbox2 = GTK_DIALOG (dialog_network_settings)->vbox;
   gtk_widget_set_name (dialog_vbox2, "dialog_vbox2");
   gtk_widget_show (dialog_vbox2);
   gtk_container_set_border_width (GTK_CONTAINER (dialog_vbox2), 2);
 
-  table12 = gtk_table_new (9, 2, FALSE);
+  table12 = gtk_table_new (9, 3, FALSE);
   gtk_widget_set_name (table12, "table12");
   gtk_widget_show (table12);
   gtk_box_pack_start (GTK_BOX (dialog_vbox2), table12, TRUE, TRUE, 0);
@@ -2559,131 +2547,47 @@ create_dialog_add_network (void)
   gtk_table_set_row_spacings (GTK_TABLE (table12), 3);
   gtk_table_set_col_spacings (GTK_TABLE (table12), 7);
 
-  label104 = gtk_label_new ("Protocol");
-  gtk_widget_set_name (label104, "label104");
-  gtk_widget_show (label104);
-  gtk_table_attach (GTK_TABLE (table12), label104, 0, 1, 0, 1,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label104), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label104), 1, 0.5);
-
-  label105 = gtk_label_new ("Name");
-  gtk_widget_set_name (label105, "label105");
-  gtk_widget_show (label105);
-  gtk_table_attach (GTK_TABLE (table12), label105, 0, 1, 1, 2,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label105), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label105), 1, 0.5);
-
-  label106 = gtk_label_new ("Nick");
-  gtk_widget_set_name (label106, "label106");
-  gtk_widget_show (label106);
-  gtk_table_attach (GTK_TABLE (table12), label106, 0, 1, 3, 4,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label106), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label106), 1, 0.5);
-
-  label107 = gtk_label_new ("User name");
-  gtk_widget_set_name (label107, "label107");
-  gtk_widget_show (label107);
-  gtk_table_attach (GTK_TABLE (table12), label107, 0, 1, 4, 5,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label107), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label107), 1, 0.5);
-
-  label108 = gtk_label_new ("Real name");
-  gtk_widget_set_name (label108, "label108");
-  gtk_widget_show (label108);
-  gtk_table_attach (GTK_TABLE (table12), label108, 0, 1, 5, 6,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label108), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label108), 1, 0.5);
-
-  label109 = gtk_label_new ("Source host");
-  gtk_widget_set_name (label109, "label109");
-  gtk_widget_show (label109);
-  gtk_table_attach (GTK_TABLE (table12), label109, 0, 1, 7, 8,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label109), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label109), 1, 0.5);
-
-  label110 = gtk_label_new ("Autosend command");
-  gtk_widget_set_name (label110, "label110");
-  gtk_widget_show (label110);
-  gtk_table_attach (GTK_TABLE (table12), label110, 0, 1, 8, 9,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label110), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label110), 1, 0.5);
-
   name = gtk_entry_new ();
   gtk_widget_set_name (name, "name");
   gtk_widget_show (name);
-  gtk_table_attach (GTK_TABLE (table12), name, 1, 2, 1, 2,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  nick = gtk_entry_new ();
-  gtk_widget_set_name (nick, "nick");
-  gtk_widget_show (nick);
-  gtk_table_attach (GTK_TABLE (table12), nick, 1, 2, 3, 4,
+  gtk_table_attach (GTK_TABLE (table12), name, 2, 3, 1, 2,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
   username = gtk_entry_new ();
   gtk_widget_set_name (username, "username");
   gtk_widget_show (username);
-  gtk_table_attach (GTK_TABLE (table12), username, 1, 2, 4, 5,
+  gtk_table_attach (GTK_TABLE (table12), username, 2, 3, 4, 5,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
   realname = gtk_entry_new ();
   gtk_widget_set_name (realname, "realname");
   gtk_widget_show (realname);
-  gtk_table_attach (GTK_TABLE (table12), realname, 1, 2, 5, 6,
+  gtk_table_attach (GTK_TABLE (table12), realname, 2, 3, 5, 6,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
   autosendcmd = gtk_entry_new ();
   gtk_widget_set_name (autosendcmd, "autosendcmd");
   gtk_widget_show (autosendcmd);
-  gtk_table_attach (GTK_TABLE (table12), autosendcmd, 1, 2, 8, 9,
+  gtk_table_attach (GTK_TABLE (table12), autosendcmd, 2, 3, 8, 9,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
   own_host = gtk_entry_new ();
   gtk_widget_set_name (own_host, "own_host");
   gtk_widget_show (own_host);
-  gtk_table_attach (GTK_TABLE (table12), own_host, 1, 2, 7, 8,
+  gtk_table_attach (GTK_TABLE (table12), own_host, 2, 3, 7, 8,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-
-  hseparator7 = gtk_hseparator_new ();
-  gtk_widget_set_name (hseparator7, "hseparator7");
-  gtk_widget_show (hseparator7);
-  gtk_table_attach (GTK_TABLE (table12), hseparator7, 0, 2, 6, 7,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (GTK_FILL), 0, 7);
-
-  hseparator8 = gtk_hseparator_new ();
-  gtk_widget_set_name (hseparator8, "hseparator8");
-  gtk_widget_show (hseparator8);
-  gtk_table_attach (GTK_TABLE (table12), hseparator8, 0, 2, 2, 3,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (GTK_FILL), 0, 7);
 
   protocol_combo = gtk_combo_new ();
   gtk_object_set_data (GTK_OBJECT (GTK_COMBO (protocol_combo)->popwin),
                        "GladeParentKey", protocol_combo);
   gtk_widget_set_name (protocol_combo, "protocol_combo");
   gtk_widget_show (protocol_combo);
-  gtk_table_attach (GTK_TABLE (table12), protocol_combo, 1, 2, 0, 1,
+  gtk_table_attach (GTK_TABLE (table12), protocol_combo, 2, 3, 0, 1,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_combo_set_value_in_list (GTK_COMBO (protocol_combo), TRUE, FALSE);
@@ -2693,7 +2597,98 @@ create_dialog_add_network (void)
   gtk_widget_show (protocol);
   gtk_entry_set_editable (GTK_ENTRY (protocol), FALSE);
 
-  dialog_action_area2 = GTK_DIALOG (dialog_add_network)->action_area;
+  nick = gtk_entry_new ();
+  gtk_widget_set_name (nick, "nick");
+  gtk_widget_show (nick);
+  gtk_table_attach (GTK_TABLE (table12), nick, 2, 3, 3, 4,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  label106 = gtk_label_new ("Nick");
+  gtk_widget_set_name (label106, "label106");
+  gtk_widget_show (label106);
+  gtk_table_attach (GTK_TABLE (table12), label106, 0, 2, 3, 4,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label106), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label106), 1, 0.5);
+
+  label107 = gtk_label_new ("User name");
+  gtk_widget_set_name (label107, "label107");
+  gtk_widget_show (label107);
+  gtk_table_attach (GTK_TABLE (table12), label107, 0, 2, 4, 5,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label107), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label107), 1, 0.5);
+
+  label108 = gtk_label_new ("Real name");
+  gtk_widget_set_name (label108, "label108");
+  gtk_widget_show (label108);
+  gtk_table_attach (GTK_TABLE (table12), label108, 0, 2, 5, 6,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label108), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label108), 1, 0.5);
+
+  label109 = gtk_label_new ("Source host");
+  gtk_widget_set_name (label109, "label109");
+  gtk_widget_show (label109);
+  gtk_table_attach (GTK_TABLE (table12), label109, 0, 2, 7, 8,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label109), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label109), 1, 0.5);
+
+  label110 = gtk_label_new ("Autosend command");
+  gtk_widget_set_name (label110, "label110");
+  gtk_widget_show (label110);
+  gtk_table_attach (GTK_TABLE (table12), label110, 0, 2, 8, 9,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label110), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label110), 1, 0.5);
+
+  hseparator7 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator7, "hseparator7");
+  gtk_widget_show (hseparator7);
+  gtk_table_attach (GTK_TABLE (table12), hseparator7, 0, 3, 6, 7,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+
+  hseparator8 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator8, "hseparator8");
+  gtk_widget_show (hseparator8);
+  gtk_table_attach (GTK_TABLE (table12), hseparator8, 0, 3, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+
+  label136 = gtk_label_new ("Protocol");
+  gtk_widget_set_name (label136, "label136");
+  gtk_widget_show (label136);
+  gtk_table_attach (GTK_TABLE (table12), label136, 1, 2, 0, 1,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label136), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label136), 1, 0.5);
+
+  label137 = gtk_label_new ("Name");
+  gtk_widget_set_name (label137, "label137");
+  gtk_widget_show (label137);
+  gtk_table_attach (GTK_TABLE (table12), label137, 1, 2, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label137), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label137), 1, 0.5);
+
+  image2 = create_pixmap (dialog_network_settings, "servers.png");
+  gtk_widget_set_name (image2, "image2");
+  gtk_widget_show (image2);
+  gtk_table_attach (GTK_TABLE (table12), image2, 0, 1, 0, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 0);
+
+  dialog_action_area2 = GTK_DIALOG (dialog_network_settings)->action_area;
   gtk_widget_set_name (dialog_action_area2, "dialog_action_area2");
   gtk_widget_show (dialog_action_area2);
   gtk_container_set_border_width (GTK_CONTAINER (dialog_action_area2), 5);
@@ -2703,56 +2698,50 @@ create_dialog_add_network (void)
   cancelbutton2 = gtk_button_new_from_stock ("gtk-cancel");
   gtk_widget_set_name (cancelbutton2, "cancelbutton2");
   gtk_widget_show (cancelbutton2);
-  gtk_dialog_add_action_widget (GTK_DIALOG (dialog_add_network), cancelbutton2, GTK_RESPONSE_CANCEL);
+  gtk_dialog_add_action_widget (GTK_DIALOG (dialog_network_settings), cancelbutton2, GTK_RESPONSE_CANCEL);
   GTK_WIDGET_SET_FLAGS (cancelbutton2, GTK_CAN_DEFAULT);
 
   okbutton2 = gtk_button_new_from_stock ("gtk-ok");
   gtk_widget_set_name (okbutton2, "okbutton2");
   gtk_widget_show (okbutton2);
-  gtk_dialog_add_action_widget (GTK_DIALOG (dialog_add_network), okbutton2, GTK_RESPONSE_OK);
+  gtk_dialog_add_action_widget (GTK_DIALOG (dialog_network_settings), okbutton2, GTK_RESPONSE_OK);
   GTK_WIDGET_SET_FLAGS (okbutton2, GTK_CAN_DEFAULT);
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
-  GLADE_HOOKUP_OBJECT_NO_REF (dialog_add_network, dialog_add_network, "dialog_add_network");
-  GLADE_HOOKUP_OBJECT_NO_REF (dialog_add_network, dialog_vbox2, "dialog_vbox2");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, table12, "table12");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, label104, "label104");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, label105, "label105");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, label106, "label106");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, label107, "label107");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, label108, "label108");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, label109, "label109");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, label110, "label110");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, name, "name");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, nick, "nick");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, username, "username");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, realname, "realname");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, autosendcmd, "autosendcmd");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, own_host, "own_host");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, hseparator7, "hseparator7");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, hseparator8, "hseparator8");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, protocol_combo, "protocol_combo");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, protocol, "protocol");
-  GLADE_HOOKUP_OBJECT_NO_REF (dialog_add_network, dialog_action_area2, "dialog_action_area2");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, cancelbutton2, "cancelbutton2");
-  GLADE_HOOKUP_OBJECT (dialog_add_network, okbutton2, "okbutton2");
+  GLADE_HOOKUP_OBJECT_NO_REF (dialog_network_settings, dialog_network_settings, "dialog_network_settings");
+  GLADE_HOOKUP_OBJECT_NO_REF (dialog_network_settings, dialog_vbox2, "dialog_vbox2");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, table12, "table12");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, name, "name");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, username, "username");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, realname, "realname");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, autosendcmd, "autosendcmd");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, own_host, "own_host");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, protocol_combo, "protocol_combo");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, protocol, "protocol");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, nick, "nick");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, label106, "label106");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, label107, "label107");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, label108, "label108");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, label109, "label109");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, label110, "label110");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, hseparator7, "hseparator7");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, hseparator8, "hseparator8");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, label136, "label136");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, label137, "label137");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, image2, "image2");
+  GLADE_HOOKUP_OBJECT_NO_REF (dialog_network_settings, dialog_action_area2, "dialog_action_area2");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, cancelbutton2, "cancelbutton2");
+  GLADE_HOOKUP_OBJECT (dialog_network_settings, okbutton2, "okbutton2");
 
-  return dialog_add_network;
+  return dialog_network_settings;
 }
 
 GtkWidget*
-create_dialog_add_server (void)
+create_dialog_server_settings (void)
 {
-  GtkWidget *dialog_add_server;
+  GtkWidget *dialog_server_settings;
   GtkWidget *dialog_vbox3;
   GtkWidget *table13;
-  GtkWidget *label111;
-  GtkWidget *label112;
-  GtkWidget *label113;
-  GtkWidget *label114;
-  GtkWidget *label115;
-  GtkWidget *label116;
-  GtkWidget *label117;
   GtkWidget *protocol_combo;
   GtkWidget *protocol;
   GtkWidget *network_combo;
@@ -2765,23 +2754,31 @@ create_dialog_add_server (void)
   GtkWidget *own_host;
   GtkWidget *autoconnect;
   GtkWidget *no_proxy;
-  GtkWidget *hseparator9;
+  GtkWidget *label117;
+  GtkWidget *label116;
+  GtkWidget *label115;
+  GtkWidget *label114;
+  GtkWidget *label113;
   GtkWidget *hseparator10;
+  GtkWidget *hseparator9;
   GtkWidget *hseparator11;
+  GtkWidget *label138;
+  GtkWidget *label139;
+  GtkWidget *image3;
   GtkWidget *dialog_action_area3;
   GtkWidget *cancelbutton3;
   GtkWidget *okbutton3;
 
-  dialog_add_server = gtk_dialog_new ();
-  gtk_widget_set_name (dialog_add_server, "dialog_add_server");
-  gtk_window_set_title (GTK_WINDOW (dialog_add_server), "Add Server");
+  dialog_server_settings = gtk_dialog_new ();
+  gtk_widget_set_name (dialog_server_settings, "dialog_server_settings");
+  gtk_window_set_title (GTK_WINDOW (dialog_server_settings), "Server Settings");
 
-  dialog_vbox3 = GTK_DIALOG (dialog_add_server)->vbox;
+  dialog_vbox3 = GTK_DIALOG (dialog_server_settings)->vbox;
   gtk_widget_set_name (dialog_vbox3, "dialog_vbox3");
   gtk_widget_show (dialog_vbox3);
   gtk_container_set_border_width (GTK_CONTAINER (dialog_vbox3), 2);
 
-  table13 = gtk_table_new (12, 2, FALSE);
+  table13 = gtk_table_new (12, 3, FALSE);
   gtk_widget_set_name (table13, "table13");
   gtk_widget_show (table13);
   gtk_box_pack_start (GTK_BOX (dialog_vbox3), table13, TRUE, TRUE, 0);
@@ -2789,75 +2786,12 @@ create_dialog_add_server (void)
   gtk_table_set_row_spacings (GTK_TABLE (table13), 3);
   gtk_table_set_col_spacings (GTK_TABLE (table13), 7);
 
-  label111 = gtk_label_new ("Protocol");
-  gtk_widget_set_name (label111, "label111");
-  gtk_widget_show (label111);
-  gtk_table_attach (GTK_TABLE (table13), label111, 0, 1, 0, 1,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label111), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label111), 1, 0.5);
-
-  label112 = gtk_label_new ("Network");
-  gtk_widget_set_name (label112, "label112");
-  gtk_widget_show (label112);
-  gtk_table_attach (GTK_TABLE (table13), label112, 0, 1, 1, 2,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label112), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label112), 1, 0.5);
-
-  label113 = gtk_label_new ("IP protocol");
-  gtk_widget_set_name (label113, "label113");
-  gtk_widget_show (label113);
-  gtk_table_attach (GTK_TABLE (table13), label113, 0, 1, 3, 4,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label113), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label113), 1, 0.5);
-
-  label114 = gtk_label_new ("Address");
-  gtk_widget_set_name (label114, "label114");
-  gtk_widget_show (label114);
-  gtk_table_attach (GTK_TABLE (table13), label114, 0, 1, 4, 5,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label114), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label114), 1, 0.5);
-
-  label115 = gtk_label_new ("Port");
-  gtk_widget_set_name (label115, "label115");
-  gtk_widget_show (label115);
-  gtk_table_attach (GTK_TABLE (table13), label115, 0, 1, 5, 6,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label115), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label115), 1, 0.5);
-
-  label116 = gtk_label_new ("Password");
-  gtk_widget_set_name (label116, "label116");
-  gtk_widget_show (label116);
-  gtk_table_attach (GTK_TABLE (table13), label116, 0, 1, 7, 8,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label116), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label116), 1, 0.5);
-
-  label117 = gtk_label_new ("Source  host");
-  gtk_widget_set_name (label117, "label117");
-  gtk_widget_show (label117);
-  gtk_table_attach (GTK_TABLE (table13), label117, 0, 1, 8, 9,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label117), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label117), 1, 0.5);
-
   protocol_combo = gtk_combo_new ();
   gtk_object_set_data (GTK_OBJECT (GTK_COMBO (protocol_combo)->popwin),
                        "GladeParentKey", protocol_combo);
   gtk_widget_set_name (protocol_combo, "protocol_combo");
   gtk_widget_show (protocol_combo);
-  gtk_table_attach (GTK_TABLE (table13), protocol_combo, 1, 2, 0, 1,
+  gtk_table_attach (GTK_TABLE (table13), protocol_combo, 2, 3, 0, 1,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_combo_set_value_in_list (GTK_COMBO (protocol_combo), TRUE, FALSE);
@@ -2872,7 +2806,7 @@ create_dialog_add_server (void)
                        "GladeParentKey", network_combo);
   gtk_widget_set_name (network_combo, "network_combo");
   gtk_widget_show (network_combo);
-  gtk_table_attach (GTK_TABLE (table13), network_combo, 1, 2, 1, 2,
+  gtk_table_attach (GTK_TABLE (table13), network_combo, 2, 3, 1, 2,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_combo_set_value_in_list (GTK_COMBO (network_combo), TRUE, TRUE);
@@ -2886,7 +2820,7 @@ create_dialog_add_server (void)
                        "GladeParentKey", ipproto_combo);
   gtk_widget_set_name (ipproto_combo, "ipproto_combo");
   gtk_widget_show (ipproto_combo);
-  gtk_table_attach (GTK_TABLE (table13), ipproto_combo, 1, 2, 3, 4,
+  gtk_table_attach (GTK_TABLE (table13), ipproto_combo, 2, 3, 3, 4,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_combo_set_value_in_list (GTK_COMBO (ipproto_combo), TRUE, TRUE);
@@ -2899,67 +2833,137 @@ create_dialog_add_server (void)
   address = gtk_entry_new ();
   gtk_widget_set_name (address, "address");
   gtk_widget_show (address);
-  gtk_table_attach (GTK_TABLE (table13), address, 1, 2, 4, 5,
+  gtk_table_attach (GTK_TABLE (table13), address, 2, 3, 4, 5,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
   port = gtk_entry_new ();
   gtk_widget_set_name (port, "port");
   gtk_widget_show (port);
-  gtk_table_attach (GTK_TABLE (table13), port, 1, 2, 5, 6,
+  gtk_table_attach (GTK_TABLE (table13), port, 2, 3, 5, 6,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
   password = gtk_entry_new ();
   gtk_widget_set_name (password, "password");
   gtk_widget_show (password);
-  gtk_table_attach (GTK_TABLE (table13), password, 1, 2, 7, 8,
+  gtk_table_attach (GTK_TABLE (table13), password, 2, 3, 7, 8,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
   own_host = gtk_entry_new ();
   gtk_widget_set_name (own_host, "own_host");
   gtk_widget_show (own_host);
-  gtk_table_attach (GTK_TABLE (table13), own_host, 1, 2, 8, 9,
+  gtk_table_attach (GTK_TABLE (table13), own_host, 2, 3, 8, 9,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
   autoconnect = gtk_check_button_new_with_mnemonic ("Automatically connect at startup");
   gtk_widget_set_name (autoconnect, "autoconnect");
   gtk_widget_show (autoconnect);
-  gtk_table_attach (GTK_TABLE (table13), autoconnect, 0, 2, 10, 11,
+  gtk_table_attach (GTK_TABLE (table13), autoconnect, 0, 3, 10, 11,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
   no_proxy = gtk_check_button_new_with_mnemonic ("Disable connecting through proxy");
   gtk_widget_set_name (no_proxy, "no_proxy");
   gtk_widget_show (no_proxy);
-  gtk_table_attach (GTK_TABLE (table13), no_proxy, 0, 2, 11, 12,
+  gtk_table_attach (GTK_TABLE (table13), no_proxy, 0, 3, 11, 12,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
-  hseparator9 = gtk_hseparator_new ();
-  gtk_widget_set_name (hseparator9, "hseparator9");
-  gtk_widget_show (hseparator9);
-  gtk_table_attach (GTK_TABLE (table13), hseparator9, 0, 2, 9, 10,
+  label117 = gtk_label_new ("Source  host");
+  gtk_widget_set_name (label117, "label117");
+  gtk_widget_show (label117);
+  gtk_table_attach (GTK_TABLE (table13), label117, 0, 2, 8, 9,
                     (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label117), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label117), 1, 0.5);
+
+  label116 = gtk_label_new ("Password");
+  gtk_widget_set_name (label116, "label116");
+  gtk_widget_show (label116);
+  gtk_table_attach (GTK_TABLE (table13), label116, 0, 2, 7, 8,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label116), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label116), 1, 0.5);
+
+  label115 = gtk_label_new ("Port");
+  gtk_widget_set_name (label115, "label115");
+  gtk_widget_show (label115);
+  gtk_table_attach (GTK_TABLE (table13), label115, 0, 2, 5, 6,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label115), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label115), 1, 0.5);
+
+  label114 = gtk_label_new ("Address");
+  gtk_widget_set_name (label114, "label114");
+  gtk_widget_show (label114);
+  gtk_table_attach (GTK_TABLE (table13), label114, 0, 2, 4, 5,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label114), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label114), 1, 0.5);
+
+  label113 = gtk_label_new ("IP protocol");
+  gtk_widget_set_name (label113, "label113");
+  gtk_widget_show (label113);
+  gtk_table_attach (GTK_TABLE (table13), label113, 0, 2, 3, 4,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label113), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label113), 1, 0.5);
 
   hseparator10 = gtk_hseparator_new ();
   gtk_widget_set_name (hseparator10, "hseparator10");
   gtk_widget_show (hseparator10);
-  gtk_table_attach (GTK_TABLE (table13), hseparator10, 0, 2, 6, 7,
+  gtk_table_attach (GTK_TABLE (table13), hseparator10, 0, 3, 6, 7,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+
+  hseparator9 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator9, "hseparator9");
+  gtk_widget_show (hseparator9);
+  gtk_table_attach (GTK_TABLE (table13), hseparator9, 0, 3, 9, 10,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (GTK_FILL), 0, 7);
 
   hseparator11 = gtk_hseparator_new ();
   gtk_widget_set_name (hseparator11, "hseparator11");
   gtk_widget_show (hseparator11);
-  gtk_table_attach (GTK_TABLE (table13), hseparator11, 0, 2, 2, 3,
+  gtk_table_attach (GTK_TABLE (table13), hseparator11, 0, 3, 2, 3,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (GTK_FILL), 0, 7);
 
-  dialog_action_area3 = GTK_DIALOG (dialog_add_server)->action_area;
+  label138 = gtk_label_new ("Protocol");
+  gtk_widget_set_name (label138, "label138");
+  gtk_widget_show (label138);
+  gtk_table_attach (GTK_TABLE (table13), label138, 1, 2, 0, 1,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label138), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label138), 1, 0.5);
+
+  label139 = gtk_label_new ("Network");
+  gtk_widget_set_name (label139, "label139");
+  gtk_widget_show (label139);
+  gtk_table_attach (GTK_TABLE (table13), label139, 1, 2, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label139), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label139), 1, 0.5);
+
+  image3 = create_pixmap (dialog_server_settings, "servers.png");
+  gtk_widget_set_name (image3, "image3");
+  gtk_widget_show (image3);
+  gtk_table_attach (GTK_TABLE (table13), image3, 0, 1, 0, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 0);
+
+  dialog_action_area3 = GTK_DIALOG (dialog_server_settings)->action_area;
   gtk_widget_set_name (dialog_action_area3, "dialog_action_area3");
   gtk_widget_show (dialog_action_area3);
   gtk_container_set_border_width (GTK_CONTAINER (dialog_action_area3), 5);
@@ -2969,45 +2973,320 @@ create_dialog_add_server (void)
   cancelbutton3 = gtk_button_new_from_stock ("gtk-cancel");
   gtk_widget_set_name (cancelbutton3, "cancelbutton3");
   gtk_widget_show (cancelbutton3);
-  gtk_dialog_add_action_widget (GTK_DIALOG (dialog_add_server), cancelbutton3, GTK_RESPONSE_CANCEL);
+  gtk_dialog_add_action_widget (GTK_DIALOG (dialog_server_settings), cancelbutton3, GTK_RESPONSE_CANCEL);
   GTK_WIDGET_SET_FLAGS (cancelbutton3, GTK_CAN_DEFAULT);
 
   okbutton3 = gtk_button_new_from_stock ("gtk-ok");
   gtk_widget_set_name (okbutton3, "okbutton3");
   gtk_widget_show (okbutton3);
-  gtk_dialog_add_action_widget (GTK_DIALOG (dialog_add_server), okbutton3, GTK_RESPONSE_OK);
+  gtk_dialog_add_action_widget (GTK_DIALOG (dialog_server_settings), okbutton3, GTK_RESPONSE_OK);
   GTK_WIDGET_SET_FLAGS (okbutton3, GTK_CAN_DEFAULT);
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
-  GLADE_HOOKUP_OBJECT_NO_REF (dialog_add_server, dialog_add_server, "dialog_add_server");
-  GLADE_HOOKUP_OBJECT_NO_REF (dialog_add_server, dialog_vbox3, "dialog_vbox3");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, table13, "table13");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, label111, "label111");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, label112, "label112");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, label113, "label113");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, label114, "label114");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, label115, "label115");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, label116, "label116");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, label117, "label117");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, protocol_combo, "protocol_combo");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, protocol, "protocol");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, network_combo, "network_combo");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, network, "network");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, ipproto_combo, "ipproto_combo");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, ipproto, "ipproto");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, address, "address");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, port, "port");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, password, "password");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, own_host, "own_host");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, autoconnect, "autoconnect");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, no_proxy, "no_proxy");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, hseparator9, "hseparator9");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, hseparator10, "hseparator10");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, hseparator11, "hseparator11");
-  GLADE_HOOKUP_OBJECT_NO_REF (dialog_add_server, dialog_action_area3, "dialog_action_area3");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, cancelbutton3, "cancelbutton3");
-  GLADE_HOOKUP_OBJECT (dialog_add_server, okbutton3, "okbutton3");
+  GLADE_HOOKUP_OBJECT_NO_REF (dialog_server_settings, dialog_server_settings, "dialog_server_settings");
+  GLADE_HOOKUP_OBJECT_NO_REF (dialog_server_settings, dialog_vbox3, "dialog_vbox3");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, table13, "table13");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, protocol_combo, "protocol_combo");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, protocol, "protocol");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, network_combo, "network_combo");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, network, "network");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, ipproto_combo, "ipproto_combo");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, ipproto, "ipproto");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, address, "address");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, port, "port");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, password, "password");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, own_host, "own_host");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, autoconnect, "autoconnect");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, no_proxy, "no_proxy");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, label117, "label117");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, label116, "label116");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, label115, "label115");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, label114, "label114");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, label113, "label113");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, hseparator10, "hseparator10");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, hseparator9, "hseparator9");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, hseparator11, "hseparator11");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, label138, "label138");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, label139, "label139");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, image3, "image3");
+  GLADE_HOOKUP_OBJECT_NO_REF (dialog_server_settings, dialog_action_area3, "dialog_action_area3");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, cancelbutton3, "cancelbutton3");
+  GLADE_HOOKUP_OBJECT (dialog_server_settings, okbutton3, "okbutton3");
 
-  return dialog_add_server;
+  return dialog_server_settings;
+}
+
+GtkWidget*
+create_dialog_channel_settings (void)
+{
+  GtkWidget *dialog_channel_settings;
+  GtkWidget *dialog_vbox4;
+  GtkWidget *table19;
+  GtkWidget *protocol_combo;
+  GtkWidget *protocol;
+  GtkWidget *network_combo;
+  GtkWidget *network;
+  GtkWidget *name;
+  GtkWidget *botmasks;
+  GtkWidget *autosendcmd;
+  GtkWidget *password;
+  GtkWidget *label151;
+  GtkWidget *label152;
+  GtkWidget *label153;
+  GtkWidget *label154;
+  GtkWidget *autojoin;
+  GtkWidget *label155;
+  GtkWidget *label156;
+  GtkWidget *label157;
+  GtkWidget *label158;
+  GtkWidget *label159;
+  GtkWidget *hseparator17;
+  GtkWidget *hseparator18;
+  GtkWidget *hseparator19;
+  GtkWidget *hseparator20;
+  GtkWidget *dialog_action_area4;
+  GtkWidget *cancelbutton4;
+  GtkWidget *okbutton4;
+
+  dialog_channel_settings = gtk_dialog_new ();
+  gtk_widget_set_name (dialog_channel_settings, "dialog_channel_settings");
+  gtk_window_set_title (GTK_WINDOW (dialog_channel_settings), "Channel Settings");
+
+  dialog_vbox4 = GTK_DIALOG (dialog_channel_settings)->vbox;
+  gtk_widget_set_name (dialog_vbox4, "dialog_vbox4");
+  gtk_widget_show (dialog_vbox4);
+  gtk_container_set_border_width (GTK_CONTAINER (dialog_vbox4), 2);
+
+  table19 = gtk_table_new (14, 3, FALSE);
+  gtk_widget_set_name (table19, "table19");
+  gtk_widget_show (table19);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox4), table19, TRUE, TRUE, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (table19), 7);
+  gtk_table_set_row_spacings (GTK_TABLE (table19), 3);
+  gtk_table_set_col_spacings (GTK_TABLE (table19), 7);
+
+  protocol_combo = gtk_combo_new ();
+  gtk_object_set_data (GTK_OBJECT (GTK_COMBO (protocol_combo)->popwin),
+                       "GladeParentKey", protocol_combo);
+  gtk_widget_set_name (protocol_combo, "protocol_combo");
+  gtk_widget_show (protocol_combo);
+  gtk_table_attach (GTK_TABLE (table19), protocol_combo, 2, 3, 0, 1,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  protocol = GTK_COMBO (protocol_combo)->entry;
+  gtk_widget_set_name (protocol, "protocol");
+  gtk_widget_show (protocol);
+
+  network_combo = gtk_combo_new ();
+  gtk_object_set_data (GTK_OBJECT (GTK_COMBO (network_combo)->popwin),
+                       "GladeParentKey", network_combo);
+  gtk_widget_set_name (network_combo, "network_combo");
+  gtk_widget_show (network_combo);
+  gtk_table_attach (GTK_TABLE (table19), network_combo, 2, 3, 1, 2,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  network = GTK_COMBO (network_combo)->entry;
+  gtk_widget_set_name (network, "network");
+  gtk_widget_show (network);
+
+  name = gtk_entry_new ();
+  gtk_widget_set_name (name, "name");
+  gtk_widget_show (name);
+  gtk_table_attach (GTK_TABLE (table19), name, 2, 3, 3, 4,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  botmasks = gtk_entry_new ();
+  gtk_widget_set_name (botmasks, "botmasks");
+  gtk_widget_show (botmasks);
+  gtk_table_attach (GTK_TABLE (table19), botmasks, 2, 3, 6, 7,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  autosendcmd = gtk_entry_new ();
+  gtk_widget_set_name (autosendcmd, "autosendcmd");
+  gtk_widget_show (autosendcmd);
+  gtk_table_attach (GTK_TABLE (table19), autosendcmd, 2, 3, 7, 8,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  password = gtk_entry_new ();
+  gtk_widget_set_name (password, "password");
+  gtk_widget_show (password);
+  gtk_table_attach (GTK_TABLE (table19), password, 2, 3, 4, 5,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  label151 = gtk_label_new ("Name");
+  gtk_widget_set_name (label151, "label151");
+  gtk_widget_show (label151);
+  gtk_table_attach (GTK_TABLE (table19), label151, 0, 2, 3, 4,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label151), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label151), 1, 0.5);
+
+  label152 = gtk_label_new ("Password");
+  gtk_widget_set_name (label152, "label152");
+  gtk_widget_show (label152);
+  gtk_table_attach (GTK_TABLE (table19), label152, 0, 2, 4, 5,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label152), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label152), 1, 0.5);
+
+  label153 = gtk_label_new ("Bot masks");
+  gtk_widget_set_name (label153, "label153");
+  gtk_widget_show (label153);
+  gtk_table_attach (GTK_TABLE (table19), label153, 0, 2, 6, 7,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label153), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label153), 1, 0.5);
+
+  label154 = gtk_label_new ("Autosend command");
+  gtk_widget_set_name (label154, "label154");
+  gtk_widget_show (label154);
+  gtk_table_attach (GTK_TABLE (table19), label154, 0, 2, 7, 8,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label154), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label154), 1, 0.5);
+
+  autojoin = gtk_check_button_new_with_mnemonic ("Automatically join to channel when connected");
+  gtk_widget_set_name (autojoin, "autojoin");
+  gtk_widget_show (autojoin);
+  gtk_table_attach (GTK_TABLE (table19), autojoin, 0, 3, 9, 10,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  label155 = gtk_label_new ("Bot masks is a space separated list of masks. The autosend command is sent to first one of the bots found after joining to channel. You can also require bot to have ops or voices by placing @ or + before the mask (eg. @*!bot@bot.org).");
+  gtk_widget_set_name (label155, "label155");
+  gtk_widget_show (label155);
+  gtk_table_attach (GTK_TABLE (table19), label155, 0, 3, 11, 12,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label155), GTK_JUSTIFY_LEFT);
+  gtk_label_set_line_wrap (GTK_LABEL (label155), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (label155), 0, 0.5);
+
+  label156 = gtk_label_new ("$0 is replaced with bot's nick in autosend command. All other $variables can be used as well. You can give multiple commands by separating them with a ';' character.");
+  gtk_widget_set_name (label156, "label156");
+  gtk_widget_show (label156);
+  gtk_table_attach (GTK_TABLE (table19), label156, 0, 3, 12, 13,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 5);
+  gtk_label_set_justify (GTK_LABEL (label156), GTK_JUSTIFY_LEFT);
+  gtk_label_set_line_wrap (GTK_LABEL (label156), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (label156), 0, 0.5);
+
+  label157 = gtk_label_new ("If you just want to execute some command after joining to channel, you can leave the bot masks empty and the command is always sent.");
+  gtk_widget_set_name (label157, "label157");
+  gtk_widget_show (label157);
+  gtk_table_attach (GTK_TABLE (table19), label157, 0, 3, 13, 14,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label157), GTK_JUSTIFY_LEFT);
+  gtk_label_set_line_wrap (GTK_LABEL (label157), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (label157), 0, 0.5);
+
+  label158 = gtk_label_new ("Protocol");
+  gtk_widget_set_name (label158, "label158");
+  gtk_widget_show (label158);
+  gtk_table_attach (GTK_TABLE (table19), label158, 1, 2, 0, 1,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label158), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label158), 1, 0.5);
+
+  label159 = gtk_label_new ("Network");
+  gtk_widget_set_name (label159, "label159");
+  gtk_widget_show (label159);
+  gtk_table_attach (GTK_TABLE (table19), label159, 1, 2, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label159), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label159), 1, 0.5);
+
+  hseparator17 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator17, "hseparator17");
+  gtk_widget_show (hseparator17);
+  gtk_table_attach (GTK_TABLE (table19), hseparator17, 0, 3, 8, 9,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+
+  hseparator18 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator18, "hseparator18");
+  gtk_widget_show (hseparator18);
+  gtk_table_attach (GTK_TABLE (table19), hseparator18, 0, 3, 10, 11,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+
+  hseparator19 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator19, "hseparator19");
+  gtk_widget_show (hseparator19);
+  gtk_table_attach (GTK_TABLE (table19), hseparator19, 0, 3, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+
+  hseparator20 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator20, "hseparator20");
+  gtk_widget_show (hseparator20);
+  gtk_table_attach (GTK_TABLE (table19), hseparator20, 0, 3, 5, 6,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+
+  dialog_action_area4 = GTK_DIALOG (dialog_channel_settings)->action_area;
+  gtk_widget_set_name (dialog_action_area4, "dialog_action_area4");
+  gtk_widget_show (dialog_action_area4);
+  gtk_container_set_border_width (GTK_CONTAINER (dialog_action_area4), 5);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area4), GTK_BUTTONBOX_END);
+  gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area4), 10);
+
+  cancelbutton4 = gtk_button_new_from_stock ("gtk-cancel");
+  gtk_widget_set_name (cancelbutton4, "cancelbutton4");
+  gtk_widget_show (cancelbutton4);
+  gtk_dialog_add_action_widget (GTK_DIALOG (dialog_channel_settings), cancelbutton4, GTK_RESPONSE_CANCEL);
+  GTK_WIDGET_SET_FLAGS (cancelbutton4, GTK_CAN_DEFAULT);
+
+  okbutton4 = gtk_button_new_from_stock ("gtk-ok");
+  gtk_widget_set_name (okbutton4, "okbutton4");
+  gtk_widget_show (okbutton4);
+  gtk_dialog_add_action_widget (GTK_DIALOG (dialog_channel_settings), okbutton4, GTK_RESPONSE_OK);
+  GTK_WIDGET_SET_FLAGS (okbutton4, GTK_CAN_DEFAULT);
+
+  /* Store pointers to all widgets, for use by lookup_widget(). */
+  GLADE_HOOKUP_OBJECT_NO_REF (dialog_channel_settings, dialog_channel_settings, "dialog_channel_settings");
+  GLADE_HOOKUP_OBJECT_NO_REF (dialog_channel_settings, dialog_vbox4, "dialog_vbox4");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, table19, "table19");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, protocol_combo, "protocol_combo");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, protocol, "protocol");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, network_combo, "network_combo");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, network, "network");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, name, "name");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, botmasks, "botmasks");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, autosendcmd, "autosendcmd");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, password, "password");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, label151, "label151");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, label152, "label152");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, label153, "label153");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, label154, "label154");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, autojoin, "autojoin");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, label155, "label155");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, label156, "label156");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, label157, "label157");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, label158, "label158");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, label159, "label159");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, hseparator17, "hseparator17");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, hseparator18, "hseparator18");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, hseparator19, "hseparator19");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, hseparator20, "hseparator20");
+  GLADE_HOOKUP_OBJECT_NO_REF (dialog_channel_settings, dialog_action_area4, "dialog_action_area4");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, cancelbutton4, "cancelbutton4");
+  GLADE_HOOKUP_OBJECT (dialog_channel_settings, okbutton4, "okbutton4");
+
+  return dialog_channel_settings;
 }
 

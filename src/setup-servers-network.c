@@ -86,7 +86,7 @@ void network_dialog_show(NetworkConfig *network)
 	GObject *obj;
 	GList *list;
 
-	dialog = create_dialog_add_network();
+	dialog = create_dialog_network_settings();
 	obj = G_OBJECT(dialog);
 
 	g_signal_connect(obj, "response",

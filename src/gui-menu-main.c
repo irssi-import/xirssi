@@ -32,6 +32,10 @@ enum {
 	ACTION_PREFERENCES = ACTION_CUSTOM,
 	ACTION_QUIT,
 
+	ACTION_VIEW_MENUBAR,
+	ACTION_VIEW_STATUSBAR,
+	ACTION_VIEW_NICKLIST,
+
 	ACTION_FAQ,
 	ACTION_HOWTO,
 	ACTION_HOMEPAGE,
@@ -46,6 +50,12 @@ static MenuItem items[] = {
 	{ ACTION_PREFERENCES,	"_Preferences", NULL, &img_preferences },
 	{ ACTION_SEPARATOR },
 	{ ACTION_QUIT,		"_Quit", NULL, &img_quit },
+	{ ACTION_ENDSUB },
+
+	{ ACTION_SUB,		"_View" },
+	{ ACTION_VIEW_MENUBAR,	"_Menubar", NULL, NULL, MENU_FLAG_CHECK },
+	{ ACTION_VIEW_STATUSBAR, "_Statusbar", NULL, NULL, MENU_FLAG_CHECK },
+	{ ACTION_VIEW_NICKLIST,	"_Nicklist", NULL, NULL, MENU_FLAG_CHECK },
 	{ ACTION_ENDSUB },
 
 	{ ACTION_SUB,		"_Help" },
@@ -65,6 +75,13 @@ static void menu_callback(void *user_data, const char *item_data, int action)
 		break;
 	case ACTION_PREFERENCES:
 		setup_preferences_show();
+		break;
+
+	case ACTION_VIEW_MENUBAR:
+		break;
+	case ACTION_VIEW_STATUSBAR:
+		break;
+	case ACTION_VIEW_NICKLIST:
 		break;
 
 	case ACTION_FAQ:

@@ -1,6 +1,8 @@
 #ifndef __GUI_MENU_H
 #define __GUI_MENU_H
 
+#define MENU_FLAG_CHECK		0x01
+
 typedef enum {
 	ACTION_SEPARATOR,
 	ACTION_SUB,
@@ -15,6 +17,7 @@ typedef struct {
 	char *data;
 
 	GtkWidget **image;
+	int flags;
 } MenuItem;
 
 typedef void (*MenuCallback) (void *user_data, const char *item_data,

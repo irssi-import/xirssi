@@ -38,6 +38,7 @@
 #include "gui-window.h"
 #include "gui-tab.h"
 #include "gui-url.h"
+#include "setup.h"
 
 #include "glade/support.h"
 
@@ -138,6 +139,8 @@ static void gui_deinit(void)
 #endif
 
 	signal_remove("gui exit", (SIGNAL_FUNC) sig_exit);
+
+        setup_preferences_destroy();
 
 	gui_urls_deinit();
         gui_context_url_deinit();

@@ -34,6 +34,7 @@ xirssi_SOURCES = \
 	dialog-about.c \
 	gui.c \
 	gui-channel.c \
+	gui-colors.c \
 	gui-context-nick.c \
 	gui-context-url.c \
 	gui-entry.c \
@@ -56,6 +57,9 @@ xirssi_SOURCES = \
 	gui-window-view.c \
 	setup.c \
 	setup-aliases.c \
+	setup-channels.c \
+	setup-channels-edit.c \
+	setup-completion.c \
 	setup-prefs.c \
 	setup-servers.c \
 	setup-servers-network.c \
@@ -66,6 +70,7 @@ noinst_HEADERS = \
 	dialogs.h \
 	gui.h \
 	gui-channel.h \
+	gui-colors.h \
 	gui-entry.h \
 	gui-frame.h \
 	gui-itemlist.h \

@@ -28,9 +28,10 @@
 #include "gui.h"
 #include "glade/interface.h"
 
-#define NETWORK_NONE "<none>"
+#define NETWORK_NONE "<none>" /* "no network" list item */
 
 GList *get_chat_protocol_names(void);
+GList *get_network_names(int chat_type, const char *network_none);
 
 static void server_save(GObject *obj, ServerConfig *server)
 {
@@ -49,7 +50,7 @@ static void server_save(GObject *obj, ServerConfig *server)
 	}
 
 	if (server == NULL) {
-		/* create server */
+		/* create server config */
 		entry = g_object_get_data(obj, "protocol");
 		proto_name = gtk_entry_get_text(entry);
 
@@ -103,22 +104,6 @@ static gboolean event_response_server(GtkWidget *widget, int response_id,
 	return FALSE;
 }
 
-static GList *get_network_names(int chat_type)
-{
-	GList *list;
-	GSList *tmp;
-
-	list = NULL;
-	for (tmp = chatnets; tmp != NULL; tmp = tmp->next) {
-		NetworkConfig *network = tmp->data;
-
-		if (chat_type == -1 || network->chat_type == chat_type)
-			list = g_list_append(list, network->name);
-	}
-	list = g_list_append(list, NETWORK_NONE);
-	return list;
-}
-
 static GList *get_ip_protocol_names(void)
 {
 	GList *list;
@@ -137,7 +122,7 @@ void server_dialog_show(ServerConfig *server, const char *network)
 	GList *list;
 	char port[MAX_INT_STRLEN];
 
-	dialog = create_dialog_add_server();
+	dialog = create_dialog_server_settings();
 	obj = G_OBJECT(dialog);
 
 	g_signal_connect(obj, "response",
@@ -151,7 +136,8 @@ void server_dialog_show(ServerConfig *server, const char *network)
 
 	/* set networks */
 	network_combo = g_object_get_data(obj, "network_combo");
-	list = get_network_names(server == NULL ? -1 : server->chat_type);
+	list = get_network_names(server == NULL ? -1 : server->chat_type,
+				 NETWORK_NONE);
 	gtk_combo_set_popdown_strings(network_combo, list);
 	g_list_free(list);
 

@@ -67,7 +67,9 @@ void gui_menu_fill(GtkWidget *menu, MenuItem *items, int items_count,
 			}
 			break;
 		default:
-			if (items[i].image != NULL) {
+			if (items[i].flags & MENU_FLAG_CHECK)
+				item = gtk_check_menu_item_new_with_mnemonic(items[i].name);
+			else if (items[i].image != NULL) {
 				item = gtk_image_menu_item_new_with_mnemonic(items[i].name);
                                 gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(item), *items[i].image);
 			} else {

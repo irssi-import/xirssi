@@ -670,7 +670,7 @@ void gui_keyboards_init(void)
 	key_bind("delete_to_next_space", "", "", NULL, (SIGNAL_FUNC) key_delete_to_next_space);
 	key_bind("erase_line", "", "^U", NULL, (SIGNAL_FUNC) key_erase_line);
 	key_bind("erase_to_beg_of_line", "", NULL, NULL, (SIGNAL_FUNC) key_erase_to_beg_of_line);
-	key_bind("erase_to_end_of_line", "", "^K", NULL, (SIGNAL_FUNC) key_erase_to_end_of_line);
+	key_bind("erase_to_end_of_line", "", "", NULL, (SIGNAL_FUNC) key_erase_to_end_of_line);
 	key_bind("yank_from_cutbuffer", "", "^Y", NULL, (SIGNAL_FUNC) key_yank_from_cutbuffer);
 	key_bind("transpose_characters", "Swap current and previous character", "^T", NULL, (SIGNAL_FUNC) key_transpose_characters);
 
@@ -688,7 +688,7 @@ void gui_keyboards_init(void)
 	key_bind("left_window", "Window in left", "^P", NULL, (SIGNAL_FUNC) key_left_window);
 	key_bind("right_window", "Window in right", "^N", NULL, (SIGNAL_FUNC) key_right_window);
 	key_bind("active_window", "Go to next window with the highest activity", "meta-a", NULL, (SIGNAL_FUNC) key_active_window);
-	key_bind("next_window_item", "Next channel/query", "^X", NULL, (SIGNAL_FUNC) key_next_window_item);
+	key_bind("next_window_item", "Next channel/query", "", NULL, (SIGNAL_FUNC) key_next_window_item);
 	key_bind("previous_window_item", "Previous channel/query", NULL, NULL, (SIGNAL_FUNC) key_previous_window_item);
 
 	key_bind("scroll_start", "Beginning of the window", "", NULL, (SIGNAL_FUNC) key_scroll_start);
@@ -700,6 +700,11 @@ void gui_keyboards_init(void)
 
 	/* .. */
 	key_bind("insert_text", "Append text to line", NULL, NULL, (SIGNAL_FUNC) key_insert_text);
+	key_bind("insert_text", NULL, "^B", "\002", (SIGNAL_FUNC) key_insert_text);
+	key_bind("insert_text", NULL, "^K", "\003", (SIGNAL_FUNC) key_insert_text);
+	key_bind("insert_text", NULL, "^O", "\017", (SIGNAL_FUNC) key_insert_text);
+	key_bind("insert_text", NULL, "^R", "\026", (SIGNAL_FUNC) key_insert_text);
+	key_bind("insert_text", NULL, "^-", "\037", (SIGNAL_FUNC) key_insert_text);
 
         /* autoreplaces */
 	key_bind("multi", NULL, "return", "check_replaces;send_line", NULL);

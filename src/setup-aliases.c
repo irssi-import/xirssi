@@ -31,7 +31,6 @@ static void alias_signals_deinit(void);
 enum {
 	COL_ALIAS,
 	COL_VALUE,
-	COL_EDITABLE,
 
 	N_COLUMNS
 };
@@ -96,7 +95,6 @@ static void alias_store_fill(GtkTreeStore *store)
 		gtk_tree_store_set(store, &iter,
 				   COL_ALIAS, node->key,
 				   COL_VALUE, node->value,
-				   COL_EDITABLE, TRUE,
 				   -1);
 	}
 }
@@ -190,7 +188,7 @@ static gboolean event_add_alias(GtkWidget *widget, GtkTreeView *tree_view)
 	gtk_tree_store_set(alias_store, &iter,
 			   COL_ALIAS, "<name>",
 			   COL_VALUE, "<value>",
-			   COL_EDITABLE, TRUE, -1);
+			   -1);
 
 	path = gtk_tree_model_get_path(GTK_TREE_MODEL(alias_store), &iter);
 
@@ -244,8 +242,7 @@ void setup_aliases_init(GtkWidget *dialog)
 	/* tree store */
 	alias_store = gtk_tree_store_new(N_COLUMNS,
 					 G_TYPE_STRING,
-					 G_TYPE_STRING,
-					 G_TYPE_BOOLEAN);
+					 G_TYPE_STRING);
 	gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(alias_store), 0,
 					gui_tree_strcase_sort_func, NULL, NULL);
 	gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(alias_store), 0,
@@ -261,21 +258,21 @@ void setup_aliases_init(GtkWidget *dialog)
 
 	/* -- */
 	renderer = gtk_cell_renderer_text_new();
+	g_object_set(G_OBJECT(renderer), "editable", TRUE, NULL);
 	g_signal_connect(G_OBJECT(renderer), "edited",
 			 G_CALLBACK(alias_edited), NULL);
 	column = gtk_tree_view_column_new_with_attributes("Alias", renderer,
 							  "text", COL_ALIAS,
-							  "editable", COL_EDITABLE,
 							  NULL);
 	gtk_tree_view_append_column(tree_view, column);
 
 	/* -- */
 	renderer = gtk_cell_renderer_text_new();
+	g_object_set(G_OBJECT(renderer), "editable", TRUE, NULL);
 	g_signal_connect(G_OBJECT(renderer), "edited",
 			 G_CALLBACK(value_edited), NULL);
 	column = gtk_tree_view_column_new_with_attributes("Value", renderer,
 							  "text", COL_VALUE,
-							  "editable", COL_EDITABLE,
 							  NULL);
 	gtk_tree_view_append_column(tree_view, column);
 
@@ -311,7 +308,6 @@ static void sig_alias_added(const char *alias, const char *value)
 	gtk_tree_store_set(alias_store, &iter,
 			   COL_ALIAS, alias,
 			   COL_VALUE, value,
-			   COL_EDITABLE, TRUE,
 			   -1);
 }
 
