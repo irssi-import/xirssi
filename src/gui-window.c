@@ -324,6 +324,7 @@ static void sig_window_destroyed(Window *window)
 {
 	WindowGui *gui;
 	GtkWidget *widget;
+	Frame *frame;
 
 	gui = WINDOW_GUI(window);
 	widget = gui->widget;
@@ -333,7 +334,16 @@ static void sig_window_destroyed(Window *window)
 	while (gui->views != NULL) {
 		WindowView *view = gui->views->data;
 		gui->views = g_slist_remove(gui->views, view);
+
+		frame = view->pane->tab->frame;
 		gtk_widget_destroy(view->pane->widget);
+
+		if (frame->notebook->children == NULL) {
+			/* we just destroyed the last tab - kill the window.
+			   I'd rather do this somewhere else, but window
+			   moving code makes it more difficult.. */
+			gtk_widget_destroy(GTK_WIDGET(frame->window));
+		}
 	}
 
 	pango_font_description_free(gui->font_monospace);
