@@ -1,3 +1,8 @@
+2002-06-06 21:39  Timo Sirainen <tss@iki.fi>
+
+	* glade/irssi.glade, src/setup-prefs.c, src/glade/interface.c:
+	setup changes.
+
 2002-06-06 19:15  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-keyboard.c: Added default meta-d = delete_next_word
