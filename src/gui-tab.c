@@ -394,6 +394,18 @@ void gui_tab_set_active_window(Tab *tab, Window *window)
 	gui_frame_set_active_window(tab->frame, window);
 }
 
+static void tab_set_label(Tab *tab, Window *window)
+{
+	if (window->active == NULL) {
+		/* empty window */
+		gtk_label_set_text(tab->label,
+				   window != NULL && window->name != NULL ?
+				   window->name : "(empty)");
+	} else {
+		gtk_label_set_text(tab->label, window->active->name);
+	}
+}
+
 void gui_tab_set_active_window_item(Tab *tab, Window *window)
 {
 	WindowItem *witem;
@@ -403,14 +415,7 @@ void gui_tab_set_active_window_item(Tab *tab, Window *window)
 		return;
 
 	witem = window == NULL ? NULL : window->active;
-	if (witem == NULL) {
-		/* empty window */
-		gtk_label_set_text(tab->label,
-				   window != NULL && window->name != NULL ?
-				   window->name : "(empty)");
-	} else {
-		gtk_label_set_text(tab->label, witem->name);
-	}
+	tab_set_label(tab, window);
 
 	if (!IS_CHANNEL(witem)) {
 		/* clear nicklist */
@@ -447,12 +452,29 @@ void gui_tab_update_active_window(Tab *tab)
         gui_tab_set_active_window(tab, window);
 }
 
+static void sig_window_name_changed(Window *window)
+{
+	GSList *tmp;
+
+	if (window->items != NULL)
+		return;
+
+	for (tmp = WINDOW_GUI(window)->views; tmp != NULL; tmp = tmp->next) {
+		WindowView *view = tmp->data;
+
+		if (view->pane->tab->active_win == window)
+			tab_set_label(view->pane->tab, window);
+	}
+}
+
 void gui_tabs_init(void)
 {
 	move_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **) move_xpm);
+	signal_add("window name changed", (SIGNAL_FUNC) sig_window_name_changed);
 }
 
 void gui_tabs_deinit(void)
 {
 	gdk_pixbuf_unref(move_pixbuf);
+	signal_remove("window name changed", (SIGNAL_FUNC) sig_window_name_changed);
 }
