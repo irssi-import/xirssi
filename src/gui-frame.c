@@ -62,8 +62,8 @@ static gboolean event_focus(GtkWidget *widget, GdkEventFocus *event,
 	return FALSE;
 }
 
-static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
-				Frame *frame)
+static gboolean event_key_press_after(GtkWidget *widget, GdkEventKey *event,
+				      Frame *frame)
 {
 	GtkWidget *entry;
 	char *str;
@@ -97,6 +97,21 @@ static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
 	return FALSE;
 }
 
+static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
+				Frame *frame)
+{
+	if (event->keyval == GDK_Tab ||
+	    event->keyval == GDK_Up ||
+	    event->keyval == GDK_Down) {
+		/* kludging around keys changing focus and not letting us
+		   handle it in the after-signal. and we can't just handle
+		   everything here, because it will break dead-keys */
+		return event_key_press_after(widget, event, frame);
+	}
+
+	return FALSE;
+}
+
 static gboolean event_switch_page(GtkNotebook *notebook, GtkNotebookPage *page,
 				  gint page_num, Frame *frame)
 {
@@ -127,7 +142,9 @@ Frame *gui_frame_new(void)
 	g_signal_connect(G_OBJECT(window), "focus_in_event",
 			 G_CALLBACK(event_focus), frame);
 	g_signal_connect_after(GTK_OBJECT(window), "key_press_event",
-			       G_CALLBACK(event_key_press), frame);
+			       G_CALLBACK(event_key_press_after), frame);
+	g_signal_connect(GTK_OBJECT(window), "key_press_event",
+			 G_CALLBACK(event_key_press), frame);
 	gtk_widget_set_usize(window, 640, 480);
 
 	vbox = gtk_vbox_new(FALSE, 0);
