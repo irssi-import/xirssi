@@ -32,7 +32,7 @@ typedef struct {
 } SetupPrefs;
 
 static SetupPrefs prefs[] = {
-	{ "Servers" },
+	{ "Connections" },
 	{ "Servers",		"page_servers", setup_servers_init },
 	{ "Channels",		"page_channels" },
 	{ "Settings",		"page_connect_settings" },
@@ -41,17 +41,17 @@ static SetupPrefs prefs[] = {
 	{ "Automatic",		"page_autolog" },
 	{ "Advanced",		"page_advanced_logging" },
 
-	{ "Window Input" },
-	{ "Ignores",		"page_ignores" },
-	{ "Highlighting",	"page_highlighting" },
-	{ "Settings",		"page_input_settings" },
-
 	{ "User Interface" },
 	{ "Windows",		"page_windows" },
 	{ "Queries",		"page_queries" },
 	{ "Completion",		"page_completion" },
 	{ "Aliases",		"page_aliases" },
 	{ "Keyboard",		"page_keyboard" },
+
+	{ "Window Input" },
+	{ "Ignores",		"page_ignores" },
+	{ "Highlighting",	"page_highlighting" },
+	{ "Settings",		"page_input_settings" },
 
 	{ "Appearance" },
 	{ "Window Output",	"page_window_output" },
