@@ -5,6 +5,38 @@
 <entry>
 <date>2002-06-06</date>
 <weekday>Thursday</weekday>
+<time>22:39</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>pixmaps/autolog.png</name>
+<revision>1.1</revision>
+</file>
+<file>
+<name>pixmaps/fontscolors.png</name>
+<revision>1.1</revision>
+</file>
+<commondir>pixmaps/</commondir>
+<msg>new icons
+</msg>
+</entry>
+
+<entry>
+<date>2002-06-06</date>
+<weekday>Thursday</weekday>
+<time>22:38</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-keyboard.c</name>
+<revision>1.13</revision>
+</file>
+<msg>use only mod2+mod4 (alt + hyper), so num/scroll lock state doesn't affect
+keyboard bindings.
+</msg>
+</entry>
+
+<entry>
+<date>2002-06-06</date>
+<weekday>Thursday</weekday>
 <time>22:28</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
