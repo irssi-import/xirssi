@@ -31,8 +31,9 @@
 #include "gui-window-view.h"
 
 #include "move.xpm"
+#include "right.xpm"
 
-static GdkPixbuf *move_pixbuf;
+static GdkPixbuf *move_pixbuf, *right_pixbuf;
 
 static gboolean event_destroy(GtkWidget *window, Tab *tab)
 {
@@ -292,7 +293,7 @@ GtkPaned *gui_tab_add_paned(Tab *tab)
 
 TabPane *gui_tab_pane_new(Tab *tab)
 {
-	GtkWidget *vbox, *hbox, *space, *button, *label;
+	GtkWidget *vbox, *hbox, *button, *label;
 	GtkPaned *paned;
 	TabPane *pane;
 
@@ -310,7 +311,7 @@ TabPane *gui_tab_pane_new(Tab *tab)
 			 G_CALLBACK(event_notify_pane), pane);
 	g_object_set_data(G_OBJECT(vbox), "TabPane", pane);
 
-	hbox = gtk_hbox_new(FALSE, 0);
+	hbox = gtk_hbox_new(FALSE, 5);
 	pane->titlebox = GTK_BOX(hbox);
 	gtk_container_set_border_width(GTK_CONTAINER(hbox), 2);
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
@@ -319,19 +320,15 @@ TabPane *gui_tab_pane_new(Tab *tab)
 	button = gui_close_button_new(pane);
 	gtk_box_pack_start(GTK_BOX(hbox), button, FALSE, FALSE, 0);
 
-	space = gtk_label_new(NULL);
-	gtk_widget_set_size_request(space, 5, -1);
-	gtk_box_pack_start(GTK_BOX(hbox), space, FALSE, FALSE, 0);
-
 	/* move button */
 	button = gui_move_button_new(tab, pane);
 	gtk_box_pack_start(GTK_BOX(hbox), button, FALSE, FALSE, 0);
 
-	space = gtk_label_new(NULL);
-	gtk_widget_set_size_request(space, 5, -1);
-	gtk_box_pack_start(GTK_BOX(hbox), space, FALSE, FALSE, 0);
-
 	gtk_widget_show_all(vbox);
+
+	/* focus icon - NOTE: after ..show_all() above. */
+	pane->focus_widget = gtk_image_new_from_pixbuf(right_pixbuf);
+	gtk_box_pack_start(GTK_BOX(hbox), pane->focus_widget, FALSE, FALSE, 0);
 
 	/* pane's tab label */
 	label = gtk_label_new(NULL);
@@ -418,6 +415,14 @@ void gui_tab_set_active(Tab *tab)
 void gui_tab_set_active_window(Tab *tab, Window *window)
 {
 	if (tab->active_win != window) {
+		if (tab->active_win != NULL) {
+			WindowGui *gui = WINDOW_GUI(tab->active_win);
+			if (gui->active_view != NULL)
+				gtk_widget_hide(gui->active_view->pane->focus_widget);
+		}
+		if (window != NULL)
+			gtk_widget_show(WINDOW_GUI(window)->active_view->pane->focus_widget);
+
 		tab->active_win = window;
 		gui_tab_set_active_window_item(tab, window);
 	}
@@ -488,9 +493,11 @@ void gui_reset_tab_labels(Frame *frame)
 void gui_tabs_init(void)
 {
 	move_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **) move_xpm);
+        right_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **) right_xpm);
 }
 
 void gui_tabs_deinit(void)
 {
 	gdk_pixbuf_unref(move_pixbuf);
+	gdk_pixbuf_unref(right_pixbuf);
 }

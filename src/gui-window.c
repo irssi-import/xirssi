@@ -82,10 +82,10 @@ void gui_window_add_view(WindowGui *window, Tab *tab)
 	view = gui_window_view_new(gui_tab_pane_new(tab),
 				   window, window->buffer);
 
-	gui_tab_set_active_window(tab, window->window);
-
 	window->views = g_slist_prepend(window->views, view);
 	window->active_view = view;
+
+	gui_tab_set_active_window(tab, window->window);
 }
 
 void gui_window_remove_view(WindowView *view)

@@ -22,7 +22,7 @@ struct _Tab {
 struct _TabPane {
 	Tab *tab;
 
-	GtkWidget *widget;
+	GtkWidget *widget, *focus_widget;
 	GtkLabel *label;
 	GtkBox *box, *titlebox;
 	WindowView *view;
