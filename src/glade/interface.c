@@ -35,13 +35,9 @@ create_preferences (void)
   GtkWidget *frame1;
   GtkWidget *sidebar;
   GtkWidget *prefs_notebook;
-  GtkWidget *table11;
+  GtkWidget *alignment1;
   GtkWidget *frame36;
   GtkWidget *image1;
-  GtkWidget *eventbox5;
-  GtkWidget *eventbox6;
-  GtkWidget *eventbox7;
-  GtkWidget *eventbox8;
   GtkWidget *label37;
   GtkWidget *empty_notebook_page;
   GtkWidget *label39;
@@ -336,6 +332,7 @@ create_preferences (void)
   dialog_vbox1 = GTK_DIALOG (preferences)->vbox;
   gtk_widget_set_name (dialog_vbox1, "dialog_vbox1");
   gtk_widget_show (dialog_vbox1);
+  gtk_container_set_border_width (GTK_CONTAINER (dialog_vbox1), 2);
 
   hbox1 = gtk_hbox_new (FALSE, 10);
   gtk_widget_set_name (hbox1, "hbox1");
@@ -364,51 +361,22 @@ create_preferences (void)
   gtk_notebook_set_show_border (GTK_NOTEBOOK (prefs_notebook), FALSE);
   gtk_notebook_set_tab_pos (GTK_NOTEBOOK (prefs_notebook), GTK_POS_LEFT);
 
-  table11 = gtk_table_new (3, 3, FALSE);
-  gtk_widget_set_name (table11, "table11");
-  gtk_widget_show (table11);
-  gtk_container_add (GTK_CONTAINER (prefs_notebook), table11);
+  alignment1 = gtk_alignment_new (0.5, 0.5, 0, 0);
+  gtk_widget_set_name (alignment1, "alignment1");
+  gtk_widget_show (alignment1);
+  gtk_container_add (GTK_CONTAINER (prefs_notebook), alignment1);
+  gtk_notebook_set_tab_label_packing (GTK_NOTEBOOK (prefs_notebook), alignment1,
+                                      TRUE, TRUE, GTK_PACK_START);
 
   frame36 = gtk_frame_new (NULL);
   gtk_widget_set_name (frame36, "frame36");
   gtk_widget_show (frame36);
-  gtk_table_attach (GTK_TABLE (table11), frame36, 1, 2, 1, 2,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (GTK_FILL), 0, 0);
-  gtk_frame_set_shadow_type (GTK_FRAME (frame36), GTK_SHADOW_IN);
+  gtk_container_add (GTK_CONTAINER (alignment1), frame36);
 
   image1 = create_pixmap (preferences, "irssilogo.jpg");
   gtk_widget_set_name (image1, "image1");
   gtk_widget_show (image1);
   gtk_container_add (GTK_CONTAINER (frame36), image1);
-
-  eventbox5 = gtk_event_box_new ();
-  gtk_widget_set_name (eventbox5, "eventbox5");
-  gtk_widget_show (eventbox5);
-  gtk_table_attach (GTK_TABLE (table11), eventbox5, 0, 3, 0, 1,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
-
-  eventbox6 = gtk_event_box_new ();
-  gtk_widget_set_name (eventbox6, "eventbox6");
-  gtk_widget_show (eventbox6);
-  gtk_table_attach (GTK_TABLE (table11), eventbox6, 0, 3, 2, 3,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
-
-  eventbox7 = gtk_event_box_new ();
-  gtk_widget_set_name (eventbox7, "eventbox7");
-  gtk_widget_show (eventbox7);
-  gtk_table_attach (GTK_TABLE (table11), eventbox7, 0, 1, 1, 2,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (GTK_FILL), 0, 0);
-
-  eventbox8 = gtk_event_box_new ();
-  gtk_widget_set_name (eventbox8, "eventbox8");
-  gtk_widget_show (eventbox8);
-  gtk_table_attach (GTK_TABLE (table11), eventbox8, 2, 3, 1, 2,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (GTK_FILL), 0, 0);
 
   label37 = gtk_label_new ("");
   gtk_widget_set_name (label37, "label37");
@@ -2253,13 +2221,9 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, frame1, "frame1");
   GLADE_HOOKUP_OBJECT (preferences, sidebar, "sidebar");
   GLADE_HOOKUP_OBJECT (preferences, prefs_notebook, "prefs_notebook");
-  GLADE_HOOKUP_OBJECT (preferences, table11, "table11");
+  GLADE_HOOKUP_OBJECT (preferences, alignment1, "alignment1");
   GLADE_HOOKUP_OBJECT (preferences, frame36, "frame36");
   GLADE_HOOKUP_OBJECT (preferences, image1, "image1");
-  GLADE_HOOKUP_OBJECT (preferences, eventbox5, "eventbox5");
-  GLADE_HOOKUP_OBJECT (preferences, eventbox6, "eventbox6");
-  GLADE_HOOKUP_OBJECT (preferences, eventbox7, "eventbox7");
-  GLADE_HOOKUP_OBJECT (preferences, eventbox8, "eventbox8");
   GLADE_HOOKUP_OBJECT (preferences, label37, "label37");
   GLADE_HOOKUP_OBJECT (preferences, label39, "label39");
   GLADE_HOOKUP_OBJECT (preferences, page_servers, "page_servers");
