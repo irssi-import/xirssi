@@ -3,6 +3,19 @@
 <changelog xmlns="http://www.red-bean.com/xmlns/cvs2cl/">
 
 <entry>
+<date>2002-12-05</date>
+<weekday>Thursday</weekday>
+<time>17:16</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>configure.in</name>
+<revision>1.7</revision>
+</file>
+<msg>fix
+</msg>
+</entry>
+
+<entry>
 <date>2002-11-23</date>
 <weekday>Saturday</weekday>
 <time>13:02</time>
