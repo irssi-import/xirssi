@@ -53,6 +53,14 @@ char *gui_keyboard_get_event_string(GdkEventKey *event)
 
 	if (event->state & GDK_MOD1_MASK)
 		g_string_prepend(cmd, "meta-");
+	if (event->state & GDK_MOD2_MASK)
+		g_string_prepend(cmd, "mod2-");
+	if (event->state & GDK_MOD3_MASK)
+		g_string_prepend(cmd, "mod3-");
+	if (event->state & GDK_MOD4_MASK)
+		g_string_prepend(cmd, "mod4-");
+	if (event->state & GDK_MOD5_MASK)
+		g_string_prepend(cmd, "mod5-");
 
 	if (event->state & GDK_CONTROL_MASK) {
 		if (chr > 255)

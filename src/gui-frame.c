@@ -94,7 +94,6 @@ static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
 		gtk_widget_grab_focus(GTK_WIDGET(entry));
 		gtk_editable_select_region(GTK_EDITABLE(entry), pos, pos);
 	}
-
 	return FALSE;
 }
 
@@ -127,8 +126,8 @@ Frame *gui_frame_new(void)
 			 G_CALLBACK(event_destroy), frame);
 	g_signal_connect(G_OBJECT(window), "focus_in_event",
 			 G_CALLBACK(event_focus), frame);
-	g_signal_connect(GTK_OBJECT(window), "key_press_event",
-			 G_CALLBACK(event_key_press), frame);
+	g_signal_connect_after(GTK_OBJECT(window), "key_press_event",
+			       G_CALLBACK(event_key_press), frame);
 	gtk_widget_set_usize(window, 640, 480);
 
 	vbox = gtk_vbox_new(FALSE, 0);
