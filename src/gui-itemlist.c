@@ -225,7 +225,8 @@ static void gui_itemlist_update_items(Itemlist *itemlist, Window *window)
 
 	gtk_option_menu_set_menu(itemlist->menu, itemlist->short_menu);
 
-	if (itemlist->items->next == NULL) {
+	if (itemlist->items->next == NULL ||
+	    (window->items && itemlist->items->next->next == NULL)) {
 		/* only one item, hide */
 		gtk_widget_hide(itemlist->widget);
 	} else {
