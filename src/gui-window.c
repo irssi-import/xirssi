@@ -389,7 +389,7 @@ static void sig_gui_printtext_finished(Window *window)
 		/* set indentation for line */
 		gtk_text_buffer_get_end_iter(gui->buffer, &end_iter);
 		memcpy(&start_iter, &end_iter, sizeof(end_iter));
-                gtk_text_iter_backward_line(&start_iter);
+		gtk_text_iter_set_line_index(&start_iter, 0);
 
 		gtk_text_buffer_apply_tag(gui->buffer,
 					  get_indent_tag(gui, gui->indent),
