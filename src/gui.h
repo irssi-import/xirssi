@@ -39,4 +39,8 @@ gint gui_tree_strcase_sort_func(GtkTreeModel *model,
 gboolean gui_tree_model_find(GtkTreeModel *model, int column,
 			     GtkTreeIter *iter, void *data);
 
+/* Returns all the rows in specified column as a string. */
+char *gui_tree_model_get_string(GtkTreeModel *model, int column,
+				const char *separator);
+
 #endif

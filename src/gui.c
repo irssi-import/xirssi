@@ -216,3 +216,28 @@ gboolean gui_tree_model_find(GtkTreeModel *model, int column,
 
 	return rec.found;
 }
+
+char *gui_tree_model_get_string(GtkTreeModel *model, int column,
+				const char *separator)
+{
+	GtkTreeIter iter;
+	GString *str;
+	char *iter_str, *ret;
+
+	if (!gtk_tree_model_get_iter_first(model, &iter))
+		return NULL;
+
+	str = g_string_new(NULL);
+	do {
+		gtk_tree_model_get(model, &iter, column, &iter_str, -1);
+		if (str->len != 0)
+			g_string_append(str, separator);
+		g_string_append(str, iter_str);
+		g_free(iter_str);
+	} while (gtk_tree_model_iter_next(model, &iter));
+
+	ret = str->str;
+	g_string_free(str, FALSE);
+
+	return ret;
+}

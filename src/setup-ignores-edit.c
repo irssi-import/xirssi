@@ -27,30 +27,6 @@
 #include "gui.h"
 #include "glade/interface.h"
 
-static char *list_get_channels(GtkTreeModel *model)
-{
-	GtkTreeIter iter;
-	GString *str;
-	char *channel, *ret;
-
-	if (!gtk_tree_model_get_iter_first(model, &iter))
-		return NULL;
-
-	str = g_string_new(NULL);
-	do {
-		gtk_tree_model_get(model, &iter, 0, &channel, -1);
-		if (str->len != 0)
-			g_string_append_c(str, ' ');
-		g_string_append(str, channel);
-		g_free(channel);
-	} while (gtk_tree_model_iter_next(model, &iter));
-
-	ret = str->str;
-	g_string_free(str, FALSE);
-
-	return ret;
-}
-
 static void ignore_save(GObject *obj, Ignore *ignore)
 {
 	GtkEntry *entry;
@@ -63,7 +39,7 @@ static void ignore_save(GObject *obj, Ignore *ignore)
 
 	create_new = ignore == NULL;
 	if (create_new) {
-		ignore = g_new0(IGNORE_REC, 1);
+		ignore = g_new0(Ignore, 1);
 	} else {
 		g_free(ignore->mask);
 		g_strfreev(ignore->channels);
@@ -72,8 +48,8 @@ static void ignore_save(GObject *obj, Ignore *ignore)
 	/* mask */
 	entry = g_object_get_data(obj, "mask");
 	mask = gtk_entry_get_text(entry);
-	ignore->mask = mask == NULL || *mask == '\0' ||
-		strcmp(mask, "*") == 0 ? NULL : g_strdup(mask);
+	ignore->mask = *mask != '\0' && strcmp(mask, "*") != 0 ?
+		g_strdup(mask) : NULL;
 
 	/* level */
 	entry = g_object_get_data(obj, "level");
@@ -100,7 +76,7 @@ static void ignore_save(GObject *obj, Ignore *ignore)
 	/* get channels */
 	model = g_object_get_data(g_object_get_data(obj, "channel_tree"),
 				  "store");
-	channels = list_get_channels(model);
+	channels = gui_tree_model_get_string(model, 0, " ");
 	ignore->channels = channels == NULL ? NULL :
 		g_strsplit(channels, " ", -1);
 	g_free(channels);
@@ -147,7 +123,7 @@ static void ignore_channels_store_fill(GtkListStore *store, Ignore *ignore)
 	}
 }
 
-static void regexp_invalid_update(GtkToggleButton *toggle, GtkEntry *entry,
+static void regexp_update_invalid(GtkToggleButton *toggle, GtkEntry *entry,
 				  GtkWidget *label)
 {
 	regex_t preg;
@@ -173,78 +149,15 @@ static void regexp_invalid_update(GtkToggleButton *toggle, GtkEntry *entry,
 
 static gboolean event_pattern_changed(GtkEntry *entry, GObject *obj)
 {
-	regexp_invalid_update(g_object_get_data(obj, "regexp"), entry,
+	regexp_update_invalid(g_object_get_data(obj, "regexp"), entry,
 			      g_object_get_data(obj, "regexp_invalid"));
 	return FALSE;
 }
 
 static gboolean event_regexp_toggled(GtkToggleButton *toggle, GObject *obj)
 {
-	regexp_invalid_update(toggle, g_object_get_data(obj, "pattern"),
+	regexp_update_invalid(toggle, g_object_get_data(obj, "pattern"),
 			      g_object_get_data(obj, "regexp_invalid"));
-	return FALSE;
-}
-
-static int timeout_edit_channel(GtkTreeView *view)
-{
-	GtkTreeViewColumn *column;
-        GtkTreePath *path;
-
-	path = g_object_get_data(G_OBJECT(view), "path");
-
-	column = gtk_tree_view_get_column(view, 0);
-	gtk_tree_view_set_cursor(view, path, column, TRUE);
-	gtk_tree_path_free(path);
-
-	return 0;
-}
-
-static gboolean event_channel_add(GtkWidget *widget, GtkTreeView *view)
-{
-        GtkListStore *store;
-	GtkTreePath *path;
-	GtkTreeIter iter;
-
-        store = g_object_get_data(G_OBJECT(view), "store");
-	gtk_list_store_prepend(store, &iter);
-	gtk_list_store_set(store, &iter, 0, "#channel", -1);
-
-	path = gtk_tree_model_get_path(GTK_TREE_MODEL(store), &iter);
-
-	/* FIXME: this is quite a horrible kludge, but I can't see any
-	   other way to do it - even 0 timeout doesn't work.
-	   gtk_tree_view_set_cursor() is buggy with newly prepended items
-	   for some reason - hopefully will be fixed soon. And since our
-	   list is sorted, we can't append it either. */
-	g_object_set_data(G_OBJECT(view), "path", path);
-	g_timeout_add(100, (GSourceFunc) timeout_edit_channel, view);
-	return FALSE;
-}
-
-static gboolean event_channel_remove(GtkWidget *widget, GtkTreeView *view)
-{
-	gui_tree_selection_delete(g_object_get_data(G_OBJECT(view), "store"),
-				  view, NULL, NULL);
-	return FALSE;
-}
-
-static gboolean channel_edited(GtkCellRendererText *cell, char *path_string,
-			       char *new_text, GtkListStore *store)
-{
-	GtkTreePath *path;
-	GtkTreeIter iter;
-
-	if (*new_text == '\0') {
-		gui_popup_error("Channel name can't be empty");
-		return FALSE;
-	}
-
-	path = gtk_tree_path_new_from_string(path_string);
-	gtk_tree_model_get_iter(GTK_TREE_MODEL(store), &iter, path);
-	gtk_tree_path_free(path);
-
-	/* update store */
-	gtk_list_store_set(store, &iter, 0, new_text, -1);
 	return FALSE;
 }
 
@@ -303,9 +216,6 @@ static gboolean event_mins_changed(GtkSpinButton *spin, GObject *obj)
 void ignore_dialog_show(Ignore *ignore)
 {
 	GtkWidget *dialog, *label;
-	GtkTreeView *view;
-	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
 	GtkListStore *store;
 	GdkColor color;
 	GObject *obj;
@@ -335,34 +245,9 @@ void ignore_dialog_show(Ignore *ignore)
 	gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &color);
 
 	/* channels */
-	store = gtk_list_store_new(1, G_TYPE_STRING);
-	gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(store), 0,
-					gui_tree_strcase_sort_func, NULL, NULL);
-	gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(store),
-					     0, GTK_SORT_ASCENDING);
-
-	view = g_object_get_data(obj, "channel_tree");
-	g_object_set_data(G_OBJECT(view), "store", store);
-	gtk_tree_view_set_model(view, GTK_TREE_MODEL(store));
-	gtk_tree_selection_set_mode(gtk_tree_view_get_selection(view),
-				    GTK_SELECTION_MULTIPLE);
-        gtk_tree_view_set_headers_visible(view, FALSE);
-
-	/* channel column */
-	renderer = gtk_cell_renderer_text_new();
-	g_object_set(G_OBJECT(renderer), "editable", TRUE, NULL);
-	g_signal_connect(G_OBJECT(renderer), "edited",
-			 G_CALLBACK(channel_edited), store);
-	column = gtk_tree_view_column_new_with_attributes(NULL, renderer,
-							  "text", 0,
-							  NULL);
-	gtk_tree_view_append_column(view, column);
-
-	/* channel buttons */
-	g_signal_connect(g_object_get_data(obj, "channel_add"), "clicked",
-			 G_CALLBACK(event_channel_add), view);
-	g_signal_connect(g_object_get_data(obj, "channel_remove"), "clicked",
-			 G_CALLBACK(event_channel_remove), view);
+	store = setup_channels_list_init(g_object_get_data(obj, "channel_tree"),
+					 g_object_get_data(obj, "channel_add"),
+					 g_object_get_data(obj, "channel_remove"));
 
 	/* expire spin buttons */
 	g_signal_connect(g_object_get_data(obj, "expire_hours"), "changed",

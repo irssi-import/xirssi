@@ -74,8 +74,6 @@ static void ignore_store_fill(GtkListStore *store)
 	GtkTreeIter iter;
 	GSList *tmp;
 
-	/* add channels - add the networks on the way, they may not even
-	   exist in the network list so use just their names */
 	for (tmp = ignores; tmp != NULL; tmp = tmp->next) {
 		Ignore *ignore = tmp->data;
 
@@ -127,32 +125,26 @@ static gboolean event_edit(GtkWidget *widget, GtkTreeView *view)
 	return FALSE;
 }
 
-static gboolean event_remove(GtkWidget *widget, GtkTreeView *view)
+static gboolean remove_iter_func(GtkTreeModel *model, GtkTreeIter *iter,
+				 GtkTreePath *path, void *user_data)
 {
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	GSList *paths;
 	Ignore *ignore;
 
-	model = GTK_TREE_MODEL(ignore_store);
+	/* remove from config */
+	gtk_tree_model_get(model, iter, COL_PTR, &ignore, -1);
+	ignore->level = 0;
+	ignore_update_rec(ignore);
 
-	paths =  gui_tree_selection_get_paths(view);
-	while (paths != NULL) {
-		GtkTreePath *path = paths->data;
+	return TRUE;
+}
 
-		/* remove from tree */
-		gtk_tree_model_get_iter(model, &iter, path);
-		gtk_tree_model_get(model, &iter, COL_PTR, &ignore, -1);
-		gtk_list_store_remove(ignore_store, &iter);
-
-		/* remove from config */
-		ignore->level = 0;
-                ignore_update_rec(ignore);
-
-		paths = g_slist_remove(paths, path);
-		gtk_tree_path_free(path);
-	}
-
+static gboolean event_remove(GtkWidget *widget, GtkTreeView *view)
+{
+	g_object_set_data(G_OBJECT(ignore_store), "removing",
+			  GINT_TO_POINTER(1));
+	gui_tree_selection_delete(GTK_TREE_MODEL(ignore_store), view,
+				  remove_iter_func, NULL);
+	g_object_set_data(G_OBJECT(ignore_store), "removing", NULL);
 	return FALSE;
 }
 
@@ -263,7 +255,10 @@ void setup_ignores_init(GtkWidget *dialog)
 
 	/* -- */
 	renderer = gtk_cell_renderer_toggle_new();
-	g_object_set(G_OBJECT(renderer), "activatable", TRUE, NULL);
+	g_object_set(G_OBJECT(renderer),
+		     "activatable", TRUE,
+		     "yalign", 0.0,
+		     NULL);
 	g_signal_connect(G_OBJECT(renderer), "toggled",
 			 G_CALLBACK(exception_toggled), NULL);
 	column = gtk_tree_view_column_new_with_attributes("Except", renderer,
@@ -276,6 +271,7 @@ void setup_ignores_init(GtkWidget *dialog)
 
 	/* -- */
 	renderer = gtk_cell_renderer_text_new();
+	g_object_set(G_OBJECT(renderer), "yalign", 0.0, NULL);
 	column = gtk_tree_view_column_new_with_attributes("Nick Mask", renderer,
 							  "text", COL_NICK,
 							  NULL);
@@ -294,6 +290,7 @@ void setup_ignores_init(GtkWidget *dialog)
 
 	/* -- */
 	renderer = gtk_cell_renderer_text_new();
+	g_object_set(G_OBJECT(renderer), "yalign", 0.0, NULL);
 	column = gtk_tree_view_column_new_with_attributes("Level", renderer,
 							  "text", COL_LEVEL,
 							  NULL);
@@ -303,6 +300,7 @@ void setup_ignores_init(GtkWidget *dialog)
 
 	/* -- */
 	renderer = gtk_cell_renderer_text_new();
+	g_object_set(G_OBJECT(renderer), "yalign", 0.0, NULL);
 	column = gtk_tree_view_column_new_with_attributes("Pattern", renderer,
 							  "text", COL_PATTERN,
 							  NULL);
@@ -348,6 +346,9 @@ static void sig_ignore_created(Ignore *ignore)
 static void sig_ignore_destroyed(Ignore *ignore)
 {
 	GtkTreeIter iter;
+
+	if (g_object_get_data(G_OBJECT(ignore_store), "removing") != NULL)
+		return;
 
 	if (store_find_ignore(ignore_store, &iter, ignore))
 		gtk_list_store_remove(ignore_store, &iter);

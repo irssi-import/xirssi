@@ -514,6 +514,8 @@ static void sig_network_removed(NetworkConfig *network)
 		if (store_find_network(channel_store, &iter, network->name))
 			gtk_tree_store_remove(channel_store, &iter);
 	}
+
+	gtk_widget_destroy(dialog);
 }
 
 static void setup_channel_signals_init(void)

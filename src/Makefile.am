@@ -59,7 +59,10 @@ xirssi_SOURCES = \
 	setup-aliases.c \
 	setup-channels.c \
 	setup-channels-edit.c \
+	setup-channels-list.c \
 	setup-completion.c \
+	setup-highlighting.c \
+	setup-highlighting-edit.c \
 	setup-ignores.c \
 	setup-ignores-edit.c \
 	setup-prefs.c \

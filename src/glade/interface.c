@@ -109,8 +109,7 @@ create_preferences (void)
   GtkWidget *autolog_level;
   GtkWidget *label119;
   GtkWidget *label120;
-  GtkWidget *level0;
-  GtkWidget *autolog_path;
+  GtkWidget *level_autolog_level;
   GtkWidget *hseparator12;
   GtkWidget *label121;
   GtkWidget *label122;
@@ -125,6 +124,8 @@ create_preferences (void)
   GtkWidget *label130;
   GtkWidget *label131;
   GtkWidget *label132;
+  GtkWidget *autolog_path;
+  GtkWidget *browse_autolog_path;
   GtkWidget *label133;
   GtkWidget *label50;
   GtkWidget *page_advanced_logging;
@@ -172,6 +173,7 @@ create_preferences (void)
   GtkWidget *hbox19;
   GtkWidget *label82;
   GtkWidget *hilight_color;
+  GtkWidget *irssicolor_hilight_color;
   GtkWidget *label81;
   GtkWidget *label73;
   GtkWidget *page_input_settings;
@@ -196,9 +198,9 @@ create_preferences (void)
   GtkWidget *beep_msg_level;
   GtkWidget *activity_hide_level;
   GtkWidget *window_default_level;
-  GtkWidget *level3;
-  GtkWidget *level2;
-  GtkWidget *level1;
+  GtkWidget *level_beep_msg_level;
+  GtkWidget *level_activity_hide_level;
+  GtkWidget *level_window_default_level;
   GtkWidget *use_status_window;
   GtkWidget *use_msgs_window;
   GtkWidget *autoclose_windows;
@@ -216,7 +218,7 @@ create_preferences (void)
   GtkWidget *hbox11;
   GtkWidget *label66;
   GtkWidget *autocreate_query_level;
-  GtkWidget *level5;
+  GtkWidget *level_autocreate_query_level;
   GtkWidget *autocreate_own_query;
   GtkWidget *hbox12;
   GtkWidget *label67;
@@ -270,7 +272,7 @@ create_preferences (void)
   GtkWidget *frame29;
   GtkWidget *table8;
   GtkWidget *timestamp_level;
-  GtkWidget *level6;
+  GtkWidget *level_timestamp_level;
   GtkWidget *label78;
   GtkWidget *label79;
   GtkWidget *timestamps;
@@ -305,8 +307,8 @@ create_preferences (void)
   GSList *dcc_autoresume_group = NULL;
   GtkWidget *dcc_autorename;
   GtkWidget *dcc_overwrite;
-  GtkWidget *browsedir1;
-  GtkWidget *browsedir2;
+  GtkWidget *browse_dcc_download_path;
+  GtkWidget *browse_dcc_upload_path;
   GtkWidget *label83;
   GtkWidget *label134;
   GtkWidget *page_irc_defaults;
@@ -833,18 +835,11 @@ create_preferences (void)
   gtk_label_set_justify (GTK_LABEL (label120), GTK_JUSTIFY_LEFT);
   gtk_misc_set_alignment (GTK_MISC (label120), 1, 0.5);
 
-  level0 = gtk_button_new_with_mnemonic ("Change...");
-  gtk_widget_set_name (level0, "level0");
-  gtk_widget_show (level0);
-  gtk_table_attach (GTK_TABLE (table14), level0, 2, 3, 2, 3,
+  level_autolog_level = gtk_button_new_with_mnemonic ("Change...");
+  gtk_widget_set_name (level_autolog_level, "level_autolog_level");
+  gtk_widget_show (level_autolog_level);
+  gtk_table_attach (GTK_TABLE (table14), level_autolog_level, 2, 3, 2, 3,
                     (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  autolog_path = gtk_entry_new ();
-  gtk_widget_set_name (autolog_path, "autolog_path");
-  gtk_widget_show (autolog_path);
-  gtk_table_attach (GTK_TABLE (table14), autolog_path, 1, 3, 1, 2,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
   hseparator12 = gtk_hseparator_new ();
@@ -972,6 +967,20 @@ create_preferences (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_label_set_justify (GTK_LABEL (label132), GTK_JUSTIFY_LEFT);
   gtk_misc_set_alignment (GTK_MISC (label132), 0, 0.5);
+
+  autolog_path = gtk_entry_new ();
+  gtk_widget_set_name (autolog_path, "autolog_path");
+  gtk_widget_show (autolog_path);
+  gtk_table_attach (GTK_TABLE (table14), autolog_path, 1, 2, 1, 2,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  browse_autolog_path = gtk_button_new_with_mnemonic ("Browse...");
+  gtk_widget_set_name (browse_autolog_path, "browse_autolog_path");
+  gtk_widget_show (browse_autolog_path);
+  gtk_table_attach (GTK_TABLE (table14), browse_autolog_path, 2, 3, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
 
   label133 = gtk_label_new ("Automatic Logging");
   gtk_widget_set_name (label133, "label133");
@@ -1247,6 +1256,11 @@ create_preferences (void)
   gtk_widget_show (hilight_color);
   gtk_box_pack_start (GTK_BOX (hbox19), hilight_color, TRUE, TRUE, 0);
 
+  irssicolor_hilight_color = gtk_button_new_with_mnemonic ("Change...");
+  gtk_widget_set_name (irssicolor_hilight_color, "irssicolor_hilight_color");
+  gtk_widget_show (irssicolor_hilight_color);
+  gtk_box_pack_start (GTK_BOX (hbox19), irssicolor_hilight_color, FALSE, FALSE, 0);
+
   label81 = gtk_label_new ("Settings");
   gtk_widget_set_name (label81, "label81");
   gtk_widget_show (label81);
@@ -1398,24 +1412,24 @@ create_preferences (void)
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
-  level3 = gtk_button_new_with_mnemonic ("Change...");
-  gtk_widget_set_name (level3, "level3");
-  gtk_widget_show (level3);
-  gtk_table_attach (GTK_TABLE (table7), level3, 2, 3, 11, 12,
+  level_beep_msg_level = gtk_button_new_with_mnemonic ("Change...");
+  gtk_widget_set_name (level_beep_msg_level, "level_beep_msg_level");
+  gtk_widget_show (level_beep_msg_level);
+  gtk_table_attach (GTK_TABLE (table7), level_beep_msg_level, 2, 3, 11, 12,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
-  level2 = gtk_button_new_with_mnemonic ("Change...");
-  gtk_widget_set_name (level2, "level2");
-  gtk_widget_show (level2);
-  gtk_table_attach (GTK_TABLE (table7), level2, 2, 3, 10, 11,
+  level_activity_hide_level = gtk_button_new_with_mnemonic ("Change...");
+  gtk_widget_set_name (level_activity_hide_level, "level_activity_hide_level");
+  gtk_widget_show (level_activity_hide_level);
+  gtk_table_attach (GTK_TABLE (table7), level_activity_hide_level, 2, 3, 10, 11,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
-  level1 = gtk_button_new_with_mnemonic ("Change...");
-  gtk_widget_set_name (level1, "level1");
-  gtk_widget_show (level1);
-  gtk_table_attach (GTK_TABLE (table7), level1, 2, 3, 7, 8,
+  level_window_default_level = gtk_button_new_with_mnemonic ("Change...");
+  gtk_widget_set_name (level_window_default_level, "level_window_default_level");
+  gtk_widget_show (level_window_default_level);
+  gtk_table_attach (GTK_TABLE (table7), level_window_default_level, 2, 3, 7, 8,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -1529,10 +1543,10 @@ create_preferences (void)
   gtk_widget_show (autocreate_query_level);
   gtk_box_pack_start (GTK_BOX (hbox11), autocreate_query_level, TRUE, TRUE, 0);
 
-  level5 = gtk_button_new_with_mnemonic ("Change...");
-  gtk_widget_set_name (level5, "level5");
-  gtk_widget_show (level5);
-  gtk_box_pack_start (GTK_BOX (hbox11), level5, FALSE, FALSE, 0);
+  level_autocreate_query_level = gtk_button_new_with_mnemonic ("Change...");
+  gtk_widget_set_name (level_autocreate_query_level, "level_autocreate_query_level");
+  gtk_widget_show (level_autocreate_query_level);
+  gtk_box_pack_start (GTK_BOX (hbox11), level_autocreate_query_level, FALSE, FALSE, 0);
 
   autocreate_own_query = gtk_check_button_new_with_mnemonic ("Auto-create queries for messages you send");
   gtk_widget_set_name (autocreate_own_query, "autocreate_own_query");
@@ -1836,10 +1850,10 @@ create_preferences (void)
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
-  level6 = gtk_button_new_with_mnemonic ("Change...");
-  gtk_widget_set_name (level6, "level6");
-  gtk_widget_show (level6);
-  gtk_table_attach (GTK_TABLE (table8), level6, 2, 3, 1, 2,
+  level_timestamp_level = gtk_button_new_with_mnemonic ("Change...");
+  gtk_widget_set_name (level_timestamp_level, "level_timestamp_level");
+  gtk_widget_show (level_timestamp_level);
+  gtk_table_attach (GTK_TABLE (table8), level_timestamp_level, 2, 3, 1, 2,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -2085,17 +2099,17 @@ create_preferences (void)
   gtk_radio_button_set_group (GTK_RADIO_BUTTON (dcc_overwrite), dcc_autoresume_group);
   dcc_autoresume_group = gtk_radio_button_group (GTK_RADIO_BUTTON (dcc_overwrite));
 
-  browsedir1 = gtk_button_new_with_mnemonic ("Browse...");
-  gtk_widget_set_name (browsedir1, "browsedir1");
-  gtk_widget_show (browsedir1);
-  gtk_table_attach (GTK_TABLE (table9), browsedir1, 2, 3, 3, 4,
+  browse_dcc_download_path = gtk_button_new_with_mnemonic ("Browse...");
+  gtk_widget_set_name (browse_dcc_download_path, "browse_dcc_download_path");
+  gtk_widget_show (browse_dcc_download_path);
+  gtk_table_attach (GTK_TABLE (table9), browse_dcc_download_path, 2, 3, 3, 4,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
-  browsedir2 = gtk_button_new_with_mnemonic ("Browse...");
-  gtk_widget_set_name (browsedir2, "browsedir2");
-  gtk_widget_show (browsedir2);
-  gtk_table_attach (GTK_TABLE (table9), browsedir2, 2, 3, 4, 5,
+  browse_dcc_upload_path = gtk_button_new_with_mnemonic ("Browse...");
+  gtk_widget_set_name (browse_dcc_upload_path, "browse_dcc_upload_path");
+  gtk_widget_show (browse_dcc_upload_path);
+  gtk_table_attach (GTK_TABLE (table9), browse_dcc_upload_path, 2, 3, 4, 5,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
@@ -2287,8 +2301,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, autolog_level, "autolog_level");
   GLADE_HOOKUP_OBJECT (preferences, label119, "label119");
   GLADE_HOOKUP_OBJECT (preferences, label120, "label120");
-  GLADE_HOOKUP_OBJECT (preferences, level0, "level0");
-  GLADE_HOOKUP_OBJECT (preferences, autolog_path, "autolog_path");
+  GLADE_HOOKUP_OBJECT (preferences, level_autolog_level, "level_autolog_level");
   GLADE_HOOKUP_OBJECT (preferences, hseparator12, "hseparator12");
   GLADE_HOOKUP_OBJECT (preferences, label121, "label121");
   GLADE_HOOKUP_OBJECT (preferences, label122, "label122");
@@ -2303,6 +2316,8 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, label130, "label130");
   GLADE_HOOKUP_OBJECT (preferences, label131, "label131");
   GLADE_HOOKUP_OBJECT (preferences, label132, "label132");
+  GLADE_HOOKUP_OBJECT (preferences, autolog_path, "autolog_path");
+  GLADE_HOOKUP_OBJECT (preferences, browse_autolog_path, "browse_autolog_path");
   GLADE_HOOKUP_OBJECT (preferences, label133, "label133");
   GLADE_HOOKUP_OBJECT (preferences, label50, "label50");
   GLADE_HOOKUP_OBJECT (preferences, page_advanced_logging, "page_advanced_logging");
@@ -2350,6 +2365,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, hbox19, "hbox19");
   GLADE_HOOKUP_OBJECT (preferences, label82, "label82");
   GLADE_HOOKUP_OBJECT (preferences, hilight_color, "hilight_color");
+  GLADE_HOOKUP_OBJECT (preferences, irssicolor_hilight_color, "irssicolor_hilight_color");
   GLADE_HOOKUP_OBJECT (preferences, label81, "label81");
   GLADE_HOOKUP_OBJECT (preferences, label73, "label73");
   GLADE_HOOKUP_OBJECT (preferences, page_input_settings, "page_input_settings");
@@ -2373,9 +2389,9 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, beep_msg_level, "beep_msg_level");
   GLADE_HOOKUP_OBJECT (preferences, activity_hide_level, "activity_hide_level");
   GLADE_HOOKUP_OBJECT (preferences, window_default_level, "window_default_level");
-  GLADE_HOOKUP_OBJECT (preferences, level3, "level3");
-  GLADE_HOOKUP_OBJECT (preferences, level2, "level2");
-  GLADE_HOOKUP_OBJECT (preferences, level1, "level1");
+  GLADE_HOOKUP_OBJECT (preferences, level_beep_msg_level, "level_beep_msg_level");
+  GLADE_HOOKUP_OBJECT (preferences, level_activity_hide_level, "level_activity_hide_level");
+  GLADE_HOOKUP_OBJECT (preferences, level_window_default_level, "level_window_default_level");
   GLADE_HOOKUP_OBJECT (preferences, use_status_window, "use_status_window");
   GLADE_HOOKUP_OBJECT (preferences, use_msgs_window, "use_msgs_window");
   GLADE_HOOKUP_OBJECT (preferences, autoclose_windows, "autoclose_windows");
@@ -2393,7 +2409,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, hbox11, "hbox11");
   GLADE_HOOKUP_OBJECT (preferences, label66, "label66");
   GLADE_HOOKUP_OBJECT (preferences, autocreate_query_level, "autocreate_query_level");
-  GLADE_HOOKUP_OBJECT (preferences, level5, "level5");
+  GLADE_HOOKUP_OBJECT (preferences, level_autocreate_query_level, "level_autocreate_query_level");
   GLADE_HOOKUP_OBJECT (preferences, autocreate_own_query, "autocreate_own_query");
   GLADE_HOOKUP_OBJECT (preferences, hbox12, "hbox12");
   GLADE_HOOKUP_OBJECT (preferences, label67, "label67");
@@ -2446,7 +2462,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, frame29, "frame29");
   GLADE_HOOKUP_OBJECT (preferences, table8, "table8");
   GLADE_HOOKUP_OBJECT (preferences, timestamp_level, "timestamp_level");
-  GLADE_HOOKUP_OBJECT (preferences, level6, "level6");
+  GLADE_HOOKUP_OBJECT (preferences, level_timestamp_level, "level_timestamp_level");
   GLADE_HOOKUP_OBJECT (preferences, label78, "label78");
   GLADE_HOOKUP_OBJECT (preferences, label79, "label79");
   GLADE_HOOKUP_OBJECT (preferences, timestamps, "timestamps");
@@ -2480,8 +2496,8 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, dcc_autoresume, "dcc_autoresume");
   GLADE_HOOKUP_OBJECT (preferences, dcc_autorename, "dcc_autorename");
   GLADE_HOOKUP_OBJECT (preferences, dcc_overwrite, "dcc_overwrite");
-  GLADE_HOOKUP_OBJECT (preferences, browsedir1, "browsedir1");
-  GLADE_HOOKUP_OBJECT (preferences, browsedir2, "browsedir2");
+  GLADE_HOOKUP_OBJECT (preferences, browse_dcc_download_path, "browse_dcc_download_path");
+  GLADE_HOOKUP_OBJECT (preferences, browse_dcc_upload_path, "browse_dcc_upload_path");
   GLADE_HOOKUP_OBJECT (preferences, label83, "label83");
   GLADE_HOOKUP_OBJECT (preferences, label134, "label134");
   GLADE_HOOKUP_OBJECT (preferences, page_irc_defaults, "page_irc_defaults");
@@ -3642,5 +3658,390 @@ create_dialog_ignore_settings (void)
   GLADE_HOOKUP_OBJECT (dialog_ignore_settings, okbutton5, "okbutton5");
 
   return dialog_ignore_settings;
+}
+
+GtkWidget*
+create_dialog_highlight_settings (void)
+{
+  GtkWidget *dialog_highlight_settings;
+  GtkWidget *dialog_vbox6;
+  GtkWidget *table21;
+  GtkWidget *label170;
+  GtkWidget *text;
+  GtkWidget *label171;
+  GtkWidget *level;
+  GtkWidget *level_button;
+  GtkWidget *hseparator24;
+  GtkWidget *highlight;
+  GSList *highlight_group = NULL;
+  GtkWidget *fullword;
+  GtkWidget *nickmask;
+  GtkWidget *hseparator25;
+  GtkWidget *regexp;
+  GtkWidget *regexp_invalid;
+  GtkWidget *line;
+  GSList *line_group = NULL;
+  GtkWidget *word;
+  GtkWidget *nick;
+  GtkWidget *hseparator26;
+  GtkWidget *label173;
+  GtkWidget *hbox22;
+  GtkObject *priority_adj;
+  GtkWidget *priority;
+  GtkWidget *label174;
+  GtkWidget *label175;
+  GtkWidget *color;
+  GtkWidget *act_color;
+  GtkWidget *color_button;
+  GtkWidget *act_color_button;
+  GtkWidget *label176;
+  GtkWidget *hbox23;
+  GtkWidget *frame39;
+  GtkWidget *scrolledwindow14;
+  GtkWidget *channel_tree;
+  GtkWidget *vbuttonbox15;
+  GtkWidget *channel_add;
+  GtkWidget *channel_remove;
+  GtkWidget *hseparator27;
+  GtkWidget *dialog_action_area6;
+  GtkWidget *cancelbutton6;
+  GtkWidget *okbutton6;
+
+  dialog_highlight_settings = gtk_dialog_new ();
+  gtk_widget_set_name (dialog_highlight_settings, "dialog_highlight_settings");
+  gtk_window_set_title (GTK_WINDOW (dialog_highlight_settings), "Highlight Settings");
+
+  dialog_vbox6 = GTK_DIALOG (dialog_highlight_settings)->vbox;
+  gtk_widget_set_name (dialog_vbox6, "dialog_vbox6");
+  gtk_widget_show (dialog_vbox6);
+  gtk_container_set_border_width (GTK_CONTAINER (dialog_vbox6), 2);
+
+  table21 = gtk_table_new (18, 3, FALSE);
+  gtk_widget_set_name (table21, "table21");
+  gtk_widget_show (table21);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox6), table21, TRUE, TRUE, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (table21), 7);
+  gtk_table_set_row_spacings (GTK_TABLE (table21), 3);
+  gtk_table_set_col_spacings (GTK_TABLE (table21), 7);
+
+  label170 = gtk_label_new ("Text / nick mask");
+  gtk_widget_set_name (label170, "label170");
+  gtk_widget_show (label170);
+  gtk_table_attach (GTK_TABLE (table21), label170, 0, 1, 0, 1,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label170), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label170), 0, 0.5);
+
+  text = gtk_entry_new ();
+  gtk_widget_set_name (text, "text");
+  gtk_widget_show (text);
+  gtk_table_attach (GTK_TABLE (table21), text, 1, 3, 0, 1,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  label171 = gtk_label_new ("Level");
+  gtk_widget_set_name (label171, "label171");
+  gtk_widget_show (label171);
+  gtk_table_attach (GTK_TABLE (table21), label171, 0, 1, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label171), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label171), 0, 0.5);
+
+  level = gtk_entry_new ();
+  gtk_widget_set_name (level, "level");
+  gtk_widget_show (level);
+  gtk_table_attach (GTK_TABLE (table21), level, 1, 2, 1, 2,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  level_button = gtk_button_new_with_mnemonic ("Change...");
+  gtk_widget_set_name (level_button, "level_button");
+  gtk_widget_show (level_button);
+  gtk_table_attach (GTK_TABLE (table21), level_button, 2, 3, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  hseparator24 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator24, "hseparator24");
+  gtk_widget_show (hseparator24);
+  gtk_table_attach (GTK_TABLE (table21), hseparator24, 0, 3, 3, 4,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+
+  highlight = gtk_radio_button_new_with_mnemonic (NULL, "Match partial words");
+  gtk_widget_set_name (highlight, "highlight");
+  gtk_widget_show (highlight);
+  gtk_table_attach (GTK_TABLE (table21), highlight, 0, 3, 4, 5,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_radio_button_set_group (GTK_RADIO_BUTTON (highlight), highlight_group);
+  highlight_group = gtk_radio_button_group (GTK_RADIO_BUTTON (highlight));
+
+  fullword = gtk_radio_button_new_with_mnemonic (NULL, "Match full words only");
+  gtk_widget_set_name (fullword, "fullword");
+  gtk_widget_show (fullword);
+  gtk_table_attach (GTK_TABLE (table21), fullword, 0, 3, 5, 6,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_radio_button_set_group (GTK_RADIO_BUTTON (fullword), highlight_group);
+  highlight_group = gtk_radio_button_group (GTK_RADIO_BUTTON (fullword));
+
+  nickmask = gtk_radio_button_new_with_mnemonic (NULL, "Nick mask");
+  gtk_widget_set_name (nickmask, "nickmask");
+  gtk_widget_show (nickmask);
+  gtk_table_attach (GTK_TABLE (table21), nickmask, 0, 3, 7, 8,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_radio_button_set_group (GTK_RADIO_BUTTON (nickmask), highlight_group);
+  highlight_group = gtk_radio_button_group (GTK_RADIO_BUTTON (nickmask));
+
+  hseparator25 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator25, "hseparator25");
+  gtk_widget_show (hseparator25);
+  gtk_table_attach (GTK_TABLE (table21), hseparator25, 0, 3, 8, 9,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+
+  regexp = gtk_radio_button_new_with_mnemonic (NULL, "Regular expression");
+  gtk_widget_set_name (regexp, "regexp");
+  gtk_widget_show (regexp);
+  gtk_table_attach (GTK_TABLE (table21), regexp, 0, 2, 6, 7,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_radio_button_set_group (GTK_RADIO_BUTTON (regexp), highlight_group);
+  highlight_group = gtk_radio_button_group (GTK_RADIO_BUTTON (regexp));
+
+  regexp_invalid = gtk_label_new ("Invalid");
+  gtk_widget_set_name (regexp_invalid, "regexp_invalid");
+  gtk_table_attach (GTK_TABLE (table21), regexp_invalid, 2, 3, 6, 7,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (regexp_invalid), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (regexp_invalid), 0, 0.5);
+
+  line = gtk_radio_button_new_with_mnemonic (NULL, "Highlight full line");
+  gtk_widget_set_name (line, "line");
+  gtk_widget_show (line);
+  gtk_table_attach (GTK_TABLE (table21), line, 0, 3, 9, 10,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_radio_button_set_group (GTK_RADIO_BUTTON (line), line_group);
+  line_group = gtk_radio_button_group (GTK_RADIO_BUTTON (line));
+
+  word = gtk_radio_button_new_with_mnemonic (NULL, "Highlight matched word");
+  gtk_widget_set_name (word, "word");
+  gtk_widget_show (word);
+  gtk_table_attach (GTK_TABLE (table21), word, 0, 3, 10, 11,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_radio_button_set_group (GTK_RADIO_BUTTON (word), line_group);
+  line_group = gtk_radio_button_group (GTK_RADIO_BUTTON (word));
+
+  nick = gtk_check_button_new_with_mnemonic ("Highlight only nick with public messages");
+  gtk_widget_set_name (nick, "nick");
+  gtk_widget_show (nick);
+  gtk_table_attach (GTK_TABLE (table21), nick, 0, 3, 11, 12,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  hseparator26 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator26, "hseparator26");
+  gtk_widget_show (hseparator26);
+  gtk_table_attach (GTK_TABLE (table21), hseparator26, 0, 3, 12, 13,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+
+  label173 = gtk_label_new ("Priority");
+  gtk_widget_set_name (label173, "label173");
+  gtk_widget_show (label173);
+  gtk_table_attach (GTK_TABLE (table21), label173, 0, 1, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label173), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label173), 0, 0.5);
+
+  hbox22 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_set_name (hbox22, "hbox22");
+  gtk_widget_show (hbox22);
+  gtk_table_attach (GTK_TABLE (table21), hbox22, 1, 3, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 0);
+
+  priority_adj = gtk_adjustment_new (0, 0, 100000, 1, 10, 10);
+  priority = gtk_spin_button_new (GTK_ADJUSTMENT (priority_adj), 1, 0);
+  gtk_widget_set_name (priority, "priority");
+  gtk_widget_show (priority);
+  gtk_box_pack_start (GTK_BOX (hbox22), priority, FALSE, TRUE, 0);
+  gtk_spin_button_set_numeric (GTK_SPIN_BUTTON (priority), TRUE);
+
+  label174 = gtk_label_new ("Highlight color");
+  gtk_widget_set_name (label174, "label174");
+  gtk_widget_show (label174);
+  gtk_table_attach (GTK_TABLE (table21), label174, 0, 1, 16, 17,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label174), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label174), 0, 0.5);
+
+  label175 = gtk_label_new ("Activity color");
+  gtk_widget_set_name (label175, "label175");
+  gtk_widget_show (label175);
+  gtk_table_attach (GTK_TABLE (table21), label175, 0, 1, 17, 18,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label175), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label175), 0, 0.5);
+
+  color = gtk_entry_new ();
+  gtk_widget_set_name (color, "color");
+  gtk_widget_show (color);
+  gtk_table_attach (GTK_TABLE (table21), color, 1, 2, 16, 17,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  act_color = gtk_entry_new ();
+  gtk_widget_set_name (act_color, "act_color");
+  gtk_widget_show (act_color);
+  gtk_table_attach (GTK_TABLE (table21), act_color, 1, 2, 17, 18,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  color_button = gtk_button_new_with_mnemonic ("Change...");
+  gtk_widget_set_name (color_button, "color_button");
+  gtk_widget_show (color_button);
+  gtk_table_attach (GTK_TABLE (table21), color_button, 2, 3, 16, 17,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  act_color_button = gtk_button_new_with_mnemonic ("Change...");
+  gtk_widget_set_name (act_color_button, "act_color_button");
+  gtk_widget_show (act_color_button);
+  gtk_table_attach (GTK_TABLE (table21), act_color_button, 2, 3, 17, 18,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  label176 = gtk_label_new ("Highlight applies only in channels:");
+  gtk_widget_set_name (label176, "label176");
+  gtk_widget_show (label176);
+  gtk_table_attach (GTK_TABLE (table21), label176, 0, 3, 13, 14,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label176), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label176), 0, 0.5);
+
+  hbox23 = gtk_hbox_new (FALSE, 7);
+  gtk_widget_set_name (hbox23, "hbox23");
+  gtk_widget_show (hbox23);
+  gtk_table_attach (GTK_TABLE (table21), hbox23, 0, 3, 14, 15,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+
+  frame39 = gtk_frame_new (NULL);
+  gtk_widget_set_name (frame39, "frame39");
+  gtk_widget_show (frame39);
+  gtk_box_pack_start (GTK_BOX (hbox23), frame39, TRUE, TRUE, 0);
+  gtk_frame_set_shadow_type (GTK_FRAME (frame39), GTK_SHADOW_IN);
+
+  scrolledwindow14 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_set_name (scrolledwindow14, "scrolledwindow14");
+  gtk_widget_show (scrolledwindow14);
+  gtk_container_add (GTK_CONTAINER (frame39), scrolledwindow14);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow14), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+
+  channel_tree = gtk_tree_view_new ();
+  gtk_widget_set_name (channel_tree, "channel_tree");
+  gtk_widget_show (channel_tree);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow14), channel_tree);
+
+  vbuttonbox15 = gtk_vbutton_box_new ();
+  gtk_widget_set_name (vbuttonbox15, "vbuttonbox15");
+  gtk_widget_show (vbuttonbox15);
+  gtk_box_pack_start (GTK_BOX (hbox23), vbuttonbox15, FALSE, TRUE, 0);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (vbuttonbox15), GTK_BUTTONBOX_START);
+  gtk_button_box_set_spacing (GTK_BUTTON_BOX (vbuttonbox15), 7);
+
+  channel_add = gtk_button_new_with_mnemonic ("Add");
+  gtk_widget_set_name (channel_add, "channel_add");
+  gtk_widget_show (channel_add);
+  gtk_container_add (GTK_CONTAINER (vbuttonbox15), channel_add);
+  GTK_WIDGET_SET_FLAGS (channel_add, GTK_CAN_DEFAULT);
+
+  channel_remove = gtk_button_new_with_mnemonic ("Remove");
+  gtk_widget_set_name (channel_remove, "channel_remove");
+  gtk_widget_show (channel_remove);
+  gtk_container_add (GTK_CONTAINER (vbuttonbox15), channel_remove);
+  GTK_WIDGET_SET_FLAGS (channel_remove, GTK_CAN_DEFAULT);
+
+  hseparator27 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator27, "hseparator27");
+  gtk_widget_show (hseparator27);
+  gtk_table_attach (GTK_TABLE (table21), hseparator27, 0, 3, 15, 16,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+
+  dialog_action_area6 = GTK_DIALOG (dialog_highlight_settings)->action_area;
+  gtk_widget_set_name (dialog_action_area6, "dialog_action_area6");
+  gtk_widget_show (dialog_action_area6);
+  gtk_container_set_border_width (GTK_CONTAINER (dialog_action_area6), 5);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area6), GTK_BUTTONBOX_END);
+  gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area6), 10);
+
+  cancelbutton6 = gtk_button_new_from_stock ("gtk-cancel");
+  gtk_widget_set_name (cancelbutton6, "cancelbutton6");
+  gtk_widget_show (cancelbutton6);
+  gtk_dialog_add_action_widget (GTK_DIALOG (dialog_highlight_settings), cancelbutton6, GTK_RESPONSE_CANCEL);
+  GTK_WIDGET_SET_FLAGS (cancelbutton6, GTK_CAN_DEFAULT);
+
+  okbutton6 = gtk_button_new_from_stock ("gtk-ok");
+  gtk_widget_set_name (okbutton6, "okbutton6");
+  gtk_widget_show (okbutton6);
+  gtk_dialog_add_action_widget (GTK_DIALOG (dialog_highlight_settings), okbutton6, GTK_RESPONSE_OK);
+  GTK_WIDGET_SET_FLAGS (okbutton6, GTK_CAN_DEFAULT);
+
+  /* Store pointers to all widgets, for use by lookup_widget(). */
+  GLADE_HOOKUP_OBJECT_NO_REF (dialog_highlight_settings, dialog_highlight_settings, "dialog_highlight_settings");
+  GLADE_HOOKUP_OBJECT_NO_REF (dialog_highlight_settings, dialog_vbox6, "dialog_vbox6");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, table21, "table21");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, label170, "label170");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, text, "text");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, label171, "label171");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, level, "level");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, level_button, "level_button");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, hseparator24, "hseparator24");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, highlight, "highlight");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, fullword, "fullword");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, nickmask, "nickmask");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, hseparator25, "hseparator25");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, regexp, "regexp");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, regexp_invalid, "regexp_invalid");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, line, "line");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, word, "word");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, nick, "nick");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, hseparator26, "hseparator26");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, label173, "label173");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, hbox22, "hbox22");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, priority, "priority");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, label174, "label174");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, label175, "label175");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, color, "color");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, act_color, "act_color");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, color_button, "color_button");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, act_color_button, "act_color_button");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, label176, "label176");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, hbox23, "hbox23");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, frame39, "frame39");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, scrolledwindow14, "scrolledwindow14");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, channel_tree, "channel_tree");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, vbuttonbox15, "vbuttonbox15");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, channel_add, "channel_add");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, channel_remove, "channel_remove");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, hseparator27, "hseparator27");
+  GLADE_HOOKUP_OBJECT_NO_REF (dialog_highlight_settings, dialog_action_area6, "dialog_action_area6");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, cancelbutton6, "cancelbutton6");
+  GLADE_HOOKUP_OBJECT (dialog_highlight_settings, okbutton6, "okbutton6");
+
+  return dialog_highlight_settings;
 }
 

@@ -24,6 +24,7 @@
 #include "settings.h"
 
 #include "setup.h"
+#include "glade/support.h"
 
 struct _Setup {
 	GHashTable *changed_settings;
@@ -85,6 +86,23 @@ void setup_register(Setup *setup, GtkWidget *widget)
 
 	/* widget name contains the /SET name */
 	name = gtk_widget_get_name(widget);
+
+	if (GTK_IS_BUTTON(widget)) {
+		/* ..unless it's a button, it contains <buttontype>_setname */
+		GtkWidget *w2;
+
+		if (strncmp(name, "level_", 6) == 0) {
+			w2 = lookup_widget(widget, name+6);
+			setup_register_level_button(widget, w2);
+		} else if (strncmp(name, "browse_", 7) == 0) {
+			w2 = lookup_widget(widget, name+7);
+                        setup_register_dir_button(widget, w2);
+		} else if (strncmp(name, "irssicolor_", 11) == 0) {
+			w2 = lookup_widget(widget, name+11);
+                        setup_register_irssicolor_button(widget, w2);
+		}
+	}
+
 	set = name == NULL ? NULL : settings_get_record(name);
 	if (set == NULL)
 		return;
@@ -124,6 +142,58 @@ void setup_register(Setup *setup, GtkWidget *widget)
 	}
 
 	g_object_set_data(G_OBJECT(widget), "set", set);
+}
+
+void setup_register_level_button(GtkWidget *button, GtkWidget *entry)
+{
+	/* FIXME: */
+}
+
+void setup_register_irssicolor_button(GtkWidget *button, GtkWidget *entry)
+{
+	/* FIXME: */
+}
+
+static void event_destroy(GtkWidget *widget, GtkWidget *entry)
+{
+	gtk_widget_unref(entry);
+}
+
+static void event_response(GtkFileSelection *filesel, int response_id,
+			   GtkEntry *entry)
+{
+	const char *fname;
+
+	/* ok / cancel pressed */
+	if (response_id == GTK_RESPONSE_OK) {
+                fname = gtk_file_selection_get_filename(filesel);
+		gtk_entry_set_text(entry, fname);
+	}
+
+	gtk_widget_destroy(GTK_WIDGET(filesel));
+}
+
+static gboolean event_dir_button_clicked(GtkWidget *button, GtkEntry *entry)
+{
+	GtkWidget *filesel;
+
+	filesel = gtk_file_selection_new(NULL);
+	gtk_file_selection_set_filename(GTK_FILE_SELECTION(filesel),
+					gtk_entry_get_text(entry));
+
+	g_signal_connect(G_OBJECT(filesel), "destroy",
+			 G_CALLBACK(event_destroy), entry);
+	g_signal_connect(G_OBJECT(filesel), "response",
+			 G_CALLBACK(event_response), entry);
+	gtk_widget_ref(GTK_WIDGET(entry));
+	gtk_widget_show(filesel);
+	return FALSE;
+}
+
+void setup_register_dir_button(GtkWidget *button, GtkWidget *entry)
+{
+	g_signal_connect(G_OBJECT(button), "clicked",
+			 G_CALLBACK(event_dir_button_clicked), entry);
 }
 
 static int setup_apply_widget(GtkWidget *widget, SETTINGS_REC *set,

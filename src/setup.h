@@ -12,6 +12,10 @@ void setup_destroy(Setup *setup);
 /* register settings in widget and it's children */
 void setup_register(Setup *setup, GtkWidget *widget);
 
+void setup_register_level_button(GtkWidget *button, GtkWidget *entry);
+void setup_register_irssicolor_button(GtkWidget *button, GtkWidget *entry);
+void setup_register_dir_button(GtkWidget *button, GtkWidget *entry);
+
 /* mark the setup to have changes */
 void setup_set_changed(Setup *setup);
 
@@ -22,9 +26,12 @@ void setup_apply_changes(Setup *setup);
 /* show the main preferences dialog */
 extern GtkWidget *setup_dialog;
 
-void setup_register_level_button(GtkButton *button, GtkEntry *entry);
-
 void setup_preferences_show(void);
 void setup_preferences_destroy(void);
+
+/* setup-private: */
+GtkListStore *setup_channels_list_init(GtkTreeView *view,
+				       GtkWidget *add_button,
+				       GtkWidget *remove_button);
 
 #endif
