@@ -18,33 +18,7 @@
 #ifndef __GTK_CELL_RENDERER_NICKLIST_H__
 #define __GTK_CELL_RENDERER_NICKLIST_H__
 
-#include <gtk/gtkcellrenderertext.h>
 #include <gtk/gtkcellrendererpixbuf.h>
-
-typedef struct _GtkCellRendererNicklistText GtkCellRendererNicklistText;
-typedef struct _GtkCellRendererNicklistTextClass GtkCellRendererNicklistTextClass;
-
-struct _GtkCellRendererNicklistText
-{
-	GtkCellRendererText parent;
-};
-
-struct _GtkCellRendererNicklistTextClass
-{
-	GtkCellRendererTextClass parent_class;
-
-	void (*parent_render) (GtkCellRenderer      *cell,
-			       GdkWindow            *window,
-			       GtkWidget            *widget,
-			       GdkRectangle         *background_area,
-			       GdkRectangle         *cell_area,
-			       GdkRectangle         *expose_area,
-			       GtkCellRendererState  flags);
-};
-
-GtkCellRenderer *gtk_cell_renderer_nicklist_text_new(void);
-
-/* pixmap version */
 
 typedef struct _GtkCellRendererNicklistPixbuf GtkCellRendererNicklistPixbuf;
 typedef struct _GtkCellRendererNicklistPixbufClass GtkCellRendererNicklistPixbufClass;

@@ -180,6 +180,24 @@ static gboolean event_leave(GtkWidget *tree, GdkEventCrossing *event,
 	return FALSE;
 }
 
+static void render_nickname(GtkTreeViewColumn *column,
+			    GtkCellRenderer   *cell,
+			    GtkTreeModel      *model,
+			    GtkTreeIter       *iter,
+			    gpointer           data)
+{
+	NicklistView *view = data;
+	Nick *nick;
+
+	nick = tree_get_nick(model, iter);
+	if (nick == NULL) {
+		g_object_set(G_OBJECT(cell), "background-gdk",
+			     &view->widget->style->bg[GTK_STATE_NORMAL], NULL);
+	} else {
+		g_object_set(G_OBJECT(cell), "background-gdk", NULL, NULL);
+	}
+}
+
 NicklistView *gui_nicklist_view_new(Tab *tab)
 {
 	GtkWidget *space, *sw, *list, *vbox, *frame;
@@ -245,11 +263,13 @@ NicklistView *gui_nicklist_view_new(Tab *tab)
 	gtk_tree_view_append_column(GTK_TREE_VIEW(list), column);
 
 	/* nick name text */
-	renderer = gtk_cell_renderer_nicklist_text_new();
+	renderer = gtk_cell_renderer_text_new();
 	column = gtk_tree_view_column_new_with_attributes(NULL, renderer,
 							  "text",
 							  NICKLIST_COL_NAME,
 							  NULL);
+	gtk_tree_view_column_set_cell_data_func(column, renderer,
+						render_nickname, view, NULL);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(list), column);
 
 	signal_emit("gui nicklist view created", 1, view);

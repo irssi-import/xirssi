@@ -24,15 +24,6 @@
 #include <gtk/gtkscrolledwindow.h>
 #include "gui-nicklist-cell-renderer.h"
 
-static void (*text_render) (GtkCellRenderer      *cell,
-			    GdkWindow            *window,
-			    GtkWidget            *widget,
-			    GdkRectangle         *background_area,
-			    GdkRectangle         *cell_area,
-			    GdkRectangle         *expose_area,
-			    GtkCellRendererState  flags);
-
-static void gtk_cell_renderer_nicklist_text_class_init (GtkCellRendererNicklistTextClass *class);
 static void gtk_cell_renderer_nicklist_pixbuf_class_init (GtkCellRendererNicklistPixbufClass *class);
 static void gtk_cell_renderer_nicklist_render     (GtkCellRenderer            *cell,
 						   GdkWindow                  *window,
@@ -41,32 +32,6 @@ static void gtk_cell_renderer_nicklist_render     (GtkCellRenderer            *c
 						   GdkRectangle               *cell_area,
 						   GdkRectangle               *expose_area,
 						   guint                       flags);
-
-GtkType
-gtk_cell_renderer_nicklist_text_get_type (void)
-{
-  static GtkType cell_nicklist_type =  0;
-
-  if (!cell_nicklist_type)
-    {
-      static const GTypeInfo cell_nicklist_info =
-      {
-	sizeof (GtkCellRendererNicklistTextClass),
-	NULL,		/* base_init */
-	NULL,		/* base_finalize */
-	(GClassInitFunc) gtk_cell_renderer_nicklist_text_class_init,
-	NULL,		/* class_finalize */
-	NULL,		/* class_data */
-	sizeof (GtkCellRendererNicklistText),
-	0,              /* n_preallocs */
-	NULL,
-      };
-
-      cell_nicklist_type = g_type_register_static (GTK_TYPE_CELL_RENDERER_TEXT, "GtkCellRendererNicklistText", &cell_nicklist_info, 0);
-    }
-
-  return cell_nicklist_type;
-}
 
 GtkType
 gtk_cell_renderer_nicklist_pixmap_get_type (void)
@@ -95,27 +60,12 @@ gtk_cell_renderer_nicklist_pixmap_get_type (void)
 }
 
 static void
-gtk_cell_renderer_nicklist_text_class_init (GtkCellRendererNicklistTextClass *class)
-{
-  GtkCellRendererClass *cell_class = GTK_CELL_RENDERER_CLASS (class);
-
-  text_render = class->parent_render = cell_class->render;
-  cell_class->render = gtk_cell_renderer_nicklist_render;
-}
-
-static void
 gtk_cell_renderer_nicklist_pixbuf_class_init (GtkCellRendererNicklistPixbufClass *class)
 {
   GtkCellRendererClass *cell_class = GTK_CELL_RENDERER_CLASS (class);
 
   class->parent_render = cell_class->render;
   cell_class->render = gtk_cell_renderer_nicklist_render;
-}
-
-GtkCellRenderer *
-gtk_cell_renderer_nicklist_text_new (void)
-{
-  return GTK_CELL_RENDERER (gtk_type_new (gtk_cell_renderer_nicklist_text_get_type ()));
 }
 
 GtkCellRenderer *
@@ -139,20 +89,7 @@ gtk_cell_renderer_nicklist_render (GtkCellRenderer *cell,
 	adj = gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(widget->parent));
 	first = adj->value+cell_area->y <= cell_area->height;
 
-	if (GTK_CHECK_TYPE(cell, gtk_cell_renderer_nicklist_text_get_type())) {
-                GtkCellRendererNicklistTextClass *c =
-			GTK_CHECK_GET_CLASS(cell, gtk_cell_renderer_nicklist_text_get_type(),
-					    GtkCellRendererNicklistTextClass);
-
-		if (first) {
-			g_object_set(G_OBJECT(cell), "background-gdk",
-				     &widget->style->bg[GTK_STATE_NORMAL], NULL);
-		}
-		c->parent_render(cell, window, widget, background_area,
-				 cell_area, expose_area, flags);
-		if (first)
-			g_object_set(G_OBJECT(cell), "background", NULL, NULL);
-	} else if (first) {
+	if (first) {
 		/* first row - pixbuf column */
 		GdkGC *gc;
 
