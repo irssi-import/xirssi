@@ -147,7 +147,9 @@ Frame *gui_frame_new(void)
 			       G_CALLBACK(event_key_press_after), frame);
 	g_signal_connect(GTK_OBJECT(window), "key_press_event",
 			 G_CALLBACK(event_key_press), frame);
-	gtk_widget_set_usize(window, 640, 480);
+
+	gtk_widget_set_usize(window, 700, 400);
+	gtk_window_set_policy(GTK_WINDOW(window), TRUE, TRUE, FALSE);
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_container_add(GTK_CONTAINER(window), vbox);

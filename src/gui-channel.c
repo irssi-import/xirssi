@@ -106,16 +106,25 @@ static void sig_channel_topic_changed(Channel *channel)
 {
 	ChannelGui *gui;
 	GSList *tmp;
-	const char *text;
+	char *text;
 
-	text = channel->topic == NULL ? "" : channel->topic;
+	if (channel->topic == NULL)
+		text = NULL;
+	else {
+		text = g_locale_to_utf8(channel->topic, -1, NULL, NULL, NULL);
+		if (text == NULL) {
+			text = g_convert(channel->topic, strlen(channel->topic),
+					 "UTF-8", "CP1252", NULL, NULL, NULL);
+		}
+	}
 
 	gui = CHANNEL_GUI(channel);
 	for (tmp = gui->titles; tmp != NULL; tmp = tmp->next) {
 		ChannelTitle *title = tmp->data;
 
-		gtk_entry_set_text(title->topic, text);
+		gtk_entry_set_text(title->topic, text == NULL ? "" : text);
 	}
+	g_free(text);
 }
 
 void gui_channels_init(void)

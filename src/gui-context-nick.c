@@ -38,6 +38,7 @@ static void statusbar_push_nick(GtkStatusbar *statusbar, Nick *nick)
 {
 	unsigned int id;
 	GString *str;
+	char *text;
 
 	id = gtk_statusbar_get_context_id(statusbar, STATUSBAR_CONTEXT);
 
@@ -49,8 +50,18 @@ static void statusbar_push_nick(GtkStatusbar *statusbar, Nick *nick)
 	if (nick->realname != NULL)
 		g_string_sprintfa(str, "  -  Name: %s", nick->realname);
 
+	/* this really should be done separately to all the nick->* values,
+	   at least when we add i18n support to strings above.. */
+	text = g_locale_to_utf8(str->str, -1, NULL, NULL, NULL);
+	if (text == NULL) {
+		text = g_convert(str->str, str->len, "UTF-8", "CP1252",
+				 NULL, NULL, NULL);
+	}
+
 	gtk_statusbar_pop(statusbar, id);
-	gtk_statusbar_push(statusbar, id, str->str);
+	gtk_statusbar_push(statusbar, id, text != NULL ? text : str->str);
+
+	g_free(text);
 	g_string_free(str, TRUE);
 }
 
