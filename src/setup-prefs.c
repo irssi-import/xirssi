@@ -44,7 +44,7 @@ static GdkPixbuf *servers_pixbuf, *channels_pixbuf, *connect_sets_pixbuf;
 static GdkPixbuf *autolog_pixbuf, *adv_logging_pixbuf;
 static GdkPixbuf *windows_pixbuf, *queries_pixbuf, *completion_pixbuf;
 static GdkPixbuf *aliases_pixbuf, *keyboard_pixbuf;
-static GdkPixbuf *ignores_pixbuf, *highlighting_pixbuf, *input_sets_pixbuf;
+static GdkPixbuf *ignores_pixbuf, *highlighting_pixbuf, *filtering_sets_pixbuf;
 static GdkPixbuf *fontscolors_pixbuf, *themes_pixbuf, *appearance_sets_pixbuf;
 
 static SetupPrefs prefs[] = {
@@ -66,7 +66,7 @@ static SetupPrefs prefs[] = {
 
 	{ "Filtering" },
 	{ "Ignores",		"page_ignores", &ignores_pixbuf, setup_ignores_init },
-	{ "Settings",		"page_input_settings", &input_sets_pixbuf },
+	{ "Settings",		"page_filtering_settings", &filtering_sets_pixbuf },
 
 	{ "Appearance" },
 	{ "Highlighting",	"page_highlighting", &highlighting_pixbuf, setup_highlighting_init },
@@ -227,7 +227,7 @@ static void images_init(void)
 
 	ignores_pixbuf = create_pixbuf("ignores.png");
 	highlighting_pixbuf = create_pixbuf("highlighting.png");
-	input_sets_pixbuf = create_pixbuf("input-settings.png");
+	filtering_sets_pixbuf = create_pixbuf("filtering-settings.png");
 
 	appearance_sets_pixbuf = create_pixbuf("appearance-settings.png");
 	fontscolors_pixbuf = create_pixbuf("fontscolors.png");
