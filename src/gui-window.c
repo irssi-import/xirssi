@@ -415,7 +415,7 @@ static void sig_gui_printtext_finished(Window *window)
 	burst = settings_get_int("scrollback_burst_remove");
 	max_lines = settings_get_int("scrollback_lines");
 
-	if (lines >= max_lines+burst) {
+	if (max_lines > 0 && lines >= max_lines+burst) {
 		/* remove first lines */
 		gtk_text_buffer_get_iter_at_line(gui->buffer, &start_iter, 0);
 		gtk_text_buffer_get_iter_at_line(gui->buffer, &end_iter, burst);
