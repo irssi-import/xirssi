@@ -19,7 +19,12 @@ AC_ARG_WITH(irssi,
 	IRSSI_INCLUDE="")
 
 if test x$IRSSI_INCLUDE = x; then
-	IRSSI_INCLUDE=".."
+  dnl * --with-irssi not given, try to find irssi
+  if test -f ../irssi-config; then
+    IRSSI_INCLUDE=".."
+  elif test -f ../irssi/irssi-config; then
+    IRSSI_INCLUDE="../irssi"
+  fi
 fi
 
 # fix relative paths
