@@ -1,3 +1,7 @@
+2002-06-06 22:10  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-tab.c: focus change fixes.
+
 2002-06-06 21:39  Timo Sirainen <tss@iki.fi>
 
 	* glade/irssi.glade, src/setup-prefs.c, src/glade/interface.c:
