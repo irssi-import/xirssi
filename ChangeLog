@@ -1,3 +1,7 @@
+2002-05-12 15:51  Timo Sirainen <tss@iki.fi>
+
+	* src/setup-servers.c: added autoconnect-column
+
 2002-05-12 14:33  Timo Sirainen <tss@iki.fi>
 
 	* src/setup-prefs.c: updated
