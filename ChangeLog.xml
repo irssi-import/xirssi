@@ -5,6 +5,19 @@
 <entry>
 <date>2002-05-08</date>
 <weekday>Wednesday</weekday>
+<time>02:26</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/Makefile.am</name>
+<revision>1.11</revision>
+</file>
+<msg>link with -export-dynamic so modules work
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-08</date>
+<weekday>Wednesday</weekday>
 <time>01:36</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
