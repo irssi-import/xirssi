@@ -1,3 +1,16 @@
+2002-05-19 10:47  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-menu-channel-topic.c, gui-menu-nick.c, gui-menu-url.c:
+	destroy popup menus after they're closed.
+
+2002-05-19 10:23  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-context-nick.c, gui-menu-nick.c, gui-menu.h,
+	gui-nicklist-view.c: nicklist popup menu is now triggered on mouse
+	press. the nicks are looked when the menuitem is executed, so if
+	any of the originally selected nicks part the channel it won't be
+	affected.
+
 2002-05-18 22:27  Timo Sirainen <tss@iki.fi>
 
 	* AUTHORS, TODO: updates
