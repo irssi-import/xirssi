@@ -1,3 +1,10 @@
+2002-05-06 00:43  Timo Sirainen <tss@iki.fi>
+
+	* AUTHORS, pixmaps/Makefile.am, pixmaps/lock.xpm, src/Makefile.am,
+	src/gui-channel.c, src/gui-channel.h, src/gui-frame.c,
+	src/gui-frame.h, src/gui-menu-channel-topic.c, src/gui-menu-nick.c,
+	src/gui-menu-url.c, src/gui-menu.h: Channel topic editing works now
+
 2002-05-05 18:59  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-keyboard.c: pgup/pgdown works
