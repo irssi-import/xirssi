@@ -1,3 +1,7 @@
+2002-05-08 02:26  Timo Sirainen <tss@iki.fi>
+
+	* src/Makefile.am: link with -export-dynamic so modules work
+
 2002-05-08 01:36  Timo Sirainen <tss@iki.fi>
 
 	* pixmaps/: Makefile.am, right.xpm: forgot to add
