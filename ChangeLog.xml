@@ -5,6 +5,20 @@
 <entry>
 <date>2002-08-10</date>
 <weekday>Saturday</weekday>
+<time>09:30</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>configure.in</name>
+<revision>1.5</revision>
+</file>
+<msg>Added --with-irssi-lib option to specify where irssi-config is located.
+--with-irssi directory is used for include files.
+</msg>
+</entry>
+
+<entry>
+<date>2002-08-10</date>
+<weekday>Saturday</weekday>
 <time>08:14</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
