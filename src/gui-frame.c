@@ -65,9 +65,7 @@ static gboolean event_focus(GtkWidget *widget, GdkEventFocus *event,
 static gboolean event_key_press_after(GtkWidget *widget, GdkEventKey *event,
 				      Frame *frame)
 {
-	GtkWidget *entry;
 	char *str;
-	int pos;
 
 	if (event->keyval == GDK_Control_L || event->keyval == GDK_Control_R ||
 	    event->keyval == GDK_Meta_L || event->keyval == GDK_Meta_R ||
@@ -83,6 +81,24 @@ static gboolean event_key_press_after(GtkWidget *widget, GdkEventKey *event,
 	}
 	g_free(str);
 
+	return FALSE;
+}
+
+static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
+				Frame *frame)
+{
+	GtkWidget *entry;
+	int pos;
+
+	if (event->keyval == GDK_Tab ||
+	    event->keyval == GDK_Up ||
+	    event->keyval == GDK_Down) {
+		/* kludging around keys changing focus and not letting us
+		   handle it in the after-signal. and we can't just handle
+		   everything here, because it will break dead-keys */
+		return event_key_press_after(widget, event, frame);
+	}
+
 	entry = frame->entry->widget;
 	if (!GTK_WIDGET_HAS_FOCUS(entry) &&
 	    (event->state & (GDK_CONTROL_MASK|GDK_MOD1_MASK)) == 0) {
@@ -93,20 +109,6 @@ static gboolean event_key_press_after(GtkWidget *widget, GdkEventKey *event,
                 pos = gtk_editable_get_position(GTK_EDITABLE(entry));
 		gtk_widget_grab_focus(GTK_WIDGET(entry));
 		gtk_editable_select_region(GTK_EDITABLE(entry), pos, pos);
-	}
-	return FALSE;
-}
-
-static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
-				Frame *frame)
-{
-	if (event->keyval == GDK_Tab ||
-	    event->keyval == GDK_Up ||
-	    event->keyval == GDK_Down) {
-		/* kludging around keys changing focus and not letting us
-		   handle it in the after-signal. and we can't just handle
-		   everything here, because it will break dead-keys */
-		return event_key_press_after(widget, event, frame);
 	}
 
 	return FALSE;
