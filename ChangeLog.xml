@@ -5,6 +5,28 @@
 <entry>
 <date>2002-05-05</date>
 <weekday>Sunday</weekday>
+<time>04:35</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-frame.c</name>
+<revision>1.17</revision>
+</file>
+<file>
+<name>src/gui-tab.c</name>
+<revision>1.11</revision>
+</file>
+<file>
+<name>src/gui-window-activity.c</name>
+<revision>1.5</revision>
+</file>
+<commondir>src/</commondir>
+<msg>color fixes
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-05</date>
+<weekday>Sunday</weekday>
 <time>03:56</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
