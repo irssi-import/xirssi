@@ -124,15 +124,25 @@ static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
 	return FALSE;
 }
 
-static gboolean event_switch_page(GtkNotebook *notebook, GtkNotebookPage *page,
+static gboolean event_switch_page(GtkWidget *notebook, GtkNotebookPage *page,
 				  gint page_num, Frame *frame)
 {
 	Tab *tab;
 
+	tab = frame->active_tab;
+	if (tab != NULL) {
+		gtk_widget_modify_bg(tab->tab_label_widget, GTK_STATE_NORMAL,
+				     &notebook->style->bg[GTK_STATE_ACTIVE]);
+	}
+
 	tab = gui_tab_get_page(frame, page_num);
+	gtk_widget_modify_bg(tab->tab_label_widget, GTK_STATE_NORMAL,
+			     &notebook->style->bg[GTK_STATE_NORMAL]);
+
 	frame->active_tab = tab;
 	if (tab->active_win != NULL)
 		window_set_active(tab->active_win);
+
 	return FALSE;
 }
 

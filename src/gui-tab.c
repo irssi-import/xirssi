@@ -122,6 +122,10 @@ Tab *gui_tab_new(Frame *frame)
 	gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 	gtk_widget_show_all(hbox);
 
+	/* by default keep it with inactive tab color */
+	gtk_widget_modify_bg(tab->tab_label_widget, GTK_STATE_NORMAL,
+		&GTK_WIDGET(frame->notebook)->style->bg[GTK_STATE_ACTIVE]);
+
 	/* nicklist */
 	tab->nicklist = gui_nicklist_view_new(tab);
 	gtk_paned_pack2(GTK_PANED(hpane), tab->nicklist->widget, FALSE, TRUE);

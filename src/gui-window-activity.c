@@ -48,7 +48,8 @@ static void sig_activity(Window *window)
 	signal_stop();
 }
 
-static void data_level_get_color(int data_level, GdkColor *color)
+static void data_level_get_color(GtkWidget *widget, int data_level,
+				 GdkColor *color)
 {
 	/* get the color */
 	switch (data_level) {
@@ -65,6 +66,8 @@ static void data_level_get_color(int data_level, GdkColor *color)
 		gdk_color_parse("magenta", color);
 		break;
 	}
+
+        gdk_color_alloc(gtk_widget_get_colormap(widget), color);
 }
 
 static void tab_update_activity(Tab *tab)
@@ -84,7 +87,7 @@ static void tab_update_activity(Tab *tab)
 	}
 
 	/* change the tab's color */
-        data_level_get_color(data_level, &color);
+	data_level_get_color(tab->widget, data_level, &color);
 	gtk_widget_modify_fg(GTK_WIDGET(tab->label), GTK_STATE_NORMAL, &color);
 }
 
@@ -96,7 +99,7 @@ static void sig_activity_update(Window *window)
 	for (tmp = WINDOW_GUI(window)->views; tmp != NULL; tmp = tmp->next) {
 		WindowView *view = tmp->data;
 
-		data_level_get_color(window->data_level, &color);
+		data_level_get_color(view->widget, window->data_level, &color);
 		gtk_widget_modify_fg(GTK_WIDGET(view->pane->label),
 				     GTK_STATE_NORMAL, &color);
 
