@@ -1,3 +1,8 @@
+2002-06-11 22:44  Timo Sirainen <tss@iki.fi>
+
+	* pixmaps/: highlighting.png, ignores.png, keyboard.png,
+	themes.png: updated
+
 2002-06-06 22:50  Timo Sirainen <tss@iki.fi>
 
 	* glade/irssi.glade, src/setup-prefs.c, src/glade/interface.c:
