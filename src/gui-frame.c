@@ -46,7 +46,6 @@ static gboolean event_destroy(GtkWidget *window, Frame *frame)
 
 	signal_emit("gui frame destroyed", 1, frame);
 	g_object_set_data(G_OBJECT(frame->widget), "Frame", NULL);
-	printf("frame destroyed\n");
 	g_free(frame);
 
 	if (frames == NULL) {

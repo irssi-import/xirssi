@@ -47,7 +47,6 @@ static gboolean event_destroy(GtkWidget *widget, WindowView *view)
 	gui_window_remove_view(view);
 	gtk_widget_destroy(view->title);
 
-	printf("window view destroyed\n");
 	g_free(view);
 	return FALSE;
 }
@@ -174,7 +173,6 @@ WindowView *gui_window_view_new(TabPane *pane, WindowGui *window,
 
 static void event_title_destroy(GtkWidget *widget, WindowView *view)
 {
-	printf("window view title destroyed\n");
 	view->title = NULL;
 }
 

@@ -51,7 +51,6 @@ static gboolean event_destroy(GtkWidget *window, Tab *tab)
 	if (tab->frame->active_tab == tab)
 		tab->frame->active_tab = NULL;
 
-	printf("tab destroyed\n");
 	g_object_set_data(G_OBJECT(tab->widget), "Tab", NULL);
 	g_free(tab);
 	return FALSE;
@@ -254,7 +253,6 @@ static gboolean event_destroy_pane(GtkWidget *widget, TabPane *pane)
 	if (pane->view != NULL)
 		gtk_widget_destroy(pane->view->widget);
 
-	printf("pane destroyed\n");
 	g_object_set_data(G_OBJECT(pane->widget), "TabPane", NULL);
 	g_free(pane);
 
