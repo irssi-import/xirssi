@@ -1,3 +1,8 @@
+2002-05-17 17:29  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-itemlist.c: "window item name changed" wasn't handled
+	properly.
+
 2002-05-16 08:36  Timo Sirainen <tss@iki.fi>
 
 	* src/setup-prefs.c: fixed sidebar behaviour.
