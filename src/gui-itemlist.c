@@ -283,6 +283,11 @@ static void sig_window_changed(Window *window)
 	gui_itemlist_update_window(window, TRUE);
 }
 
+static void sig_window_item_name_changed(WindowItem *witem)
+{
+	gui_itemlist_update_window(window_item_window(witem), TRUE);
+}
+
 static void sig_window_item_changed(Window *window)
 {
 	/* window item/server changed */
@@ -306,7 +311,7 @@ void gui_itemlists_init(void)
 	signal_add("window changed", (SIGNAL_FUNC) sig_window_changed);
 	signal_add("window item new", (SIGNAL_FUNC) sig_window_changed);
 	signal_add("window item remove", (SIGNAL_FUNC) sig_window_changed);
-	signal_add("window item name changed", (SIGNAL_FUNC) sig_window_changed);
+	signal_add("window item name changed", (SIGNAL_FUNC) sig_window_item_name_changed);
 	signal_add("window item changed", (SIGNAL_FUNC) sig_window_item_changed);
 	signal_add("window server changed", (SIGNAL_FUNC) sig_window_item_changed);
 	signal_add("server connected", (SIGNAL_FUNC) sig_server_connected);
@@ -317,7 +322,7 @@ void gui_itemlists_deinit(void)
 	signal_remove("window changed", (SIGNAL_FUNC) sig_window_changed);
 	signal_remove("window item new", (SIGNAL_FUNC) sig_window_changed);
 	signal_remove("window item remove", (SIGNAL_FUNC) sig_window_changed);
-	signal_remove("window item name changed", (SIGNAL_FUNC) sig_window_changed);
+	signal_remove("window item name changed", (SIGNAL_FUNC) sig_window_item_name_changed);
 	signal_remove("window item changed", (SIGNAL_FUNC) sig_window_item_changed);
 	signal_remove("window server changed", (SIGNAL_FUNC) sig_window_item_changed);
 	signal_remove("server connected", (SIGNAL_FUNC) sig_server_connected);
