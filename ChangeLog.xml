@@ -3,6 +3,28 @@
 <changelog xmlns="http://www.red-bean.com/xmlns/cvs2cl/">
 
 <entry>
+<date>2002-05-07</date>
+<weekday>Tuesday</weekday>
+<time>19:58</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-tab.c</name>
+<revision>1.14</revision>
+</file>
+<file>
+<name>src/gui-tab.h</name>
+<revision>1.8</revision>
+</file>
+<file>
+<name>src/gui-window.c</name>
+<revision>1.11</revision>
+</file>
+<commondir>src/</commondir>
+<msg>Show focus icon in active window
+</msg>
+</entry>
+
+<entry>
 <date>2002-05-06</date>
 <weekday>Monday</weekday>
 <time>02:06</time>
