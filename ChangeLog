@@ -1,3 +1,12 @@
+2002-06-06 22:39  Timo Sirainen <tss@iki.fi>
+
+	* pixmaps/: autolog.png, fontscolors.png: new icons
+
+2002-06-06 22:38  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-keyboard.c: use only mod2+mod4 (alt + hyper), so
+	num/scroll lock state doesn't affect keyboard bindings.
+
 2002-06-06 22:28  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-entry.h, gui-frame.c, gui-keyboard.c, gui-keyboard.h:
