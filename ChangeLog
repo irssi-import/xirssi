@@ -1,3 +1,7 @@
+2002-06-24 00:22  Timo Sirainen <tss@iki.fi>
+
+	* AUTHORS: updated
+
 2002-06-11 23:21  Timo Sirainen <tss@iki.fi>
 
 	* glade/irssi.glade, src/glade/interface.c: fix
