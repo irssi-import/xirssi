@@ -18,7 +18,7 @@ AC_ARG_WITH(irssi,
 	IRSSI_INCLUDE=$withval,
 	IRSSI_INCLUDE="")
 
-AC_ARG_WITH(irssi,
+AC_ARG_WITH(irssi-lib,
 [  --with-irssi-lib        Irssi library directory],
 	IRSSI_LIB=$withval,
 	IRSSI_LIB="")
