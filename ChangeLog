@@ -1,3 +1,13 @@
+2002-04-26 23:48  Timo Sirainen <tss@iki.fi>
+
+	* src/: Makefile.am, gui-tab.h, gui-window-activity.c,
+	gui-window-view.c, gui-window.c, gui-window.h: Added window
+	activity code.
+
+2002-04-26 23:46  Timo Sirainen <tss@iki.fi>
+
+	* src/.cvsignore: added xirssi
+
 2002-04-26 22:47  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-context-nick.c, gui-entry.c, gui-frame.c,
