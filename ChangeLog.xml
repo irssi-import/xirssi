@@ -3,6 +3,19 @@
 <changelog xmlns="http://www.red-bean.com/xmlns/cvs2cl/">
 
 <entry>
+<date>2002-06-06</date>
+<weekday>Thursday</weekday>
+<time>19:15</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-keyboard.c</name>
+<revision>1.11</revision>
+</file>
+<msg>Added default meta-d = delete_next_word
+</msg>
+</entry>
+
+<entry>
 <date>2002-06-05</date>
 <weekday>Wednesday</weekday>
 <time>22:40</time>
