@@ -1,3 +1,11 @@
+2002-05-12 14:33  Timo Sirainen <tss@iki.fi>
+
+	* src/setup-prefs.c: updated
+
+2002-05-12 14:04  Timo Sirainen <tss@iki.fi>
+
+	* autogen.sh: #!/bin/sh was missing.
+
 2002-05-12 13:43  Timo Sirainen <tss@iki.fi>
 
 	* glade/irssi.glade, src/glade/interface.c: updates
