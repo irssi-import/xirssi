@@ -51,6 +51,8 @@ static gboolean event_destroy(GtkWidget *window, Tab *tab)
 	if (tab->frame->active_tab == tab)
 		tab->frame->active_tab = NULL;
 
+	gui_reset_tab_labels(tab->frame);
+
 	g_object_set_data(G_OBJECT(tab->widget), "Tab", NULL);
 	g_free(tab);
 	return FALSE;
