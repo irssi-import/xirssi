@@ -5,6 +5,36 @@
 <entry>
 <date>2002-04-30</date>
 <weekday>Tuesday</weekday>
+<time>03:21</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>README</name>
+<revision>1.2</revision>
+</file>
+<msg>updated
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-30</date>
+<weekday>Tuesday</weekday>
+<time>03:13</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>.cvsignore</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>AUTHORS</name>
+<revision>1.2</revision>
+</file>
+<msg>updates
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-30</date>
+<weekday>Tuesday</weekday>
 <time>03:00</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
