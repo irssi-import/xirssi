@@ -30,9 +30,13 @@ static void sig_window_word(GtkTextTag **tag, WindowGui *window,
 			    Channel *channel, const char *word)
 {
 	/* common urls */
-	if (strncmp(word, "http://", 7) == 0 || strncmp(word, "www.", 4) == 0 ||
-	    strncmp(word, "ftp://", 6) == 0 || strncmp(word, "ftp.", 4) == 0 ||
-	    strncmp(word, "irc://", 6) == 0 || strncmp(word, "mailto:", 7) == 0) {
+	if (strncmp(word, "http://", 7) == 0 ||
+	    strncmp(word, "https://", 8) == 0 ||
+	    strncmp(word, "www.", 4) == 0 ||
+	    strncmp(word, "ftp://", 6) == 0 ||
+	    strncmp(word, "ftp.", 4) == 0 ||
+	    strncmp(word, "irc://", 6) == 0 ||
+	    strncmp(word, "mailto:", 7) == 0) {
 		*tag = gtk_text_tag_table_lookup(window->tagtable, "url");
 		if (*tag == NULL)
 			*tag = gui_window_context_create_tag(window, "url");

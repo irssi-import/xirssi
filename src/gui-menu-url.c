@@ -103,7 +103,8 @@ void gui_menu_url_popup(const char *url, int button)
 	else if (strncmp(url, "ftp.", 4) == 0)
 		url = new_url = g_strconcat("ftp://", url, NULL);
 
-	if (strncmp(url, "http://", 7) == 0) {
+	if (strncmp(url, "http://", 7) == 0 ||
+	    strncmp(url, "https://", 8) == 0) {
 		items = http_items;
 		nitems = G_N_ELEMENTS(http_items);
 	} else if (strncmp(url, "ftp://", 6) == 0) {
