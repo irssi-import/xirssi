@@ -31,12 +31,8 @@ static gboolean event_destroy(GtkWidget *widget, NicklistView *view)
 {
 	signal_emit("gui nicklist view destroyed", 1, view);
 
-	view->widget = NULL;
-	view->label = NULL;
-	view->view = NULL;
-
-	gui_nicklist_view_unref(view);
-	gui_tab_unref(view->tab);
+	g_object_set_data(G_OBJECT(view->widget), "NicklistView", NULL);
+	g_free(view);
 	return FALSE;
 }
 
@@ -188,12 +184,11 @@ NicklistView *gui_nicklist_view_new(Tab *tab)
 	NicklistView *view;
 
 	view = g_new0(NicklistView, 1);
-	view->refcount = 1;
-
 	view->tab = tab;
-	gui_tab_ref(view->tab);
 
 	view->widget = vbox = gtk_vbox_new(FALSE, 0);
+	g_object_set_data(G_OBJECT(view->widget), "NicklistView", view);
+
 	gtk_widget_set_size_request(vbox, 150, -1);
 	g_signal_connect(G_OBJECT(vbox), "destroy",
 			 G_CALLBACK(event_destroy), view);
@@ -249,32 +244,17 @@ NicklistView *gui_nicklist_view_new(Tab *tab)
 	return view;
 }
 
-void gui_nicklist_view_ref(NicklistView *view)
-{
-	view->refcount++;
-}
-
-void gui_nicklist_view_unref(NicklistView *view)
-{
-	if (--view->refcount > 0)
-		return;
-
-	if (view->nicklist != NULL)
-		gui_nicklist_unref(view->nicklist);
-	g_free(view);
-}
-
 void gui_nicklist_view_set(NicklistView *view, Nicklist *nicklist)
 {
+	if (view->nicklist == nicklist)
+		return;
+
 	if (view->nicklist != NULL) {
 		view->nicklist->views =
 			g_slist_remove(view->nicklist->views, view);
-		gui_nicklist_unref(view->nicklist);
 	}
-	if (nicklist != NULL) {
-		gui_nicklist_ref(nicklist);
+	if (nicklist != NULL)
 		nicklist->views = g_slist_prepend(nicklist->views, view);
-	}
 	view->nicklist = nicklist;
 
 	gtk_tree_view_set_model(GTK_TREE_VIEW(view->view),

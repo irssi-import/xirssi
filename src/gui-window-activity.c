@@ -52,21 +52,17 @@ static void tab_update_activity(Tab *tab)
 {
 	GtkWidget *label;
 	GdkColor color;
-	GSList *tmp;
+	GList *tmp;
 	int data_level;
-
-	if (tab->frame->notebook == NULL) {
-		/* destroying the frame */
-		return;
-	}
 
 	/* get highest data level */
 	data_level = 0;
-	for (tmp = tab->views; tmp != NULL; tmp = tmp->next) {
-		WindowView *view = tmp->data;
+	for (tmp = tab->panes; tmp != NULL; tmp = tmp->next) {
+		TabPane *pane = tmp->data;
 
-		if (view->window->window->data_level > data_level)
-			data_level = view->window->window->data_level;
+		if (pane->view != NULL &&
+		    pane->view->window->window->data_level > data_level)
+			data_level = pane->view->window->window->data_level;
 	}
 
 	/* get the color */
@@ -98,8 +94,8 @@ static void sig_activity_update(Window *window)
 		WindowView *view = tmp->data;
 
 		if (window->data_level == 0 ||
-		    view->tab->data_level < window->data_level)
-			tab_update_activity(view->tab);
+		    view->pane->tab->data_level < window->data_level)
+			tab_update_activity(view->pane->tab);
 	}
 }
 

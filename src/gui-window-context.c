@@ -40,6 +40,8 @@ typedef struct {
 	char *word;
 } ContextEvent;
 
+static GdkCursor *hand_cursor;
+
 static void get_tag_start(GtkTextIter *start_iter, const GtkTextIter *iter,
 			  GtkTextTag *tag)
 {
@@ -256,7 +258,7 @@ gboolean gui_window_context_event_motion(GtkWidget *widget, GdkEvent *event,
 
 			window = gtk_text_view_get_window(view->view,
 							  GTK_TEXT_WINDOW_TEXT);
-			gdk_window_set_cursor(window, view->hand_cursor);
+			gdk_window_set_cursor(window, hand_cursor);
 		}
 	} else if (view->cursor_link) {
 		/* moved out of tag */
@@ -286,12 +288,16 @@ static void sig_gui_window_view_destroyed(WindowView *view)
 
 void gui_window_contexts_init(void)
 {
+	hand_cursor = gdk_cursor_new(GDK_HAND2);
+
 	signal_add("gui window view created", (SIGNAL_FUNC) sig_gui_window_view_created);
 	signal_add("gui window view destroyed", (SIGNAL_FUNC) sig_gui_window_view_destroyed);
 }
 
 void gui_window_contexts_deinit(void)
 {
+	gdk_cursor_unref(hand_cursor);
+
 	signal_remove("gui window view created", (SIGNAL_FUNC) sig_gui_window_view_created);
 	signal_remove("gui window view destroyed", (SIGNAL_FUNC) sig_gui_window_view_destroyed);
 }

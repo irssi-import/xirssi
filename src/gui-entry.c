@@ -27,10 +27,9 @@ static gboolean event_destroy(GtkWidget *widget, Entry *entry)
 {
 	signal_emit("gui entry destroyed", 1, entry);
 
-	entry->widget = NULL;
-	entry->entry = NULL;
-
-	gui_entry_unref(entry);
+	keyboard_destroy(entry->keyboard);
+	g_object_set_data(G_OBJECT(entry->widget), "Entry", NULL);
+	g_free(entry);
 	return FALSE;
 }
 
@@ -45,15 +44,11 @@ Entry *gui_entry_new(Frame *frame)
 	Entry *entry;
 
 	entry = g_new0(Entry, 1);
-	entry->refcount = 1;
-
-	entry->frame = frame;
-	gui_frame_ref(entry->frame);
-
 	entry->keyboard = keyboard_create(entry);
-
 	entry->widget = gtk_entry_new();
 	entry->entry = GTK_ENTRY(entry->widget);
+
+	g_object_set_data(G_OBJECT(entry->widget), "Entry", entry);
 
 	g_signal_connect(G_OBJECT(entry->widget), "destroy",
 			 G_CALLBACK(event_destroy), entry);
@@ -62,23 +57,6 @@ Entry *gui_entry_new(Frame *frame)
 
 	signal_emit("gui entry created", 1, entry);
 	return entry;
-}
-
-void gui_entry_ref(Entry *entry)
-{
-	entry->refcount++;
-}
-
-int gui_entry_unref(Entry *entry)
-{
-	if (--entry->refcount > 0)
-		return TRUE;
-
-	keyboard_destroy(entry->keyboard);
-	gui_frame_unref(entry->frame);
-
-	g_free(entry);
-	return FALSE;
 }
 
 void gui_entry_set_window(Entry *entry, Window *window)

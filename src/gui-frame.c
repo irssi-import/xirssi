@@ -35,29 +35,32 @@ Frame *active_frame;
 
 static gboolean event_destroy(GtkWidget *window, Frame *frame)
 {
+	frame->destroying = TRUE;
+
 	frames = g_slist_remove(frames, frame);
 	if (active_frame == frame)
 		gui_frame_set_active(frames != NULL ? frames->data : NULL);
 
-	signal_emit("gui frame destroyed", 1, frame);
+	/* destroy tabs first */
+	gtk_widget_destroy(GTK_WIDGET(frame->notebook));
 
-	frame->destroying = TRUE;
-	frame->window = NULL;
-	frame->notebook = NULL;
+	signal_emit("gui frame destroyed", 1, frame);
+	g_object_set_data(G_OBJECT(frame->widget), "Frame", NULL);
+	printf("frame destroyed\n");
+	g_free(frame);
 
 	if (frames == NULL) {
 		/* last window killed - quit */
 		signal_emit("command quit", 1, "");
 	}
 
-	gui_frame_unref(frame);
 	return FALSE;
 }
 
 static gboolean event_focus(GtkWidget *widget, GdkEventFocus *event,
 			    Frame *frame)
 {
-        gui_frame_set_active(frame);
+	gui_frame_set_active(frame);
 	if (frame->active_tab != NULL && frame->active_tab->active_win != NULL)
 		window_set_active(frame->active_tab->active_win);
 	return FALSE;
@@ -120,29 +123,27 @@ static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
 static gboolean event_switch_page(GtkNotebook *notebook, GtkNotebookPage *page,
 				  gint page_num, Frame *frame)
 {
-	GtkWidget *widget;
 	Tab *tab;
 
-	widget = gtk_notebook_get_nth_page(notebook, page_num);
-	tab = g_object_get_data(G_OBJECT(widget), "irssi tab");
-
+	tab = gui_tab_get_page(frame, page_num);
 	frame->active_tab = tab;
 	if (tab->active_win != NULL)
 		window_set_active(tab->active_win);
 	return FALSE;
 }
 
-Frame *gui_frame_new(void)
+Frame *gui_frame_new(int show)
 {
 	GtkWidget *window, *vbox, *notebook, *statusbar;
 	Frame *frame;
 
 	frame = g_new0(Frame, 1);
-	frame->refcount = 1;
 
 	/* create the window */
-	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-        frame->window = GTK_WINDOW(window);
+	frame->widget = window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	frame->window = GTK_WINDOW(window);
+	g_object_set_data(G_OBJECT(window), "Frame", frame);
+
 	g_signal_connect(G_OBJECT(window), "destroy",
 			 G_CALLBACK(event_destroy), frame);
 	g_signal_connect(G_OBJECT(window), "focus_in_event",
@@ -173,48 +174,13 @@ Frame *gui_frame_new(void)
 	frame->statusbar = GTK_STATUSBAR(statusbar);
 	gtk_box_pack_start(GTK_BOX(vbox), statusbar, FALSE, FALSE, 0);
 
-	gtk_widget_show_all(window);
 	gtk_widget_grab_focus(frame->entry->widget);
+	if (show) gtk_widget_show_all(window);
 
 	frames = g_slist_prepend(frames, frame);
 
 	signal_emit("gui frame created", 1, frame);
 	return frame;
-}
-
-void gui_frame_ref(Frame *frame)
-{
-	frame->refcount++;
-}
-
-void gui_frame_unref(Frame *frame)
-{
-	if (--frame->refcount > 0)
-		return;
-
-	g_free(frame);
-}
-
-Tab *gui_frame_new_tab(Frame *frame)
-{
-	Tab *tab;
-
-	tab = gui_tab_new(frame);
-
-	g_object_set_data(G_OBJECT(tab->widget), "irssi tab", tab);
-	gtk_notebook_append_page(frame->notebook, tab->widget, tab->tab_label);
-	return tab;
-}
-
-Tab *gui_frame_get_tab(Frame *frame, int page)
-{
-	GtkWidget *child;
-
-	g_return_val_if_fail(!frame->destroying, NULL);
-
-	child = gtk_notebook_get_nth_page(frame->notebook, page);
-	return child == NULL ? NULL :
-		g_object_get_data(G_OBJECT(child), "irssi tab");
 }
 
 void gui_frame_set_active(Frame *frame)
@@ -228,15 +194,4 @@ void gui_frame_set_active(Frame *frame)
 void gui_frame_set_active_window(Frame *frame, Window *window)
 {
 	gui_entry_set_window(frame->entry, window);
-}
-
-void gui_frame_set_active_tab(Tab *tab)
-{
-	int page;
-
-	if (tab->destroying || tab->frame->destroying)
-		return;
-
-	page = gtk_notebook_page_num(tab->frame->notebook, tab->widget);
-	gtk_notebook_set_current_page(tab->frame->notebook, page);
 }

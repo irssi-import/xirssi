@@ -34,7 +34,7 @@ xirssi_SOURCES = \
 	gui-nicklist.c \
 	gui-nicklist-view.c \
 	gui-tab.c \
-	gui-tab-label.c \
+	gui-tab-move.c \
 	gui-window.c \
 	gui-window-activity.c \
 	gui-window-context.c \
@@ -50,7 +50,7 @@ noinst_HEADERS = \
 	gui-nicklist.h \
 	gui-nicklist-view.h \
 	gui-tab.h \
-	gui-tab-label.h \
+	gui-tab-move.h \
 	gui-window.h \
 	gui-window-context.h \
 	gui-window-item-rec.h \

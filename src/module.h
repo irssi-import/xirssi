@@ -18,6 +18,7 @@ typedef struct _TEXT_DEST_REC TextDest;
 typedef struct _Entry Entry;
 typedef struct _Frame Frame;
 typedef struct _Tab Tab;
+typedef struct _TabPane TabPane;
 typedef struct _WindowGui WindowGui;
 typedef struct _WindowView WindowView;
 
@@ -28,3 +29,5 @@ typedef struct _NicklistView NicklistView;
 typedef struct {
 #include "gui-window-item-rec.h"
 } WindowItemGui;
+
+void *gui_widget_find_data(GtkWidget *widget, const char *key);

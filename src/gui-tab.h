@@ -2,38 +2,44 @@
 #define __GUI_TAB_H
 
 struct _Tab {
-	int refcount;
 	Frame *frame;
 
 	GtkWidget *widget;
 	GtkWidget *tab_label;
 	GtkLabel *label;
 
+	GtkPaned *first_paned, *last_paned;
 	GList *panes;
-	GSList *views;
 
 	NicklistView *nicklist;
 	Window *active_win;
 	int data_level;
 
-	Frame *drag_frame;
-	int drag_pos;
-	unsigned int pressing:1;
-	unsigned int dragging:1;
-	unsigned int detaching:1;
-
 	unsigned int destroying:1;
+};
+
+struct _TabPane {
+	Tab *tab;
+
+	GtkWidget *widget;
+	GtkBox *box, *titlebox;
+	WindowView *view;
 };
 
 Tab *gui_tab_new(Frame *frame);
 
-void gui_tab_ref(Tab *tab);
-void gui_tab_unref(Tab *tab);
+GtkPaned *gui_tab_add_paned(Tab *tab);
+TabPane *gui_tab_pane_new(Tab *tab);
+void gui_tab_pack_panes(Tab *tab);
 
-GtkBox *gui_tab_add_widget(Tab *tab, GtkWidget *widget);
-void gui_tab_remove_widget(Tab *tab, GtkWidget *widget);
+Tab *gui_tab_get_page(Frame *frame, int page);
 
+void gui_tab_set_active(Tab *tab);
 void gui_tab_set_active_window(Tab *tab, Window *window);
 void gui_tab_set_active_window_item(Tab *tab, Window *window);
+void gui_tab_update_active_window(Tab *tab);
+
+void gui_tabs_init(void);
+void gui_tabs_deinit(void);
 
 #endif

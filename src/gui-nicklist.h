@@ -10,7 +10,6 @@ enum {
 };
 
 struct _Nicklist {
-	int refcount;
 	Channel *channel;
 
 	GtkListStore *store;
@@ -21,9 +20,7 @@ struct _Nicklist {
 };
 
 Nicklist *gui_nicklist_new(Channel *channel);
-
-void gui_nicklist_ref(Nicklist *nicklist);
-void gui_nicklist_unref(Nicklist *nicklist);
+void gui_nicklist_destroy(Nicklist *nicklist);
 
 void gui_nicklists_init(void);
 void gui_nicklists_deinit(void);

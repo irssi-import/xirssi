@@ -44,12 +44,10 @@ static gboolean event_destroy(GtkWidget *widget, WindowView *view)
 
 	g_signal_handler_disconnect(G_OBJECT(view->window->buffer),
 				    view->sig_changed);
-	gdk_cursor_destroy(view->hand_cursor);
-	gui_window_remove_view(view->window, view);
+	gui_window_remove_view(view);
+	gtk_widget_destroy(view->title);
 
-	view->tab->views = g_slist_remove(view->tab->views, view);
-	gui_tab_unref(view->tab);
-
+	printf("window view destroyed\n");
 	g_free(view);
 	return FALSE;
 }
@@ -105,7 +103,7 @@ static void get_font_size(GtkWidget *widget, PangoFontDescription *font_desc,
 
 }
 
-WindowView *gui_window_view_new(Tab *tab, WindowGui *window,
+WindowView *gui_window_view_new(TabPane *pane, WindowGui *window,
 				GtkTextBuffer *buffer)
 {
         WindowView *view;
@@ -115,11 +113,7 @@ WindowView *gui_window_view_new(Tab *tab, WindowGui *window,
 
 	view = g_new0(WindowView, 1);
 	view->window = window;
-	view->hand_cursor = gdk_cursor_new(GDK_HAND2);
-
-	view->tab = tab;
-	view->tab->views = g_slist_prepend(view->tab->views, view);
-	gui_tab_ref(view->tab);
+	view->pane = pane;
 
 	view->sig_changed = g_signal_connect(G_OBJECT(buffer), "changed",
 					     G_CALLBACK(event_changed), view);
@@ -164,6 +158,11 @@ WindowView *gui_window_view_new(Tab *tab, WindowGui *window,
 	gtk_widget_modify_text(text_view, GTK_STATE_NORMAL, &color);
 
 	gtk_widget_show_all(view->widget);
+
+	/* update pane */
+	pane->view = view;
+	gtk_box_pack_start(pane->box, view->widget, TRUE, TRUE, 0);
+
 	get_font_size(text_view, window->font_monospace,
 		      &view->font_width, &view->font_height);
 
@@ -175,6 +174,7 @@ WindowView *gui_window_view_new(Tab *tab, WindowGui *window,
 
 static void event_title_destroy(GtkWidget *widget, WindowView *view)
 {
+	printf("window view title destroyed\n");
 	view->title = NULL;
 }
 
@@ -183,7 +183,7 @@ void gui_window_view_set_title(WindowView *view)
 	Window *window;
 	GtkWidget *title;
 
-	if (view->titlebox == NULL)
+	if (view->pane->titlebox == NULL)
 		return;
 
 	window = view->window->window;
@@ -205,12 +205,11 @@ void gui_window_view_set_title(WindowView *view)
 		gtk_widget_destroy(view->title);
 	view->title = title;
 
-	gtk_widget_show(view->title);
-	g_signal_connect(G_OBJECT(view->title), "destroy",
+	gtk_widget_show(title);
+	g_signal_connect(G_OBJECT(title), "destroy",
 			 G_CALLBACK(event_title_destroy), view);
 
-	g_object_set_data(G_OBJECT(view->titlebox), "title", title);
-	gtk_box_pack_start(view->titlebox, title, TRUE, TRUE, 0);
+	gtk_box_pack_start(view->pane->titlebox, title, TRUE, TRUE, 0);
 }
 
 static void gui_window_views_set_title(Window *window)

@@ -79,8 +79,8 @@ void gui_window_add_view(WindowGui *window, Tab *tab)
 {
 	WindowView *view;
 
-	view = gui_window_view_new(tab, window, window->buffer);
-	view->titlebox = gui_tab_add_widget(tab, view->widget);
+	view = gui_window_view_new(gui_tab_pane_new(tab),
+				   window, window->buffer);
 
 	gui_tab_set_active_window(tab, window->window);
 
@@ -88,9 +88,12 @@ void gui_window_add_view(WindowGui *window, Tab *tab)
 	window->active_view = view;
 }
 
-void gui_window_remove_view(WindowGui *window, WindowView *view)
+void gui_window_remove_view(WindowView *view)
 {
+	WindowGui *window = view->window;
+
 	window->views = g_slist_remove(window->views, view);
+
 	window->active_view = window->views != NULL ?
 		window->views->data : NULL;
 	if (window->views == NULL)
@@ -118,12 +121,13 @@ void gui_window_update_width(WindowGui *window)
 
 static int tab_has_window(Tab *tab, Window *window)
 {
-	GSList *tmp;
+	GList *tmp;
 
-	for (tmp = tab->views; tmp != NULL; tmp = tmp->next) {
-		WindowView *view = tmp->data;
+	for (tmp = tab->panes; tmp != NULL; tmp = tmp->next) {
+		TabPane *pane = tmp->data;
 
-		if (view->window->window == window)
+		if (pane->view != NULL &&
+		    pane->view->window->window == window)
 			return TRUE;
 	}
 
@@ -266,9 +270,9 @@ static void sig_window_created(Window *window, void *automatic)
 	WindowGui *gui;
 
 	if (window_create_override == 0 || active_frame == NULL)
-		gui_frame_set_active(gui_frame_new());
+		gui_frame_set_active(gui_frame_new(TRUE));
 	if (window_create_override <= 1 || active_frame->active_tab == NULL)
-		gui_frame_set_active_tab(gui_frame_new_tab(active_frame));
+		gui_tab_set_active(gui_tab_new(active_frame));
 	window_create_override = -1;
 
 	gui = g_new0(WindowGui, 1);
@@ -315,7 +319,7 @@ static void sig_window_destroyed(Window *window)
 	while (gui->views != NULL) {
 		WindowView *view = gui->views->data;
 		gui->views = g_slist_remove(gui->views, view);
-		gui_tab_remove_widget(view->tab, view->widget);
+		gtk_widget_destroy(view->pane->widget);
 	}
 
 	pango_font_description_free(gui->font_monospace);
@@ -328,8 +332,8 @@ static void sig_window_changed(Window *window)
 {
 	WindowGui *gui = WINDOW_GUI(window);
 
-	gui_tab_set_active_window(gui->active_view->tab, window);
-	gui_frame_set_active_tab(gui->active_view->tab);
+	gui_tab_set_active_window(gui->active_view->pane->tab, window);
+	gui_tab_set_active(gui->active_view->pane->tab);
 }
 
 static void sig_window_item_changed(Window *window, WindowItem *witem)
@@ -340,7 +344,7 @@ static void sig_window_item_changed(Window *window, WindowItem *witem)
 	for (tmp = gui->views; tmp != NULL; tmp = tmp->next) {
 		WindowView *view = tmp->data;
 
-		gui_tab_set_active_window_item(view->tab, window);
+		gui_tab_set_active_window_item(view->pane->tab, window);
 		gui_window_view_set_title(view);
 	}
 }

@@ -23,25 +23,62 @@
 
 #include "gui-frame.h"
 #include "gui-tab.h"
-#include "gui-tab-label.h"
+#include "gui-tab-move.h"
 #include "gui-window.h"
 #include "gui-channel.h"
 #include "gui-nicklist-view.h"
+#include "gui-window.h"
+#include "gui-window-view.h"
+
+#include "move.xpm"
+
+static GdkPixbuf *move_pixbuf;
 
 static gboolean event_destroy(GtkWidget *window, Tab *tab)
 {
 	signal_emit("gui tab destroyed", 1, tab);
 
+	tab->destroying = TRUE;
+
+	/* destroy panes first */
+	while (tab->panes != NULL) {
+		TabPane *pane = tab->panes->data;
+		gtk_widget_destroy(pane->widget);
+	}
+
+	/* make sure frame->active_tab isn't invalid even for the
+	   short time it takes for frame to notice the tab change. */
 	if (tab->frame->active_tab == tab)
 		tab->frame->active_tab = NULL;
 
-	tab->destroying = TRUE;
-	tab->widget = NULL;
-	tab->tab_label = NULL;
-	tab->label = NULL;
-
-	gui_tab_unref(tab);
+	printf("tab destroyed\n");
+	g_object_set_data(G_OBJECT(tab->widget), "Tab", NULL);
+	g_free(tab);
 	return FALSE;
+}
+
+static gboolean event_notify(GtkWidget *widget, GParamSpec *spec, Tab *tab)
+{
+	Frame *frame;
+
+	if (strcmp(spec->name, "parent") == 0) {
+		frame = gui_widget_find_data(widget, "Frame");
+		if (frame != NULL)
+			tab->frame = frame;
+	}
+	return FALSE;
+}
+
+static GtkWidget *gui_tab_label_new(GtkWidget *label, Tab *tab)
+{
+	GtkWidget *eventbox;
+
+	eventbox = gtk_event_box_new();
+	gtk_container_add(GTK_CONTAINER(eventbox), label);
+	gtk_widget_show_all(eventbox);
+
+        gui_tab_move_label_init(eventbox);
+	return eventbox;
 }
 
 Tab *gui_tab_new(Frame *frame)
@@ -50,15 +87,16 @@ Tab *gui_tab_new(Frame *frame)
 	Tab *tab;
 
 	tab = g_new0(Tab, 1);
-	tab->refcount = 1;
-
 	tab->frame = frame;
-	gui_frame_ref(frame);
 
 	/* create the window */
 	tab->widget = vbox = gtk_vbox_new(FALSE, 0);
+	g_object_set_data(G_OBJECT(tab->widget), "Tab", tab);
+
 	g_signal_connect(G_OBJECT(vbox), "destroy",
 			 G_CALLBACK(event_destroy), tab);
+	g_signal_connect(G_OBJECT(vbox), "notify",
+			 G_CALLBACK(event_notify), tab);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox), 5);
 
 	hpane = gtk_hpaned_new();
@@ -67,149 +105,98 @@ Tab *gui_tab_new(Frame *frame)
 	/* tab's label */
 	label = gtk_label_new(NULL);
 	tab->label = GTK_LABEL(label);
-	tab->tab_label = gui_tab_label_new(tab, label);
+
+	tab->tab_label = gui_tab_label_new(label, tab);
+	g_object_set_data(G_OBJECT(tab->tab_label), "Tab", tab);
 
 	/* nicklist */
 	tab->nicklist = gui_nicklist_view_new(tab);
-	gui_nicklist_view_ref(tab->nicklist);
 	gtk_paned_pack2(GTK_PANED(hpane), tab->nicklist->widget, FALSE, TRUE);
 
 	/* vertical pane */
 	vpane = gtk_vpaned_new();
 	gtk_paned_pack1(GTK_PANED(hpane), vpane, TRUE, TRUE);
-	tab->panes = g_list_prepend(tab->panes, vpane);
+	tab->first_paned = tab->last_paned = GTK_PANED(vpane);
 
 	gtk_widget_show_all(vbox);
 	gtk_widget_hide(tab->nicklist->widget);
+
+	gtk_notebook_append_page(frame->notebook, tab->widget, tab->tab_label);
 
 	signal_emit("gui tab created", 1, tab);
 	return tab;
 }
 
-void gui_tab_ref(Tab *tab)
+static void event_pane_close(GtkWidget *widget, TabPane *pane)
 {
-	tab->refcount++;
-}
-
-void gui_tab_unref(Tab *tab)
-{
-	if (--tab->refcount > 0)
-		return;
-
-	gui_nicklist_view_unref(tab->nicklist);
-	gui_frame_unref(tab->frame);
-	g_free(tab);
-}
-
-typedef struct {
-	Tab *tab;
-
-	GtkWidget *widget;
-	GtkWidget *box;
-	GtkPaned *paned;
-
-	GtkWidget *titlebox, *title;
-} PanedWidget;
-
-static void sig_pane_close(GtkWidget *widget, GtkWidget *paned)
-{
-	PanedWidget *pw;
-
-	pw = g_object_get_data(G_OBJECT(paned), "irssi paned widget");
 	if (windows->next != NULL)
-		gui_tab_remove_widget(pw->tab, pw->widget);
+		gtk_widget_destroy(pane->widget);
 }
 
-static void panes_swap(PanedWidget *pw1, PanedWidget *pw2)
+#if 0 // FIXME
+static void pane_move_up(GList *lower)
 {
-	GtkWidget *widget, *tempbox;
+	TabPane *pane1, *pane2;
+	GtkPaned *paned1, *paned2;
 
-	if (pw1 == NULL || pw2 == NULL)
-		return;
+	pane1 = lower->prev->data;
+	pane2 = lower->data;
 
-	tempbox = gtk_event_box_new();
+	/* remove */
+	gtk_widget_ref(pane1->widget);
+	gtk_widget_ref(pane2->widget);
 
-	widget = pw1->widget;
-	gtk_widget_reparent(widget, tempbox);
+	gtk_widget_hide(pane1->widget);
+	gtk_widget_hide(pane2->widget);
 
-	gtk_widget_reparent(pw2->widget, pw1->box);
-	pw1->widget = pw2->widget;
-	g_object_set_data(G_OBJECT(pw1->widget), "irssi pane", pw1->paned);
+	paned1 = GTK_PANED(pane1->widget->parent);
+	paned2 = GTK_PANED(pane2->widget->parent);
 
-	gtk_widget_reparent(widget, pw2->box);
-	pw2->widget = widget;
-	g_object_set_data(G_OBJECT(pw2->widget), "irssi pane", pw2->paned);
+	gtk_container_remove(GTK_CONTAINER(paned2), pane1->widget);
+	gtk_container_remove(GTK_CONTAINER(paned2), pane2->widget);
 
-	gtk_widget_destroy(tempbox);
+	/* add */
+	gtk_paned_add2(paned2, pane1->widget);
+	gtk_paned_add2(paned1, pane2->widget);
+
+	gtk_widget_show(pane1->widget);
+	gtk_widget_show(pane2->widget);
+
+	gtk_widget_unref(pane1->widget);
+	gtk_widget_unref(pane2->widget);
+
+	/* swap in the tab->panes list too */
+	lower->data = pane1;
+	lower->prev->data = pane2;
 }
+#endif
 
-static void sig_pane_move_down(GtkWidget *widget, GtkWidget *paned)
+static TabPane *tab_find_pane(Tab *tab, GtkWidget *paned)
 {
-	PanedWidget *pw1, *pw2;
+	GList *tmp;
 
-	pw1 = g_object_get_data(G_OBJECT(paned), "irssi paned widget");
-	pw2 = g_object_get_data(G_OBJECT(paned->parent), "irssi paned widget");
+	/* find the pane */
+	for (tmp = tab->panes; tmp != NULL; tmp = tmp->next) {
+		TabPane *pane = tmp->data;
 
-        panes_swap(pw1, pw2);
-}
-
-static void sig_pane_move_up(GtkWidget *widget, GtkPaned *paned)
-{
-	PanedWidget *pw1, *pw2;
-
-	pw1 = g_object_get_data(G_OBJECT(paned), "irssi paned widget");
-	pw2 = g_object_get_data(G_OBJECT(paned->child1), "irssi paned widget");
-
-        panes_swap(pw1, pw2);
-}
-
-static GtkWidget *
-stock_button_create(const char *stock, GCallback callback, void *data)
-{
-	GtkWidget *button, *pix;
-
-	pix = gtk_image_new_from_stock(stock, GTK_ICON_SIZE_BUTTON);
-	gtk_widget_set_size_request(pix, 10, 10);
-
-	button = gtk_button_new();
-	gtk_container_add(GTK_CONTAINER(button), pix);
-
-	if (callback != NULL) {
-		g_signal_connect(G_OBJECT(button), "clicked",
-				 callback, data);
+		if (pane->widget->parent == paned)
+			return pane;
 	}
 
-	return button;
-}
-
-static void paned_set_move_buttons(GtkWidget *paned, int show)
-{
-	GtkWidget *upbutton, *downbutton;
-
-	upbutton = g_object_get_data(G_OBJECT(paned), "irssi but move up");
-	downbutton = g_object_get_data(G_OBJECT(paned), "irssi but move down");
-
-	if (show) {
-		gtk_widget_show(upbutton);
-		gtk_widget_show(downbutton);
-	} else {
-		gtk_widget_hide(upbutton);
-		gtk_widget_hide(downbutton);
-	}
-
-	/*gtk_widget_set_sensitive(upbutton, show);
-        gtk_widget_set_sensitive(downbutton, show);*/
+	return NULL;
 }
 
 static gboolean event_pane_moved(GtkPaned *paned, GdkEventButton *event,
 				 Tab *tab)
 {
-	PanedWidget *pw;
+	TabPane *pane;
 	int pos;
 
+	pane = tab_find_pane(tab, GTK_WIDGET(paned));
 	pos = gtk_paned_get_position(paned);
-	if (paned == tab->panes->next->data) {
-		/* create a new pane? */
+	if (pane == tab->panes->data) {
+		/* moving the uppest pane - check if we want to
+		   create new split window */
 		if (pos <= 1)
 			return FALSE;
 
@@ -218,54 +205,139 @@ static gboolean event_pane_moved(GtkPaned *paned, GdkEventButton *event,
 			return FALSE;
 		}
 
-		signal_emit("command window new", 3, "split",
-			    tab->active_win->active_server,
-			    tab->active_win->active);
-	} else if (pos <= 20 && paned == tab->panes->next->next->data) {
-		/* destroy the pane */
-		pw = g_object_get_data(G_OBJECT(paned->child1), "irssi paned widget");
-		gui_tab_remove_widget(tab, pw->widget);
+
+		signal_emit("command window new", 1, "split");
+	} else if (pos <= 20 && tab->panes->next != NULL &&
+		   pane == tab->panes->next->data) {
+		/* shrinked the second uppest pane - destroy the uppest pane */
+		pane = tab->panes->data;
+		gtk_widget_destroy(pane->widget);
 	}
 
 	return FALSE;
 }
 
-GtkBox *gui_tab_add_widget(Tab *tab, GtkWidget *widget)
+static GtkWidget *gui_close_button_new(TabPane *pane)
 {
-	PanedWidget *pw;
+	GtkWidget *button, *image;
+
+	button = gtk_button_new();
+	g_signal_connect(G_OBJECT(button), "clicked",
+			 G_CALLBACK(event_pane_close), pane);
+
+	image = gtk_image_new_from_stock(GTK_STOCK_CLOSE, GTK_ICON_SIZE_BUTTON);
+	gtk_widget_set_size_request(image, 13, 13);
+	gtk_container_add(GTK_CONTAINER(button), image);
+
+	return button;
+}
+
+static GtkWidget *gui_move_button_new(Tab *tab, TabPane *pane)
+{
+	GtkWidget *button, *image;
+
+	button = gtk_button_new();
+	gui_tab_move_label_init(button);
+
+	image = gtk_image_new_from_pixbuf(move_pixbuf);
+	gtk_container_add(GTK_CONTAINER(button), image);
+
+	return button;
+}
+
+static gboolean event_destroy_pane(GtkWidget *widget, TabPane *pane)
+{
+	Tab *tab = pane->tab;
+
+	tab->panes = g_list_remove(tab->panes, pane);
+
+	if (pane->view != NULL)
+		gtk_widget_destroy(pane->view->widget);
+
+	printf("pane destroyed\n");
+	g_object_set_data(G_OBJECT(pane->widget), "TabPane", NULL);
+	g_free(pane);
+
+	if (tab->panes == NULL) {
+		/* last pane, kill the tab */
+                gtk_widget_destroy(tab->widget);
+	} else {
+		gui_tab_pack_panes(tab);
+		gui_tab_update_active_window(tab);
+	}
+	return FALSE;
+}
+
+static gboolean event_notify_pane(GtkWidget *widget, GParamSpec *spec,
+				  TabPane *pane)
+{
+	Tab *tab;
+
+	if (strcmp(spec->name, "parent") == 0) {
+		tab = gui_widget_find_data(widget, "Tab");
+		if (tab != NULL)
+			pane->tab = tab;
+	}
+	return FALSE;
+}
+
+GtkPaned *gui_tab_add_paned(Tab *tab)
+{
+	GtkWidget *new_paned;
+	GtkPaned *paned, *parent_paned;
+
+	paned = tab->last_paned;
+
+	/* add new empty pane */
+	new_paned = gtk_vpaned_new();
+	gtk_paned_add1(paned, new_paned);
+	gtk_widget_show(new_paned);
+
+	parent_paned = GTK_PANED(GTK_WIDGET(paned)->parent);
+	if (paned != tab->first_paned &&
+	    gtk_paned_get_position(parent_paned) < 100)
+		gtk_paned_set_position(parent_paned, 100);
+	g_signal_connect(G_OBJECT(paned), "button_release_event",
+			 G_CALLBACK(event_pane_moved), tab);
+	tab->last_paned = GTK_PANED(new_paned);
+	return paned;
+}
+
+TabPane *gui_tab_pane_new(Tab *tab)
+{
+	GtkWidget *vbox, *hbox, *space, *button;
 	GtkPaned *paned;
-	GtkWidget *new_paned, *vbox, *hbox, *space, *button;
+	TabPane *pane;
 
-	pw = g_new0(PanedWidget, 1);
-	pw->widget = widget;
-	pw->tab = tab;
+	pane = g_new0(TabPane, 1);
+	pane->tab = tab;
+        paned = gui_tab_add_paned(tab);
 
-	pw->paned = paned = tab->panes->data;
-        g_object_set_data(G_OBJECT(paned), "irssi paned widget", pw);
-        g_object_set_data(G_OBJECT(widget), "irssi pane", paned);
-
-	pw->box = vbox = gtk_vbox_new(FALSE, 5);
+	pane->widget = vbox = gtk_vbox_new(FALSE, 5);
+	pane->box = GTK_BOX(vbox);
 	gtk_paned_add2(paned, vbox);
 
-	pw->titlebox = hbox = gtk_hbox_new(FALSE, 0);
+	g_signal_connect(G_OBJECT(vbox), "destroy",
+			 G_CALLBACK(event_destroy_pane), pane);
+	g_signal_connect(G_OBJECT(vbox), "notify",
+			 G_CALLBACK(event_notify_pane), pane);
+	g_object_set_data(G_OBJECT(vbox), "TabPane", pane);
+
+	hbox = gtk_hbox_new(FALSE, 0);
+	pane->titlebox = GTK_BOX(hbox);
 	gtk_container_set_border_width(GTK_CONTAINER(hbox), 2);
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
 
-	/* close and move/down buttons */
-	button = stock_button_create(GTK_STOCK_CLOSE,
-				     GTK_SIGNAL_FUNC(sig_pane_close), paned);
+	/* close button */
+	button = gui_close_button_new(pane);
 	gtk_box_pack_start(GTK_BOX(hbox), button, FALSE, FALSE, 0);
 
 	space = gtk_label_new(NULL);
 	gtk_widget_set_size_request(space, 5, -1);
 	gtk_box_pack_start(GTK_BOX(hbox), space, FALSE, FALSE, 0);
 
-	button = stock_button_create(GTK_STOCK_GO_UP, GTK_SIGNAL_FUNC(sig_pane_move_up), paned);
-	g_object_set_data(G_OBJECT(paned), "irssi but move up", button);
-	gtk_box_pack_start(GTK_BOX(hbox), button, FALSE, FALSE, 0);
-
-	button = stock_button_create(GTK_STOCK_GO_DOWN, GTK_SIGNAL_FUNC(sig_pane_move_down), paned);
-	g_object_set_data(G_OBJECT(paned), "irssi but move down", button);
+	/* move button */
+	button = gui_move_button_new(tab, pane);
 	gtk_box_pack_start(GTK_BOX(hbox), button, FALSE, FALSE, 0);
 
 	space = gtk_label_new(NULL);
@@ -273,66 +345,81 @@ GtkBox *gui_tab_add_widget(Tab *tab, GtkWidget *widget)
 	gtk_box_pack_start(GTK_BOX(hbox), space, FALSE, FALSE, 0);
 
 	gtk_widget_show_all(vbox);
-	gtk_box_pack_start(GTK_BOX(vbox), widget, TRUE, TRUE, 0);
 
-	if (tab->panes->next == NULL) {
-		/* first pane in tab, don't show up/down buttons */
-		paned_set_move_buttons(GTK_WIDGET(paned), FALSE);
-	} else if (tab->panes->next->next == NULL) {
-		/* second pane in tab, show the old
-		   window's up/down buttons */
-		paned_set_move_buttons(tab->panes->next->data, TRUE);
-	}
-
-	/* add new empty pane */
-	new_paned = gtk_vpaned_new();
-	gtk_paned_add1(paned, new_paned);
-	gtk_widget_show(new_paned);
-
-	g_signal_connect(G_OBJECT(paned), "button_release_event",
-			 G_CALLBACK(event_pane_moved), tab);
-
-	tab->panes = g_list_prepend(tab->panes, new_paned);
-
-	return GTK_BOX(hbox);
+	tab->panes = g_list_prepend(tab->panes, pane);
+	return pane;
 }
 
-void gui_tab_remove_widget(Tab *tab, GtkWidget *widget)
+static void paned_reparent_child(GtkPaned *dest, GtkWidget *child)
 {
-	PanedWidget *pw1, *pw2;
-	GtkPaned *paned;
+	gtk_widget_ref(child);
+	gtk_widget_hide(child);
 
-	paned = g_object_get_data(G_OBJECT(widget), "irssi pane");
-	for (;;) {
-		pw1 = g_object_get_data(G_OBJECT(paned), "irssi paned widget");
-		pw2 = g_object_get_data(G_OBJECT(paned->child1), "irssi paned widget");
+	gtk_container_remove(GTK_CONTAINER(child->parent), child);
+	gtk_paned_add2(dest, child);
 
-		if (pw2 == NULL) {
-			g_assert(pw1->widget == widget);
+	gtk_widget_show(child);
+	gtk_widget_unref(child);
+}
 
-			gtk_widget_destroy(pw1->box);
-			g_free(pw1);
+void gui_tab_pack_panes(Tab *tab)
+{
+	GtkPaned *empty_paned, *paned;
 
-			g_object_set_data(G_OBJECT(paned), "irssi paned widget", NULL);
-			gtk_paned_set_position(GTK_PANED(GTK_WIDGET(paned)->parent), 0);
+	if (tab->destroying || tab->panes == NULL)
+		return;
 
-			paned = GTK_PANED(paned->child1);
-			tab->panes = g_list_remove(tab->panes, paned);
-			gtk_widget_destroy(GTK_WIDGET(paned));
-			break;
+	/* find the first paned with empty child */
+        empty_paned = tab->first_paned;
+	while (empty_paned->child1 != NULL && empty_paned->child2 != NULL)
+		empty_paned = GTK_PANED(empty_paned->child1);
+
+	if (empty_paned->child1 == NULL)
+		return;
+
+	/* find the next paned with a child */
+        paned = empty_paned;
+	while (paned->child1 != NULL && paned->child2 == NULL)
+		paned = GTK_PANED(paned->child1);
+
+	/* now move the childs to highest empty panes */
+	while (paned->child1 != NULL) {
+		if (paned->child2 != NULL) {
+			paned_reparent_child(empty_paned, paned->child2);
+			empty_paned = GTK_PANED(empty_paned->child1);
 		}
-
-		panes_swap(pw1, pw2);
 		paned = GTK_PANED(paned->child1);
 	}
 
-	if (g_list_length(tab->panes) == 2) {
-		/* only one pane left, hide move up/down buttons */
-		paned_set_move_buttons(tab->panes->next->data, FALSE);
-	} else if (tab->panes->next == NULL) {
-		/* last pane, kill the tab */
-                gtk_widget_destroy(tab->widget);
-	}
+	/* now destroy the extra panes */
+	tab->last_paned = empty_paned;
+	g_signal_handlers_disconnect_by_func(tab->last_paned,
+					     G_CALLBACK(event_pane_moved), tab);
+	gtk_widget_destroy(tab->last_paned->child1);
+
+	/* set the paned position at top to 0 */
+	gtk_paned_set_position(GTK_PANED(GTK_WIDGET(tab->last_paned)->parent),
+			       0);
+}
+
+Tab *gui_tab_get_page(Frame *frame, int page)
+{
+	GtkWidget *child;
+
+	child = gtk_notebook_get_nth_page(frame->notebook, page);
+	return child == NULL ? NULL :
+		g_object_get_data(G_OBJECT(child), "Tab");
+}
+
+void gui_tab_set_active(Tab *tab)
+{
+	int page;
+
+	if (tab->frame->destroying)
+		return;
+
+	page = gtk_notebook_page_num(tab->frame->notebook, tab->widget);
+	gtk_notebook_set_current_page(tab->frame->notebook, page);
 }
 
 void gui_tab_set_active_window(Tab *tab, Window *window)
@@ -341,6 +428,7 @@ void gui_tab_set_active_window(Tab *tab, Window *window)
 		tab->active_win = window;
 		gui_tab_set_active_window_item(tab, window);
 	}
+
 	gui_frame_set_active_window(tab->frame, window);
 }
 
@@ -352,10 +440,11 @@ void gui_tab_set_active_window_item(Tab *tab, Window *window)
 	if (tab->destroying)
 		return;
 
-	witem = window->active;
+	witem = window == NULL ? NULL : window->active;
 	if (witem == NULL) {
 		/* empty window */
-		gtk_label_set_text(tab->label, window->name != NULL ?
+		gtk_label_set_text(tab->label,
+				   window != NULL && window->name != NULL ?
 				   window->name : "(empty)");
 	} else {
 		gtk_label_set_text(tab->label, witem->name);
@@ -370,4 +459,38 @@ void gui_tab_set_active_window_item(Tab *tab, Window *window)
 		gui_nicklist_view_set(tab->nicklist, gui->nicklist);
 		gtk_widget_show(tab->nicklist->widget);
 	}
+}
+
+void gui_tab_update_active_window(Tab *tab)
+{
+	Window *window;
+	GList *tmp;
+
+	window = NULL;
+	for (tmp = tab->panes; tmp != NULL; tmp = tmp->next) {
+		TabPane *pane = tmp->data;
+
+		if (pane->view == NULL)
+			continue;
+
+		if (pane->view->window->window == tab->active_win) {
+			window = pane->view->window->window;
+			break;
+		}
+
+		if (window == NULL)
+			window = pane->view->window->window;
+	}
+
+        gui_tab_set_active_window(tab, window);
+}
+
+void gui_tabs_init(void)
+{
+	move_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **) move_xpm);
+}
+
+void gui_tabs_deinit(void)
+{
+	gdk_pixbuf_unref(move_pixbuf);
 }

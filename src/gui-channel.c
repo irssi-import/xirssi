@@ -96,7 +96,7 @@ static void sig_channel_destroyed(Channel *channel)
 		gtk_widget_destroy(title->widget);
 	}
 
-	gui_nicklist_unref(gui->nicklist);
+	gui_nicklist_destroy(gui->nicklist);
 	g_free(gui);
 
 	MODULE_DATA_UNSET(channel);

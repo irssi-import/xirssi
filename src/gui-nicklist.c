@@ -59,7 +59,6 @@ Nicklist *gui_nicklist_new(Channel *channel)
 	GtkListStore *store;
 
 	nicklist = g_new0(Nicklist, 1);
-	nicklist->refcount = 1;
 	nicklist->channel = channel;
 
 	nicklist->store = store =
@@ -76,17 +75,15 @@ Nicklist *gui_nicklist_new(Channel *channel)
 	return nicklist;
 }
 
-void gui_nicklist_ref(Nicklist *nicklist)
+void gui_nicklist_destroy(Nicklist *nicklist)
 {
-	nicklist->refcount++;
-}
-
-void gui_nicklist_unref(Nicklist *nicklist)
-{
-	if (--nicklist->refcount > 0)
-		return;
-
 	signal_emit("gui nicklist destroyed", 1, nicklist);
+
+	while (nicklist->views != NULL) {
+		NicklistView *view = nicklist->views->data;
+		gui_nicklist_view_set(view, NULL);
+		nicklist->views = g_slist_remove(nicklist->views, view);
+	}
 
 	g_object_unref(G_OBJECT(nicklist->store));
 	g_free(nicklist);
@@ -230,6 +227,10 @@ void gui_nicklists_init(void)
 
 void gui_nicklists_deinit(void)
 {
+	gdk_pixbuf_unref(op_pixbuf);
+	gdk_pixbuf_unref(halfop_pixbuf);
+	gdk_pixbuf_unref(voice_pixbuf);
+
 	signal_remove("nicklist new", (SIGNAL_FUNC) gui_nicklist_add);
 	signal_remove("nicklist remove", (SIGNAL_FUNC) gui_nicklist_remove);
 	signal_remove("nicklist changed", (SIGNAL_FUNC) gui_nicklist_changed);

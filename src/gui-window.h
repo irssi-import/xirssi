@@ -24,7 +24,7 @@ struct _WindowGui {
 };
 
 void gui_window_add_view(WindowGui *window, Tab *tab);
-void gui_window_remove_view(WindowGui *window, WindowView *view);
+void gui_window_remove_view(WindowView *view);
 
 void gui_window_update_width(WindowGui *window);
 /* Returns TRUE if window is visible in any of the frames. */

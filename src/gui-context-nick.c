@@ -99,11 +99,6 @@ static Nick *nick_find_first(Server *server, const char *nick)
 	return NULL;
 }
 
-static GtkStatusbar *window_get_statusbar(Window *window)
-{
-	return WINDOW_GUI(window)->active_view->tab->frame->statusbar;
-}
-
 static void sig_window_word(GtkTextTag **tag, WindowGui *window,
 			    Channel *channel, const char *word)
 {
@@ -137,13 +132,13 @@ static void sig_window_enter(Window *window, const char *word, GtkTextTag *tag)
 	if (server != NULL) {
 		nick = nick_find_first(server, word);
 		if (nick != NULL)
-			statusbar_push_nick(window_get_statusbar(window), nick);
+			statusbar_push_nick(active_frame->statusbar, nick);
 	}
 }
 
 static void sig_window_leave(Window *window, const char *word, GtkTextTag *tag)
 {
-	statusbar_pop_nick(window_get_statusbar(window));
+	statusbar_pop_nick(active_frame->statusbar);
 }
 
 static void sig_window_press(Window *window, const char *word,

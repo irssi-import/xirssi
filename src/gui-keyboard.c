@@ -322,7 +322,7 @@ static void key_send_line(const char *data, Entry *entry)
 	}
 	translate_output(str);
 
-	gui_entry_ref(entry);
+	gtk_widget_ref(entry->widget);
 
 	/* str may contain \r or \n chars, split the line from there */
 	do {
@@ -350,8 +350,9 @@ static void key_send_line(const char *data, Entry *entry)
                 g_free(add_history);
 	}
 
-	if (gui_entry_unref(entry))
-		gtk_entry_set_text(entry->entry, "");
+	gtk_entry_set_text(entry->entry, "");
+	gtk_widget_unref(entry->widget);
+
 	command_history_clear_pos(entry->active_win);
 
         g_free(str);
@@ -539,7 +540,10 @@ static void key_change_window(const char *data, Entry *entry)
 
 static void key_change_tab(const char *data, Entry *entry)
 {
-	gtk_notebook_set_current_page(entry->frame->notebook, atoi(data)-1);
+	Frame *frame;
+
+	frame = gui_widget_find_data(entry->widget, "Frame");
+	gtk_notebook_set_current_page(frame->notebook, atoi(data)-1);
 }
 
 void gui_keyboards_init(void)

@@ -36,6 +36,7 @@
 #include "gui-keyboard.h"
 #include "gui-nicklist.h"
 #include "gui-window.h"
+#include "gui-tab.h"
 
 #include <signal.h>
 
@@ -64,6 +65,19 @@ static void sig_exit(void)
 	gtk_main_quit();
 }
 
+void *gui_widget_find_data(GtkWidget *widget, const char *key)
+{
+	void *data;
+
+	for (; widget != NULL; widget = widget->parent) {
+		data = g_object_get_data(G_OBJECT(widget), key);
+		if (data != NULL)
+			return data;
+	}
+
+	return NULL;
+}
+
 static void gui_init(void)
 {
 	irssi_gui = IRSSI_GUI_GTK;
@@ -86,6 +100,7 @@ static void gui_finish_init(void)
 	fe_perl_init();
 #endif
 
+	gui_tabs_init();
 	gui_windows_init();
 	gui_keyboards_init();
 	gui_nicklists_init();
@@ -99,6 +114,7 @@ static void gui_finish_init(void)
 			  (GLogLevelFlags) (G_LOG_LEVEL_CRITICAL |
 					    G_LOG_LEVEL_WARNING),
 			  (GLogFunc) g_log_default_handler, NULL);
+        g_log_set_always_fatal(G_LOG_LEVEL_MASK);
 
 	signal_emit("irssi init finished", 0);
 }
@@ -123,6 +139,7 @@ static void gui_deinit(void)
 	gui_nicklists_deinit();
 	gui_keyboards_deinit();
 	gui_windows_deinit();
+	gui_tabs_deinit();
 
 	//theme_unregister();
 
