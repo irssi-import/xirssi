@@ -5,6 +5,19 @@
 <entry>
 <date>2002-05-04</date>
 <weekday>Saturday</weekday>
+<time>22:06</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-window.c</name>
+<revision>1.9</revision>
+</file>
+<msg>don't set autocreated windows active automatically.
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-04</date>
+<weekday>Saturday</weekday>
 <time>21:55</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
