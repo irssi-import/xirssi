@@ -178,7 +178,7 @@ create_preferences (void)
   GtkWidget *irssicolor_hilight_color;
   GtkWidget *label81;
   GtkWidget *label73;
-  GtkWidget *page_input_settings;
+  GtkWidget *page_filtering_settings;
   GtkWidget *frame18;
   GtkWidget *vbox7;
   GtkWidget *no_filtering;
@@ -1361,15 +1361,15 @@ create_preferences (void)
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 7), label73);
   gtk_label_set_justify (GTK_LABEL (label73), GTK_JUSTIFY_LEFT);
 
-  page_input_settings = gtk_vbox_new (FALSE, 10);
-  gtk_widget_set_name (page_input_settings, "page_input_settings");
-  gtk_widget_show (page_input_settings);
-  gtk_container_add (GTK_CONTAINER (prefs_notebook), page_input_settings);
+  page_filtering_settings = gtk_vbox_new (FALSE, 10);
+  gtk_widget_set_name (page_filtering_settings, "page_filtering_settings");
+  gtk_widget_show (page_filtering_settings);
+  gtk_container_add (GTK_CONTAINER (prefs_notebook), page_filtering_settings);
 
   frame18 = gtk_frame_new (NULL);
   gtk_widget_set_name (frame18, "frame18");
   gtk_widget_show (frame18);
-  gtk_box_pack_start (GTK_BOX (page_input_settings), frame18, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (page_filtering_settings), frame18, FALSE, TRUE, 0);
 
   vbox7 = gtk_vbox_new (FALSE, 3);
   gtk_widget_set_name (vbox7, "vbox7");
@@ -2987,7 +2987,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, irssicolor_hilight_color, "irssicolor_hilight_color");
   GLADE_HOOKUP_OBJECT (preferences, label81, "label81");
   GLADE_HOOKUP_OBJECT (preferences, label73, "label73");
-  GLADE_HOOKUP_OBJECT (preferences, page_input_settings, "page_input_settings");
+  GLADE_HOOKUP_OBJECT (preferences, page_filtering_settings, "page_filtering_settings");
   GLADE_HOOKUP_OBJECT (preferences, frame18, "frame18");
   GLADE_HOOKUP_OBJECT (preferences, vbox7, "vbox7");
   GLADE_HOOKUP_OBJECT (preferences, no_filtering, "no_filtering");
