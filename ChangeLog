@@ -1,3 +1,17 @@
+2002-05-16 08:36  Timo Sirainen <tss@iki.fi>
+
+	* src/setup-prefs.c: fixed sidebar behaviour.
+
+2002-05-16 08:27  Timo Sirainen <tss@iki.fi>
+
+	* pixmaps/themes.png: updated
+
+2002-05-16 08:17  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-frame.c, gui-frame.h, gui-menu-main.c: implemented
+	showing/hiding menubar/statusbar/nicklist - now if only the menubar
+	shows their actual value correctly..
+
 2002-05-16 07:49  Timo Sirainen <tss@iki.fi>
 
 	* TODO, glade/irssi.glade, pixmaps/advanced-logging.png,
