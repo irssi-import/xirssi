@@ -172,9 +172,9 @@ Frame *gui_frame_new(int show)
 			 G_CALLBACK(event_delete), frame);
 	g_signal_connect(G_OBJECT(window), "focus_in_event",
 			 G_CALLBACK(event_focus), frame);
-	g_signal_connect_after(GTK_OBJECT(window), "key_press_event",
+	g_signal_connect_after(G_OBJECT(window), "key_press_event",
 			       G_CALLBACK(event_key_press_after), frame);
-	g_signal_connect(GTK_OBJECT(window), "key_press_event",
+	g_signal_connect(G_OBJECT(window), "key_press_event",
 			 G_CALLBACK(event_key_press), frame);
 
 	gtk_window_set_default_size(frame->window, 700, 400);
@@ -189,7 +189,7 @@ Frame *gui_frame_new(int show)
 
 	/* notebook */
 	notebook = gtk_notebook_new();
-	g_signal_connect(GTK_OBJECT(notebook), "switch_page",
+	g_signal_connect(G_OBJECT(notebook), "switch_page",
 			 G_CALLBACK(event_switch_page), frame);
 	frame->notebook = GTK_NOTEBOOK(notebook);
 	gtk_notebook_set_tab_pos(frame->notebook, GTK_POS_BOTTOM);

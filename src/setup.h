@@ -22,6 +22,8 @@ void setup_apply_changes(Setup *setup);
 /* show the main preferences dialog */
 extern GtkWidget *setup_dialog;
 
+void setup_register_level_button(GtkButton *button, GtkEntry *entry);
+
 void setup_preferences_show(void);
 void setup_preferences_destroy(void);
 

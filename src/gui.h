@@ -15,11 +15,28 @@ void gui_entry_update(GObject *object, const char *name, char **value);
 
 void gui_entry_set_from(GObject *object, const char *key, const char *value);
 void gui_toggle_set_from(GObject *object, const char *key, gboolean value);
+void gui_spin_set_from(GObject *object, const char *key, int value);
 
+/* GtkTreeView helper functions */
+
+/* Returns TRUE if row should be deleted */
+typedef gboolean (*TreeSelectionDeleteFunc) (GtkTreeModel *, GtkTreeIter *,
+					     GtkTreePath *, void *user_data);
+
+/* Return GtkTreePaths for all selected rows */
+GSList *gui_tree_selection_get_paths(GtkTreeView *view);
+
+/* Delete selected rows. If func is NULL, all selected rows are deleted. */
+void gui_tree_selection_delete(GtkTreeModel *model, GtkTreeView *view,
+			       TreeSelectionDeleteFunc func, void *user_data);
+
+/* Sort function for case-insensitive sorting */
 gint gui_tree_strcase_sort_func(GtkTreeModel *model,
 				GtkTreeIter *a, GtkTreeIter *b,
 				gpointer user_data);
 
-GSList *gui_tree_selection_get_paths(GtkTreeView *view);
+/* Find GtkTreeIter for specified data */
+gboolean gui_tree_model_find(GtkTreeModel *model, int column,
+			     GtkTreeIter *iter, void *data);
 
 #endif

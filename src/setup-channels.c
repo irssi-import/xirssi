@@ -203,6 +203,7 @@ static gboolean store_find_network_func(GtkTreeModel *model, GtkTreePath *path,
 		rec->found = TRUE;
 		memcpy(rec->iter, iter, sizeof(GtkTreeIter));
 	}
+	g_free(iter_name);
 
 	return rec->found;
 }
@@ -255,7 +256,6 @@ static void store_setup_channel(GtkTreeStore *store, GtkTreeIter *iter,
 {
 	gtk_tree_store_set(store, iter,
 			   COL_PTR, channel,
-			   COL_AUTOJOIN, channel->autojoin,
 			   COL_NAME, channel->name,
 			   -1);
 }
@@ -277,8 +277,9 @@ static void channel_store_fill(GtkTreeStore *store)
 						channel->chatnet)) {
 				/* unknown network, create it */
 				gtk_tree_store_append(store, &net_iter, NULL);
-				gtk_tree_store_set(store, &net_iter, COL_NAME,
-						   channel->chatnet, -1);
+				gtk_tree_store_set(store, &net_iter,
+						   COL_NAME, channel->chatnet,
+						   -1);
 			}
 
 			gtk_tree_store_append(store, &iter, &net_iter);
@@ -294,21 +295,17 @@ static void autojoin_toggled(GtkCellRendererToggle *cell, char *path_string)
 	GtkTreeIter iter;
 	GtkTreePath *path;
 	ChannelConfig *channel;
-	gboolean active;
 
 	model = GTK_TREE_MODEL(channel_store);
 	path = gtk_tree_path_new_from_string(path_string);
 
-	active = !gtk_cell_renderer_toggle_get_active(cell);
-
-	/* update store */
-	gtk_tree_model_get_iter(model, &iter, path);
-	gtk_tree_store_set(channel_store, &iter,
-			   COL_AUTOJOIN, active, -1);
-
 	/* update config */
+	gtk_tree_model_get_iter(model, &iter, path);
 	gtk_tree_model_get(model, &iter, COL_PTR, &channel, -1);
-	channel->autojoin = active;
+	channel->autojoin = !gtk_cell_renderer_toggle_get_active(cell);
+
+	/* update tree view */
+        gtk_tree_model_row_changed(model, path, &iter);
 }
 
 static void autojoin_set_func(GtkTreeViewColumn *column,
@@ -360,7 +357,7 @@ void setup_channels_init(GtkWidget *dialog)
         channel_store_fill(channel_store);
 
 	/* view */
-	tree_view = g_object_get_data(G_OBJECT(dialog), "channels_tree");
+	tree_view = g_object_get_data(G_OBJECT(dialog), "channel_tree");
 	g_signal_connect(G_OBJECT(tree_view), "button_press_event",
 			 G_CALLBACK(event_button_press), NULL);
 
@@ -446,8 +443,9 @@ static void sig_channel_added(ChannelConfig *channel)
 		else {
 			/* create the network */
 			gtk_tree_store_append(channel_store, &parent, NULL);
-			gtk_tree_store_set(channel_store, &parent, COL_NAME,
-					   channel->chatnet, -1);
+			gtk_tree_store_set(channel_store, &parent,
+					   COL_NAME, channel->chatnet,
+					   -1);
 			gtk_tree_store_append(channel_store, &iter, &parent);
 		}
 	}
@@ -469,8 +467,9 @@ static void sig_network_added(NetworkConfig *network)
 
 	if (!store_find_network(channel_store, &iter, network->name))
 		gtk_tree_store_append(channel_store, &iter, NULL);
-	gtk_tree_store_set(channel_store, &iter, COL_NAME,
-			   network->name, -1);
+	gtk_tree_store_set(channel_store, &iter,
+			   COL_NAME, network->name,
+			   -1);
 }
 
 static int network_has_channels(const char *network)

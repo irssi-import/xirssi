@@ -6,3 +6,4 @@ GtkWidget* create_preferences (void);
 GtkWidget* create_dialog_network_settings (void);
 GtkWidget* create_dialog_server_settings (void);
 GtkWidget* create_dialog_channel_settings (void);
+GtkWidget* create_dialog_ignore_settings (void);

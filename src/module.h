@@ -20,6 +20,8 @@ typedef struct _CHATNET_REC NetworkConfig;
 typedef struct _SERVER_SETUP_REC ServerConfig;
 typedef struct _CHANNEL_SETUP_REC ChannelConfig;
 
+typedef struct _IGNORE_REC Ignore;
+
 typedef struct _Entry Entry;
 typedef struct _Frame Frame;
 typedef struct _Itemlist Itemlist;

@@ -19,6 +19,7 @@
 */
 
 #include "module.h"
+#include "gui.h"
 
 void gui_popup_error(const char *format, ...)
 {
@@ -90,25 +91,12 @@ void gui_toggle_set_from(GObject *object, const char *key, gboolean value)
 	gtk_toggle_button_set_active(toggle, value);
 }
 
-gint gui_tree_strcase_sort_func(GtkTreeModel *model,
-				GtkTreeIter *a, GtkTreeIter *b,
-				gpointer user_data)
+void gui_spin_set_from(GObject *object, const char *key, int value)
 {
-	int column = GPOINTER_TO_INT(user_data);
-	GValue a_value = { 0, };
-	GValue b_value = { 0, };
-	int ret;
+	GtkSpinButton *spin;
 
-	gtk_tree_model_get_value(model, a, column, &a_value);
-	gtk_tree_model_get_value(model, b, column, &b_value);
-
-	ret = strcasecmp(g_value_get_string(&a_value),
-			 g_value_get_string(&b_value));
-
-	g_value_unset(&a_value);
-	g_value_unset(&b_value);
-
-	return ret;
+	spin = g_object_get_data(object, key);
+	gtk_spin_button_set_value(spin, value);
 }
 
 static void selection_get_paths(GtkTreeModel *model, GtkTreePath *path,
@@ -130,4 +118,101 @@ GSList *gui_tree_selection_get_paths(GtkTreeView *view)
 	gtk_tree_selection_selected_foreach(sel, selection_get_paths, &paths);
 
 	return paths;
+}
+
+void gui_tree_selection_delete(GtkTreeModel *model, GtkTreeView *view,
+			       TreeSelectionDeleteFunc func, void *user_data)
+{
+	GtkTreeIter iter;
+	GSList *paths;
+	int liststore;
+
+	g_return_if_fail(model != NULL);
+	g_return_if_fail(view != NULL);
+
+	if (GTK_IS_LIST_STORE(model))
+		liststore = TRUE;
+	else if (GTK_IS_TREE_STORE(model))
+		liststore = FALSE;
+	else {
+		g_warning("gui_tree_selection_delete(): unknown tree model");
+		return;
+	}
+
+	paths =  gui_tree_selection_get_paths(view);
+	while (paths != NULL) {
+		GtkTreePath *path = paths->data;
+
+		/* remove from tree */
+		gtk_tree_model_get_iter(model, &iter, path);
+		if (func == NULL || func(model, &iter, path, user_data)) {
+			if (liststore) {
+				gtk_list_store_remove(GTK_LIST_STORE(model),
+						      &iter);
+			} else {
+				gtk_tree_store_remove(GTK_TREE_STORE(model),
+						      &iter);
+			}
+		}
+
+		paths = g_slist_remove(paths, path);
+		gtk_tree_path_free(path);
+	}
+}
+
+gint gui_tree_strcase_sort_func(GtkTreeModel *model,
+				GtkTreeIter *a, GtkTreeIter *b,
+				gpointer user_data)
+{
+	int column = GPOINTER_TO_INT(user_data);
+	GValue a_value = { 0, };
+	GValue b_value = { 0, };
+	int ret;
+
+	gtk_tree_model_get_value(model, a, column, &a_value);
+	gtk_tree_model_get_value(model, b, column, &b_value);
+
+	ret = strcasecmp(g_value_get_string(&a_value),
+			 g_value_get_string(&b_value));
+
+	g_value_unset(&a_value);
+	g_value_unset(&b_value);
+
+	return ret;
+}
+
+typedef struct {
+	gboolean found;
+	int column;
+	GtkTreeIter *iter;
+	void *data;
+} StoreFind;
+
+static gboolean store_find_func(GtkTreeModel *model, GtkTreePath *path,
+				GtkTreeIter *iter, gpointer data)
+{
+	StoreFind *rec = data;
+	void *iter_data;
+
+	gtk_tree_model_get(model, iter, rec->column, &iter_data, -1);
+	if (iter_data == rec->data) {
+		rec->found = TRUE;
+		memcpy(rec->iter, iter, sizeof(GtkTreeIter));
+	}
+
+	return rec->found;
+}
+
+gboolean gui_tree_model_find(GtkTreeModel *model, int column,
+			     GtkTreeIter *iter, void *data)
+{
+	StoreFind rec;
+
+	rec.found = FALSE;
+	rec.column = column;
+	rec.iter = iter;
+	rec.data = data;
+	gtk_tree_model_foreach(model, store_find_func, &rec);
+
+	return rec.found;
 }

@@ -28,6 +28,7 @@ void setup_servers_init(GtkWidget *dialog);
 void setup_channels_init(GtkWidget *dialog);
 void setup_aliases_init(GtkWidget *dialog);
 void setup_completions_init(GtkWidget *dialog);
+void setup_ignores_init(GtkWidget *dialog);
 
 typedef struct {
 	const char *name;
@@ -62,7 +63,7 @@ static SetupPrefs prefs[] = {
 	{ "Keyboard",		"page_keyboard", &keyboard_pixbuf },
 
 	{ "Window Input" },
-	{ "Ignores",		"page_ignores", &ignores_pixbuf },
+	{ "Ignores",		"page_ignores", &ignores_pixbuf, setup_ignores_init },
 	{ "Highlighting",	"page_highlighting", &highlighting_pixbuf },
 	{ "Settings",		"page_input_settings", &input_sets_pixbuf },
 
@@ -73,6 +74,11 @@ static SetupPrefs prefs[] = {
 };
 
 GtkWidget *setup_dialog;
+
+void setup_register_level_button(GtkButton *button, GtkEntry *entry)
+{
+	/* FIXME: */
+}
 
 static gboolean event_destroy(GtkWidget *widget, Setup *setup)
 {

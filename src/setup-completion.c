@@ -233,7 +233,8 @@ static gboolean event_add_completion(GtkWidget *widget, GtkTreeView *tree_view)
 	gtk_tree_store_prepend(completion_store, &iter, NULL);
 	gtk_tree_store_set(completion_store, &iter,
 			   COL_KEY, "<key>",
-			   COL_VALUE, "<value>", -1);
+			   COL_VALUE, "<value>",
+			   -1);
 
 	path = gtk_tree_model_get_path(GTK_TREE_MODEL(completion_store), &iter);
 
@@ -246,32 +247,24 @@ static gboolean event_add_completion(GtkWidget *widget, GtkTreeView *tree_view)
 	return FALSE;
 }
 
+static gboolean remove_iter_func(GtkTreeModel *model, GtkTreeIter *iter,
+				 GtkTreePath *path, void *user_data)
+{
+	char *key;
+
+	/* remove from config */
+	gtk_tree_model_get(model, iter, COL_KEY, &key, -1);
+	iconfig_set_str("completions", key, NULL);
+	g_free(key);
+
+	return TRUE;
+}
+
 static gboolean event_remove_completion(GtkWidget *widget,
 					GtkTreeView *tree_view)
 {
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	GSList *paths;
-	char *key;
-
-	model = GTK_TREE_MODEL(completion_store);
-
-	paths =  gui_tree_selection_get_paths(tree_view);
-	while (paths != NULL) {
-		GtkTreePath *path = paths->data;
-
-		/* remove from tree */
-		gtk_tree_model_get_iter(model, &iter, path);
-		gtk_tree_model_get(model, &iter, COL_KEY, &key, -1);
-		gtk_tree_store_remove(completion_store, &iter);
-
-		/* remove from config */
-		iconfig_set_str("completions", key, NULL);
-		g_free(key);
-
-		paths = g_slist_remove(paths, path);
-		gtk_tree_path_free(path);
-	}
+	gui_tree_selection_delete(GTK_TREE_MODEL(completion_store), tree_view,
+				  remove_iter_func, NULL);
 	return FALSE;
 }
 
@@ -293,7 +286,7 @@ void setup_completions_init(GtkWidget *dialog)
 	gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(completion_store), 0,
 					gui_tree_strcase_sort_func, NULL, NULL);
 	gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(completion_store),
-					     0, GTK_SORT_ASCENDING);
+					     COL_KEY, GTK_SORT_ASCENDING);
 	completion_store_fill(completion_store);
 
 	/* view */

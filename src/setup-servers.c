@@ -138,7 +138,7 @@ static int fix_tree_networks(NetworkConfig *network)
 	gtk_tree_store_insert_before(server_store, &new_iter, NULL, &iter);
 	gtk_tree_store_set(server_store, &new_iter,
 			   COL_PTR, network,
-			   COL_NAME, network->name,
+			   //COL_NAME, network->name,
 			   -1);
 	return 0;
 }
@@ -306,26 +306,19 @@ static void store_setup_network(GtkTreeStore *store, GtkTreeIter *iter,
 {
 	gtk_tree_store_set(store, iter,
 			   COL_PTR, network,
-			   COL_NAME, network->name,
-			   COL_PROTOCOL, CHAT_PROTOCOL(network)->name,
+			   //COL_NAME, network->name,
+			   //COL_PROTOCOL, CHAT_PROTOCOL(network)->name,
 			   -1);
 }
 
 static void store_setup_server(GtkTreeStore *store, GtkTreeIter *iter,
 			       ServerConfig *server)
 {
-	char port[MAX_INT_STRLEN];
-
-	if (server->port <= 0)
-		port[0] = '\0';
-	else
-		ltoa(port, server->port);
-
 	gtk_tree_store_set(store, iter,
 			   COL_PTR, server,
-			   COL_NAME, server->address,
-			   COL_PORT, port,
-			   COL_PROTOCOL, CHAT_PROTOCOL(server)->name,
+			   //COL_NAME, server->address,
+			   //COL_PORT, port,
+			   //COL_PROTOCOL, CHAT_PROTOCOL(server)->name,
 			   -1);
 }
 
@@ -400,21 +393,17 @@ static void autoconnect_toggled(GtkCellRendererToggle *cell, char *path_string)
 	GtkTreeIter iter;
 	GtkTreePath *path;
 	ServerConfig *server;
-	gboolean active;
 
 	model = GTK_TREE_MODEL(server_store);
 	path = gtk_tree_path_new_from_string(path_string);
 
-	active = !gtk_cell_renderer_toggle_get_active(cell);
-
-	/* update store */
-	gtk_tree_model_get_iter(model, &iter, path);
-	gtk_tree_store_set(server_store, &iter,
-			   COL_AUTOCONNECT, active, -1);
-
 	/* update config */
+	gtk_tree_model_get_iter(model, &iter, path);
 	gtk_tree_model_get(model, &iter, COL_PTR, &server, -1);
-	server->autoconnect = active;
+	server->autoconnect = !gtk_cell_renderer_toggle_get_active(cell);
+
+	/* update tree view */
+        gtk_tree_model_row_changed(model, path, &iter);
 }
 
 static void autoconnect_set_func(GtkTreeViewColumn *column,
@@ -434,18 +423,61 @@ static void autoconnect_set_func(GtkTreeViewColumn *column,
 		     NULL);
 }
 
-static void server_set_func(GtkTreeViewColumn *column,
-			    GtkCellRenderer   *cell,
-			    GtkTreeModel      *model,
-			    GtkTreeIter       *iter,
-			    gpointer           data)
+static void name_set_func(GtkTreeViewColumn *column,
+			  GtkCellRenderer   *cell,
+			  GtkTreeModel      *model,
+			  GtkTreeIter       *iter,
+			  gpointer           data)
 {
+	const char *name;
 	void *iter_data;
 
 	gtk_tree_model_get(model, iter, COL_PTR, &iter_data, -1);
 
+	name = IS_CHATNET(iter_data) ? CHATNET(iter_data)->name :
+		SERVER_SETUP(iter_data)->address;
 	g_object_set(G_OBJECT(cell),
+		     "text", name,
 		     "weight", IS_CHATNET(iter_data) ? PANGO_WEIGHT_BOLD : 0,
+		     NULL);
+}
+
+static void port_set_func(GtkTreeViewColumn *column,
+			  GtkCellRenderer   *cell,
+			  GtkTreeModel      *model,
+			  GtkTreeIter       *iter,
+			  gpointer           data)
+{
+	ServerConfig *server;
+	char port[MAX_INT_STRLEN];
+	void *iter_data;
+
+	gtk_tree_model_get(model, iter, COL_PTR, &iter_data, -1);
+	server = SERVER_SETUP(iter_data);
+
+	if (server == NULL || server->port <= 0)
+		port[0] = '\0';
+	else
+		ltoa(port, server->port);
+
+	g_object_set(G_OBJECT(cell),
+		     "text", port,
+		     NULL);
+}
+
+static void protocol_set_func(GtkTreeViewColumn *column,
+			      GtkCellRenderer   *cell,
+			      GtkTreeModel      *model,
+			      GtkTreeIter       *iter,
+			      gpointer           data)
+{
+	void *iter_data;
+
+	gtk_tree_model_get(model, iter, COL_PTR, &iter_data, -1);
+	/* NOTE: casting is "wrong" but it doesn't matter, we just need
+	   the chat_type which is always at same position */
+	g_object_set(G_OBJECT(cell),
+		     "text", CHAT_PROTOCOL((ServerConfig *) iter_data)->name,
 		     NULL);
 }
 
@@ -471,7 +503,7 @@ void setup_servers_init(GtkWidget *dialog)
         server_store_fill(server_store);
 
 	/* view */
-	tree_view = g_object_get_data(G_OBJECT(dialog), "servers_tree");
+	tree_view = g_object_get_data(G_OBJECT(dialog), "server_tree");
 	g_signal_connect(G_OBJECT(tree_view), "button_press_event",
 			 G_CALLBACK(event_button_press), NULL);
 
@@ -499,20 +531,25 @@ void setup_servers_init(GtkWidget *dialog)
 							  "text", COL_NAME,
 							  NULL);
 	gtk_tree_view_column_set_cell_data_func(column, renderer,
-						server_set_func, NULL, NULL);
-	gtk_tree_view_append_column(tree_view, column);
+						name_set_func, NULL, NULL);
 	gtk_tree_view_column_set_min_width(column, 150);
+	gtk_tree_view_append_column(tree_view, column);
+        gtk_tree_view_set_expander_column(tree_view, column);
 
 	/* -- */
 	column = gtk_tree_view_column_new_with_attributes("Port", renderer,
 							  "text", COL_PORT,
 							  NULL);
+	gtk_tree_view_column_set_cell_data_func(column, renderer,
+						port_set_func, NULL, NULL);
 	gtk_tree_view_append_column(tree_view, column);
 
 	/* -- */
 	column = gtk_tree_view_column_new_with_attributes("Protocol", renderer,
 							  "text", COL_PROTOCOL,
 							  NULL);
+	gtk_tree_view_column_set_cell_data_func(column, renderer,
+						protocol_set_func, NULL, NULL);
 	gtk_tree_view_append_column(tree_view, column);
 
 	/* buttons */

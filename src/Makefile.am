@@ -60,6 +60,8 @@ xirssi_SOURCES = \
 	setup-channels.c \
 	setup-channels-edit.c \
 	setup-completion.c \
+	setup-ignores.c \
+	setup-ignores-edit.c \
 	setup-prefs.c \
 	setup-servers.c \
 	setup-servers-network.c \
