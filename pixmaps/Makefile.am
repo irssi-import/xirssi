@@ -12,7 +12,8 @@ xpm_pixmaps = \
 	arrow-up-twist.xpm \
 	arrow-left.xpm \
 	arrow-right-twist.xpm \
-	detach-box.xpm
+	detach-box.xpm \
+	move.xpm
 
 pixmaps = \
 	$(xpm_pixmaps) \
