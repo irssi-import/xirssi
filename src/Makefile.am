@@ -30,6 +30,7 @@ xirssi_SOURCES = \
 	gui-keyboard.c \
 	gui-menu.c \
 	gui-menu-nick.c \
+	gui-menu-url.c \
 	gui-nicklist.c \
 	gui-nicklist-view.c \
 	gui-tab.c \
@@ -44,7 +45,6 @@ noinst_HEADERS = \
 	gui-entry.h \
 	gui-frame.h \
 	gui-menu.h \
-	gui-menu-nick.h \
 	gui-nicklist.h \
 	gui-nicklist-view.h \
 	gui-tab.h \

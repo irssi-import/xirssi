@@ -114,6 +114,5 @@ void gui_menu_nick_popup(Server *server, Channel *channel,
 		      G_CALLBACK(menu_callback), menu);
 
 	gtk_widget_show_all(menu);
-	gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL,
-		       button, 0);
+	gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, button, 0);
 }

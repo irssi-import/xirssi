@@ -30,7 +30,7 @@
 #include "gui-window-view.h"
 #include "gui-window-context.h"
 #include "gui-nicklist-view.h"
-#include "gui-menu-nick.h"
+#include "gui-menu.h"
 
 #define STATUSBAR_CONTEXT "context nick"
 

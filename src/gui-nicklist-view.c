@@ -25,7 +25,7 @@
 #include "gui-tab.h"
 #include "gui-nicklist.h"
 #include "gui-nicklist-view.h"
-#include "gui-menu-nick.h"
+#include "gui-menu.h"
 
 static gboolean event_destroy(GtkWidget *widget, NicklistView *view)
 {

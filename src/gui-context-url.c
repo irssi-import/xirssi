@@ -20,9 +20,11 @@
 
 #include "module.h"
 #include "signals.h"
+#include "settings.h"
 
 #include "gui-window.h"
 #include "gui-window-context.h"
+#include "gui-menu.h"
 
 static void sig_window_word(GtkTextTag **tag, WindowGui *window,
 			    Channel *channel, const char *word)
@@ -41,13 +43,16 @@ static void sig_window_word(GtkTextTag **tag, WindowGui *window,
 static void sig_window_press(Window *window, const char *word, GtkTextTag *tag,
 			     GdkEventButton *event)
 {
-	if (event->button != 3)
-		return;
-
+	if (event->button == 3)
+		gui_menu_url_popup(word, event->button);
 }
 
 void gui_context_url_init(void)
 {
+	settings_add_str("misc", "http_handler", "galeon $0");
+	settings_add_str("misc", "ftp_handler", "galeon $0");
+	settings_add_str("misc", "mail_handler", "xterm -e mutt $0");
+
         signal_add("gui window context word", (SIGNAL_FUNC) sig_window_word);
 	signal_add("gui window context press", (SIGNAL_FUNC) sig_window_press);
 }
