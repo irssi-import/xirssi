@@ -181,13 +181,12 @@ create_preferences (void)
   GtkWidget *page_input_settings;
   GtkWidget *frame18;
   GtkWidget *vbox7;
-  GtkWidget *emphasis;
-  GtkWidget *bell_beeps;
-  GtkWidget *hseparator2;
   GtkWidget *no_filtering;
   GSList *no_filtering_group = NULL;
   GtkWidget *hide_colors;
   GtkWidget *hide_text_style;
+  GtkWidget *hseparator32;
+  GtkWidget *bell_beeps;
   GtkWidget *label58;
   GtkWidget *label95;
   GtkWidget *page_windows;
@@ -285,6 +284,11 @@ create_preferences (void)
   GtkWidget *show_nickmode;
   GtkWidget *Show_nick_s_channel_status_before_nickname_in_public_msgs;
   GtkWidget *label77;
+  GtkWidget *frame48;
+  GtkWidget *vbox18;
+  GtkWidget *emphasis;
+  GtkWidget *show_names_on_join;
+  GtkWidget *label205;
   GtkWidget *label103;
   GtkWidget *page_irc_dcc;
   GtkWidget *frame34;
@@ -1357,7 +1361,7 @@ create_preferences (void)
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 7), label73);
   gtk_label_set_justify (GTK_LABEL (label73), GTK_JUSTIFY_LEFT);
 
-  page_input_settings = gtk_vbox_new (FALSE, 0);
+  page_input_settings = gtk_vbox_new (FALSE, 10);
   gtk_widget_set_name (page_input_settings, "page_input_settings");
   gtk_widget_show (page_input_settings);
   gtk_container_add (GTK_CONTAINER (prefs_notebook), page_input_settings);
@@ -1372,21 +1376,6 @@ create_preferences (void)
   gtk_widget_show (vbox7);
   gtk_container_add (GTK_CONTAINER (frame18), vbox7);
   gtk_container_set_border_width (GTK_CONTAINER (vbox7), 7);
-
-  emphasis = gtk_check_button_new_with_mnemonic ("Expand __underlining__ and *bolding*");
-  gtk_widget_set_name (emphasis, "emphasis");
-  gtk_widget_show (emphasis);
-  gtk_box_pack_start (GTK_BOX (vbox7), emphasis, FALSE, FALSE, 0);
-
-  bell_beeps = gtk_check_button_new_with_mnemonic ("Beep when received a BELL character (^G)");
-  gtk_widget_set_name (bell_beeps, "bell_beeps");
-  gtk_widget_show (bell_beeps);
-  gtk_box_pack_start (GTK_BOX (vbox7), bell_beeps, FALSE, FALSE, 0);
-
-  hseparator2 = gtk_hseparator_new ();
-  gtk_widget_set_name (hseparator2, "hseparator2");
-  gtk_widget_show (hseparator2);
-  gtk_box_pack_start (GTK_BOX (vbox7), hseparator2, TRUE, TRUE, 7);
 
   no_filtering = gtk_radio_button_new_with_mnemonic (NULL, "No filtering");
   gtk_widget_set_name (no_filtering, "no_filtering");
@@ -1409,7 +1398,17 @@ create_preferences (void)
   gtk_radio_button_set_group (GTK_RADIO_BUTTON (hide_text_style), no_filtering_group);
   no_filtering_group = gtk_radio_button_group (GTK_RADIO_BUTTON (hide_text_style));
 
-  label58 = gtk_label_new ("Input Mangling");
+  hseparator32 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator32, "hseparator32");
+  gtk_widget_show (hseparator32);
+  gtk_box_pack_start (GTK_BOX (vbox7), hseparator32, FALSE, TRUE, 7);
+
+  bell_beeps = gtk_check_button_new_with_mnemonic ("Beep when received a BELL character (^G)");
+  gtk_widget_set_name (bell_beeps, "bell_beeps");
+  gtk_widget_show (bell_beeps);
+  gtk_box_pack_start (GTK_BOX (vbox7), bell_beeps, FALSE, FALSE, 0);
+
+  label58 = gtk_label_new ("Filtering");
   gtk_widget_set_name (label58, "label58");
   gtk_widget_show (label58);
   gtk_frame_set_label_widget (GTK_FRAME (frame18), label58);
@@ -2005,6 +2004,33 @@ create_preferences (void)
   gtk_widget_show (label77);
   gtk_frame_set_label_widget (GTK_FRAME (frame30), label77);
   gtk_label_set_justify (GTK_LABEL (label77), GTK_JUSTIFY_LEFT);
+
+  frame48 = gtk_frame_new (NULL);
+  gtk_widget_set_name (frame48, "frame48");
+  gtk_widget_show (frame48);
+  gtk_box_pack_start (GTK_BOX (page_window_output), frame48, FALSE, TRUE, 0);
+
+  vbox18 = gtk_vbox_new (FALSE, 2);
+  gtk_widget_set_name (vbox18, "vbox18");
+  gtk_widget_show (vbox18);
+  gtk_container_add (GTK_CONTAINER (frame48), vbox18);
+  gtk_container_set_border_width (GTK_CONTAINER (vbox18), 7);
+
+  emphasis = gtk_check_button_new_with_mnemonic ("Expand __underlining__ and *bolding*");
+  gtk_widget_set_name (emphasis, "emphasis");
+  gtk_widget_show (emphasis);
+  gtk_box_pack_start (GTK_BOX (vbox18), emphasis, FALSE, FALSE, 0);
+
+  show_names_on_join = gtk_check_button_new_with_mnemonic ("Show /NAMES list when joining to channel");
+  gtk_widget_set_name (show_names_on_join, "show_names_on_join");
+  gtk_widget_show (show_names_on_join);
+  gtk_box_pack_start (GTK_BOX (vbox18), show_names_on_join, FALSE, FALSE, 0);
+
+  label205 = gtk_label_new ("Misc");
+  gtk_widget_set_name (label205, "label205");
+  gtk_widget_show (label205);
+  gtk_frame_set_label_widget (GTK_FRAME (frame48), label205);
+  gtk_label_set_justify (GTK_LABEL (label205), GTK_JUSTIFY_LEFT);
 
   label103 = gtk_label_new ("");
   gtk_widget_set_name (label103, "label103");
@@ -2964,12 +2990,11 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, page_input_settings, "page_input_settings");
   GLADE_HOOKUP_OBJECT (preferences, frame18, "frame18");
   GLADE_HOOKUP_OBJECT (preferences, vbox7, "vbox7");
-  GLADE_HOOKUP_OBJECT (preferences, emphasis, "emphasis");
-  GLADE_HOOKUP_OBJECT (preferences, bell_beeps, "bell_beeps");
-  GLADE_HOOKUP_OBJECT (preferences, hseparator2, "hseparator2");
   GLADE_HOOKUP_OBJECT (preferences, no_filtering, "no_filtering");
   GLADE_HOOKUP_OBJECT (preferences, hide_colors, "hide_colors");
   GLADE_HOOKUP_OBJECT (preferences, hide_text_style, "hide_text_style");
+  GLADE_HOOKUP_OBJECT (preferences, hseparator32, "hseparator32");
+  GLADE_HOOKUP_OBJECT (preferences, bell_beeps, "bell_beeps");
   GLADE_HOOKUP_OBJECT (preferences, label58, "label58");
   GLADE_HOOKUP_OBJECT (preferences, label95, "label95");
   GLADE_HOOKUP_OBJECT (preferences, page_windows, "page_windows");
@@ -3066,6 +3091,11 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, show_nickmode, "show_nickmode");
   GLADE_HOOKUP_OBJECT (preferences, Show_nick_s_channel_status_before_nickname_in_public_msgs, "Show_nick_s_channel_status_before_nickname_in_public_msgs");
   GLADE_HOOKUP_OBJECT (preferences, label77, "label77");
+  GLADE_HOOKUP_OBJECT (preferences, frame48, "frame48");
+  GLADE_HOOKUP_OBJECT (preferences, vbox18, "vbox18");
+  GLADE_HOOKUP_OBJECT (preferences, emphasis, "emphasis");
+  GLADE_HOOKUP_OBJECT (preferences, show_names_on_join, "show_names_on_join");
+  GLADE_HOOKUP_OBJECT (preferences, label205, "label205");
   GLADE_HOOKUP_OBJECT (preferences, label103, "label103");
   GLADE_HOOKUP_OBJECT (preferences, page_irc_dcc, "page_irc_dcc");
   GLADE_HOOKUP_OBJECT (preferences, frame34, "frame34");

@@ -64,12 +64,12 @@ static SetupPrefs prefs[] = {
 	{ "Aliases",		"page_aliases", &aliases_pixbuf, setup_aliases_init },
 	{ "Keyboard",		"page_keyboard", &keyboard_pixbuf, setup_keyboard_init },
 
-	{ "Window Input" },
+	{ "Filtering" },
 	{ "Ignores",		"page_ignores", &ignores_pixbuf, setup_ignores_init },
-	{ "Highlighting",	"page_highlighting", &highlighting_pixbuf, setup_highlighting_init },
 	{ "Settings",		"page_input_settings", &input_sets_pixbuf },
 
 	{ "Appearance" },
+	{ "Highlighting",	"page_highlighting", &highlighting_pixbuf, setup_highlighting_init },
 	{ "Window Output",	"page_window_output", &window_output_pixbuf },
 	{ "Fonts & Colors",	"page_fontscolors", &fontscolors_pixbuf },
 	{ "Themes",		"page_themes", &themes_pixbuf }
