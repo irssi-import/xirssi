@@ -1,3 +1,11 @@
+2002-05-11 05:24  Timo Sirainen <tss@iki.fi>
+
+	* TODO: updated
+
+2002-05-11 05:04  Timo Sirainen <tss@iki.fi>
+
+	* src/setup-servers.c: show networks with bold
+
 2002-05-11 05:00  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-window.c: when destroying last tab in frame, destroy the
