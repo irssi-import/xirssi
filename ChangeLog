@@ -1,3 +1,22 @@
+2002-05-18 22:27  Timo Sirainen <tss@iki.fi>
+
+	* AUTHORS, TODO: updates
+
+2002-05-18 22:25  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-frame.c: notebooks are now scrollable so they won't limit
+	the minimum width of window.
+
+2002-05-18 22:05  Timo Sirainen <tss@iki.fi>
+
+	* glade/irssi.glade, src/Makefile.am, src/gui-frame.c,
+	src/gui-keyboard.c, src/gui-keyboard.h, src/module.h,
+	src/setup-channels-edit.c, src/setup-channels.c,
+	src/setup-highlighting-edit.c, src/setup-ignores-edit.c,
+	src/setup-keyboard-edit.c, src/setup-keyboard.c, src/setup-prefs.c,
+	src/glade/interface.c, src/glade/interface.h: keyboard settings and
+	cleanups.
+
 2002-05-18 19:51  Timo Sirainen <tss@iki.fi>
 
 	* glade/irssi.glade, src/Makefile.am, src/gui.c, src/gui.h,
