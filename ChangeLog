@@ -1,3 +1,7 @@
+2002-08-11 10:31  Timo Sirainen <tss@iki.fi>
+
+	* configure.in: --with-irssi-lib was buggy.
+
 2002-08-10 09:30  Timo Sirainen <tss@iki.fi>
 
 	* configure.in: Added --with-irssi-lib option to specify where
