@@ -1,3 +1,14 @@
+2002-05-05 00:51  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-itemlist.c: don't show itemlist if there's only one
+	window item in tab.
+
+2002-05-05 00:37  Timo Sirainen <tss@iki.fi>
+
+	* src/: Makefile.am, gui-frame.c, gui-frame.h, gui-itemlist.c,
+	gui-itemlist.h, gui-keyboard.c, gui-tab-move.c, gui-tab.c, irssi.c,
+	module.h: added itemlist + some other minor fixes.
+
 2002-05-04 22:06  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-window.c: don't set autocreated windows active
