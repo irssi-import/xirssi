@@ -5,6 +5,19 @@
 <entry>
 <date>2002-04-30</date>
 <weekday>Tuesday</weekday>
+<time>17:05</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-tab-label.c</name>
+<revision>1.3</revision>
+</file>
+<msg>crashfix
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-30</date>
+<weekday>Tuesday</weekday>
 <time>04:30</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
