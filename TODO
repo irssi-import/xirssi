@@ -1,11 +1,24 @@
 
 BUGS:
+ - alt-a leaves focus to previous window (mjr)
+ - pressing 3 keys at the same time:
+18:13 <@joose> cras: ** (xirssi:11740): CRITICAL **: file keyboard.c: line 563 
+               (key_pressed): assertion `key != NULL && *key != '\0'' failed
+ 
+ - quitting sometimes crashes in different places...
 
- - make sure popup menus are really destroyed when they're hidden -
-   they're not automatically destroyed..
- - text widget problems:
-   - everything fixed in gtk cvs?
-      - crashing sometimes when closing windows (tabs?)
+gui = NULL at quit
+#0  gui_tab_set_active_window (tab=0x827e6d8, window=0x8194778)
+    at gui-tab.c:425
+#1  0x08063866 in gui_tab_update_active_window (tab=0x827e6d8) at gui-tab.c:489
+#2  0x08063168 in event_destroy_pane (widget=0x83b43f0, pane=0x83b41a0)
+    at gui-tab.c:254
+
+dnd tab inside another:
+==9439== Invalid read of size 4
+==9439==    at 0x4043D6D2: ??? (gtktreeviewcolumn.c:1123)
+==9439==    by 0x4043DE9D: gtk_tree_view_column_clear_attributes (gtktreeviewcolumn.c:1392)
+==9439==    by 0x4043C479: ??? (gtktreeviewcolumn.c:341)
 
 FEATURES:
 
@@ -45,8 +58,11 @@ FEATURES:
       network list should be updated to list only networks using that proto
     - separate irc stuff from glade file, and make it work.
     - add colors, themes and advanced logging pages
+    - add popup menus
 
  - clean about dialog, add ccr there
+ - add configure time settings somewhere .. about dialog? /version?
+   (irssi's feature actually)
  - galeon-like tab size settings..?
  - statusbar
  - lots of irc-specific stuff
