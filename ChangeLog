@@ -1,3 +1,9 @@
+2002-06-06 22:28  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-entry.h, gui-frame.c, gui-keyboard.c, gui-keyboard.h:
+	More fixes with handling dead key presses. Automatic completions
+	should work with space key again.
+
 2002-06-06 22:10  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-tab.c: focus change fixes.
