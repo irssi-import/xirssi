@@ -1,3 +1,13 @@
+2002-05-09 16:46  Timo Sirainen <tss@iki.fi>
+
+	* src/dialog-about.c: minor changes
+
+2002-05-09 16:35  Timo Sirainen <tss@iki.fi>
+
+	* src/: Makefile.am, dialog-about.c, gui-menu-main.c,
+	gui-menu-url.c, gui-menu.c, gui-menu.h, irssi.c: menu/image
+	updates.
+
 2002-05-09 15:41  Timo Sirainen <tss@iki.fi>
 
 	* src/: Makefile.am, dialog-about.c, dialogs.h, gui-frame.c,
