@@ -1,3 +1,12 @@
+2002-05-09 15:41  Timo Sirainen <tss@iki.fi>
+
+	* src/: Makefile.am, dialog-about.c, dialogs.h, gui-frame.c,
+	gui-menu-channel-topic.c, gui-menu-main.c, gui-menu-nick.c,
+	gui-menu-url.c, gui-menu.c, gui-menu.h, irssi.c, setup-servers.c,
+	setup-servers.h, setup.c, setup.h: Setup code with partially
+	working server settings. Updated menu code. Added menubar (will be
+	optional later).
+
 2002-05-09 05:44  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-window.c: added /set scrollback_lines + /set
