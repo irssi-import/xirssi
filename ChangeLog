@@ -1,3 +1,12 @@
+2002-05-05 17:20  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-tab.c: tab numbers weren't updated when tab was closed.
+
+2002-05-05 17:15  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-window-activity.c: Activity colors weren't cleared
+	properly.
+
 2002-05-05 04:35  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-frame.c, gui-tab.c, gui-window-activity.c: color fixes
