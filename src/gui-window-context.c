@@ -54,22 +54,44 @@ static void get_tag_start(GtkTextIter *start_iter, const GtkTextIter *iter,
 	}
 }
 
+static void get_tag_end(GtkTextIter *end_iter, const GtkTextIter *iter,
+			GtkTextTag *tag)
+{
+	memcpy(end_iter, iter, sizeof(GtkTextIter));
+
+	/* go to end of tag */
+	while (gtk_text_iter_forward_char(end_iter)) {
+		if (!gtk_text_iter_has_tag(end_iter, tag))
+			break;
+	}
+}
+
 static char *get_tag_word(GtkTextIter *start_iter, const GtkTextIter *iter,
 			  GtkTextTag *tag)
 {
 	GtkTextIter end_iter;
 
-	memcpy(&end_iter, iter, sizeof(end_iter));
-
-	/* go to end of tag */
-	while (gtk_text_iter_forward_char(&end_iter)) {
-		if (!gtk_text_iter_has_tag(&end_iter, tag))
-			break;
-	}
-
 	/* get the text in tag */
+	get_tag_end(&end_iter, iter, tag);
 	return gtk_text_buffer_get_text(gtk_text_iter_get_buffer(iter),
 					start_iter, &end_iter, TRUE);
+}
+
+static void mark_tag_select(const GtkTextIter *iter, GtkTextTag *tag)
+{
+	GtkTextBuffer *buffer;
+	GtkTextMark *select, *insert;
+	GtkTextIter start_iter, end_iter;
+
+	buffer = gtk_text_iter_get_buffer(iter);
+	select = gtk_text_buffer_get_selection_bound(buffer);
+	insert = gtk_text_buffer_get_insert(buffer);
+
+	get_tag_start(&start_iter, iter, tag);
+	get_tag_end(&end_iter, iter, tag);
+
+	gtk_text_buffer_move_mark(buffer, select, &start_iter);
+	gtk_text_buffer_move_mark(buffer, insert, &end_iter);
 }
 
 static gboolean event_tag(GtkTextTag *tag, GtkWidget *widget,
@@ -83,7 +105,9 @@ static gboolean event_tag(GtkTextTag *tag, GtkWidget *widget,
 	context->tag_event = TRUE;
 
 	if (event->type != GDK_MOTION_NOTIFY &&
-	    event->type != GDK_BUTTON_PRESS)
+	    event->type != GDK_BUTTON_PRESS &&
+            event->type != GDK_BUTTON_RELEASE &&
+	    event->type != GDK_2BUTTON_PRESS)
 		return FALSE;
 
 	/* a) motion, b) mouse button press */
@@ -116,54 +140,37 @@ static gboolean event_tag(GtkTextTag *tag, GtkWidget *widget,
 
 	if (moved || context->tag != tag) {
 		context->tag = tag;
-		signal_emit("gui window context enter", 3,
-			    context->window, context->word, tag);
+		signal_emit("gui window context enter", 4,
+			    context->window, context->word, tag, widget);
 	}
 
-	if (event->type == GDK_BUTTON_PRESS) {
-		signal_emit("gui window context press", 4, context->window,
-			    context->word, tag, event);
+	switch (event->type) {
+	case GDK_BUTTON_PRESS:
+		signal_emit("gui window context press", 5, context->window,
+			    context->word, tag, event, widget);
+		break;
+	case GDK_BUTTON_RELEASE:
+		signal_emit("gui window context release", 5, context->window,
+			    context->word, tag, event, widget);
+		break;
+	case GDK_2BUTTON_PRESS:
+		/* doubleclicked tag, set the selection to cover the tag
+		   entirely - FIXME: the end selection won't stay there.. */
+		mark_tag_select(iter, tag);
+		return TRUE;
+	default:
 	}
 
 	return FALSE;
 }
 
-static GtkTextTag *create_tag(WindowGui *window, const char *name)
+GtkTextTag *gui_window_context_create_tag(WindowGui *window, const char *name)
 {
 	GtkTextTag *tag;
 
 	tag = gtk_text_buffer_create_tag(window->buffer, name, NULL);
-	g_signal_connect(G_OBJECT(tag), "event", G_CALLBACK(event_tag), NULL);
+	g_signal_connect_after(G_OBJECT(tag), "event", G_CALLBACK(event_tag), NULL);
 	return tag;
-}
-
-static GtkTextTag *word_get_tag(WindowGui *window, Channel *channel,
-				const char *word)
-{
-	GtkTextTag *tag;
-	char *name;
-
-	/* common urls */
-	if (strncmp(word, "http://", 7) == 0 || strncmp(word, "www.", 4) == 0 ||
-	    strncmp(word, "ftp://", 6) == 0 || strncmp(word, "ftp.", 4) == 0 ||
-	    strncmp(word, "irc://", 6) == 0 || strncmp(word, "mailto:", 7) == 0) {
-		tag = gtk_text_tag_table_lookup(window->tagtable, "url");
-		if (tag == NULL)
-			tag = create_tag(window, "url");
-		return tag;
-	}
-
-	/* nick? */
-	if (channel != NULL && nicklist_find(channel, word) != NULL) {
-		name = g_strconcat("nick ", channel->server->tag, NULL);
-		tag = gtk_text_tag_table_lookup(window->tagtable, name);
-		if (tag == NULL)
-			tag = create_tag(window, name);
-		g_free(name);
-		return tag;
-	}
-
-	return NULL;
 }
 
 void gui_window_print_mark_context(WindowGui *window, TextDest *dest,
@@ -193,7 +200,10 @@ void gui_window_print_mark_context(WindowGui *window, TextDest *dest,
 			/* got a word */
 			word = g_strndup(start, (int) (text-start));
 			len = strlen(word);
-			tag = word_get_tag(window, channel, word);
+
+			tag = NULL;
+			signal_emit("gui window context word", 4,
+				    &tag, window, channel, word);
 			g_free(word);
 
 			if (tag != NULL) {

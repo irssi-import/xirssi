@@ -1,6 +1,8 @@
 #ifndef __GUI_WINDOW_CONTEXT_H
 #define __GUI_WINDOW_CONTEXT_H
 
+GtkTextTag *gui_window_context_create_tag(WindowGui *window, const char *name);
+
 void gui_window_print_mark_context(WindowGui *window, TextDest *dest,
 				   GtkTextIter *iter, const char *text);
 

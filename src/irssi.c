@@ -56,6 +56,9 @@ void fe_common_irc_deinit(void);
 void gui_context_nick_init(void);
 void gui_context_nick_deinit(void);
 
+void gui_context_url_init(void);
+void gui_context_url_deinit(void);
+
 static void sig_exit(void)
 {
 	gtk_main_quit();
@@ -88,6 +91,7 @@ static void gui_finish_init(void)
 	gui_nicklists_init();
 	gui_channels_init();
         gui_context_nick_init();
+        gui_context_url_init();
 
 	fe_common_core_finish_init();
 
@@ -113,6 +117,7 @@ static void gui_deinit(void)
 
 	signal_remove("gui exit", (SIGNAL_FUNC) sig_exit);
 
+        gui_context_url_deinit();
         gui_context_nick_deinit();
 	gui_channels_deinit();
 	gui_nicklists_deinit();

@@ -24,8 +24,10 @@ xirssi_LDADD = \
 xirssi_SOURCES = \
 	gui-channel.c \
 	gui-context-nick.c \
+	gui-context-url.c \
 	gui-entry.c \
 	gui-frame.c \
+	gui-menu.c \
 	gui-menu-nick.c \
 	gui-nicklist.c \
 	gui-nicklist-view.c \
@@ -39,6 +41,7 @@ noinst_HEADERS = \
 	gui-channel.h \
 	gui-entry.h \
 	gui-frame.h \
+	gui-menu.h \
 	gui-menu-nick.h \
 	gui-nicklist.h \
 	gui-nicklist-view.h \

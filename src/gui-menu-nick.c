@@ -20,57 +20,62 @@
 
 #include "module.h"
 #include "misc.h"
+#include "special-vars.h"
 #include "servers.h"
 #include "channels.h"
-#include "nicklist.h"
 
-typedef enum {
-	ACTION_OP,
-	ACTION_DEOP,
-	ACTION_HALFOP,
-	ACTION_DEHALFOP,
-	ACTION_VOICE,
-	ACTION_DEVOICE,
-	ACTION_KICKBAN,
-	ACTION_DCC_CHAT,
-	ACTION_DCC_SEND,
-	ACTION_PING,
-	ACTION_VERSION,
-	ACTION_TIME,
-	ACTION_WHOIS,
-	ACTION_QUERY
-} MenuAction;
+#include "gui-menu.h"
 
-static void menu_callback(const char *data, MenuAction action,
-			  GtkWidget *widget);
+static MenuItem items[] = {
+	{ ACTION_SUB,		"_Op" },
+	{ ACTION_COMMAND,	"Give _Ops", "op $1-" },
+	{ ACTION_COMMAND,	"Take Ops", "deop $1-" },
+	{ ACTION_SEPARATOR },
+	{ ACTION_COMMAND,	"Give _Halfops", "halfop $1-" },
+	{ ACTION_COMMAND,	"Take Halfops", "dehalfop $1-" },
+	{ ACTION_SEPARATOR },
+	{ ACTION_COMMAND,	"Give _Voice", "voice $1-" },
+	{ ACTION_COMMAND,	"Take Voice", "devoice $1-" },
+	{ ACTION_SEPARATOR },
+	{ ACTION_COMMAND,	"Kickban...", "kickban -gui $0" },
+	{ ACTION_ENDSUB },
 
-static GtkItemFactoryEntry menu_items[] = {
-	{ "/_Op",		NULL, NULL, 0, "<Branch>" },
-	{ "/Op/Give _Ops",	NULL, menu_callback, ACTION_OP, NULL },
-	{ "/Op/Take Ops",	NULL, menu_callback, ACTION_DEOP, NULL },
-	{ "/Op/sep1",		NULL, NULL, 0, "<Separator>" },
-	{ "/Op/Give _Halfops",	NULL, menu_callback, ACTION_HALFOP, NULL },
-	{ "/Op/Take Halfops",	NULL, menu_callback, ACTION_DEHALFOP, NULL },
-	{ "/Op/sep2",		NULL, NULL, 0, "<Separator>" },
-	{ "/Op/Give _Voice",	NULL, menu_callback, ACTION_VOICE, NULL },
-	{ "/Op/Take Voice",	NULL, menu_callback, ACTION_DEVOICE, NULL },
-	{ "/Op/sep3",		NULL, NULL, 0, "<Separator>" },
-	{ "/Op/Kickban..",	NULL, menu_callback, ACTION_KICKBAN, NULL },
-	{ "/_DCC",		NULL, NULL, 0, "<Branch>" },
-	{ "/DCC/_Chat",		NULL, menu_callback, ACTION_DCC_CHAT, NULL },
-	{ "/DCC/_Send File",	NULL, menu_callback, ACTION_DCC_SEND, NULL },
-	{ "/_CTCP",		NULL, NULL, 0, "<Branch>" },
-	{ "/CTCP/_Ping",	NULL, menu_callback, ACTION_PING, NULL },
-	{ "/CTCP/_Version",	NULL, menu_callback, ACTION_VERSION, NULL },
-	{ "/CTCP/_Time",	NULL, menu_callback, ACTION_TIME, NULL },
-	{ "/_Whois",		NULL, menu_callback, ACTION_WHOIS, NULL },
-	{ "/_Query",		NULL, menu_callback, ACTION_QUERY, NULL }
+	{ ACTION_SUB,		"_DCC" },
+	{ ACTION_COMMAND,	"_Chat", "dcc chat $0" },
+	{ ACTION_COMMAND,	"_Send File", "dcc send $0" },
+	{ ACTION_ENDSUB },
+
+	{ ACTION_SUB,		"_CTCP" },
+	{ ACTION_COMMAND,	"_Ping", "ping $0" },
+	{ ACTION_COMMAND,	"_Version", "ctcp $0 version" },
+	{ ACTION_COMMAND,	"_Time", "ctcp $0 time" },
+	{ ACTION_ENDSUB },
+
+	{ ACTION_COMMAND,	"_Whois", "whois $0" },
+	{ ACTION_COMMAND,	"_Query", "query $0" }
 };
 
-static void menu_callback(const char *data, MenuAction action,
-			  GtkWidget *widget)
+static void menu_callback(GtkWidget *item, GtkWidget *menu)
 {
-	printf("callback\n");
+	Server *server;
+	Channel *channel;
+	const char *cmd, *space_nicks, *comma_nicks;
+	const char *server_tag, *channel_name;
+	char *data;
+
+	cmd = g_object_get_data(G_OBJECT(item), "data");
+	space_nicks = g_object_get_data(G_OBJECT(menu), "space_nicks");
+	comma_nicks = g_object_get_data(G_OBJECT(menu), "comma_nicks");
+	server_tag = g_object_get_data(G_OBJECT(menu), "server_tag");
+	channel_name = g_object_get_data(G_OBJECT(menu), "channel_name");
+
+	server = server_find_tag(server_tag);
+	channel = server == NULL || channel_name == NULL ? NULL :
+		channel_find(server, channel_name);
+
+	data = g_strconcat(comma_nicks, " ", space_nicks, NULL);
+	eval_special_string(cmd, data, server, channel);
+	g_free(data);
 }
 
 static gboolean event_menu_destroy(GtkWidget *widget)
@@ -79,27 +84,6 @@ static gboolean event_menu_destroy(GtkWidget *widget)
 	g_free(g_object_get_data(G_OBJECT(widget), "comma_nicks"));
 	return FALSE;
 }
-
-#if 0
-static gboolean menuitem_nicks_cmd(const char *cmd)
-{
-	printf("%p\n", gtk_menu_item_get_submenu(item));
-	Channel *channel;
-	char signal[50], *nicks;
-
-	channel = g_object_get_data(G_OBJECT(widget->parent), "channel");
-	nicks = g_object_get_data(G_OBJECT(widget->parent), "nicks");
-
-	if (g_slist_find(channels, channel) == NULL) {
-		/* channel was destroyed while waiting */
-		return FALSE;
-	}
-
-	g_snprintf(signal, sizeof(signal), "command %s", cmd);
-	signal_emit(signal, 3, nicks, channel->server, channel);
-	return FALSE;
-}
-#endif
 
 void gui_menu_nick_popup(Server *server, Channel *channel,
 			 GSList *nicks, GdkEventButton *event)
@@ -127,6 +111,10 @@ void gui_menu_nick_popup(Server *server, Channel *channel,
 				  channel->name);
 	}
 
+	gui_menu_fill(menu, items, sizeof(items)/sizeof(items[0]),
+		      G_CALLBACK(menu_callback), menu);
+
+	gtk_widget_show_all(menu);
 	gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL,
 		       event->button, 0);
 }

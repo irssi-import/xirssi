@@ -87,6 +87,30 @@ static GtkStatusbar *window_get_statusbar(Window *window)
 	return WINDOW_GUI(window)->active_view->tab->frame->statusbar;
 }
 
+static void sig_window_word(GtkTextTag **tag, WindowGui *window,
+			    Channel *channel, const char *word)
+{
+	char *name;
+
+	if (channel == NULL) {
+		channel = CHANNEL(window->window->active);
+		if (channel == NULL)
+			return;
+	}
+
+	if (nicklist_find(channel, word) == NULL)
+		return;
+
+	/* yeah, it's a nick */
+	name = g_strconcat("nick ", channel->server->tag, NULL);
+	*tag = gtk_text_tag_table_lookup(window->tagtable, name);
+	if (*tag == NULL)
+		*tag = gui_window_context_create_tag(window, name);
+	g_free(name);
+
+	signal_stop();
+}
+
 static void sig_window_enter(Window *window, const char *word, GtkTextTag *tag)
 {
 	Server *server;
@@ -105,11 +129,14 @@ static void sig_window_leave(Window *window, const char *word, GtkTextTag *tag)
 	statusbar_pop_nick(window_get_statusbar(window));
 }
 
-static void sig_window_press(Window *window, const char *word, GtkTextTag *tag,
-			     GdkEventButton *event)
+static void sig_window_release(Window *window, const char *word,
+			       GtkTextTag *tag, GdkEventButton *event)
 {
 	Server *server;
 	GSList *nicks;
+
+	if (event->button != 3)
+		return;
 
 	server = tag_get_server(tag);
 	if (server == NULL)
@@ -133,18 +160,20 @@ static void sig_nicklist_leave(NicklistView *view, Nick *nick)
 
 void gui_context_nick_init(void)
 {
+        signal_add("gui window context word", (SIGNAL_FUNC) sig_window_word);
         signal_add("gui window context enter", (SIGNAL_FUNC) sig_window_enter);
         signal_add("gui window context leave", (SIGNAL_FUNC) sig_window_leave);
-	signal_add("gui window context press", (SIGNAL_FUNC) sig_window_press);
+	signal_add("gui window context release", (SIGNAL_FUNC) sig_window_release);
 	signal_add("gui nicklist enter", (SIGNAL_FUNC) sig_nicklist_enter);
 	signal_add("gui nicklist leave", (SIGNAL_FUNC) sig_nicklist_leave);
 }
 
 void gui_context_nick_deinit(void)
 {
+        signal_remove("gui window context word", (SIGNAL_FUNC) sig_window_word);
         signal_remove("gui window context enter", (SIGNAL_FUNC) sig_window_enter);
         signal_remove("gui window context leave", (SIGNAL_FUNC) sig_window_leave);
-        signal_remove("gui window context press", (SIGNAL_FUNC) sig_window_press);
+	signal_remove("gui window context release", (SIGNAL_FUNC) sig_window_release);
 	signal_remove("gui nicklist enter", (SIGNAL_FUNC) sig_nicklist_enter);
 	signal_remove("gui nicklist leave", (SIGNAL_FUNC) sig_nicklist_leave);
 }
