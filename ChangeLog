@@ -1,3 +1,21 @@
+2002-04-27 20:57  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-nicklist.c: mode changes messed up ops-counter above
+	nicklist.
+
+2002-04-27 20:35  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-menu-url.c: /exec -quiet galeon so it stops complaining
+	about using existing process :)
+
+2002-04-27 20:35  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-frame.c: crashfix
+
+2002-04-27 20:11  Timo Sirainen <tss@iki.fi>
+
+	* TODO, pixmaps/Makefile.am, src/Makefile.am: updates
+
 2002-04-27 19:46  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-frame.c: key handling changes
