@@ -92,10 +92,12 @@ static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
 
 	if (event->keyval == GDK_Tab ||
 	    event->keyval == GDK_Up ||
-	    event->keyval == GDK_Down) {
-		/* kludging around keys changing focus and not letting us
-		   handle it in the after-signal. and we can't just handle
-		   everything here, because it will break dead-keys */
+	    event->keyval == GDK_Down ||
+	    (event->state & GDK_CONTROL_MASK) != 0) {
+		/* kludging around keys changing focus (and some others) and
+		   not letting us handle it in the after-signal. and we can't
+		   just handle everything here, because it will break
+		   dead-keys */
 		return event_key_press_after(widget, event, frame);
 	}
 
