@@ -25,6 +25,7 @@
 #include "gui-tab.h"
 #include "gui-nicklist.h"
 #include "gui-nicklist-view.h"
+#include "gui-nicklist-cell-renderer.h"
 #include "gui-menu.h"
 
 static gboolean event_destroy(GtkWidget *widget, NicklistView *view)
@@ -68,16 +69,19 @@ static gboolean event_button_press(GtkTreeView *tree, GdkEventButton *event,
         GtkTreeIter iter;
 	Nick *nick;
 
-	if (event->button != 1 || event->type != GDK_2BUTTON_PRESS)
-		return FALSE;
-
-	/* left-doubleclick - open the nick under mouse in query */
 	if (!gtk_tree_view_get_path_at_pos(tree, event->x, event->y,
 					   &path, NULL, NULL, NULL))
 		return FALSE;
 
 	model = GTK_TREE_MODEL(view->nicklist->store);
-	if (gtk_tree_model_get_iter(model, &iter, path)) {
+	if (!gtk_tree_model_get_iter(model, &iter, path))
+		return FALSE;
+
+	if (event->type == GDK_BUTTON_PRESS && !gtk_tree_path_prev(path)) {
+		/* clicked on first row - don't allow it */
+		return TRUE;
+	} else if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
+		/* left-doubleclick - open the nick under mouse in query */
 		nick = tree_get_nick(model, &iter);
 		if (nick != NULL) {
 			signal_emit("command query", 2, nick->nick,
@@ -178,10 +182,11 @@ static gboolean event_leave(GtkWidget *tree, GdkEventCrossing *event,
 
 NicklistView *gui_nicklist_view_new(Tab *tab)
 {
-	GtkWidget *sw, *list, *vbox, *frame;
+	GtkWidget *space, *sw, *list, *vbox, *frame;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 	NicklistView *view;
+	int handle_size;
 
 	view = g_new0(NicklistView, 1);
 	view->tab = tab;
@@ -193,12 +198,19 @@ NicklistView *gui_nicklist_view_new(Tab *tab)
 	g_signal_connect(G_OBJECT(vbox), "destroy",
 			 G_CALLBACK(event_destroy), view);
 
-	view->label = gtk_label_new(NULL);
-	gtk_box_pack_start(GTK_BOX(vbox), view->label, FALSE, FALSE, 0);
+	/* add some empty space so it'll be at the same
+	   position as topic entry */
+	space = gtk_label_new(NULL);
+	gtk_widget_style_get(GTK_WIDGET(tab->last_paned), "handle_size",
+			     &handle_size, NULL);
+	/* +1? .. no idea, hopefully ok with non-default theme.. */
+	gtk_widget_set_size_request(space, -1, handle_size+1);
+	gtk_box_pack_start(GTK_BOX(vbox), space, FALSE, FALSE, 0);
 
 	frame = gtk_frame_new(NULL);
         gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	gtk_box_pack_start(GTK_BOX(vbox), frame, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox), frame, TRUE, TRUE,
+			   GTK_WIDGET(tab->first_paned)->allocation.height);
 
 	/* scrolled window where to place nicklist */
 	sw = gtk_scrolled_window_new(NULL, NULL);
@@ -225,7 +237,7 @@ NicklistView *gui_nicklist_view_new(Tab *tab)
 				    GTK_SELECTION_MULTIPLE);
 
 	/* nick mode pixmap */
-	renderer = gtk_cell_renderer_pixbuf_new();
+	renderer = gtk_cell_renderer_nicklist_pixmap_new();
 	column = gtk_tree_view_column_new_with_attributes(NULL, renderer,
 							  "pixbuf",
 							  NICKLIST_COL_PIXMAP,
@@ -233,7 +245,7 @@ NicklistView *gui_nicklist_view_new(Tab *tab)
 	gtk_tree_view_append_column(GTK_TREE_VIEW(list), column);
 
 	/* nick name text */
-	renderer = gtk_cell_renderer_text_new();
+	renderer = gtk_cell_renderer_nicklist_text_new();
 	column = gtk_tree_view_column_new_with_attributes(NULL, renderer,
 							  "text",
 							  NICKLIST_COL_NAME,
@@ -257,12 +269,6 @@ void gui_nicklist_view_set(NicklistView *view, Nicklist *nicklist)
 		nicklist->views = g_slist_prepend(nicklist->views, view);
 	view->nicklist = nicklist;
 
-	gtk_tree_view_set_model(GTK_TREE_VIEW(view->view),
-				nicklist == NULL ? NULL :
+	gtk_tree_view_set_model(view->view, nicklist == NULL ? NULL :
 				GTK_TREE_MODEL(nicklist->store));
-}
-
-void gui_nicklist_view_label_updated(NicklistView *view)
-{
-	gtk_label_set_text(GTK_LABEL(view->label), view->nicklist->label);
 }

@@ -129,14 +129,14 @@ Tab *gui_tab_new(Frame *frame)
 	gtk_widget_modify_bg(tab->tab_label_widget, GTK_STATE_NORMAL,
 		&GTK_WIDGET(frame->notebook)->style->bg[GTK_STATE_ACTIVE]);
 
-	/* nicklist */
-	tab->nicklist = gui_nicklist_view_new(tab);
-	gtk_paned_pack2(GTK_PANED(hpane), tab->nicklist->widget, FALSE, TRUE);
-
-	/* vertical pane */
+	/* vertical pane (keep the code before nicklist) */
 	vpane = gtk_vpaned_new();
 	gtk_paned_pack1(GTK_PANED(hpane), vpane, TRUE, TRUE);
 	tab->first_paned = tab->last_paned = GTK_PANED(vpane);
+
+	/* nicklist */
+	tab->nicklist = gui_nicklist_view_new(tab);
+	gtk_paned_pack2(GTK_PANED(hpane), tab->nicklist->widget, FALSE, TRUE);
 
 	gtk_widget_show_all(vbox);
 	gtk_widget_hide(tab->nicklist->widget);

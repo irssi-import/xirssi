@@ -15,7 +15,6 @@ struct _Nicklist {
 	GtkListStore *store;
 	GSList *views;
 
-	char label[128];
 	int nicks, ops, halfops, voices, normal;
 };
 

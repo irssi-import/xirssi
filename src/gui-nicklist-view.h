@@ -4,7 +4,7 @@
 struct _NicklistView {
 	Tab *tab;
 
-	GtkWidget *widget, *label;
+	GtkWidget *widget;
 	GtkTreeView *view;
 
 	Nicklist *nicklist;
@@ -13,6 +13,5 @@ struct _NicklistView {
 NicklistView *gui_nicklist_view_new(Tab *tab);
 
 void gui_nicklist_view_set(NicklistView *view, Nicklist *nicklist);
-void gui_nicklist_view_label_updated(NicklistView *view);
 
 #endif
