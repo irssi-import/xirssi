@@ -5,6 +5,57 @@
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
+<time>16:46</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/dialog-about.c</name>
+<revision>1.3</revision>
+</file>
+<msg>minor changes
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-09</date>
+<weekday>Thursday</weekday>
+<time>16:35</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/Makefile.am</name>
+<revision>1.14</revision>
+</file>
+<file>
+<name>src/dialog-about.c</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>src/gui-menu-main.c</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>src/gui-menu-url.c</name>
+<revision>1.5</revision>
+</file>
+<file>
+<name>src/gui-menu.c</name>
+<revision>1.3</revision>
+</file>
+<file>
+<name>src/gui-menu.h</name>
+<revision>1.5</revision>
+</file>
+<file>
+<name>src/irssi.c</name>
+<revision>1.8</revision>
+</file>
+<commondir>src/</commondir>
+<msg>menu/image updates.
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-09</date>
+<weekday>Thursday</weekday>
 <time>15:41</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
