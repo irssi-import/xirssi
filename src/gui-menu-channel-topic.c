@@ -23,26 +23,34 @@
 #include "gui-channel.h"
 #include "gui-menu.h"
 
+enum {
+	ACTION_LOCK = ACTION_CUSTOM,
+	ACTION_UNLOCK
+};
+
 static MenuItem locked_items[] = {
-	{ ACTION_COMMAND,	"Unlock topic", "unlock" }
+	{ ACTION_UNLOCK,	"Unlock topic" }
 };
 
 static MenuItem unlocked_items[] = {
-	{ ACTION_COMMAND,	"Lock topic", "lock" }
+	{ ACTION_LOCK,		"Lock topic" }
 };
 
-static void menu_callback(GtkWidget *item, GtkWidget *menu)
+static void menu_callback(void *user_data, const char *item_data, int action)
 {
+	GObject *obj = user_data;
 	GtkWidget *widget;
-	const char *cmd;
 
-	cmd = g_object_get_data(G_OBJECT(item), "data");
-	widget = g_object_get_data(G_OBJECT(menu), "topic_widget");
+	widget = g_object_get_data(obj, "topic_widget");
 
-	if (strcmp(cmd, "lock") == 0)
+	switch (action) {
+	case ACTION_LOCK:
 		gui_channel_topic_lock(widget);
-	else if (strcmp(cmd, "unlock") == 0)
+		break;
+	case ACTION_UNLOCK:
 		gui_channel_topic_unlock(widget);
+		break;
+	}
 
 	gtk_widget_unref(widget);
 }
@@ -62,11 +70,11 @@ void gui_menu_channel_topic_popup(Channel *channel, GtkWidget *widget,
 	if (locked) {
 		gui_menu_fill(menu, locked_items,
 			      G_N_ELEMENTS(locked_items),
-			      G_CALLBACK(menu_callback), menu);
+			      menu_callback, menu);
 	} else {
 		gui_menu_fill(menu, unlocked_items,
 			      G_N_ELEMENTS(unlocked_items),
-			      G_CALLBACK(menu_callback), menu);
+			      menu_callback, menu);
 	}
 
 	gtk_widget_show_all(menu);

@@ -22,8 +22,21 @@
 
 #include "gui-menu.h"
 
+static void menu_callback(GObject *item, void *user_data)
+{
+	MenuCallback callback;
+	const char *item_data;
+	int action;
+
+	callback = g_object_get_data(item, "callback");
+	item_data = g_object_get_data(item, "item_data");
+	action = GPOINTER_TO_INT(g_object_get_data(item, "action"));
+
+	callback(user_data, item_data, action);
+}
+
 void gui_menu_fill(GtkWidget *menu, MenuItem *items, int items_count,
-		   GCallback callback, void *user_data)
+		   MenuCallback callback, void *user_data)
 {
 	GtkWidget *newmenu, *item;
 	int i;
@@ -53,16 +66,19 @@ void gui_menu_fill(GtkWidget *menu, MenuItem *items, int items_count,
 				menu = newmenu;
 			}
 			break;
-		case ACTION_COMMAND:
-			item = gtk_menu_item_new_with_mnemonic(items[i].name);
-			g_object_set_data(G_OBJECT(item), "data", items[i].data);
-			g_signal_connect(G_OBJECT(item), "activate",
-					 callback, user_data);
-			break;
 		default:
-			item = NULL;
+			item = gtk_menu_item_new_with_mnemonic(items[i].name);
+			g_object_set_data(G_OBJECT(item), "item_data",
+					  items[i].data);
+			g_object_set_data(G_OBJECT(item), "callback",
+					  callback);
+			g_object_set_data(G_OBJECT(item), "action",
+					  GINT_TO_POINTER(items[i].action));
+			g_signal_connect(G_OBJECT(item), "activate",
+					 G_CALLBACK(menu_callback), user_data);
 			break;
 		}
+
 		if (item != NULL)
 			gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 	}

@@ -26,6 +26,10 @@
 
 #include "gui-menu.h"
 
+enum {
+	ACTION_COMMAND = ACTION_CUSTOM
+};
+
 static MenuItem items[] = {
 	{ ACTION_SUB,		"_Op" },
 	{ ACTION_COMMAND,	"Give _Ops", "op $1-" },
@@ -55,19 +59,19 @@ static MenuItem items[] = {
 	{ ACTION_COMMAND,	"_Query", "query $0" }
 };
 
-static void menu_callback(GtkWidget *item, GtkWidget *menu)
+static void menu_callback(void *user_data, const char *cmd, int action)
 {
+	GObject *obj = user_data;
 	Server *server;
 	Channel *channel;
-	const char *cmd, *space_nicks, *comma_nicks;
+	const char *space_nicks, *comma_nicks;
 	const char *server_tag, *channel_name;
 	char *data;
 
-	cmd = g_object_get_data(G_OBJECT(item), "data");
-	space_nicks = g_object_get_data(G_OBJECT(menu), "space_nicks");
-	comma_nicks = g_object_get_data(G_OBJECT(menu), "comma_nicks");
-	server_tag = g_object_get_data(G_OBJECT(menu), "server_tag");
-	channel_name = g_object_get_data(G_OBJECT(menu), "channel_name");
+	space_nicks = g_object_get_data(obj, "space_nicks");
+	comma_nicks = g_object_get_data(obj, "comma_nicks");
+	server_tag = g_object_get_data(obj, "server_tag");
+	channel_name = g_object_get_data(obj, "channel_name");
 
 	server = server_find_tag(server_tag);
 	channel = server == NULL || channel_name == NULL ? NULL :
@@ -110,8 +114,7 @@ void gui_menu_nick_popup(Server *server, Channel *channel,
 				  channel->name);
 	}
 
-	gui_menu_fill(menu, items, sizeof(items)/sizeof(items[0]),
-		      G_CALLBACK(menu_callback), menu);
+	gui_menu_fill(menu, items, G_N_ELEMENTS(items), menu_callback, menu);
 
 	gtk_widget_show_all(menu);
 	gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, button, 0);

@@ -24,6 +24,7 @@ xirssi_LDADD = \
 	@PERL_LINK_FLAGS@
 
 xirssi_SOURCES = \
+	dialog-about.c \
 	gui-channel.c \
 	gui-context-nick.c \
 	gui-context-url.c \
@@ -33,6 +34,7 @@ xirssi_SOURCES = \
 	gui-keyboard.c \
 	gui-menu.c \
 	gui-menu-channel-topic.c \
+	gui-menu-main.c \
 	gui-menu-nick.c \
 	gui-menu-url.c \
 	gui-nicklist.c \
@@ -44,9 +46,12 @@ xirssi_SOURCES = \
 	gui-window-activity.c \
 	gui-window-context.c \
 	gui-window-view.c \
+	setup.c \
+	setup-servers.c \
         irssi.c
 
 noinst_HEADERS = \
+	dialogs.h \
 	gui-channel.h \
 	gui-entry.h \
 	gui-frame.h \
@@ -62,4 +67,6 @@ noinst_HEADERS = \
 	gui-window-item-rec.h \
 	gui-window-view.h \
 	gui-nicklist-cell-renderer.h \
+	setup.h \
+	setup-servers.h \
 	module.h

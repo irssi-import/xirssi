@@ -5,7 +5,8 @@ typedef enum {
 	ACTION_SEPARATOR,
 	ACTION_SUB,
 	ACTION_ENDSUB,
-	ACTION_COMMAND
+
+	ACTION_CUSTOM
 } MenuAction;
 
 typedef struct {
@@ -14,8 +15,15 @@ typedef struct {
 	char *data;
 } MenuItem;
 
+typedef void (*MenuCallback) (void *user_data, const char *item_data,
+			      int action);
+
 void gui_menu_fill(GtkWidget *menu, MenuItem *items, int items_count,
-		   GCallback callback, void *user_data);
+		   MenuCallback callback, void *user_data);
+
+/* main menu */
+GtkWidget *gui_menu_bar_new(void);
+void gui_main_menu_fill(GtkWidget *menu);
 
 /* context menus: */
 void gui_menu_nick_popup(Server *server, Channel *channel,

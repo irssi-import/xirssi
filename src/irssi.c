@@ -19,7 +19,6 @@
 */
 
 #include "module.h"
-//#include "module-formats.h"
 #include "modules-load.h"
 #include "args.h"
 #include "signals.h"
@@ -30,7 +29,6 @@
 
 #include "printtext.h"
 #include "fe-common-core.h"
-//#include "themes.h"
 
 #include "gui-channel.h"
 #include "gui-itemlist.h"
@@ -38,6 +36,8 @@
 #include "gui-nicklist.h"
 #include "gui-window.h"
 #include "gui-tab.h"
+
+#include "setup-servers.h"
 
 #include <signal.h>
 
@@ -87,7 +87,6 @@ static void gui_init(void)
 	fe_common_core_init();
 	fe_common_irc_init();
 
-	//theme_register(gui_text_formats);
 	signal_add_last("gui exit", (SIGNAL_FUNC) sig_exit);
 }
 
@@ -109,6 +108,7 @@ static void gui_finish_init(void)
 	gui_channels_init();
         gui_context_nick_init();
         gui_context_url_init();
+        setup_servers_init();
 
 	fe_common_core_finish_init();
 
@@ -135,6 +135,7 @@ static void gui_deinit(void)
 
 	signal_remove("gui exit", (SIGNAL_FUNC) sig_exit);
 
+        setup_servers_deinit();
         gui_context_url_deinit();
         gui_context_nick_deinit();
 	gui_channels_deinit();
@@ -143,8 +144,6 @@ static void gui_deinit(void)
 	gui_itemlists_deinit();
 	gui_windows_deinit();
 	gui_tabs_deinit();
-
-	//theme_unregister();
 
 	fe_common_irc_deinit();
 	fe_common_core_deinit();
