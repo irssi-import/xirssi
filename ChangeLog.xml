@@ -5,6 +5,32 @@
 <entry>
 <date>2002-05-05</date>
 <weekday>Sunday</weekday>
+<time>17:20</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-tab.c</name>
+<revision>1.12</revision>
+</file>
+<msg>tab numbers weren't updated when tab was closed.
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-05</date>
+<weekday>Sunday</weekday>
+<time>17:15</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-window-activity.c</name>
+<revision>1.6</revision>
+</file>
+<msg>Activity colors weren't cleared properly.
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-05</date>
+<weekday>Sunday</weekday>
 <time>04:35</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
