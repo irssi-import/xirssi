@@ -1,3 +1,16 @@
+2002-04-30 03:00  Timo Sirainen <tss@iki.fi>
+
+	* pixmaps/Makefile.am, pixmaps/arrow-down-twist.xpm,
+	pixmaps/arrow-down.xpm, pixmaps/arrow-left-twist.xpm,
+	pixmaps/arrow-left.xpm, pixmaps/arrow-right-twist.xpm,
+	pixmaps/arrow-right.xpm, pixmaps/arrow-up-twist.xpm,
+	pixmaps/arrow-up.xpm, pixmaps/detach-box.xpm, src/Makefile.am,
+	src/gui-frame.c, src/gui-frame.h, src/gui-nicklist-view.c,
+	src/gui-tab-label.c, src/gui-tab-label.h, src/gui-tab.c,
+	src/gui-tab.h, src/module.h: Added drag and drop moving/detaching
+	of tabs, or at least the dragging but dropping doesn't really work
+	yet :) Also removed the deprecated GTK calls.
+
 2002-04-27 23:14  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-keyboard.c: handle pasting multiple lines properly
