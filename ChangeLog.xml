@@ -3,6 +3,19 @@
 <changelog xmlns="http://www.red-bean.com/xmlns/cvs2cl/">
 
 <entry>
+<date>2002-08-10</date>
+<weekday>Saturday</weekday>
+<time>08:14</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>autogen.sh</name>
+<revision>1.7</revision>
+</file>
+<msg>call libtoolize
+</msg>
+</entry>
+
+<entry>
 <date>2002-07-01</date>
 <weekday>Monday</weekday>
 <time>17:36</time>
