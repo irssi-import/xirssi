@@ -5,8 +5,9 @@ struct _Tab {
 	Frame *frame;
 
 	GtkWidget *widget;
-	GtkWidget *tab_label;
+	GtkWidget *tab_label_widget;
 	GtkLabel *label;
+	GtkBox *tab_label_box;
 
 	GtkPaned *first_paned, *last_paned;
 	GList *panes;
@@ -22,6 +23,7 @@ struct _TabPane {
 	Tab *tab;
 
 	GtkWidget *widget;
+	GtkLabel *label;
 	GtkBox *box, *titlebox;
 	WindowView *view;
 };
@@ -38,6 +40,8 @@ void gui_tab_set_active(Tab *tab);
 void gui_tab_set_active_window(Tab *tab, Window *window);
 void gui_tab_set_active_window_item(Tab *tab, Window *window);
 void gui_tab_update_active_window(Tab *tab);
+
+void gui_reset_tab_labels(Frame *frame);
 
 void gui_tabs_init(void);
 void gui_tabs_deinit(void);

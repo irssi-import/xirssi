@@ -286,6 +286,7 @@ static void move_arrows(GtkNotebook *notebook, int pos)
 
 static void tab_pane_move(Tab *dest_tab, TabPane *pane)
 {
+	GtkWidget *label;
 	GtkPaned *paned;
 
 	paned = gui_tab_add_paned(dest_tab);
@@ -298,6 +299,14 @@ static void tab_pane_move(Tab *dest_tab, TabPane *pane)
         gui_tab_update_active_window(pane->tab);
 
 	/* remove */
+	label = pane->label == NULL ? NULL : GTK_WIDGET(pane->label);
+	if (label != NULL) {
+		gtk_widget_ref(label);
+		gtk_widget_hide(label);
+		gtk_container_remove(GTK_CONTAINER(pane->tab->tab_label_box),
+				     label);
+	}
+
 	gtk_widget_ref(pane->widget);
 	gtk_widget_hide(pane->widget);
 	gtk_container_remove(GTK_CONTAINER(pane->widget->parent), pane->widget);
@@ -306,6 +315,13 @@ static void tab_pane_move(Tab *dest_tab, TabPane *pane)
 	gtk_paned_add2(paned, pane->widget);
 	gtk_widget_show(pane->widget);
 	gtk_widget_unref(pane->widget);
+
+	if (label != NULL) {
+		gtk_box_pack_end(dest_tab->tab_label_box, label,
+				 FALSE, FALSE, 0);
+		gtk_widget_show(label);
+		gtk_widget_unref(label);
+	}
 
 	g_object_notify(G_OBJECT(pane->widget), "parent");
 }
@@ -345,6 +361,7 @@ static void tab_drop_real(TabDrag *drag, int x, int y)
 		/* move the tab */
 		gtk_notebook_reorder_child(orig_frame->notebook,
 					   child, new_page);
+		gui_reset_tab_labels(orig_frame);
 	} else {
 		/* move to another frame, or detach as new window */
 		if (drag->detaching &&
@@ -357,8 +374,8 @@ static void tab_drop_real(TabDrag *drag, int x, int y)
 		gtk_widget_ref(child);
 		gtk_widget_hide(child);
 
-		gtk_widget_ref(drag->orig_tab->tab_label);
-		gtk_widget_hide(drag->orig_tab->tab_label);
+		gtk_widget_ref(drag->orig_tab->tab_label_widget);
+		gtk_widget_hide(drag->orig_tab->tab_label_widget);
 
 		gtk_notebook_remove_page(orig_frame->notebook, current_page);
 
@@ -373,13 +390,16 @@ static void tab_drop_real(TabDrag *drag, int x, int y)
 		drag->orig_tab->frame = drag->dest_frame;
 		gtk_notebook_insert_page(drag->dest_frame->notebook,
 					 drag->orig_tab->widget,
-					 drag->orig_tab->tab_label, new_page);
+					 drag->orig_tab->tab_label_widget,
+					 new_page);
 
-		gtk_widget_show(drag->orig_tab->tab_label);
-		gtk_widget_unref(drag->orig_tab->tab_label);
+		gtk_widget_show(drag->orig_tab->tab_label_widget);
+		gtk_widget_unref(drag->orig_tab->tab_label_widget);
 
 		gtk_widget_show(child);
 		gtk_widget_unref(child);
+
+		gui_reset_tab_labels(drag->dest_frame);
 	}
 }
 
@@ -400,8 +420,6 @@ static void tab_drop(TabDrag *drag, int x, int y)
 	    (drag->detaching || (drag->dest_pos & 1) == 0)) {
 		/* extract pane into tab, so it's easier to move it */
 		newtab = gui_tab_new(drag->orig_tab->frame);
-		gtk_label_set_text(newtab->label,
-				   gtk_label_get_text(drag->orig_tab->label));
 		tab_pane_move(newtab, drag->orig_pane);
 
 		gui_tab_pack_panes(drag->orig_tab);
@@ -411,10 +429,13 @@ static void tab_drop(TabDrag *drag, int x, int y)
 	tab_drop_real(drag, x, y);
 
 	/* kill tab if it doesn't have panes left */
-	if (drag->orig_tab->panes == NULL)
+	if (drag->orig_tab->panes == NULL) {
 		gtk_widget_destroy(drag->orig_tab->widget);
-	else
-                gui_tab_pack_panes(drag->orig_tab);
+		gui_reset_tab_labels(orig_frame);
+	} else {
+		/* just remove the useless GtkPaneds */
+		gui_tab_pack_panes(drag->orig_tab);
+	}
 
 	/* kill frame if we moved it's last tab */
 	if (orig_frame->notebook->children == NULL)

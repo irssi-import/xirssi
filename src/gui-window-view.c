@@ -171,6 +171,31 @@ WindowView *gui_window_view_new(TabPane *pane, WindowGui *window,
 	return view;
 }
 
+static char *window_get_label(Window *window)
+{
+	GString *str;
+	GSList *tmp;
+	char *ret;
+
+	if (window->active == NULL) {
+		/* empty window */
+		return window->name != NULL ? g_strdup(window->name) :
+			g_strdup("(empty)");
+	}
+
+	str = g_string_new(NULL);
+	for (tmp = window->items; tmp != NULL; tmp = tmp->next) {
+		WindowItem *item = tmp->data;
+
+		if (str->len > 0)
+			g_string_append_c(str, ' ');
+		g_string_append(str, item->name);
+	}
+	ret = str->str;
+	g_string_free(str, FALSE);
+	return ret;
+}
+
 static void event_title_destroy(GtkWidget *widget, WindowView *view)
 {
 	view->title = NULL;
@@ -180,6 +205,11 @@ void gui_window_view_set_title(WindowView *view)
 {
 	Window *window;
 	GtkWidget *title;
+	char *str;
+
+	str = window_get_label(view->window->window);
+	gtk_label_set_text(view->pane->label, str);
+	g_free(str);
 
 	if (view->pane->titlebox == NULL)
 		return;

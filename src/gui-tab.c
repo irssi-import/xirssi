@@ -80,9 +80,19 @@ static GtkWidget *gui_tab_label_new(GtkWidget *label, Tab *tab)
 	return eventbox;
 }
 
+static void gui_tab_set_label(Tab *tab)
+{
+	char str[20];
+	int page_num;
+
+        page_num = gtk_notebook_page_num(tab->frame->notebook, tab->widget)+1;
+	g_snprintf(str, sizeof(str), "%d:", page_num);
+	gtk_label_set_text(tab->label, str);
+}
+
 Tab *gui_tab_new(Frame *frame)
 {
-	GtkWidget *vbox, *hpane, *vpane, *label;
+	GtkWidget *vbox, *hbox, *hpane, *vpane, *label;
 	Tab *tab;
 
 	tab = g_new0(Tab, 1);
@@ -102,11 +112,15 @@ Tab *gui_tab_new(Frame *frame)
 	gtk_box_pack_start(GTK_BOX(vbox), hpane, TRUE, TRUE, 0);
 
 	/* tab's label */
-	label = gtk_label_new(NULL);
-	tab->label = GTK_LABEL(label);
+	hbox = gtk_hbox_new(FALSE, 5);
+        tab->tab_label_box = GTK_BOX(hbox);
+	tab->tab_label_widget = gui_tab_label_new(hbox, tab);
+	g_object_set_data(G_OBJECT(tab->tab_label_widget), "Tab", tab);
 
-	tab->tab_label = gui_tab_label_new(label, tab);
-	g_object_set_data(G_OBJECT(tab->tab_label), "Tab", tab);
+	label = gtk_label_new(NULL);
+        tab->label = GTK_LABEL(label);
+	gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+	gtk_widget_show_all(hbox);
 
 	/* nicklist */
 	tab->nicklist = gui_nicklist_view_new(tab);
@@ -120,7 +134,9 @@ Tab *gui_tab_new(Frame *frame)
 	gtk_widget_show_all(vbox);
 	gtk_widget_hide(tab->nicklist->widget);
 
-	gtk_notebook_append_page(frame->notebook, tab->widget, tab->tab_label);
+	gtk_notebook_append_page(frame->notebook, tab->widget,
+				 tab->tab_label_widget);
+	gui_tab_set_label(tab);
 
 	signal_emit("gui tab created", 1, tab);
 	return tab;
@@ -214,6 +230,9 @@ static gboolean event_destroy_pane(GtkWidget *widget, TabPane *pane)
 
 	tab->panes = g_list_remove(tab->panes, pane);
 
+	if (!pane->tab->destroying && pane->label != NULL)
+		gtk_widget_destroy(GTK_WIDGET(pane->label));
+
 	if (pane->view != NULL)
 		gtk_widget_destroy(pane->view->widget);
 
@@ -267,7 +286,7 @@ GtkPaned *gui_tab_add_paned(Tab *tab)
 
 TabPane *gui_tab_pane_new(Tab *tab)
 {
-	GtkWidget *vbox, *hbox, *space, *button;
+	GtkWidget *vbox, *hbox, *space, *button, *label;
 	GtkPaned *paned;
 	TabPane *pane;
 
@@ -307,6 +326,12 @@ TabPane *gui_tab_pane_new(Tab *tab)
 	gtk_box_pack_start(GTK_BOX(hbox), space, FALSE, FALSE, 0);
 
 	gtk_widget_show_all(vbox);
+
+	/* pane's tab label */
+	label = gtk_label_new(NULL);
+	pane->label = GTK_LABEL(label);
+	gtk_box_pack_end(tab->tab_label_box, label, FALSE, FALSE, 0);
+	gtk_widget_show(label);
 
 	tab->panes = g_list_prepend(tab->panes, pane);
 	return pane;
@@ -394,18 +419,6 @@ void gui_tab_set_active_window(Tab *tab, Window *window)
 	gui_frame_set_active_window(tab->frame, window);
 }
 
-static void tab_set_label(Tab *tab, Window *window)
-{
-	if (window == NULL || window->active == NULL) {
-		/* empty window */
-		gtk_label_set_text(tab->label,
-				   window != NULL && window->name != NULL ?
-				   window->name : "(empty)");
-	} else {
-		gtk_label_set_text(tab->label, window->active->name);
-	}
-}
-
 void gui_tab_set_active_window_item(Tab *tab, Window *window)
 {
 	WindowItem *witem;
@@ -415,8 +428,6 @@ void gui_tab_set_active_window_item(Tab *tab, Window *window)
 		return;
 
 	witem = window == NULL ? NULL : window->active;
-	tab_set_label(tab, window);
-
 	if (!IS_CHANNEL(witem)) {
 		/* clear nicklist */
 		gtk_widget_hide(tab->nicklist->widget);
@@ -452,29 +463,24 @@ void gui_tab_update_active_window(Tab *tab)
         gui_tab_set_active_window(tab, window);
 }
 
-static void sig_window_name_changed(Window *window)
+void gui_reset_tab_labels(Frame *frame)
 {
-	GSList *tmp;
+	Tab *tab;
+	int i;
 
-	if (window->items != NULL)
-		return;
-
-	for (tmp = WINDOW_GUI(window)->views; tmp != NULL; tmp = tmp->next) {
-		WindowView *view = tmp->data;
-
-		if (view->pane->tab->active_win == window)
-			tab_set_label(view->pane->tab, window);
+	i = 0;
+	while ((tab = gui_tab_get_page(frame, i)) != NULL) {
+                gui_tab_set_label(tab);
+		i++;
 	}
 }
 
 void gui_tabs_init(void)
 {
 	move_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **) move_xpm);
-	signal_add("window name changed", (SIGNAL_FUNC) sig_window_name_changed);
 }
 
 void gui_tabs_deinit(void)
 {
 	gdk_pixbuf_unref(move_pixbuf);
-	signal_remove("window name changed", (SIGNAL_FUNC) sig_window_name_changed);
 }
