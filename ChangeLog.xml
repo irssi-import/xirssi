@@ -5,6 +5,56 @@
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
+<time>19:46</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-frame.c</name>
+<revision>1.8</revision>
+</file>
+<msg>key handling changes
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-27</date>
+<weekday>Saturday</weekday>
+<time>19:31</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-window.c</name>
+<revision>1.6</revision>
+</file>
+<msg>indent fixes
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-27</date>
+<weekday>Saturday</weekday>
+<time>19:24</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-window-view.c</name>
+<revision>1.5</revision>
+</file>
+<file>
+<name>src/gui-window.c</name>
+<revision>1.5</revision>
+</file>
+<file>
+<name>src/gui-window.h</name>
+<revision>1.4</revision>
+</file>
+<commondir>src/</commondir>
+<msg>Moved printing with one big tag into multiple smaller tags, finally figured
+out that this is the correct way it should have been done from beginning :)
+Also added proper indenting to lines
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-27</date>
+<weekday>Saturday</weekday>
 <time>18:14</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
