@@ -1,3 +1,19 @@
+2002-05-09 18:52  Timo Sirainen <tss@iki.fi>
+
+	* src/dialog-about.c: minor update
+
+2002-05-09 18:30  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-tab-move.c: when detaching tab, the origin frame's tabs
+	weren't renumbered.
+
+2002-05-09 18:04  Timo Sirainen <tss@iki.fi>
+
+	* AUTHORS, TODO, pixmaps/Makefile.am, pixmaps/lock.xpm,
+	src/gui-channel.c, src/gui-menu-main.c, src/gui-url.c,
+	src/gui-url.h: forgot to add gui-url.*, using grey background
+	instead of lock icon now for topic locking, few minor changes.
+
 2002-05-09 16:46  Timo Sirainen <tss@iki.fi>
 
 	* src/dialog-about.c: minor changes
