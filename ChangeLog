@@ -1,3 +1,11 @@
+2002-04-26 22:47  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-context-nick.c, gui-entry.c, gui-frame.c,
+	gui-menu-nick.c, gui-menu-nick.h, gui-nicklist-view.c,
+	gui-window-context.c, gui-window-context.h, gui-window-view.c,
+	gui-window.c: utf8 <-> locale conversion by default, popup menu
+	fixes
+
 2002-04-26 19:56  Timo Sirainen <tss@iki.fi>
 
 	* src/: Makefile.am, gui-context-nick.c, gui-context-url.c,
