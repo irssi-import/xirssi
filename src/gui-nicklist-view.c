@@ -84,7 +84,7 @@ static gboolean event_button_press(GtkTreeView *tree, GdkEventButton *event,
 	if (gtk_tree_model_get_iter(model, &iter, path)) {
 		nick = tree_get_nick(model, &iter);
 		if (nick != NULL) {
-			signal_emit("command query", 2, nick,
+			signal_emit("command query", 2, nick->nick,
 				    view->nicklist->channel->server);
 		}
 	}
