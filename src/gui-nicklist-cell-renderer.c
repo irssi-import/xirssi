@@ -137,7 +137,7 @@ gtk_cell_renderer_nicklist_render (GtkCellRenderer *cell,
 	int first;
 
 	adj = gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(widget->parent));
-	first = adj->value+cell_area->y <= 1;
+	first = adj->value+cell_area->y <= cell_area->height;
 
 	if (GTK_CHECK_TYPE(cell, gtk_cell_renderer_nicklist_text_get_type())) {
                 GtkCellRendererNicklistTextClass *c =
