@@ -8,6 +8,7 @@ if test "x`echo $error|grep AM_PATH_GTK`" != "x"; then
   aclocal $ACLOCAL_FLAGS -I .
 fi
 
+libtoolize --force --copy
 autoheader
 autoconf
 automake --add-missing
