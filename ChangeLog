@@ -1,3 +1,16 @@
+2002-05-18 09:49  Timo Sirainen <tss@iki.fi>
+
+	* src/setup-ignores-edit.c: adding new ignores crashed..
+
+2002-05-18 09:38  Timo Sirainen <tss@iki.fi>
+
+	* glade/irssi.glade, src/Makefile.am, src/gui-frame.c, src/gui.c,
+	src/gui.h, src/module.h, src/setup-channels.c,
+	src/setup-completion.c, src/setup-ignores-edit.c,
+	src/setup-prefs.c, src/setup-servers.c, src/setup.h,
+	src/glade/interface.c, src/glade/interface.h: Ignores work now +
+	many other smaller misc. fixes.
+
 2002-05-17 17:29  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-itemlist.c: "window item name changed" wasn't handled
