@@ -112,9 +112,13 @@ static gboolean event_button_release(GtkTreeView *tree, GdkEventButton *event,
 		return FALSE;
 	}
 
-	/* popup menu */
+	/* popup menu - FIXME: try to get this in button_press_event.
+	   it just has the problem of not updating the selections yet,
+	   one possible solution would be to read the selected nicks later
+	   which might actually be very good idea since selected nicks might
+	   leave the channel while popup menu is being open.. */
 	gui_menu_nick_popup(view->nicklist->channel->server,
-			    view->nicklist->channel, nicks, event);
+			    view->nicklist->channel, nicks, 0);
 	g_slist_free(nicks);
 	return FALSE;
 }

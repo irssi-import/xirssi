@@ -153,7 +153,8 @@ static gboolean event_switch_page(GtkNotebook *notebook, GtkNotebookPage *page,
 	tab = g_object_get_data(G_OBJECT(widget), "irssi tab");
 
 	frame->active_tab = tab;
-	window_set_active(tab->active_win);
+	if (tab->active_win != NULL)
+		window_set_active(tab->active_win);
 	return FALSE;
 }
 
@@ -173,7 +174,7 @@ Frame *gui_frame_new(void)
 			 G_CALLBACK(event_focus), frame);
 	g_signal_connect(GTK_OBJECT(window), "key_press_event",
 			 G_CALLBACK(event_key_press), frame);
-	gtk_widget_set_usize(window, 600, 400);
+	gtk_widget_set_usize(window, 640, 480);
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_container_add(GTK_CONTAINER(window), vbox);
@@ -230,7 +231,8 @@ Tab *gui_frame_new_tab(Frame *frame)
 void gui_frame_set_active(Frame *frame)
 {
 	active_frame = frame;
-	if (frame != NULL && frame->active_tab != NULL)
+	if (frame != NULL && frame->active_tab != NULL &&
+	    frame->active_tab->active_win != NULL)
 		window_set_active(frame->active_tab->active_win);
 }
 

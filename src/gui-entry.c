@@ -138,7 +138,11 @@ static void key_send_line(const char *data, Entry *entry)
 	add_history = g_strdup(line);
 	history = command_history_current(entry->active_win);
 
-	str = g_strdup(line);
+	str = g_locale_from_utf8(line, -1, NULL, NULL, NULL);
+	if (str == NULL) {
+		/* error - fallback to utf8 */
+		str = g_strdup(line);
+	}
 	translate_output(str);
 
         gui_entry_ref(entry);

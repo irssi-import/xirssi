@@ -25,6 +25,7 @@
 #include "printtext.h"
 #include "window-items.h"
 
+#include "gui-frame.h"
 #include "gui-tab.h"
 #include "gui-window.h"
 #include "gui-window-view.h"
@@ -137,8 +138,6 @@ WindowView *gui_window_view_new(Tab *tab, WindowGui *window,
 			       G_CALLBACK(event_resize), view);
 	g_signal_connect(G_OBJECT(text_view), "motion_notify_event",
 			 G_CALLBACK(gui_window_context_event_motion), view);
-	g_signal_connect(G_OBJECT(text_view), "leave_notify_event",
-			 G_CALLBACK(gui_window_context_event_leave), view);
 	gtk_container_add(GTK_CONTAINER(sw), text_view);
 
 	/* FIXME: configurable */

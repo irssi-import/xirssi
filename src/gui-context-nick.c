@@ -129,8 +129,8 @@ static void sig_window_leave(Window *window, const char *word, GtkTextTag *tag)
 	statusbar_pop_nick(window_get_statusbar(window));
 }
 
-static void sig_window_release(Window *window, const char *word,
-			       GtkTextTag *tag, GdkEventButton *event)
+static void sig_window_press(Window *window, const char *word,
+			     GtkTextTag *tag, GdkEventButton *event)
 {
 	Server *server;
 	GSList *nicks;
@@ -144,7 +144,7 @@ static void sig_window_release(Window *window, const char *word,
 
 	nicks = g_slist_prepend(NULL, (void *) word);
 	gui_menu_nick_popup(server, CHANNEL(active_win->active),
-			    nicks, event);
+			    nicks, event->button);
 	g_slist_free(nicks);
 }
 
@@ -163,7 +163,7 @@ void gui_context_nick_init(void)
         signal_add("gui window context word", (SIGNAL_FUNC) sig_window_word);
         signal_add("gui window context enter", (SIGNAL_FUNC) sig_window_enter);
         signal_add("gui window context leave", (SIGNAL_FUNC) sig_window_leave);
-	signal_add("gui window context release", (SIGNAL_FUNC) sig_window_release);
+	signal_add("gui window context press", (SIGNAL_FUNC) sig_window_press);
 	signal_add("gui nicklist enter", (SIGNAL_FUNC) sig_nicklist_enter);
 	signal_add("gui nicklist leave", (SIGNAL_FUNC) sig_nicklist_leave);
 }
@@ -173,7 +173,7 @@ void gui_context_nick_deinit(void)
         signal_remove("gui window context word", (SIGNAL_FUNC) sig_window_word);
         signal_remove("gui window context enter", (SIGNAL_FUNC) sig_window_enter);
         signal_remove("gui window context leave", (SIGNAL_FUNC) sig_window_leave);
-	signal_remove("gui window context release", (SIGNAL_FUNC) sig_window_release);
+	signal_remove("gui window context press", (SIGNAL_FUNC) sig_window_press);
 	signal_remove("gui nicklist enter", (SIGNAL_FUNC) sig_nicklist_enter);
 	signal_remove("gui nicklist leave", (SIGNAL_FUNC) sig_nicklist_leave);
 }

@@ -86,14 +86,13 @@ static gboolean event_menu_destroy(GtkWidget *widget)
 }
 
 void gui_menu_nick_popup(Server *server, Channel *channel,
-			 GSList *nicks, GdkEventButton *event)
+			 GSList *nicks, int button)
 {
 	GtkWidget *menu;
 	char *space_nicks, *comma_nicks;
 
 	g_return_if_fail(server != NULL);
 	g_return_if_fail(nicks != NULL);
-	g_return_if_fail(event != NULL);
 
 	space_nicks = gslist_to_string(nicks, " ");
 	comma_nicks = gslist_to_string(nicks, ",");
@@ -116,5 +115,5 @@ void gui_menu_nick_popup(Server *server, Channel *channel,
 
 	gtk_widget_show_all(menu);
 	gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL,
-		       event->button, 0);
+		       button, 0);
 }

@@ -119,8 +119,20 @@ static void gui_window_print(WindowGui *window, TextDest *dest,
 	GtkTextTag *tag;
 	GtkTextIter iter;
 	GdkColor *colortab;
-	char tag_name[50];
+	char *utf8_text, tag_name[50];
 	int offset;
+
+	utf8_text = g_locale_to_utf8(text, -1, NULL, NULL, NULL);
+	if (utf8_text == NULL) {
+		/* error - fallback to hardcoded charset (ms windows one) */
+		utf8_text = g_convert(text, strlen(text),
+				      "UTF-8", "CP1252",
+				      NULL, NULL, NULL);
+		if (utf8_text == NULL) {
+			/* shouldn't happen I think.. */
+			utf8_text = g_strdup(text);
+		}
+	}
 
 	gtk_text_buffer_get_end_iter(window->buffer, &iter);
 
@@ -177,13 +189,15 @@ static void gui_window_print(WindowGui *window, TextDest *dest,
 	/* add text */
 	offset = gtk_text_iter_get_offset(&iter);
 	gtk_text_buffer_insert_with_tags(window->buffer, &iter,
-					 text, -1, tag, NULL);
+					 utf8_text, -1, tag, NULL);
 	gtk_text_buffer_place_cursor(window->buffer, &iter);
 
 	/* add context tags */
 	gtk_text_buffer_get_end_iter(window->buffer, &iter);
 	gtk_text_iter_set_offset(&iter, offset);
-	gui_window_print_mark_context(window, dest, &iter, text);
+	gui_window_print_mark_context(window, dest, &iter, utf8_text);
+
+	g_free(utf8_text);
 }
 
 static void sig_window_create_override(gpointer tab)

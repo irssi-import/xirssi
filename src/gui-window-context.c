@@ -266,18 +266,6 @@ gboolean gui_window_context_event_motion(GtkWidget *widget, GdkEvent *event,
 	return FALSE;
 }
 
-gboolean gui_window_context_event_leave(GtkWidget *widget, GdkEvent *event,
-					WindowView *view)
-{
-        ContextEvent *context;
-
-	if (view->cursor_link) {
-		context = g_object_get_data(G_OBJECT(widget), "context");
-		window_context_leave(view, context);
-	}
-	return FALSE;
-}
-
 static void sig_gui_window_view_created(WindowView *view)
 {
         ContextEvent *context;
