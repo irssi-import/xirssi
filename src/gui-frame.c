@@ -71,51 +71,10 @@ static gboolean event_focus(GtkWidget *widget, GdkEventFocus *event,
 	return FALSE;
 }
 
-static gboolean event_key_press_after(GtkWidget *widget, GdkEventKey *event,
-				      Frame *frame)
+static void entry_grab_focus(GtkWidget *entry, GdkEventKey *event)
 {
-	char *str;
-
-	if (gui_is_modifier(event->keyval))
-		return FALSE;
-
-	str = gui_keyboard_get_event_string(event);
-	if (key_pressed(frame->entry->keyboard, str)) {
-		g_signal_stop_emission_by_name(G_OBJECT(widget),
-					       "key_press_event");
-		g_free(str);
-		return TRUE;
-	}
-	g_free(str);
-
-	return FALSE;
-}
-
-static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
-				Frame *frame)
-{
-	GtkWidget *entry;
 	int pos;
 
-	if (g_slist_find(frame->focusable_widgets,
-			 gtk_window_get_focus(frame->window)) != NULL) {
-		/* focus is in another widget where it's allowed -
-		   don't do anything */
-		return FALSE;
-	}
-
-	if (event->keyval == GDK_Tab ||
-	    event->keyval == GDK_Up ||
-	    event->keyval == GDK_Down ||
-	    (event->state & GDK_CONTROL_MASK) != 0) {
-		/* kludging around keys changing focus (and some others) and
-		   not letting us handle it in the after-signal. and we can't
-		   just handle everything here, because it will break
-		   dead-keys */
-		return event_key_press_after(widget, event, frame);
-	}
-
-	entry = frame->entry->widget;
 	if (!GTK_WIDGET_HAS_FOCUS(entry) &&
 	    (event->state & (GDK_CONTROL_MASK|GDK_MOD1_MASK)) == 0) {
 		/* normal key pressed, change focus to entry field -
@@ -126,7 +85,44 @@ static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
 		gtk_widget_grab_focus(entry);
 		gtk_editable_select_region(GTK_EDITABLE(entry), pos, pos);
 	}
+}
 
+static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
+				Frame *frame)
+{
+	char *str;
+
+	if (g_slist_find(frame->focusable_widgets,
+			 gtk_window_get_focus(frame->window)) != NULL) {
+		/* focus is in another widget where it's allowed -
+		   don't do anything */
+		return FALSE;
+	}
+
+	if (gui_is_modifier(event->keyval)) {
+		if (gui_is_dead_key(event->keyval)) {
+			entry_grab_focus(frame->entry->widget, event);
+                        frame->entry->last_dead_key = TRUE;
+		}
+		return FALSE;
+	}
+
+	if (frame->entry->last_dead_key) {
+		/* we're continuing a dead key press, so the keycode is still
+		   incomplete. don't try to handle any custom key bindings */
+		frame->entry->last_dead_key = FALSE;
+	} else {
+		str = gui_keyboard_get_event_string(event);
+		if (key_pressed(frame->entry->keyboard, str)) {
+			g_signal_stop_emission_by_name(G_OBJECT(widget),
+						       "key_press_event");
+			g_free(str);
+			return TRUE;
+		}
+		g_free(str);
+	}
+
+	entry_grab_focus(frame->entry->widget, event);
 	return FALSE;
 }
 
@@ -170,8 +166,6 @@ Frame *gui_frame_new(int show)
 			 G_CALLBACK(event_delete), frame);
 	g_signal_connect(G_OBJECT(window), "focus_in_event",
 			 G_CALLBACK(event_focus), frame);
-	g_signal_connect_after(G_OBJECT(window), "key_press_event",
-			       G_CALLBACK(event_key_press_after), frame);
 	g_signal_connect(G_OBJECT(window), "key_press_event",
 			 G_CALLBACK(event_key_press), frame);
 

@@ -9,6 +9,8 @@ struct _Entry {
 
 	Window *active_win;
 	Keyboard *keyboard;
+
+	unsigned int last_dead_key:1;
 };
 
 Entry *gui_entry_new(Frame *frame);

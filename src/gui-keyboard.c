@@ -110,7 +110,15 @@ int gui_is_modifier(int keyval)
 	case GDK_Super_R:
 	case GDK_Hyper_L:
 	case GDK_Hyper_R:
+		return TRUE;
+	default:
+		return gui_is_dead_key(keyval);
+	}
+}
 
+int gui_is_dead_key(int keyval)
+{
+	switch (keyval) {
 	case GDK_dead_grave:
 	case GDK_dead_acute:
 	case GDK_dead_circumflex:
@@ -129,7 +137,6 @@ int gui_is_modifier(int keyval)
 	case GDK_dead_semivoiced_sound:
 	case GDK_dead_belowdot:
 		return TRUE;
-
 	default:
 		return FALSE;
 	}
