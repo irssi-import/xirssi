@@ -4,7 +4,7 @@
 struct _Frame {
 	int refcount;
 
-	GtkWidget *widget;
+	GtkWindow *window;
 	GtkNotebook *notebook;
 	GtkStatusbar *statusbar;
 	Entry *entry;

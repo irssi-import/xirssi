@@ -23,6 +23,7 @@
 
 #include "gui-frame.h"
 #include "gui-tab.h"
+#include "gui-tab-label.h"
 #include "gui-window.h"
 #include "gui-channel.h"
 #include "gui-nicklist-view.h"
@@ -35,6 +36,7 @@ static gboolean event_destroy(GtkWidget *window, Tab *tab)
 		tab->frame->active_tab = NULL;
 
 	tab->widget = NULL;
+	tab->tab_label = NULL;
 	tab->label = NULL;
 
 	gui_tab_unref(tab);
@@ -43,7 +45,7 @@ static gboolean event_destroy(GtkWidget *window, Tab *tab)
 
 Tab *gui_tab_new(Frame *frame)
 {
-	GtkWidget *vbox, *hpane, *vpane;
+	GtkWidget *vbox, *hpane, *vpane, *label;
 	Tab *tab;
 
 	tab = g_new0(Tab, 1);
@@ -62,7 +64,9 @@ Tab *gui_tab_new(Frame *frame)
 	gtk_box_pack_start(GTK_BOX(vbox), hpane, TRUE, TRUE, 0);
 
 	/* tab's label */
-	tab->label = GTK_LABEL(gtk_label_new(NULL));
+	label = gtk_label_new(NULL);
+	tab->label = GTK_LABEL(label);
+	tab->tab_label = gui_tab_label_new(tab, label);
 
 	/* nicklist */
 	tab->nicklist = gui_nicklist_view_new(tab);
@@ -159,19 +163,19 @@ static void sig_pane_move_up(GtkWidget *widget, GtkPaned *paned)
 }
 
 static GtkWidget *
-stock_button_create(const char *stock, GtkSignalFunc callback, void *data)
+stock_button_create(const char *stock, GCallback callback, void *data)
 {
 	GtkWidget *button, *pix;
 
 	pix = gtk_image_new_from_stock(stock, GTK_ICON_SIZE_BUTTON);
-	gtk_widget_set_usize(pix, 10, 10);
+	gtk_widget_set_size_request(pix, 10, 10);
 
 	button = gtk_button_new();
 	gtk_container_add(GTK_CONTAINER(button), pix);
 
 	if (callback != NULL) {
-		gtk_signal_connect(GTK_OBJECT(button), "clicked",
-				   callback, data);
+		g_signal_connect(G_OBJECT(button), "clicked",
+				 callback, data);
 	}
 
 	return button;
@@ -252,7 +256,7 @@ GtkBox *gui_tab_add_widget(Tab *tab, GtkWidget *widget)
 	gtk_box_pack_start(GTK_BOX(hbox), button, FALSE, FALSE, 0);
 
 	space = gtk_label_new(NULL);
-	gtk_widget_set_usize(space, 5, -1);
+	gtk_widget_set_size_request(space, 5, -1);
 	gtk_box_pack_start(GTK_BOX(hbox), space, FALSE, FALSE, 0);
 
 	button = stock_button_create(GTK_STOCK_GO_UP, GTK_SIGNAL_FUNC(sig_pane_move_up), paned);
@@ -264,7 +268,7 @@ GtkBox *gui_tab_add_widget(Tab *tab, GtkWidget *widget)
 	gtk_box_pack_start(GTK_BOX(hbox), button, FALSE, FALSE, 0);
 
 	space = gtk_label_new(NULL);
-	gtk_widget_set_usize(space, 5, -1);
+	gtk_widget_set_size_request(space, 5, -1);
 	gtk_box_pack_start(GTK_BOX(hbox), space, FALSE, FALSE, 0);
 
 	gtk_widget_show_all(vbox);
@@ -284,8 +288,8 @@ GtkBox *gui_tab_add_widget(Tab *tab, GtkWidget *widget)
 	gtk_paned_add1(paned, new_paned);
 	gtk_widget_show(new_paned);
 
-	gtk_signal_connect(GTK_OBJECT(paned), "button_release_event",
-			   GTK_SIGNAL_FUNC(event_pane_moved), tab);
+	g_signal_connect(G_OBJECT(paned), "button_release_event",
+			 G_CALLBACK(event_pane_moved), tab);
 
 	tab->panes = g_list_prepend(tab->panes, new_paned);
 
@@ -347,10 +351,10 @@ void gui_tab_set_active_window_item(Tab *tab, Window *window)
 	witem = window->active;
 	if (witem == NULL) {
 		/* empty window */
-		gtk_label_set(tab->label, window->name != NULL ?
-			      window->name : "(empty)");
+		gtk_label_set_text(tab->label, window->name != NULL ?
+				   window->name : "(empty)");
 	} else {
-		gtk_label_set(tab->label, witem->name);
+		gtk_label_set_text(tab->label, witem->name);
 	}
 
 	if (!IS_CHANNEL(witem)) {

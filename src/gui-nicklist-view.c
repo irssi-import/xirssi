@@ -194,7 +194,7 @@ NicklistView *gui_nicklist_view_new(Tab *tab)
 	gui_tab_ref(view->tab);
 
 	view->widget = vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_set_usize(vbox, 150, -1);
+	gtk_widget_set_size_request(vbox, 150, -1);
 	g_signal_connect(G_OBJECT(vbox), "destroy",
 			 G_CALLBACK(event_destroy), view);
 
@@ -214,14 +214,14 @@ NicklistView *gui_nicklist_view_new(Tab *tab)
 
 	/* view */
 	list = gtk_tree_view_new();
-	gtk_signal_connect(GTK_OBJECT(list), "button_press_event",
-			   GTK_SIGNAL_FUNC(event_button_press), view);
-	gtk_signal_connect(GTK_OBJECT(list), "button_release_event",
-			   GTK_SIGNAL_FUNC(event_button_release), view);
-	gtk_signal_connect(GTK_OBJECT(list), "motion_notify_event",
-			   GTK_SIGNAL_FUNC(event_motion), view);
-	gtk_signal_connect(GTK_OBJECT(list), "leave_notify_event",
-			   GTK_SIGNAL_FUNC(event_leave), view);
+	g_signal_connect(G_OBJECT(list), "button_press_event",
+			 G_CALLBACK(event_button_press), view);
+	g_signal_connect(G_OBJECT(list), "button_release_event",
+			 G_CALLBACK(event_button_release), view);
+	g_signal_connect(G_OBJECT(list), "motion_notify_event",
+			 G_CALLBACK(event_motion), view);
+	g_signal_connect(G_OBJECT(list), "leave_notify_event",
+			 G_CALLBACK(event_leave), view);
 	view->view = GTK_TREE_VIEW(list);
 	gtk_container_add(GTK_CONTAINER(sw), list);
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(list), FALSE);
@@ -284,5 +284,5 @@ void gui_nicklist_view_set(NicklistView *view, Nicklist *nicklist)
 
 void gui_nicklist_view_label_updated(NicklistView *view)
 {
-	gtk_label_set(GTK_LABEL(view->label), view->nicklist->label);
+	gtk_label_set_text(GTK_LABEL(view->label), view->nicklist->label);
 }

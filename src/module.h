@@ -1,5 +1,6 @@
 #include "common.h"
 
+#define GTK_DISABLE_DEPRECATED
 #include <gtk/gtk.h>
 
 #define MODULE_NAME "xirssi"

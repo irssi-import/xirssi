@@ -6,6 +6,7 @@ struct _Tab {
 	Frame *frame;
 
 	GtkWidget *widget;
+	GtkWidget *tab_label;
 	GtkLabel *label;
 
 	GList *panes;
@@ -14,6 +15,11 @@ struct _Tab {
 	NicklistView *nicklist;
 	Window *active_win;
 	int data_level;
+
+	int drag_pos;
+	unsigned int pressing:1;
+	unsigned int dragging:1;
+	unsigned int detaching:1;
 };
 
 Tab *gui_tab_new(Frame *frame);

@@ -41,7 +41,7 @@ static gboolean event_destroy(GtkWidget *window, Frame *frame)
 
 	signal_emit("gui frame destroyed", 1, frame);
 
-	frame->widget = NULL;
+	frame->window = NULL;
 	frame->notebook = NULL;
 
 	if (frames == NULL) {
@@ -140,7 +140,8 @@ Frame *gui_frame_new(void)
 	frame->refcount = 1;
 
 	/* create the window */
-	frame->widget = window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+        frame->window = GTK_WINDOW(window);
 	g_signal_connect(G_OBJECT(window), "destroy",
 			 G_CALLBACK(event_destroy), frame);
 	g_signal_connect(G_OBJECT(window), "focus_in_event",
@@ -150,8 +151,8 @@ Frame *gui_frame_new(void)
 	g_signal_connect(GTK_OBJECT(window), "key_press_event",
 			 G_CALLBACK(event_key_press), frame);
 
-	gtk_widget_set_usize(window, 700, 400);
-	gtk_window_set_policy(GTK_WINDOW(window), TRUE, TRUE, FALSE);
+	gtk_window_set_default_size(frame->window, 700, 400);
+        gtk_window_set_resizable(frame->window, TRUE);
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_container_add(GTK_CONTAINER(window), vbox);
@@ -200,8 +201,7 @@ Tab *gui_frame_new_tab(Frame *frame)
 	tab = gui_tab_new(frame);
 
 	g_object_set_data(G_OBJECT(tab->widget), "irssi tab", tab);
-	gtk_notebook_append_page(frame->notebook, tab->widget,
-				 GTK_WIDGET(tab->label));
+	gtk_notebook_append_page(frame->notebook, tab->widget, tab->tab_label);
 	return tab;
 }
 
