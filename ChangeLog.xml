@@ -5,6 +5,45 @@
 <entry>
 <date>2002-06-06</date>
 <weekday>Thursday</weekday>
+<time>22:50</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>glade/irssi.glade</name>
+<revision>1.11</revision>
+</file>
+<file>
+<name>src/setup-prefs.c</name>
+<revision>1.11</revision>
+</file>
+<file>
+<name>src/glade/interface.c</name>
+<revision>1.11</revision>
+</file>
+<msg>Setup -&gt; Appearance: "window output" -&gt; "settings".
+</msg>
+</entry>
+
+<entry>
+<date>2002-06-06</date>
+<weekday>Thursday</weekday>
+<time>22:49</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-context-url.c</name>
+<revision>1.3</revision>
+</file>
+<file>
+<name>src/gui-menu-url.c</name>
+<revision>1.7</revision>
+</file>
+<commondir>src/</commondir>
+<msg>Support for https URLs.
+</msg>
+</entry>
+
+<entry>
+<date>2002-06-06</date>
+<weekday>Thursday</weekday>
 <time>22:39</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
