@@ -101,20 +101,24 @@ static gboolean event_main_clicked(GtkWidget *button, GtkWidget *list)
 	if (widget != NULL)
 		gtk_widget_hide(widget);
 
+	notebook = g_object_get_data(G_OBJECT(setup_dialog), "prefs_notebook");
+
 	/* show our new list */
-	if (widget == list)
+	if (widget == list) {
+		/* unselect everything */
 		list = NULL;
-	else {
+		gtk_notebook_set_current_page(notebook, 0);
+	} else {
 		gtk_widget_show(list);
 
 		/* show the active page of this list */
 		widget = g_object_get_data(G_OBJECT(list), "active_button");
 		if (widget != NULL) {
 			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget),
+						     FALSE);
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget),
 						     TRUE);
 		} else {
-			notebook = g_object_get_data(G_OBJECT(setup_dialog),
-						     "prefs_notebook");
 			gtk_notebook_set_current_page(notebook, 0);
 		}
 	}
