@@ -57,7 +57,7 @@ static gboolean event_focus(GtkWidget *widget, GdkEventFocus *event,
 			    Frame *frame)
 {
         gui_frame_set_active(frame);
-	if (frame->active_tab->active_win != NULL)
+	if (frame->active_tab != NULL && frame->active_tab->active_win != NULL)
 		window_set_active(frame->active_tab->active_win);
 	return FALSE;
 }
