@@ -145,6 +145,9 @@ void gui_window_activities_init(void)
 	signal_add_first("window activity", (SIGNAL_FUNC) sig_activity);
 
 	signal_add("window hilight", (SIGNAL_FUNC) sig_activity_update);
+	/* we need to use "window changed", so we can clear activity in
+	   all split windows in tab. */
+	signal_add("window changed", (SIGNAL_FUNC) sig_activity_update);
 }
 
 void gui_window_activities_deinit(void)
@@ -153,4 +156,5 @@ void gui_window_activities_deinit(void)
 	signal_remove("window activity", (SIGNAL_FUNC) sig_activity);
 
 	signal_remove("window hilight", (SIGNAL_FUNC) sig_activity_update);
+	signal_remove("window changed", (SIGNAL_FUNC) sig_activity_update);
 }
