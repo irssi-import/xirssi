@@ -128,8 +128,10 @@ void gui_menu_url_popup(const char *url, int button)
 
 	g_signal_connect(G_OBJECT(menu), "destroy",
 			 G_CALLBACK(event_menu_destroy), NULL);
-	g_object_set_data(G_OBJECT(menu), "url", new_url);
+	g_signal_connect(G_OBJECT(menu), "selection_done",
+			 G_CALLBACK(gtk_widget_destroy), NULL);
 
+	g_object_set_data(G_OBJECT(menu), "url", new_url);
 	gui_menu_fill(menu, items, nitems, menu_callback, menu);
 
 	gtk_widget_show_all(menu);

@@ -104,6 +104,8 @@ void gui_menu_nick_popup(GetNicksFunc func, void *user_data, int button)
 
 	g_signal_connect(G_OBJECT(menu), "destroy",
 			 G_CALLBACK(event_destroy), NULL);
+	g_signal_connect(G_OBJECT(menu), "selection_done",
+			 G_CALLBACK(gtk_widget_destroy), NULL);
 	g_object_set_data(G_OBJECT(menu), "nicks_func", func);
 	g_object_set_data(G_OBJECT(menu), "nicks_func_data", user_data);
 

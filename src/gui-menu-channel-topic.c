@@ -63,6 +63,8 @@ void gui_menu_channel_topic_popup(Channel *channel, GtkWidget *widget,
 	g_return_if_fail(channel != NULL);
 
 	menu = gtk_menu_new();
+	g_signal_connect(G_OBJECT(menu), "selection_done",
+			 G_CALLBACK(gtk_widget_destroy), NULL);
 
 	gtk_widget_ref(widget);
 	g_object_set_data(G_OBJECT(menu), "topic_widget", widget);
