@@ -5,6 +5,32 @@
 <entry>
 <date>2002-05-06</date>
 <weekday>Monday</weekday>
+<time>02:06</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>TODO</name>
+<revision>1.6</revision>
+</file>
+<msg>updated
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-06</date>
+<weekday>Monday</weekday>
+<time>02:03</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-keyboard.c</name>
+<revision>1.7</revision>
+</file>
+<msg>added bind actions left_window, right_window, upper_window and lower_window
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-06</date>
+<weekday>Monday</weekday>
 <time>00:43</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
