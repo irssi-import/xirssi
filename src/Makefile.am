@@ -28,7 +28,8 @@ xirssi_LDADD = \
 	@COMMON_LIBS@ \
 	@PERL_LINK_LIBS@ \
 	@PERL_FE_LINK_LIBS@ \
-	@PERL_LINK_FLAGS@
+	@PERL_LINK_FLAGS@ \
+	@PROG_LIBS@
 
 xirssi_SOURCES = \
 	dialog-about.c \
