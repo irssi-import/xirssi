@@ -3,6 +3,73 @@
 <changelog xmlns="http://www.red-bean.com/xmlns/cvs2cl/">
 
 <entry>
+<date>2002-05-11</date>
+<weekday>Saturday</weekday>
+<time>05:00</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-window.c</name>
+<revision>1.14</revision>
+</file>
+<msg>when destroying last tab in frame, destroy the tab too.
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-11</date>
+<weekday>Saturday</weekday>
+<time>04:37</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/Makefile.am</name>
+<revision>1.16</revision>
+</file>
+<file>
+<name>src/gui.c</name>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui.h</name>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/irssi.c</name>
+<revision>1.10</revision>
+</file>
+<file>
+<name>src/module.h</name>
+<revision>1.5</revision>
+</file>
+<file>
+<name>src/setup-servers-network.c</name>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/setup-servers-server.c</name>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/setup-servers.c</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>src/setup-servers.h</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>src/setup.c</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>src/setup.h</name>
+<revision>1.2</revision>
+</file>
+<commondir>src/</commondir>
+<msg>added server dialog, and gui.[ch] for some helper functions.
+</msg>
+</entry>
+
+<entry>
 <date>2002-05-10</date>
 <weekday>Friday</weekday>
 <time>23:31</time>
