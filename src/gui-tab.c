@@ -132,44 +132,6 @@ static void event_pane_close(GtkWidget *widget, TabPane *pane)
 		gtk_widget_destroy(pane->widget);
 }
 
-#if 0 // FIXME
-static void pane_move_up(GList *lower)
-{
-	TabPane *pane1, *pane2;
-	GtkPaned *paned1, *paned2;
-
-	pane1 = lower->prev->data;
-	pane2 = lower->data;
-
-	/* remove */
-	gtk_widget_ref(pane1->widget);
-	gtk_widget_ref(pane2->widget);
-
-	gtk_widget_hide(pane1->widget);
-	gtk_widget_hide(pane2->widget);
-
-	paned1 = GTK_PANED(pane1->widget->parent);
-	paned2 = GTK_PANED(pane2->widget->parent);
-
-	gtk_container_remove(GTK_CONTAINER(paned2), pane1->widget);
-	gtk_container_remove(GTK_CONTAINER(paned2), pane2->widget);
-
-	/* add */
-	gtk_paned_add2(paned2, pane1->widget);
-	gtk_paned_add2(paned1, pane2->widget);
-
-	gtk_widget_show(pane1->widget);
-	gtk_widget_show(pane2->widget);
-
-	gtk_widget_unref(pane1->widget);
-	gtk_widget_unref(pane2->widget);
-
-	/* swap in the tab->panes list too */
-	lower->data = pane1;
-	lower->prev->data = pane2;
-}
-#endif
-
 static TabPane *tab_find_pane(Tab *tab, GtkWidget *paned)
 {
 	GList *tmp;

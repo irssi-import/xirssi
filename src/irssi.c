@@ -114,7 +114,7 @@ static void gui_finish_init(void)
 			  (GLogLevelFlags) (G_LOG_LEVEL_CRITICAL |
 					    G_LOG_LEVEL_WARNING),
 			  (GLogFunc) g_log_default_handler, NULL);
-        g_log_set_always_fatal(G_LOG_LEVEL_MASK);
+	/*g_log_set_always_fatal(G_LOG_LEVEL_MASK);*/
 
 	signal_emit("irssi init finished", 0);
 }
