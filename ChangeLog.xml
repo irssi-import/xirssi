@@ -3,6 +3,32 @@
 <changelog xmlns="http://www.red-bean.com/xmlns/cvs2cl/">
 
 <entry>
+<date>2002-06-11</date>
+<weekday>Tuesday</weekday>
+<time>22:44</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>pixmaps/highlighting.png</name>
+<revision>1.1</revision>
+</file>
+<file>
+<name>pixmaps/ignores.png</name>
+<revision>1.1</revision>
+</file>
+<file>
+<name>pixmaps/keyboard.png</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>pixmaps/themes.png</name>
+<revision>1.3</revision>
+</file>
+<commondir>pixmaps/</commondir>
+<msg>updated
+</msg>
+</entry>
+
+<entry>
 <date>2002-06-06</date>
 <weekday>Thursday</weekday>
 <time>22:50</time>
