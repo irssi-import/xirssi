@@ -692,7 +692,7 @@
 	src/gui-nicklist-view.h, src/gui-tab.c, src/gui-tab.h,
 	src/gui-window-item-rec.h, src/gui-context-nick.c,
 	src/gui-menu-nick.h, src/gui-window-context.c,
-	src/gui-window-context.h: Initial revision
+	src/gui-window-context.h: initial import
 
 2002-04-22 09:06  Timo Sirainen <tss@iki.fi>
 
@@ -708,5 +708,5 @@
 	src/gui-nicklist-view.h, src/gui-tab.c, src/gui-tab.h,
 	src/gui-window-item-rec.h, src/gui-context-nick.c,
 	src/gui-menu-nick.h, src/gui-window-context.c,
-	src/gui-window-context.h: initial import
+	src/gui-window-context.h: Initial revision
 
