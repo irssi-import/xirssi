@@ -5,6 +5,27 @@
 <entry>
 <date>2002-06-11</date>
 <weekday>Tuesday</weekday>
+<time>23:14</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>pixmaps/channels.png</name>
+<revision>1.1</revision>
+</file>
+<file>
+<name>pixmaps/filtering-settings.png</name>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/setup-prefs.c</name>
+<revision>1.12</revision>
+</file>
+<msg>updated pixmaps
+</msg>
+</entry>
+
+<entry>
+<date>2002-06-11</date>
+<weekday>Tuesday</weekday>
 <time>22:44</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
