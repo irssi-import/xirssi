@@ -3,6 +3,19 @@
 <changelog xmlns="http://www.red-bean.com/xmlns/cvs2cl/">
 
 <entry>
+<date>2002-05-17</date>
+<weekday>Friday</weekday>
+<time>17:29</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-itemlist.c</name>
+<revision>1.5</revision>
+</file>
+<msg>"window item name changed" wasn't handled properly.
+</msg>
+</entry>
+
+<entry>
 <date>2002-05-16</date>
 <weekday>Thursday</weekday>
 <time>08:36</time>
