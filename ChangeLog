@@ -1,0 +1,36 @@
+2002-04-22 11:33  Timo Sirainen <tss@iki.fi>
+
+	* configure.in: check ../irssi/ for irssi sources too
+
+2002-04-22 11:06  Timo Sirainen <tss@iki.fi>
+
+	* AUTHORS, Makefile.am, NEWS, README, TODO, acconfig.h, autogen.sh,
+	config-plugin.h.in, configure.in, stamp.h.in, pixmaps/Makefile.am,
+	pixmaps/halfop.xpm, pixmaps/op.xpm, pixmaps/voice.xpm,
+	pixmaps/.xvpics/irssilogo.png, src/.cvsignore, src/Makefile.am,
+	src/gui-frame.h, src/gui-nicklist.c, src/gui-nicklist.h,
+	src/gui-window-view.h, src/gui-window.h, src/irssi.c, src/module.h,
+	src/gui-frame.c, src/gui-window.c, src/gui-entry.c,
+	src/gui-entry.h, src/gui-window-view.c, src/gui-channel.c,
+	src/gui-channel.h, src/gui-menu-nick.c, src/gui-nicklist-view.c,
+	src/gui-nicklist-view.h, src/gui-tab.c, src/gui-tab.h,
+	src/gui-window-item-rec.h, src/gui-context-nick.c,
+	src/gui-menu-nick.h, src/gui-window-context.c,
+	src/gui-window-context.h: Initial revision
+
+2002-04-22 11:06  Timo Sirainen <tss@iki.fi>
+
+	* AUTHORS, Makefile.am, NEWS, README, TODO, acconfig.h, autogen.sh,
+	config-plugin.h.in, configure.in, stamp.h.in, pixmaps/Makefile.am,
+	pixmaps/halfop.xpm, pixmaps/op.xpm, pixmaps/voice.xpm,
+	pixmaps/.xvpics/irssilogo.png, src/.cvsignore, src/Makefile.am,
+	src/gui-frame.h, src/gui-nicklist.c, src/gui-nicklist.h,
+	src/gui-window-view.h, src/gui-window.h, src/irssi.c, src/module.h,
+	src/gui-frame.c, src/gui-window.c, src/gui-entry.c,
+	src/gui-entry.h, src/gui-window-view.c, src/gui-channel.c,
+	src/gui-channel.h, src/gui-menu-nick.c, src/gui-nicklist-view.c,
+	src/gui-nicklist-view.h, src/gui-tab.c, src/gui-tab.h,
+	src/gui-window-item-rec.h, src/gui-context-nick.c,
+	src/gui-menu-nick.h, src/gui-window-context.c,
+	src/gui-window-context.h: initial import
+
