@@ -283,6 +283,15 @@ static int setup_apply_widget(GtkWidget *widget, SETTINGS_REC *set,
 		}
 		settings_set_str(set->key, str_value);
 		break;
+	case SETTING_TYPE_TIME:
+		settings_set_time(set->key, str_value);
+		break;
+	case SETTING_TYPE_LEVEL:
+		settings_set_level(set->key, str_value);
+		break;
+       case SETTING_TYPE_SIZE:
+		settings_set_size(set->key, str_value);
+		break;
 	}
 
 	return TRUE;

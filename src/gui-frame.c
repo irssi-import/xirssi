@@ -113,7 +113,7 @@ static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
 		frame->entry->last_dead_key = FALSE;
 	} else {
 		str = gui_keyboard_get_event_string(event);
-		if (key_pressed(frame->entry->keyboard, str)) {
+		if (key_pressed(frame->entry->keyboard, str) >= 0) {
 			g_signal_stop_emission_by_name(G_OBJECT(widget),
 						       "key_press_event");
 			g_free(str);

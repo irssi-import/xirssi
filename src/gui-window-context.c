@@ -161,6 +161,7 @@ static gboolean event_tag(GtkTextTag *tag, GtkWidget *widget,
 		mark_tag_select(iter, tag);
 		return TRUE;
 	default:
+		break;
 	}
 
 	return FALSE;
