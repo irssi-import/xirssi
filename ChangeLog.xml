@@ -3,6 +3,23 @@
 <changelog xmlns="http://www.red-bean.com/xmlns/cvs2cl/">
 
 <entry>
+<date>2002-11-23</date>
+<weekday>Saturday</weekday>
+<time>13:02</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>.cvsignore</name>
+<revision>1.3</revision>
+</file>
+<file>
+<name>COPYING</name>
+<revision>1.1</revision>
+</file>
+<msg>Added exception to linking against OpenSSL
+</msg>
+</entry>
+
+<entry>
 <date>2002-11-20</date>
 <weekday>Wednesday</weekday>
 <time>17:04</time>
