@@ -20,7 +20,6 @@
 
 #include "module.h"
 #include "signals.h"
-#include "misc.h"
 #include "chat-protocols.h"
 #include "chatnets.h"
 #include "channels-setup.h"

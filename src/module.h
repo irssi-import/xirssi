@@ -22,6 +22,8 @@ typedef struct _CHANNEL_SETUP_REC ChannelConfig;
 
 typedef struct _IGNORE_REC Ignore;
 typedef struct _HILIGHT_REC Highlight;
+typedef struct _KEYINFO_REC KeyAction;
+typedef struct _KEY_REC Key;
 
 typedef struct _Entry Entry;
 typedef struct _Frame Frame;

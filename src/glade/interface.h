@@ -8,3 +8,4 @@ GtkWidget* create_dialog_server_settings (void);
 GtkWidget* create_dialog_channel_settings (void);
 GtkWidget* create_dialog_ignore_settings (void);
 GtkWidget* create_dialog_highlight_settings (void);
+GtkWidget* create_dialog_keyboard_settings (void);

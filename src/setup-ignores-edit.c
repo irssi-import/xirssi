@@ -21,7 +21,6 @@
 #include "module.h"
 #include "levels.h"
 #include "ignore.h"
-#include "misc.h"
 
 #include "setup.h"
 #include "gui.h"

@@ -35,6 +35,8 @@
 #include "gui-window.h"
 #include "gui-window-view.h"
 
+#include <gdk/gdkkeysyms.h>
+
 char *gui_keyboard_get_event_string(GdkEventKey *event)
 {
 	GString *cmd;
@@ -64,7 +66,7 @@ char *gui_keyboard_get_event_string(GdkEventKey *event)
 		g_string_prepend(cmd, "mod5-");
 
 	if (event->state & GDK_CONTROL_MASK) {
-		if (chr > 255)
+		if (chr <= 32 || chr > 'z')
 			g_string_prepend(cmd, "ctrl-");
 		else {
 			g_string_prepend(cmd, "^");
@@ -89,6 +91,48 @@ char *gui_keyboard_get_event_string(GdkEventKey *event)
 	ret = cmd->str;
 	g_string_free(cmd, FALSE);
 	return ret;
+}
+
+int gui_is_modifier(int keyval)
+{
+	switch (keyval) {
+	case GDK_Shift_L:
+	case GDK_Shift_R:
+	case GDK_Control_L:
+	case GDK_Control_R:
+	case GDK_Caps_Lock:
+	case GDK_Shift_Lock:
+	case GDK_Meta_L:
+	case GDK_Meta_R:
+	case GDK_Alt_L:
+	case GDK_Alt_R:
+	case GDK_Super_L:
+	case GDK_Super_R:
+	case GDK_Hyper_L:
+	case GDK_Hyper_R:
+
+	case GDK_dead_grave:
+	case GDK_dead_acute:
+	case GDK_dead_circumflex:
+	case GDK_dead_tilde:
+	case GDK_dead_macron:
+	case GDK_dead_breve:
+	case GDK_dead_abovedot:
+	case GDK_dead_diaeresis:
+	case GDK_dead_abovering:
+	case GDK_dead_doubleacute:
+	case GDK_dead_caron:
+	case GDK_dead_cedilla:
+	case GDK_dead_ogonek:
+	case GDK_dead_iota:
+	case GDK_dead_voiced_sound:
+	case GDK_dead_semivoiced_sound:
+	case GDK_dead_belowdot:
+		return TRUE;
+
+	default:
+		return FALSE;
+	}
 }
 
 static int gtk_entry_move_forward_to_space(GtkEntry *entry)
@@ -700,11 +744,11 @@ void gui_keyboards_init(void)
 
 	/* .. */
 	key_bind("insert_text", "Append text to line", NULL, NULL, (SIGNAL_FUNC) key_insert_text);
-	key_bind("insert_text", NULL, "^B", "\002", (SIGNAL_FUNC) key_insert_text);
-	key_bind("insert_text", NULL, "^K", "\003", (SIGNAL_FUNC) key_insert_text);
-	key_bind("insert_text", NULL, "^O", "\017", (SIGNAL_FUNC) key_insert_text);
-	key_bind("insert_text", NULL, "^R", "\026", (SIGNAL_FUNC) key_insert_text);
-	key_bind("insert_text", NULL, "^-", "\037", (SIGNAL_FUNC) key_insert_text);
+	key_bind("insert_text", NULL, "^B", "\\002", (SIGNAL_FUNC) key_insert_text);
+	key_bind("insert_text", NULL, "^K", "\\003", (SIGNAL_FUNC) key_insert_text);
+	key_bind("insert_text", NULL, "^O", "\\017", (SIGNAL_FUNC) key_insert_text);
+	key_bind("insert_text", NULL, "^R", "\\026", (SIGNAL_FUNC) key_insert_text);
+	key_bind("insert_text", NULL, "^-", "\\037", (SIGNAL_FUNC) key_insert_text);
 
         /* autoreplaces */
 	key_bind("multi", NULL, "return", "check_replaces;send_line", NULL);

@@ -20,7 +20,6 @@
 
 #include "module.h"
 #include "levels.h"
-#include "misc.h"
 
 #include "hilight-text.h"
 

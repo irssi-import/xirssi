@@ -65,6 +65,8 @@ xirssi_SOURCES = \
 	setup-highlighting-edit.c \
 	setup-ignores.c \
 	setup-ignores-edit.c \
+	setup-keyboard.c \
+	setup-keyboard-edit.c \
 	setup-prefs.c \
 	setup-servers.c \
 	setup-servers-network.c \

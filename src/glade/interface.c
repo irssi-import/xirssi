@@ -3376,7 +3376,7 @@ create_dialog_ignore_settings (void)
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_label_set_justify (GTK_LABEL (label160), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label160), 0, 0.5);
+  gtk_misc_set_alignment (GTK_MISC (label160), 1, 0.5);
 
   label162 = gtk_label_new ("Level");
   gtk_widget_set_name (label162, "label162");
@@ -3385,7 +3385,7 @@ create_dialog_ignore_settings (void)
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_label_set_justify (GTK_LABEL (label162), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label162), 0, 0.5);
+  gtk_misc_set_alignment (GTK_MISC (label162), 1, 0.5);
 
   level = gtk_entry_new ();
   gtk_widget_set_name (level, "level");
@@ -3731,7 +3731,7 @@ create_dialog_highlight_settings (void)
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_label_set_justify (GTK_LABEL (label170), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label170), 0, 0.5);
+  gtk_misc_set_alignment (GTK_MISC (label170), 1, 0.5);
 
   text = gtk_entry_new ();
   gtk_widget_set_name (text, "text");
@@ -3747,7 +3747,7 @@ create_dialog_highlight_settings (void)
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_label_set_justify (GTK_LABEL (label171), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label171), 0, 0.5);
+  gtk_misc_set_alignment (GTK_MISC (label171), 1, 0.5);
 
   level = gtk_entry_new ();
   gtk_widget_set_name (level, "level");
@@ -3860,7 +3860,7 @@ create_dialog_highlight_settings (void)
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_label_set_justify (GTK_LABEL (label173), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label173), 0, 0.5);
+  gtk_misc_set_alignment (GTK_MISC (label173), 1, 0.5);
 
   hbox22 = gtk_hbox_new (FALSE, 0);
   gtk_widget_set_name (hbox22, "hbox22");
@@ -3883,7 +3883,7 @@ create_dialog_highlight_settings (void)
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_label_set_justify (GTK_LABEL (label174), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label174), 0, 0.5);
+  gtk_misc_set_alignment (GTK_MISC (label174), 1, 0.5);
 
   label175 = gtk_label_new ("Activity color");
   gtk_widget_set_name (label175, "label175");
@@ -3892,7 +3892,7 @@ create_dialog_highlight_settings (void)
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_label_set_justify (GTK_LABEL (label175), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label175), 0, 0.5);
+  gtk_misc_set_alignment (GTK_MISC (label175), 1, 0.5);
 
   color = gtk_entry_new ();
   gtk_widget_set_name (color, "color");
@@ -4043,5 +4043,157 @@ create_dialog_highlight_settings (void)
   GLADE_HOOKUP_OBJECT (dialog_highlight_settings, okbutton6, "okbutton6");
 
   return dialog_highlight_settings;
+}
+
+GtkWidget*
+create_dialog_keyboard_settings (void)
+{
+  GtkWidget *dialog_keyboard_settings;
+  GtkWidget *dialog_vbox7;
+  GtkWidget *table22;
+  GtkWidget *label177;
+  GtkWidget *label178;
+  GtkWidget *hseparator28;
+  GtkWidget *key;
+  GtkWidget *data;
+  GtkWidget *label179;
+  GtkWidget *frame40;
+  GtkWidget *keyinfo_tree;
+  GtkWidget *action_tree;
+  GtkWidget *key_button;
+  GtkWidget *dialog_action_area7;
+  GtkWidget *cancelbutton7;
+  GtkWidget *okbutton7;
+
+  dialog_keyboard_settings = gtk_dialog_new ();
+  gtk_widget_set_name (dialog_keyboard_settings, "dialog_keyboard_settings");
+  gtk_window_set_title (GTK_WINDOW (dialog_keyboard_settings), "Key Binding Settings");
+  gtk_window_set_default_size (GTK_WINDOW (dialog_keyboard_settings), 500, 400);
+
+  dialog_vbox7 = GTK_DIALOG (dialog_keyboard_settings)->vbox;
+  gtk_widget_set_name (dialog_vbox7, "dialog_vbox7");
+  gtk_widget_show (dialog_vbox7);
+  gtk_container_set_border_width (GTK_CONTAINER (dialog_vbox7), 2);
+
+  table22 = gtk_table_new (5, 3, FALSE);
+  gtk_widget_set_name (table22, "table22");
+  gtk_widget_show (table22);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox7), table22, TRUE, TRUE, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (table22), 7);
+  gtk_table_set_row_spacings (GTK_TABLE (table22), 3);
+  gtk_table_set_col_spacings (GTK_TABLE (table22), 7);
+
+  label177 = gtk_label_new ("Key");
+  gtk_widget_set_name (label177, "label177");
+  gtk_widget_show (label177);
+  gtk_table_attach (GTK_TABLE (table22), label177, 0, 1, 0, 1,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label177), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label177), 1, 0.5);
+
+  label178 = gtk_label_new ("Data");
+  gtk_widget_set_name (label178, "label178");
+  gtk_widget_show (label178);
+  gtk_table_attach (GTK_TABLE (table22), label178, 0, 1, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label178), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label178), 1, 0.5);
+
+  hseparator28 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator28, "hseparator28");
+  gtk_widget_show (hseparator28);
+  gtk_table_attach (GTK_TABLE (table22), hseparator28, 0, 3, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+
+  key = gtk_entry_new ();
+  gtk_widget_set_name (key, "key");
+  gtk_widget_show (key);
+  gtk_table_attach (GTK_TABLE (table22), key, 1, 2, 0, 1,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  data = gtk_entry_new ();
+  gtk_widget_set_name (data, "data");
+  gtk_widget_show (data);
+  gtk_table_attach (GTK_TABLE (table22), data, 1, 3, 1, 2,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  label179 = gtk_label_new ("Action");
+  gtk_widget_set_name (label179, "label179");
+  gtk_widget_show (label179);
+  gtk_table_attach (GTK_TABLE (table22), label179, 0, 3, 3, 4,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label179), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label179), 0, 0.5);
+
+  frame40 = gtk_frame_new (NULL);
+  gtk_widget_set_name (frame40, "frame40");
+  gtk_widget_show (frame40);
+  gtk_table_attach (GTK_TABLE (table22), frame40, 0, 3, 4, 5,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+  gtk_frame_set_shadow_type (GTK_FRAME (frame40), GTK_SHADOW_IN);
+
+  keyinfo_tree = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_set_name (keyinfo_tree, "keyinfo_tree");
+  gtk_widget_show (keyinfo_tree);
+  gtk_container_add (GTK_CONTAINER (frame40), keyinfo_tree);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (keyinfo_tree), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+
+  action_tree = gtk_tree_view_new ();
+  gtk_widget_set_name (action_tree, "action_tree");
+  gtk_widget_show (action_tree);
+  gtk_container_add (GTK_CONTAINER (keyinfo_tree), action_tree);
+
+  key_button = gtk_check_button_new_with_mnemonic ("Set the key directly");
+  gtk_widget_set_name (key_button, "key_button");
+  gtk_widget_show (key_button);
+  gtk_table_attach (GTK_TABLE (table22), key_button, 2, 3, 0, 1,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  dialog_action_area7 = GTK_DIALOG (dialog_keyboard_settings)->action_area;
+  gtk_widget_set_name (dialog_action_area7, "dialog_action_area7");
+  gtk_widget_show (dialog_action_area7);
+  gtk_container_set_border_width (GTK_CONTAINER (dialog_action_area7), 5);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area7), GTK_BUTTONBOX_END);
+  gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area7), 10);
+
+  cancelbutton7 = gtk_button_new_from_stock ("gtk-cancel");
+  gtk_widget_set_name (cancelbutton7, "cancelbutton7");
+  gtk_widget_show (cancelbutton7);
+  gtk_dialog_add_action_widget (GTK_DIALOG (dialog_keyboard_settings), cancelbutton7, GTK_RESPONSE_CANCEL);
+  GTK_WIDGET_SET_FLAGS (cancelbutton7, GTK_CAN_DEFAULT);
+
+  okbutton7 = gtk_button_new_from_stock ("gtk-ok");
+  gtk_widget_set_name (okbutton7, "okbutton7");
+  gtk_widget_show (okbutton7);
+  gtk_dialog_add_action_widget (GTK_DIALOG (dialog_keyboard_settings), okbutton7, GTK_RESPONSE_OK);
+  GTK_WIDGET_SET_FLAGS (okbutton7, GTK_CAN_DEFAULT);
+
+  /* Store pointers to all widgets, for use by lookup_widget(). */
+  GLADE_HOOKUP_OBJECT_NO_REF (dialog_keyboard_settings, dialog_keyboard_settings, "dialog_keyboard_settings");
+  GLADE_HOOKUP_OBJECT_NO_REF (dialog_keyboard_settings, dialog_vbox7, "dialog_vbox7");
+  GLADE_HOOKUP_OBJECT (dialog_keyboard_settings, table22, "table22");
+  GLADE_HOOKUP_OBJECT (dialog_keyboard_settings, label177, "label177");
+  GLADE_HOOKUP_OBJECT (dialog_keyboard_settings, label178, "label178");
+  GLADE_HOOKUP_OBJECT (dialog_keyboard_settings, hseparator28, "hseparator28");
+  GLADE_HOOKUP_OBJECT (dialog_keyboard_settings, key, "key");
+  GLADE_HOOKUP_OBJECT (dialog_keyboard_settings, data, "data");
+  GLADE_HOOKUP_OBJECT (dialog_keyboard_settings, label179, "label179");
+  GLADE_HOOKUP_OBJECT (dialog_keyboard_settings, frame40, "frame40");
+  GLADE_HOOKUP_OBJECT (dialog_keyboard_settings, keyinfo_tree, "keyinfo_tree");
+  GLADE_HOOKUP_OBJECT (dialog_keyboard_settings, action_tree, "action_tree");
+  GLADE_HOOKUP_OBJECT (dialog_keyboard_settings, key_button, "key_button");
+  GLADE_HOOKUP_OBJECT_NO_REF (dialog_keyboard_settings, dialog_action_area7, "dialog_action_area7");
+  GLADE_HOOKUP_OBJECT (dialog_keyboard_settings, cancelbutton7, "cancelbutton7");
+  GLADE_HOOKUP_OBJECT (dialog_keyboard_settings, okbutton7, "okbutton7");
+
+  return dialog_keyboard_settings;
 }
 

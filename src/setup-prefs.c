@@ -30,6 +30,7 @@ void setup_aliases_init(GtkWidget *dialog);
 void setup_completions_init(GtkWidget *dialog);
 void setup_ignores_init(GtkWidget *dialog);
 void setup_highlighting_init(GtkWidget *dialog);
+void setup_keyboard_init(GtkWidget *dialog);
 
 typedef struct {
 	const char *name;
@@ -61,7 +62,7 @@ static SetupPrefs prefs[] = {
 	{ "Queries",		"page_queries", &queries_pixbuf },
 	{ "Completion",		"page_completion", &completion_pixbuf, setup_completions_init },
 	{ "Aliases",		"page_aliases", &aliases_pixbuf, setup_aliases_init },
-	{ "Keyboard",		"page_keyboard", &keyboard_pixbuf },
+	{ "Keyboard",		"page_keyboard", &keyboard_pixbuf, setup_keyboard_init },
 
 	{ "Window Input" },
 	{ "Ignores",		"page_ignores", &ignores_pixbuf, setup_ignores_init },

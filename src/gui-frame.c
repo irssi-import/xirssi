@@ -76,9 +76,7 @@ static gboolean event_key_press_after(GtkWidget *widget, GdkEventKey *event,
 {
 	char *str;
 
-	if (event->keyval == GDK_Control_L || event->keyval == GDK_Control_R ||
-	    event->keyval == GDK_Meta_L || event->keyval == GDK_Meta_R ||
-	    event->keyval == GDK_Alt_L || event->keyval == GDK_Alt_R)
+	if (gui_is_modifier(event->keyval))
 		return FALSE;
 
 	str = gui_keyboard_get_event_string(event);
