@@ -167,7 +167,9 @@ static gboolean event_pane_moved(GtkPaned *paned, GdkEventButton *event,
 		}
 
 
-		signal_emit("command window new", 1, "split");
+		signal_emit("command window new", 2, "split",
+			    tab->active_win == NULL ? NULL :
+			    tab->active_win->active_server);
 	} else if (pos <= 20 && tab->panes->next != NULL &&
 		   pane == tab->panes->next->data) {
 		/* shrinked the second uppest pane - destroy the uppest pane */

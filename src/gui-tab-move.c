@@ -365,7 +365,7 @@ static void tab_drop_real(TabDrag *drag, int x, int y)
 		if (drag->detaching) {
 			drag->dest_frame = gui_frame_new(FALSE);
 			gtk_window_move(drag->dest_frame->window, x, y);
-			gtk_widget_show_all(GTK_WIDGET(drag->dest_frame->window));
+			gtk_widget_show(GTK_WIDGET(drag->dest_frame->window));
 		}
 
 		/* move into new frame */

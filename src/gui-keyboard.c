@@ -461,8 +461,7 @@ static void key_next_window_item(void)
 			server = index > 0 ? g_slist_nth(servers, index-1)->data :
 				g_slist_last(servers)->data;
 		}
-		signal_emit("command window server", 3, server->tag,
-			    active_win->active_server, active_win->active);
+		signal_emit("command window server", 1, server->tag);
 	}
 }
 

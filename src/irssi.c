@@ -33,6 +33,7 @@
 //#include "themes.h"
 
 #include "gui-channel.h"
+#include "gui-itemlist.h"
 #include "gui-keyboard.h"
 #include "gui-nicklist.h"
 #include "gui-window.h"
@@ -102,6 +103,7 @@ static void gui_finish_init(void)
 
 	gui_tabs_init();
 	gui_windows_init();
+	gui_itemlists_init();
 	gui_keyboards_init();
 	gui_nicklists_init();
 	gui_channels_init();
@@ -138,6 +140,7 @@ static void gui_deinit(void)
 	gui_channels_deinit();
 	gui_nicklists_deinit();
 	gui_keyboards_deinit();
+	gui_itemlists_deinit();
 	gui_windows_deinit();
 	gui_tabs_deinit();
 

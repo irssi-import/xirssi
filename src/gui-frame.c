@@ -24,6 +24,7 @@
 
 #include "gui-frame.h"
 #include "gui-entry.h"
+#include "gui-itemlist.h"
 #include "gui-keyboard.h"
 #include "gui-tab.h"
 #include "gui-window.h"
@@ -137,7 +138,7 @@ static gboolean event_switch_page(GtkNotebook *notebook, GtkNotebookPage *page,
 
 Frame *gui_frame_new(int show)
 {
-	GtkWidget *window, *vbox, *notebook, *statusbar;
+	GtkWidget *window, *vbox, *hbox, *notebook, *statusbar;
 	Frame *frame;
 
 	frame = g_new0(Frame, 1);
@@ -170,9 +171,16 @@ Frame *gui_frame_new(int show)
 	frame->notebook = GTK_NOTEBOOK(notebook);
 	gtk_box_pack_start(GTK_BOX(vbox), notebook, TRUE, TRUE, 0);
 
-	/* entry */
+	/* itemlist/entry */
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+
+	frame->itemlist = gui_itemlist_new(frame);
+	gtk_box_pack_start(GTK_BOX(hbox), frame->itemlist->widget,
+			   FALSE, FALSE, 0);
+
 	frame->entry = gui_entry_new(frame);
-	gtk_box_pack_start(GTK_BOX(vbox), frame->entry->widget, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox), frame->entry->widget, TRUE, TRUE, 0);
 
 	/* statusbar */
 	statusbar = gtk_statusbar_new();
@@ -180,7 +188,9 @@ Frame *gui_frame_new(int show)
 	gtk_box_pack_start(GTK_BOX(vbox), statusbar, FALSE, FALSE, 0);
 
 	gtk_widget_grab_focus(frame->entry->widget);
-	if (show) gtk_widget_show_all(window);
+	gtk_widget_show_all(vbox);
+	gtk_widget_hide(frame->itemlist->widget);
+	if (show) gtk_widget_show(window);
 
 	frames = g_slist_prepend(frames, frame);
 

@@ -17,6 +17,7 @@ typedef struct _TEXT_DEST_REC TextDest;
 
 typedef struct _Entry Entry;
 typedef struct _Frame Frame;
+typedef struct _Itemlist Itemlist;
 typedef struct _Tab Tab;
 typedef struct _TabPane TabPane;
 typedef struct _WindowGui WindowGui;

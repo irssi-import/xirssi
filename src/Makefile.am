@@ -27,6 +27,7 @@ xirssi_SOURCES = \
 	gui-context-url.c \
 	gui-entry.c \
 	gui-frame.c \
+	gui-itemlist.c \
 	gui-keyboard.c \
 	gui-menu.c \
 	gui-menu-nick.c \
@@ -45,6 +46,7 @@ noinst_HEADERS = \
 	gui-channel.h \
 	gui-entry.h \
 	gui-frame.h \
+	gui-itemlist.h \
 	gui-keyboard.h \
 	gui-menu.h \
 	gui-nicklist.h \
