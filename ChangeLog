@@ -1,3 +1,8 @@
+2002-05-16 05:40  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-colors.c, gui-colors.h, gui-window.c: updated color
+	handling
+
 2002-05-16 04:20  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-itemlist.c, gui-window-view.c: name -> visible_name
