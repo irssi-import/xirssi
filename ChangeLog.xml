@@ -5,6 +5,32 @@
 <entry>
 <date>2002-05-12</date>
 <weekday>Sunday</weekday>
+<time>14:33</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/setup-prefs.c</name>
+<revision>1.2</revision>
+</file>
+<msg>updated
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-12</date>
+<weekday>Sunday</weekday>
+<time>14:04</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>autogen.sh</name>
+<revision>1.6</revision>
+</file>
+<msg>#!/bin/sh was missing.
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-12</date>
+<weekday>Sunday</weekday>
 <time>13:43</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
