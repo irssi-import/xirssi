@@ -110,3 +110,24 @@ gint gui_tree_strcase_sort_func(GtkTreeModel *model,
 
 	return ret;
 }
+
+static void selection_get_paths(GtkTreeModel *model, GtkTreePath *path,
+				GtkTreeIter *iter, gpointer data)
+{
+	GSList **paths = data;
+
+	*paths = g_slist_prepend(*paths, gtk_tree_path_copy(path));
+}
+
+GSList *gui_tree_selection_get_paths(GtkTreeView *view)
+{
+	GtkTreeSelection *sel;
+	GSList *paths;
+
+	/* get paths of selected rows */
+	paths = NULL;
+	sel = gtk_tree_view_get_selection(view);
+	gtk_tree_selection_selected_foreach(sel, selection_get_paths, &paths);
+
+	return paths;
+}

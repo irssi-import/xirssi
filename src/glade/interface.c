@@ -253,8 +253,8 @@ create_preferences (void)
   GtkWidget *scrolledwindow10;
   GtkWidget *alias_tree;
   GtkWidget *vbuttonbox11;
-  GtkWidget *button33;
-  GtkWidget *button34;
+  GtkWidget *alias_add;
+  GtkWidget *alias_remove;
   GtkWidget *label72;
   GtkWidget *label101;
   GtkWidget *page_keyboard;
@@ -1734,17 +1734,17 @@ create_preferences (void)
   gtk_button_box_set_layout (GTK_BUTTON_BOX (vbuttonbox11), GTK_BUTTONBOX_START);
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (vbuttonbox11), 7);
 
-  button33 = gtk_button_new_with_mnemonic ("Add");
-  gtk_widget_set_name (button33, "button33");
-  gtk_widget_show (button33);
-  gtk_container_add (GTK_CONTAINER (vbuttonbox11), button33);
-  GTK_WIDGET_SET_FLAGS (button33, GTK_CAN_DEFAULT);
+  alias_add = gtk_button_new_with_mnemonic ("Add");
+  gtk_widget_set_name (alias_add, "alias_add");
+  gtk_widget_show (alias_add);
+  gtk_container_add (GTK_CONTAINER (vbuttonbox11), alias_add);
+  GTK_WIDGET_SET_FLAGS (alias_add, GTK_CAN_DEFAULT);
 
-  button34 = gtk_button_new_with_mnemonic ("Remove");
-  gtk_widget_set_name (button34, "button34");
-  gtk_widget_show (button34);
-  gtk_container_add (GTK_CONTAINER (vbuttonbox11), button34);
-  GTK_WIDGET_SET_FLAGS (button34, GTK_CAN_DEFAULT);
+  alias_remove = gtk_button_new_with_mnemonic ("Remove");
+  gtk_widget_set_name (alias_remove, "alias_remove");
+  gtk_widget_show (alias_remove);
+  gtk_container_add (GTK_CONTAINER (vbuttonbox11), alias_remove);
+  GTK_WIDGET_SET_FLAGS (alias_remove, GTK_CAN_DEFAULT);
 
   label72 = gtk_label_new ("Aliases");
   gtk_widget_set_name (label72, "label72");
@@ -2440,8 +2440,8 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, scrolledwindow10, "scrolledwindow10");
   GLADE_HOOKUP_OBJECT (preferences, alias_tree, "alias_tree");
   GLADE_HOOKUP_OBJECT (preferences, vbuttonbox11, "vbuttonbox11");
-  GLADE_HOOKUP_OBJECT (preferences, button33, "button33");
-  GLADE_HOOKUP_OBJECT (preferences, button34, "button34");
+  GLADE_HOOKUP_OBJECT (preferences, alias_add, "alias_add");
+  GLADE_HOOKUP_OBJECT (preferences, alias_remove, "alias_remove");
   GLADE_HOOKUP_OBJECT (preferences, label72, "label72");
   GLADE_HOOKUP_OBJECT (preferences, label101, "label101");
   GLADE_HOOKUP_OBJECT (preferences, page_keyboard, "page_keyboard");

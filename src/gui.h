@@ -20,4 +20,6 @@ gint gui_tree_strcase_sort_func(GtkTreeModel *model,
 				GtkTreeIter *a, GtkTreeIter *b,
 				gpointer user_data);
 
+GSList *gui_tree_selection_get_paths(GtkTreeView *view);
+
 #endif

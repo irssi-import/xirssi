@@ -3579,7 +3579,7 @@
 			  <property name="spacing">7</property>
 
 			  <child>
-			    <widget class="GtkButton" id="button33">
+			    <widget class="GtkButton" id="alias_add">
 			      <property name="visible">True</property>
 			      <property name="can_default">True</property>
 			      <property name="can_focus">True</property>
@@ -3590,7 +3590,7 @@
 			  </child>
 
 			  <child>
-			    <widget class="GtkButton" id="button34">
+			    <widget class="GtkButton" id="alias_remove">
 			      <property name="visible">True</property>
 			      <property name="can_default">True</property>
 			      <property name="can_focus">True</property>

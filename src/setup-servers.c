@@ -26,6 +26,7 @@
 #include "servers-setup.h"
 
 #include "setup.h"
+#include "gui.h"
 
 void network_dialog_show(NetworkConfig *network);
 void server_dialog_show(ServerConfig *server, const char *network);
@@ -237,29 +238,16 @@ static void network_remove_with_servers(NetworkConfig *network)
 	chatnet_remove(network);
 }
 
-static void selection_get_paths(GtkTreeModel *model, GtkTreePath *path,
-				GtkTreeIter *iter, gpointer data)
-{
-	GSList **paths = data;
-
-	*paths = g_slist_prepend(*paths, gtk_tree_path_copy(path));
-}
-
 static gboolean event_remove(GtkWidget *widget, GtkTreeView *view)
 {
 	GtkTreeModel *model;
-	GtkTreeSelection *sel;
 	GtkTreeIter iter;
 	GSList *paths;
 	void *data;
 
-	/* get paths of selected rows */
-	paths = NULL;
-	sel = gtk_tree_view_get_selection(view);
-        gtk_tree_selection_selected_foreach(sel, selection_get_paths, &paths);
-
-	/* remove the rows */
 	model = GTK_TREE_MODEL(server_store);
+
+	paths =  gui_tree_selection_get_paths(view);
 	while (paths != NULL) {
 		GtkTreePath *path = paths->data;
 
