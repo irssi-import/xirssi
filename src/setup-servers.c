@@ -44,6 +44,7 @@ enum {
 };
 
 static GtkTreeStore *server_store = NULL;
+static GdkPixbuf *autoconnect_pixbuf = NULL;
 
 static gboolean event_destroy(GtkWidget *widget)
 {
@@ -420,6 +421,22 @@ void setup_server_add_protocol_widget(GtkTable *table, int y,
 	}
 }
 
+static void autoconnect_set_func(GtkTreeViewColumn *column,
+				 GtkCellRenderer   *cell,
+				 GtkTreeModel      *model,
+				 GtkTreeIter       *iter,
+				 gpointer           data)
+{
+	ServerConfig *server;
+
+	gtk_tree_model_get(model, iter, 0, &server, -1);
+	server = SERVER_SETUP(server);
+
+	g_object_set(G_OBJECT(cell), "pixbuf",
+		     server == NULL || !server->autoconnect ? NULL :
+		     autoconnect_pixbuf, NULL);
+}
+
 static void server_set_func(GtkTreeViewColumn *column,
 			    GtkCellRenderer   *cell,
 			    GtkTreeModel      *model,
@@ -465,7 +482,23 @@ void setup_servers_init(GtkWidget *dialog)
 	gtk_tree_selection_set_mode(gtk_tree_view_get_selection(tree_view),
 				    GTK_SELECTION_MULTIPLE);
 
-	renderer = gtk_cell_renderer_text_new ();
+	/* -- */
+	renderer = gtk_cell_renderer_pixbuf_new();
+	column = gtk_tree_view_column_new_with_attributes(NULL, renderer,
+							  NULL);
+	gtk_tree_view_column_set_cell_data_func(column, renderer,
+						autoconnect_set_func,
+						NULL, NULL);
+	gtk_tree_view_append_column(tree_view, column);
+
+	if (autoconnect_pixbuf == NULL) {
+		autoconnect_pixbuf =
+			gtk_widget_render_icon(dialog, GTK_STOCK_APPLY,
+					       GTK_ICON_SIZE_MENU, NULL);
+	}
+
+	/* -- */
+	renderer = gtk_cell_renderer_text_new();
 	column = gtk_tree_view_column_new_with_attributes("Name", renderer,
 							  "text", COL_NAME,
 							  NULL);
@@ -474,11 +507,13 @@ void setup_servers_init(GtkWidget *dialog)
 	gtk_tree_view_append_column(tree_view, column);
 	gtk_tree_view_column_set_min_width(column, 200);
 
+	/* -- */
 	column = gtk_tree_view_column_new_with_attributes("Port", renderer,
 							  "text", COL_PORT,
 							  NULL);
 	gtk_tree_view_append_column(tree_view, column);
 
+	/* -- */
 	column = gtk_tree_view_column_new_with_attributes("Protocol", renderer,
 							  "text", COL_PROTOCOL,
 							  NULL);
@@ -582,6 +617,9 @@ static void setup_server_signals_init(void)
 
 static void setup_server_signals_deinit(void)
 {
+	if (autoconnect_pixbuf != NULL)
+		g_object_unref(G_OBJECT(autoconnect_pixbuf));
+
 	signal_remove("server setup updated", (SIGNAL_FUNC) sig_server_added);
 	signal_remove("server setup destroyed", (SIGNAL_FUNC) sig_server_removed);
 	signal_remove("chatnet created", (SIGNAL_FUNC) sig_network_added);
