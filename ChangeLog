@@ -1,3 +1,15 @@
+2002-05-05 01:18  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-itemlist.c, gui-tab-move.c, gui-tab.c: crashfixes
+
+2002-05-05 01:10  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-window-activity.c: window activity was broken
+
+2002-05-05 01:09  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-tab.c: changing window name didn't update tab's label.
+
 2002-05-05 00:51  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-itemlist.c: don't show itemlist if there's only one
