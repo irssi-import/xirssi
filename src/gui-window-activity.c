@@ -85,10 +85,32 @@ static void tab_update_activity(Tab *tab)
 		    pane->view->window->window->data_level > data_level)
 			data_level = pane->view->window->window->data_level;
 	}
+	tab->data_level = data_level;
 
 	/* change the tab's color */
 	data_level_get_color(tab->widget, data_level, &color);
 	gtk_widget_modify_fg(GTK_WIDGET(tab->label), GTK_STATE_NORMAL, &color);
+}
+
+static void tab_clear_activity(Tab *tab)
+{
+	GdkColor color;
+	GList *tmp;
+
+	data_level_get_color(tab->widget, 0, &color);
+
+	/* update tab's label */
+	tab->data_level = 0;
+	gtk_widget_modify_fg(GTK_WIDGET(tab->label),
+			     GTK_STATE_NORMAL, &color);
+
+	/* update panes' labels */
+	for (tmp = tab->panes; tmp != NULL; tmp = tmp->next) {
+		TabPane *pane = tmp->data;
+
+		gtk_widget_modify_fg(GTK_WIDGET(pane->label),
+				     GTK_STATE_NORMAL, &color);
+	}
 }
 
 static void sig_activity_update(Window *window)
@@ -99,13 +121,21 @@ static void sig_activity_update(Window *window)
 	for (tmp = WINDOW_GUI(window)->views; tmp != NULL; tmp = tmp->next) {
 		WindowView *view = tmp->data;
 
+		if (window->data_level == 0) {
+			if (view->pane->tab->data_level != 0)
+				tab_clear_activity(view->pane->tab);
+			continue;
+		}
+
+		/* set color to view's tab */
 		data_level_get_color(view->widget, window->data_level, &color);
 		gtk_widget_modify_fg(GTK_WIDGET(view->pane->label),
 				     GTK_STATE_NORMAL, &color);
 
-		if (window->data_level == 0 ||
-		    view->pane->tab->data_level < window->data_level)
+		if (view->pane->tab->data_level < window->data_level) {
+			/* update tab's main label's color too */
 			tab_update_activity(view->pane->tab);
+		}
 	}
 }
 
