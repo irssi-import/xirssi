@@ -5,6 +5,19 @@
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
+<time>18:14</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-nicklist-view.c</name>
+<revision>1.5</revision>
+</file>
+<msg>doubleclicking nick did /query, but with invalid nick name
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-27</date>
+<weekday>Saturday</weekday>
 <time>17:49</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
