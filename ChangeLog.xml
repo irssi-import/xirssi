@@ -5,6 +5,19 @@
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
+<time>20:54</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-window.c</name>
+<revision>1.13</revision>
+</file>
+<msg>if /set scrollback_lines &lt;= 0, keep it unlimited.
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-09</date>
+<weekday>Thursday</weekday>
 <time>19:06</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
