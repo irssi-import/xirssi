@@ -1,3 +1,11 @@
+2002-04-27 02:49  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-frame.c: fix up/down/tab keys to work again properly
+
+2002-04-27 02:17  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-entry.c: enter-key was broken..
+
 2002-04-27 01:30  Timo Sirainen <tss@iki.fi>
 
 	* TODO: updated
