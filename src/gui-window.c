@@ -24,6 +24,7 @@
 
 #include "printtext.h"
 
+#include "gui-colors.h"
 #include "gui-frame.h"
 #include "gui-tab.h"
 #include "gui-window.h"
@@ -32,47 +33,6 @@
 
 void gui_window_activities_init(void);
 void gui_window_activities_deinit(void);
-
-#define COLORS 16
-static GdkColor colors[COLORS] = {
-	{ 0, 0, 0, 0 }, /* black */
-	{ 0, 0, 0, 0xcccc }, /* blue */
-	{ 0, 0, 0xcccc, 0 }, /* green */
-	{ 0, 0, 0xbbbb, 0xbbbb }, /* cyan */
-	{ 0, 0xcccc, 0, 0 }, /* red */
-	{ 0, 0xbbbb, 0, 0xbbbb }, /* magenta */
-	{ 0, 0xbbbb, 0xbbbb, 0 }, /* brown */
-	{ 0, 0xaaaa, 0xaaaa, 0xaaaa }, /* grey */
-	{ 0, 0x7777, 0x7777, 0x7777 }, /* dark grey */
-	{ 0, 0, 0, 0xffff }, /* light blue */
-	{ 0, 0, 0xffff, 0 }, /* light green */
-	{ 0, 0, 0xffff, 0xffff }, /* light cyan */
-	{ 0, 0xffff, 0, 0 }, /* light red */
-	{ 0, 0xffff, 0, 0xffff }, /* light magenta */
-	{ 0, 0xffff, 0xffff, 0 }, /* yellow */
-	{ 0, 0xffff, 0xffff, 0xffff } /* white */
-};
-
-
-#define MIRC_COLORS 16
-static GdkColor mirc_colors[MIRC_COLORS] = {
-	{ 0, 0xffff, 0xffff, 0xffff }, /* white */
-	{ 0, 0, 0, 0 }, /* black */
-	{ 0, 0, 0, 0x7b00 }, /* blue */
-	{ 0, 0, 0x9100, 0 }, /* green */
-	{ 0, 0xffff, 0, 0 }, /* light red */
-	{ 0, 0x7b00, 0, 0 }, /* red */
-	{ 0, 0x9c00, 0, 0x9c00 }, /* magenta */
-	{ 0, 0xffff, 0x7d00, 0 }, /* orange */
-	{ 0, 0xffff, 0xffff, 0 }, /* yellow */
-	{ 0, 0, 0xfa00, 0 }, /* light green */
-	{ 0, 0, 0x9100, 0x8b00 }, /* cyan */
-	{ 0, 0, 0xffff, 0xffff }, /* light cyan */
-	{ 0, 0, 0, 0xffff }, /* light blue */
-	{ 0, 0xffff, 0, 0xffff }, /* light magenta */
-	{ 0, 0x7b00, 0x7b00, 0x7b00 }, /* grey */
-	{ 0, 0xcd00, 0xd200, 0xcd00 } /* dark grey */
-};
 
 static int window_create_override;
 
@@ -209,18 +169,23 @@ static void gui_window_print(WindowGui *window, TextDest *dest,
 					  &start_iter, &iter);
 	}
 
-	if (flags & GUI_PRINT_FLAG_BOLD)
-		fg |= 8;
-	if (flags & GUI_PRINT_FLAG_BLINK)
-		bg |= 8;
-
 	if ((flags & GUI_PRINT_FLAG_MIRC_COLOR) == 0) {
 		/* normal color */
-		if (fg < 0 || fg > COLORS)
+		if (fg < 0 || fg > DEFAULT_COLORS)
 			fg = -1;
-		if (bg < 0 || bg > COLORS)
+		if (bg < 0 || bg > DEFAULT_COLORS)
 			bg = -1;
 		colortab = colors;
+
+		if (flags & GUI_PRINT_FLAG_BOLD) {
+			if (fg == -1)
+				fg = COLOR_BOLD;
+			else
+				fg |= 8;
+		}
+
+		if ((flags & GUI_PRINT_FLAG_BLINK) && bg != -1)
+			bg |= 8;
 
 		g_snprintf(fg_tag_name, sizeof(fg_tag_name), "c_%d", fg);
 		g_snprintf(bg_tag_name, sizeof(bg_tag_name), "bc_%d", bg);
@@ -232,6 +197,21 @@ static void gui_window_print(WindowGui *window, TextDest *dest,
 
 		g_snprintf(fg_tag_name, sizeof(fg_tag_name), "m_%d", fg);
 		g_snprintf(bg_tag_name, sizeof(bg_tag_name), "bm_%d", bg);
+	}
+
+	if ((flags & GUI_PRINT_FLAG_BOLD) &&
+	    (flags & GUI_PRINT_FLAG_MIRC_COLOR)) {
+		/* bold mirc color */
+		tag = gtk_text_tag_table_lookup(window->tagtable, "bold");
+		if (tag == NULL) {
+			tag = gtk_text_buffer_create_tag(window->buffer,
+							 "bold", NULL);
+			g_object_set(G_OBJECT(tag), "weight",
+				     PANGO_WEIGHT_BOLD, NULL);
+		}
+
+		gtk_text_buffer_apply_tag(window->buffer, tag,
+					  &start_iter, &iter);
 	}
 
 	if (fg >= 0) {
