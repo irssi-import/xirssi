@@ -36,7 +36,7 @@ static gboolean event_destroy(GtkWidget *widget, Entry *entry)
 
 static gboolean event_activate(GtkWidget *widget, Entry *entry)
 {
-	key_pressed(entry->keyboard, "entry");
+	key_pressed(entry->keyboard, "return");
 	return FALSE;
 }
 
