@@ -1,3 +1,7 @@
+2002-04-30 17:05  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-tab-label.c: crashfix
+
 2002-04-30 04:30  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-frame.c, gui-frame.h, gui-tab-label.c,
