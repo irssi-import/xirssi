@@ -1,3 +1,23 @@
+2002-04-27 16:53  Timo Sirainen <tss@iki.fi>
+
+	* .cvsignore: added
+
+2002-04-27 16:53  Timo Sirainen <tss@iki.fi>
+
+	* autogen.sh, pixmaps/generate.sh: whops, generate.sh wasn't needed
+	:)
+
+2002-04-27 16:50  Timo Sirainen <tss@iki.fi>
+
+	* TODO, autogen.sh, pixmaps/.cvsignore, pixmaps/Makefile.am,
+	pixmaps/ball-blue.png, pixmaps/ball-green.png,
+	pixmaps/ball-lightblue.png, pixmaps/ball-orange.png,
+	pixmaps/ball-pink.png, pixmaps/ball-red.png,
+	pixmaps/ball-yellow.png, pixmaps/generate.sh, pixmaps/halfop.xpm,
+	pixmaps/op.xpm, pixmaps/voice.xpm, src/gui-context-nick.c,
+	src/gui-nicklist.c: changed nicklist pixmaps to 3d-like balls :)
+	pixmaps by ccr.
+
 2002-04-27 03:24  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-frame.c: focus was automoved too late to entry line and
@@ -77,12 +97,12 @@
 	* AUTHORS, Makefile.am, NEWS, README, TODO, acconfig.h, autogen.sh,
 	config-plugin.h.in, configure.in, stamp.h.in, pixmaps/Makefile.am,
 	pixmaps/halfop.xpm, pixmaps/op.xpm, pixmaps/voice.xpm,
-	pixmaps/.xvpics/irssilogo.png, src/.cvsignore, src/Makefile.am,
-	src/gui-frame.h, src/gui-nicklist.c, src/gui-nicklist.h,
-	src/gui-window-view.h, src/gui-window.h, src/irssi.c, src/module.h,
-	src/gui-frame.c, src/gui-window.c, src/gui-entry.c,
-	src/gui-entry.h, src/gui-window-view.c, src/gui-channel.c,
-	src/gui-channel.h, src/gui-menu-nick.c, src/gui-nicklist-view.c,
+	src/.cvsignore, src/Makefile.am, src/gui-frame.h,
+	src/gui-nicklist.c, src/gui-nicklist.h, src/gui-window-view.h,
+	src/gui-window.h, src/irssi.c, src/module.h, src/gui-frame.c,
+	src/gui-window.c, src/gui-entry.c, src/gui-entry.h,
+	src/gui-window-view.c, src/gui-channel.c, src/gui-channel.h,
+	src/gui-menu-nick.c, src/gui-nicklist-view.c,
 	src/gui-nicklist-view.h, src/gui-tab.c, src/gui-tab.h,
 	src/gui-window-item-rec.h, src/gui-context-nick.c,
 	src/gui-menu-nick.h, src/gui-window-context.c,
@@ -93,12 +113,12 @@
 	* AUTHORS, Makefile.am, NEWS, README, TODO, acconfig.h, autogen.sh,
 	config-plugin.h.in, configure.in, stamp.h.in, pixmaps/Makefile.am,
 	pixmaps/halfop.xpm, pixmaps/op.xpm, pixmaps/voice.xpm,
-	pixmaps/.xvpics/irssilogo.png, src/.cvsignore, src/Makefile.am,
-	src/gui-frame.h, src/gui-nicklist.c, src/gui-nicklist.h,
-	src/gui-window-view.h, src/gui-window.h, src/irssi.c, src/module.h,
-	src/gui-frame.c, src/gui-window.c, src/gui-entry.c,
-	src/gui-entry.h, src/gui-window-view.c, src/gui-channel.c,
-	src/gui-channel.h, src/gui-menu-nick.c, src/gui-nicklist-view.c,
+	src/.cvsignore, src/Makefile.am, src/gui-frame.h,
+	src/gui-nicklist.c, src/gui-nicklist.h, src/gui-window-view.h,
+	src/gui-window.h, src/irssi.c, src/module.h, src/gui-frame.c,
+	src/gui-window.c, src/gui-entry.c, src/gui-entry.h,
+	src/gui-window-view.c, src/gui-channel.c, src/gui-channel.h,
+	src/gui-menu-nick.c, src/gui-nicklist-view.c,
 	src/gui-nicklist-view.h, src/gui-tab.c, src/gui-tab.h,
 	src/gui-window-item-rec.h, src/gui-context-nick.c,
 	src/gui-menu-nick.h, src/gui-window-context.c,
