@@ -18,4 +18,8 @@ void setup_set_changed(Setup *setup);
 /* apply setting changes */
 void setup_apply_changes(Setup *setup);
 
+
+/* show the main preferences dialog */
+void setup_preferences_show(void);
+
 #endif

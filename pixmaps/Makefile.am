@@ -34,8 +34,8 @@ EXTRA_DIST = \
 	ball-yellow.png \
 	ball-green.png \
 	ball-orange.png \
-	ball-red.png
-
+	ball-red.png \
+	irssilogo.jpg
 all: $(generated_pixmaps)
 
 clean-generic:

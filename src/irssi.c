@@ -39,6 +39,8 @@
 #include "gui-tab.h"
 #include "gui-url.h"
 
+#include "glade/support.h"
+
 #include <signal.h>
 
 #ifdef HAVE_STATIC_PERL
@@ -99,6 +101,7 @@ static void gui_finish_init(void)
 	perl_core_init();
 	fe_perl_init();
 #endif
+        add_pixmap_directory("../pixmaps");
 
 	gui_tabs_init();
 	gui_windows_init();

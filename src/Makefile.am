@@ -1,3 +1,5 @@
+SUBDIRS = glade
+
 bin_PROGRAMS = xirssi
 
 INCLUDES = \
@@ -9,7 +11,11 @@ INCLUDES = \
 	$(GTK_CFLAGS) \
 	-DSYSCONFDIR=\""$(sysconfdir)"\"
 
+xirssi_libs = \
+	glade/libirssi_glade.a
+
 xirssi_DEPENDENCIES = \
+	$(xirssi_libs) \
 	@COMMON_LIBS@ \
 	@PERL_LINK_LIBS@ \
 	@PERL_FE_LINK_LIBS@
@@ -17,7 +23,8 @@ xirssi_DEPENDENCIES = \
 xirssi_LDFLAGS = -export-dynamic
 
 xirssi_LDADD = \
-        @GTK_LIBS@ \
+	$(xirssi_libs) \
+	@GTK_LIBS@ \
 	@COMMON_LIBS@ \
 	@PERL_LINK_LIBS@ \
 	@PERL_FE_LINK_LIBS@ \
@@ -48,6 +55,7 @@ xirssi_SOURCES = \
 	gui-window-context.c \
 	gui-window-view.c \
 	setup.c \
+	setup-prefs.c \
 	setup-servers.c \
 	setup-servers-network.c \
 	setup-servers-server.c \
@@ -72,5 +80,4 @@ noinst_HEADERS = \
 	gui-window-item-rec.h \
 	gui-window-view.h \
 	setup.h \
-	setup-servers.h \
 	module.h

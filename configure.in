@@ -60,5 +60,6 @@ fi
 AC_OUTPUT(
 Makefile
 src/Makefile
+src/glade/Makefile
 pixmaps/Makefile
 stamp.h)

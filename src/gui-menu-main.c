@@ -23,15 +23,14 @@
 
 #include "gui-menu.h"
 #include "dialogs.h"
-#include "setup-servers.h"
+#include "setup.h"
 
 #define FAQ_URL "http://nl.irssi.org/?page=docs&doc=faq"
 #define STARTUP_HOWTO_URL "http://irssi.org/?page=docs&doc=startup-HOWTO"
 
 enum {
-	ACTION_QUIT = ACTION_CUSTOM,
-
-	ACTION_SETUP_SERVERS,
+	ACTION_PREFERENCES = ACTION_CUSTOM,
+	ACTION_QUIT,
 
 	ACTION_FAQ,
 	ACTION_HOWTO,
@@ -40,15 +39,13 @@ enum {
 };
 
 static int images_initialized = FALSE;
-static GtkWidget *img_quit, *img_home;
+static GtkWidget *img_quit, *img_preferences, *img_home;
 
 static MenuItem items[] = {
 	{ ACTION_SUB,		"_Irssi" },
+	{ ACTION_PREFERENCES,	"_Preferences", NULL, &img_preferences },
+	{ ACTION_SEPARATOR },
 	{ ACTION_QUIT,		"_Quit", NULL, &img_quit },
-	{ ACTION_ENDSUB },
-
-	{ ACTION_SUB,		"_Settings" },
-	{ ACTION_SETUP_SERVERS,	"_Servers" },
 	{ ACTION_ENDSUB },
 
 	{ ACTION_SUB,		"_Help" },
@@ -66,8 +63,8 @@ static void menu_callback(void *user_data, const char *item_data, int action)
 	case ACTION_QUIT:
 		signal_emit("command quit", 1, "");
 		break;
-	case ACTION_SETUP_SERVERS:
-		setup_servers_show();
+	case ACTION_PREFERENCES:
+		setup_preferences_show();
 		break;
 
 	case ACTION_FAQ:
@@ -88,6 +85,7 @@ static void menu_callback(void *user_data, const char *item_data, int action)
 static void init_images(void)
 {
 	img_quit = gtk_image_new_from_stock(GTK_STOCK_QUIT, GTK_ICON_SIZE_MENU);
+	img_preferences = gtk_image_new_from_stock(GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU);
 	img_home = gtk_image_new_from_stock(GTK_STOCK_HOME, GTK_ICON_SIZE_MENU);
 }
 

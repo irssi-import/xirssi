@@ -26,18 +26,20 @@
 #include "servers-setup.h"
 
 #include "gui.h"
-#include "setup-servers.h"
+#include "glade/interface.h"
 
 #define NETWORK_NONE "<none>"
 
-static void server_save(GObject *data, ServerConfig *server)
+GList *get_chat_protocol_names(void);
+
+static void server_save(GObject *obj, ServerConfig *server)
 {
 	ChatProtocol *proto;
 	GtkEntry *entry;
 	GtkToggleButton *toggle;
 	const char *proto_name, *address, *value;
 
-	entry = g_object_get_data(data, "address");
+	entry = g_object_get_data(obj, "address");
 	address = gtk_entry_get_text(entry);
 
 	if (*address == '\0') {
@@ -48,7 +50,7 @@ static void server_save(GObject *data, ServerConfig *server)
 
 	if (server == NULL) {
 		/* create server */
-		entry = g_object_get_data(data, "protocol");
+		entry = g_object_get_data(obj, "protocol");
 		proto_name = gtk_entry_get_text(entry);
 
 		proto = chat_protocol_find(proto_name);
@@ -59,7 +61,7 @@ static void server_save(GObject *data, ServerConfig *server)
 		server->chat_type = proto->id;
 	}
 
-	entry = g_object_get_data(data, "ipproto");
+	entry = g_object_get_data(obj, "ipproto");
 	value = gtk_entry_get_text(entry);
 	if (g_strcasecmp(value, "ipv4") == 0)
 		server->family = AF_INET;
@@ -71,20 +73,20 @@ static void server_save(GObject *data, ServerConfig *server)
 	g_free(server->address);
 	server->address = g_strdup(address);
 
-	entry = g_object_get_data(data, "port");
+	entry = g_object_get_data(obj, "port");
 	server->port = atoi(gtk_entry_get_text(entry));
 
-	gui_entry_update(data, "network", &server->chatnet);
+	gui_entry_update(obj, "network", &server->chatnet);
 	if (server->chatnet != NULL &&
 	    strcmp(server->chatnet, NETWORK_NONE) == 0)
 		g_free_and_null(server->chatnet);
 
-	gui_entry_update(data, "password", &server->password);
-	gui_entry_update(data, "own_host", &server->own_host);
+	gui_entry_update(obj, "password", &server->password);
+	gui_entry_update(obj, "own_host", &server->own_host);
 
-	toggle = g_object_get_data(data, "autoconnect");
+	toggle = g_object_get_data(obj, "autoconnect");
 	server->autoconnect = gtk_toggle_button_get_active(toggle);
-	toggle = g_object_get_data(data, "no_proxy");
+	toggle = g_object_get_data(obj, "no_proxy");
 	server->no_proxy = gtk_toggle_button_get_active(toggle);
 
 	server_setup_add(server);
@@ -94,10 +96,8 @@ static gboolean event_response_server(GtkWidget *widget, int response_id,
 				      ServerConfig *server)
 {
 	/* ok / cancel pressed */
-	if (response_id == GTK_RESPONSE_OK) {
-		server_save(g_object_get_data(G_OBJECT(widget), "data"),
-			    server);
-	}
+	if (response_id == GTK_RESPONSE_OK)
+		server_save(G_OBJECT(widget), server);
 
 	gtk_widget_destroy(widget);
 	return FALSE;
@@ -131,125 +131,67 @@ static GList *get_ip_protocol_names(void)
 
 void server_dialog_show(ServerConfig *server, const char *network)
 {
-	GtkWidget *dialog, *table, *sep, *label, *combo, *checkbox;
-	ChatProtocol *proto;
+	GtkWidget *dialog;
+	GtkCombo *protocol_combo, *network_combo, *ipproto_combo;
+	GObject *obj;
 	GList *list;
 	char port[MAX_INT_STRLEN];
-	int y;
 
-	if (server != NULL)
-		network = server->chatnet;
+	dialog = create_dialog_add_server();
+	obj = G_OBJECT(dialog);
 
-	dialog = gtk_dialog_new_with_buttons("Add Network", NULL, 0,
-					     GTK_STOCK_OK, GTK_RESPONSE_OK,
-					     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					     NULL);
-	g_signal_connect(G_OBJECT(dialog), "response",
+	g_signal_connect(obj, "response",
 			 G_CALLBACK(event_response_server), server);
 
-	table = gtk_table_new(3, 3, FALSE);
-	g_object_set_data(G_OBJECT(dialog), "data", table);
-	gtk_container_set_border_width(GTK_CONTAINER(table), 7);
-	gtk_table_set_row_spacings(GTK_TABLE(table), 3);
-	gtk_table_set_col_spacings(GTK_TABLE(table), 7);
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox),
-			   table, TRUE, TRUE, 0);
-
-	y = 0;
-
-	/* -- */
-	proto = server == NULL ? NULL :
-		chat_protocol_find_id(server->chat_type);
-	setup_server_add_protocol_widget(GTK_TABLE(table), y++, proto);
-
-	label = gtk_label_new("Network");
-	gtk_misc_set_alignment(GTK_MISC(label), 1, .5);
-	gtk_table_attach(GTK_TABLE(table), label, 0, 1, y, y+1,
-			 GTK_FILL, 0, 0, 0);
-
-	combo = gtk_combo_new();
-        gtk_combo_set_value_in_list(GTK_COMBO(combo), TRUE, TRUE);
-	gtk_table_attach_defaults(GTK_TABLE(table), combo,
-				  1, 2, y, y+1);
-	y++;
-
-	list = get_network_names(server == NULL ? -1 : server->chat_type);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo), list);
+	/* set chat protocols */
+	protocol_combo = g_object_get_data(obj, "protocol_combo");
+	list = get_chat_protocol_names();
+	gtk_combo_set_popdown_strings(protocol_combo, list);
 	g_list_free(list);
 
+	/* set networks */
+	network_combo = g_object_get_data(obj, "network_combo");
+	list = get_network_names(server == NULL ? -1 : server->chat_type);
+	gtk_combo_set_popdown_strings(network_combo, list);
+	g_list_free(list);
+
+	/* set default network */
+	if (server != NULL)
+		network = server->chatnet;
 	if (network == NULL)
 		network = NETWORK_NONE;
-	gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(combo)->entry), network);
-	g_object_set_data(G_OBJECT(table), "network", GTK_COMBO(combo)->entry);
+	gtk_entry_set_text(GTK_ENTRY(network_combo->entry), network);
 
-	sep = gtk_hseparator_new();
-	gtk_table_attach(GTK_TABLE(table), sep, 0, 2, y, y+1,
-			 GTK_FILL, GTK_FILL, 0, 10);
-	y++;
-
-	/* -- */
-
-	/* ip protocol */
-	label = gtk_label_new("IP Protocol");
-	gtk_misc_set_alignment(GTK_MISC(label), 1, .5);
-	gtk_table_attach(GTK_TABLE(table), label, 0, 1, y, y+1,
-			 GTK_FILL, 0, 0, 0);
-
-	combo = gtk_combo_new();
-	gtk_table_attach_defaults(GTK_TABLE(table), combo,
-				  1, 2, y, y+1);
-	y++;
-
+	/* set ip protocols */
+	ipproto_combo = g_object_get_data(obj, "ipproto_combo");
 	list = get_ip_protocol_names();
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo), list);
-
-	gtk_editable_set_editable(GTK_EDITABLE(GTK_COMBO(combo)->entry),
-				  FALSE);
-	if (server != NULL && server->family != 0) {
-		gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(combo)->entry),
-				   server->family == AF_INET ? "IPv4" : "IPv6");
-	}
+	gtk_combo_set_popdown_strings(ipproto_combo, list);
 	g_list_free(list);
-	g_object_set_data(G_OBJECT(table), "ipproto", GTK_COMBO(combo)->entry);
 
-	/* address */
-	gui_table_add_entry(GTK_TABLE(table), 0, y++, "Address", "address",
-			    server == NULL ? NULL : server->address);
+	if (server != NULL) {
+		/* set old values */
+		gtk_widget_set_sensitive(GTK_WIDGET(protocol_combo), FALSE);
+		gtk_entry_set_text(GTK_ENTRY(protocol_combo->entry),
+				   CHAT_PROTOCOL(server)->name);
 
-	/* port */
-	if (server == NULL || server->port <= 0)
-		port[0] = '\0';
-	else
-		ltoa(port, server->port);
-	gui_table_add_entry(GTK_TABLE(table), 0, y++, "Port", "port", port);
+		if (server->family != 0) {
+			gtk_entry_set_text(GTK_ENTRY(ipproto_combo->entry),
+					   server->family == AF_INET ?
+					   "IPv4" : "IPv6");
+		}
 
-	sep = gtk_hseparator_new();
-	gtk_table_attach(GTK_TABLE(table), sep, 0, 2, y, y+1,
-			 GTK_FILL, GTK_FILL, 0, 10);
-	y++;
+		if (server->port <= 0)
+			port[0] = '\0';
+		else
+			ltoa(port, server->port);
 
-	/* -- */
-	gui_table_add_entry(GTK_TABLE(table), 0, y++, "Password", "password",
-			    server == NULL ? NULL : server->password);
-	gui_table_add_entry(GTK_TABLE(table), 0, y++, "Source Host", "own_host",
-			    server == NULL ? NULL : server->own_host);
+		gui_entry_set_from(obj, "address", server->address);
+		gui_entry_set_from(obj, "port", port);
+		gui_entry_set_from(obj, "password", server->password);
+		gui_entry_set_from(obj, "own_host", server->own_host);
+		gui_toggle_set_from(obj, "autoconnect", server->autoconnect);
+		gui_toggle_set_from(obj, "no_proxy", server->no_proxy);
+	}
 
-	sep = gtk_hseparator_new();
-	gtk_table_attach(GTK_TABLE(table), sep, 0, 2, y, y+1,
-			 GTK_FILL, GTK_FILL, 0, 10);
-	y++;
-
-	checkbox = gtk_check_button_new_with_label("Automatically connect at startup");
-	g_object_set_data(G_OBJECT(table), "autoconnect", checkbox);
-	gtk_table_attach(GTK_TABLE(table), checkbox, 0, 2, y, y+1,
-			 GTK_FILL, GTK_FILL, 0, 0);
-	y++;
-
-	checkbox = gtk_check_button_new_with_label("Disable connecting through proxy");
-	g_object_set_data(G_OBJECT(table), "no_proxy", checkbox);
-	gtk_table_attach(GTK_TABLE(table), checkbox, 0, 2, y, y+1,
-			 GTK_FILL, GTK_FILL, 0, 0);
-	y++;
-
-	gtk_widget_show_all(dialog);
+	gtk_widget_show(dialog);
 }

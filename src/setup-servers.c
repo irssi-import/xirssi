@@ -43,27 +43,13 @@ enum {
 	N_COLUMNS
 };
 
-static GtkWidget *server_dialog = NULL;
 static GtkTreeStore *server_store = NULL;
-static Setup *server_setup;
 
 static gboolean event_destroy(GtkWidget *widget)
 {
-        setup_server_signals_deinit();
-	setup_destroy(server_setup);
-
-	server_dialog = NULL;
-	server_setup = NULL;
+	setup_server_signals_deinit();
+	server_store = NULL;
 	return FALSE;
-}
-
-static void event_response(GtkWidget *widget, int response_id)
-{
-	/* ok / cancel pressed */
-	if (response_id == GTK_RESPONSE_OK)
-                setup_apply_changes(server_setup);
-
-	gtk_widget_destroy(widget);
 }
 
 static gboolean event_button_press(GtkTreeView *tree, GdkEventButton *event)
@@ -291,7 +277,6 @@ static gboolean event_remove(GtkWidget *widget, GtkTreeView *view)
 		gtk_tree_path_free(path);
 	}
 
-	setup_set_changed(server_setup);
 	return FALSE;
 }
 
@@ -391,7 +376,7 @@ static void server_store_fill(GtkTreeStore *store)
 	}
 }
 
-static GList *get_chat_protocol_names(void)
+GList *get_chat_protocol_names(void)
 {
 	GList *list;
 	GSList *tmp;
@@ -449,25 +434,15 @@ static void server_set_func(GtkTreeViewColumn *column,
 		     IS_CHATNET(iter_data) ? PANGO_WEIGHT_BOLD : 0, NULL);
 }
 
-static GtkWidget *server_tree_new(void)
+void setup_servers_init(GtkWidget *dialog)
 {
-	GtkWidget *frame, *hbox, *sw, *view, *buttonbox, *button;
+	GtkWidget *button;
 	GtkTreeView *tree_view;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 
-	hbox = gtk_hbox_new(FALSE, 7);
-
-	/* scrolled window */
-	frame = gtk_frame_new(NULL);
-        gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-	gtk_box_pack_start(GTK_BOX(hbox), frame, TRUE, TRUE, 0);
-
-	sw = gtk_scrolled_window_new(NULL, NULL);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(sw),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_container_add(GTK_CONTAINER(frame), sw);
+	g_signal_connect(G_OBJECT(dialog), "destroy",
+			 G_CALLBACK(event_destroy), NULL);
 
 	/* tree store */
 	server_store = gtk_tree_store_new(N_COLUMNS,
@@ -480,13 +455,12 @@ static GtkWidget *server_tree_new(void)
 			       G_CALLBACK(event_row_changed), NULL);*/
         server_store_fill(server_store);
 
-	/* tree view */
-	view = gtk_tree_view_new_with_model(GTK_TREE_MODEL(server_store));
-	g_signal_connect(G_OBJECT(view), "button_press_event",
+	/* view */
+	tree_view = g_object_get_data(G_OBJECT(dialog), "servers_tree");
+	g_signal_connect(G_OBJECT(tree_view), "button_press_event",
 			 G_CALLBACK(event_button_press), NULL);
-	gtk_container_add(GTK_CONTAINER(sw), view);
 
-	tree_view = GTK_TREE_VIEW(view);
+	gtk_tree_view_set_model(tree_view, GTK_TREE_MODEL(server_store));
 	/*gtk_tree_view_set_reorderable(tree_view, TRUE);*/
 	gtk_tree_selection_set_mode(gtk_tree_view_get_selection(tree_view),
 				    GTK_SELECTION_MULTIPLE);
@@ -510,162 +484,22 @@ static GtkWidget *server_tree_new(void)
 							  NULL);
 	gtk_tree_view_append_column(tree_view, column);
 
-	/* add/edit/remove */
-	buttonbox = gtk_vbutton_box_new();
-	gtk_button_box_set_layout(GTK_BUTTON_BOX(buttonbox),
-				  GTK_BUTTONBOX_START);
-	gtk_box_set_spacing(GTK_BOX(buttonbox), 5);
-	gtk_box_pack_start(GTK_BOX(hbox), buttonbox, FALSE, FALSE, 0);
-
-	button = gtk_button_new_with_label("Add Network...");
+	/* buttons */
+	button = g_object_get_data(G_OBJECT(dialog), "server_add_network");
 	g_signal_connect(G_OBJECT(button), "clicked",
 			 G_CALLBACK(event_add_network), tree_view);
-	gtk_container_add(GTK_CONTAINER(buttonbox), button);
 
-	button = gtk_button_new_with_label("Add Server...");
+	button = g_object_get_data(G_OBJECT(dialog), "server_add_server");
 	g_signal_connect(G_OBJECT(button), "clicked",
 			 G_CALLBACK(event_add_server), tree_view);
-	gtk_container_add(GTK_CONTAINER(buttonbox), button);
 
-	button = gtk_button_new_with_label("Edit...");
+	button = g_object_get_data(G_OBJECT(dialog), "server_edit");
 	g_signal_connect(G_OBJECT(button), "clicked",
 			 G_CALLBACK(event_edit), tree_view);
-	gtk_container_add(GTK_CONTAINER(buttonbox), button);
 
-	button = gtk_button_new_with_label("Remove");
+	button = g_object_get_data(G_OBJECT(dialog), "server_remove");
 	g_signal_connect(G_OBJECT(button), "clicked",
 			 G_CALLBACK(event_remove), tree_view);
-	gtk_container_add(GTK_CONTAINER(buttonbox), button);
-
-	return hbox;
-}
-
-void setup_servers_show(void)
-{
-	GtkWidget *dialog, *vbox, *vbox2, *hbox, *frame, *table;
-	GtkWidget *tree, *label, *checkbox, *spin, *entry;
-
-	if (server_dialog != NULL) {
-		gdk_window_raise(server_dialog->window);
-		return;
-	}
-
-	server_dialog = dialog =
-		gtk_dialog_new_with_buttons("Server Settings", NULL, 0,
-					    GTK_STOCK_OK, GTK_RESPONSE_OK,
-					    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					    NULL);
-	gtk_widget_set_size_request(dialog, -1, 550);
-	server_setup = setup_create(NULL, NULL);
-
-	g_signal_connect(G_OBJECT(dialog), "destroy",
-			 G_CALLBACK(event_destroy), NULL);
-	g_signal_connect(G_OBJECT(dialog), "response",
-			 G_CALLBACK(event_response), NULL);
-
-	vbox = gtk_vbox_new(FALSE, 7);
-	gtk_container_set_border_width(GTK_CONTAINER(vbox), 7);
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox),
-			   vbox, TRUE, TRUE, 0);
-
-	/* servers list */
-	frame = gtk_frame_new("Servers");
-	gtk_box_pack_start(GTK_BOX(vbox), frame, TRUE, TRUE, 0);
-
-	vbox2 = gtk_vbox_new(FALSE, 5);
-	gtk_container_set_border_width(GTK_CONTAINER(vbox2), 7);
-	gtk_container_add(GTK_CONTAINER(frame), vbox2);
-
-	tree = server_tree_new();
-	gtk_box_pack_start(GTK_BOX(vbox2), tree, TRUE, TRUE, 0);
-
-	/* motd */
-	checkbox = gtk_check_button_new_with_label("Skip MOTD while connecting");
-	gtk_widget_set_name(checkbox, "skip_motd");
-	gtk_box_pack_start(GTK_BOX(vbox2), checkbox, FALSE, FALSE, 0);
-
-	/* IPv6 */
-	checkbox = gtk_check_button_new_with_label("Prefer IPv6 addresses with DNS lookups");
-	gtk_widget_set_name(checkbox, "resolve_prefer_ipv6");
-	gtk_box_pack_start(GTK_BOX(vbox2), checkbox, FALSE, FALSE, 0);
-
-	/* reconnect wait */
-	hbox = gtk_hbox_new(FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(vbox2), hbox, FALSE, FALSE, 0);
-
-	label = gtk_label_new("Seconds to wait before reconnecting (-1 = never reconnect)");
-	gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-	spin = gtk_spin_button_new(NULL, 0, 0);
-        gtk_spin_button_set_range(GTK_SPIN_BUTTON(spin), -1, G_MAXINT);
-        gtk_spin_button_set_increments(GTK_SPIN_BUTTON(spin), 1, 60);
-	gtk_widget_set_name(spin, "server_reconnect_time");
-	gtk_box_pack_start(GTK_BOX(hbox), spin, FALSE, FALSE, 0);
-
-	/* source host */
-	hbox = gtk_hbox_new(FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(vbox2), hbox, FALSE, FALSE, 0);
-
-	label = gtk_label_new("Source host (\"virtual host\")");
-	gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-	entry = gtk_entry_new();
-	gtk_widget_set_name(entry, "hostname");
-	gtk_box_pack_start(GTK_BOX(hbox), entry, TRUE, TRUE, 0);
-
-	/* user information */
-	frame = gtk_frame_new("User Information");
-	gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, FALSE, 0);
-
-	table = gtk_table_new(3, 2, FALSE);
-	gtk_container_add(GTK_CONTAINER(frame), table);
-	gtk_container_set_border_width(GTK_CONTAINER(table), 7);
-	gtk_table_set_row_spacings(GTK_TABLE(table), 3);
-	gtk_table_set_col_spacings(GTK_TABLE(table), 7);
-
-	label = gtk_label_new("Nick");
-	gtk_misc_set_alignment(GTK_MISC(label), 1, .5);
-	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 0, 1,
-			 GTK_FILL, 0, 0, 0);
-
-	entry = gtk_entry_new();
-	gtk_entry_set_width_chars(GTK_ENTRY(entry), 10);
-	gtk_widget_set_name(entry, "nick");
-	gtk_table_attach(GTK_TABLE(table), entry, 1, 2, 0, 1,
-			 GTK_FILL, 0, 0, 0);
-
-	label = gtk_label_new("Alt. Nick");
-	gtk_misc_set_alignment(GTK_MISC(label), 1, .5);
-	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 1, 2,
-			 GTK_FILL, 0, 0, 0);
-
-	entry = gtk_entry_new();
-	gtk_entry_set_width_chars(GTK_ENTRY(entry), 10);
-	gtk_widget_set_name(entry, "alternate_nick");
-	gtk_table_attach(GTK_TABLE(table), entry, 1, 2, 1, 2,
-			 GTK_FILL, 0, 0, 0);
-
-	label = gtk_label_new("User Name");
-	gtk_misc_set_alignment(GTK_MISC(label), 1, .5);
-	gtk_table_attach(GTK_TABLE(table), label, 2, 3, 0, 1,
-			 GTK_FILL, 0, 0, 0);
-
-	entry = gtk_entry_new();
-	gtk_widget_set_name(entry, "user_name");
-	gtk_table_attach_defaults(GTK_TABLE(table), entry, 3, 4, 0, 1);
-
-	label = gtk_label_new("Real Name");
-	gtk_misc_set_alignment(GTK_MISC(label), 1, .5);
-	gtk_table_attach(GTK_TABLE(table), label, 2, 3, 1, 2,
-			 GTK_FILL, 0, 0, 0);
-
-	entry = gtk_entry_new();
-	gtk_widget_set_name(entry, "real_name");
-	gtk_table_attach_defaults(GTK_TABLE(table), entry, 3, 4, 1, 2);
-
-	gtk_widget_show_all(dialog);
-
-	setup_register(server_setup, dialog);
 
 	setup_server_signals_init();
 }

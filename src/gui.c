@@ -61,14 +61,31 @@ GtkWidget *gui_table_add_entry(GtkTable *table, int x, int y,
 	return entry;
 }
 
-void gui_entry_update(GObject *table, const char *name, char **value)
+void gui_entry_update(GObject *object, const char *name, char **value)
 {
 	GtkEntry *entry;
 	const char *entry_text;
 
-	entry = g_object_get_data(table, name);
+	entry = g_object_get_data(object, name);
         entry_text = gtk_entry_get_text(entry);
 
 	g_free(*value);
 	*value = *entry_text == '\0' ? NULL : g_strdup(entry_text);
+}
+
+void gui_entry_set_from(GObject *object, const char *key, const char *value)
+{
+	GtkEntry *entry;
+
+	entry = g_object_get_data(object, key);
+	if (value != NULL)
+		gtk_entry_set_text(entry, value);
+}
+
+void gui_toggle_set_from(GObject *object, const char *key, gboolean value)
+{
+	GtkToggleButton *toggle;
+
+	toggle = g_object_get_data(object, key);
+	gtk_toggle_button_set_active(toggle, value);
 }

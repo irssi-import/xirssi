@@ -58,10 +58,12 @@ static gboolean event_changed(GtkWidget *widget, Setup *setup)
 	set = g_object_get_data(G_OBJECT(widget), "set");
 	g_hash_table_insert(setup->changed_settings, widget, set);
 
-	if (!setup->changed && setup->changed_func != NULL) {
-		/* notify once about the change */
-		setup->changed_func(setup, setup->user_data);
+	if (!setup->changed) {
 		setup->changed = TRUE;
+		if (setup->changed_func != NULL) {
+			/* notify once about the change */
+			setup->changed_func(setup, setup->user_data);
+		}
 	}
 	return TRUE;
 }
@@ -71,6 +73,7 @@ void setup_register(Setup *setup, GtkWidget *widget)
 	GList *tmp, *children;
 	SETTINGS_REC *set;
 	const char *name;
+	char number[MAX_INT_STRLEN];
 
 	/* recursively register all known widgets with settings */
 	if (GTK_IS_CONTAINER(widget)) {
@@ -102,6 +105,9 @@ void setup_register(Setup *setup, GtkWidget *widget)
 
 			gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget),
 						  settings_get_int(set->key));
+		} else if (set->type == SETTING_TYPE_INT) {
+			ltoa(number, settings_get_int(set->key));
+			gtk_entry_set_text(GTK_ENTRY(widget), number);
 		} else {
 			g_return_if_fail(set->type == SETTING_TYPE_STRING);
 
