@@ -1,3 +1,9 @@
+2002-05-05 03:56  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-tab-move.c, gui-tab.c, gui-tab.h,
+	gui-window-activity.c, gui-window-view.c: show tab number + all
+	window items in tab.
+
 2002-05-05 01:18  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-itemlist.c, gui-tab-move.c, gui-tab.c: crashfixes
