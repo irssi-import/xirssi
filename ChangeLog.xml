@@ -3,6 +3,19 @@
 <changelog xmlns="http://www.red-bean.com/xmlns/cvs2cl/">
 
 <entry>
+<date>2002-08-11</date>
+<weekday>Sunday</weekday>
+<time>10:31</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>configure.in</name>
+<revision>1.6</revision>
+</file>
+<msg>--with-irssi-lib was buggy.
+</msg>
+</entry>
+
+<entry>
 <date>2002-08-10</date>
 <weekday>Saturday</weekday>
 <time>09:30</time>
