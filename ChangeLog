@@ -1,3 +1,12 @@
+2002-05-06 02:06  Timo Sirainen <tss@iki.fi>
+
+	* TODO: updated
+
+2002-05-06 02:03  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-keyboard.c: added bind actions left_window, right_window,
+	upper_window and lower_window
+
 2002-05-06 00:43  Timo Sirainen <tss@iki.fi>
 
 	* AUTHORS, pixmaps/Makefile.am, pixmaps/lock.xpm, src/Makefile.am,
