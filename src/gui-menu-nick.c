@@ -64,55 +64,48 @@ static void menu_callback(void *user_data, const char *cmd, int action)
 	GObject *obj = user_data;
 	Server *server;
 	Channel *channel;
-	const char *space_nicks, *comma_nicks;
-	const char *server_tag, *channel_name;
+	GetNicksFunc func;
+	void *func_data;
+	const char *nicks;
 	char *data;
 
-	space_nicks = g_object_get_data(obj, "space_nicks");
-	comma_nicks = g_object_get_data(obj, "comma_nicks");
-	server_tag = g_object_get_data(obj, "server_tag");
-	channel_name = g_object_get_data(obj, "channel_name");
+	func = g_object_get_data(obj, "nicks_func");
+	func_data = g_object_get_data(obj, "nicks_func_data");
 
-	server = server_find_tag(server_tag);
-	channel = server == NULL || channel_name == NULL ? NULL :
-		channel_find(server, channel_name);
+	nicks = func(&server, &channel, func_data);
+	if (nicks == NULL)
+		return;
 
-	data = g_strconcat(comma_nicks, " ", space_nicks, NULL);
+	data = g_strconcat(nicks, " ", nicks, NULL);
+	g_strdelimit(data+strlen(nicks)+1, " ", ',');
+
 	eval_special_string(cmd, data, server, channel);
 	g_free(data);
 }
 
-static gboolean event_menu_destroy(GtkWidget *widget)
+static gboolean event_destroy(GtkWidget *widget)
 {
-	g_free(g_object_get_data(G_OBJECT(widget), "space_nicks"));
-	g_free(g_object_get_data(G_OBJECT(widget), "comma_nicks"));
+	GetNicksFunc func;
+	void *user_data;
+
+	func = g_object_get_data(G_OBJECT(widget), "nicks_func");
+	user_data = g_object_get_data(G_OBJECT(widget), "nicks_func_data");
+
+	func(NULL, NULL, user_data);
 	return FALSE;
 }
 
-void gui_menu_nick_popup(Server *server, Channel *channel,
-			 GSList *nicks, int button)
+void gui_menu_nick_popup(GetNicksFunc func, void *user_data, int button)
 {
 	GtkWidget *menu;
-	char *space_nicks, *comma_nicks;
-
-	g_return_if_fail(server != NULL);
-	g_return_if_fail(nicks != NULL);
-
-	space_nicks = gslist_to_string(nicks, " ");
-	comma_nicks = gslist_to_string(nicks, ",");
 
 	/* create the menu */
 	menu = gtk_menu_new();
 
 	g_signal_connect(G_OBJECT(menu), "destroy",
-			 G_CALLBACK(event_menu_destroy), NULL);
-	g_object_set_data(G_OBJECT(menu), "space_nicks", space_nicks);
-	g_object_set_data(G_OBJECT(menu), "comma_nicks", comma_nicks);
-	g_object_set_data(G_OBJECT(menu), "server_tag", server->tag);
-	if (channel != NULL) {
-		g_object_set_data(G_OBJECT(menu), "channel_name",
-				  channel->name);
-	}
+			 G_CALLBACK(event_destroy), NULL);
+	g_object_set_data(G_OBJECT(menu), "nicks_func", func);
+	g_object_set_data(G_OBJECT(menu), "nicks_func_data", user_data);
 
 	gui_menu_fill(menu, items, G_N_ELEMENTS(items), menu_callback, menu);
 

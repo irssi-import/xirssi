@@ -141,11 +141,39 @@ static void sig_window_leave(Window *window, const char *word, GtkTextTag *tag)
 	statusbar_pop_nick(active_frame->statusbar);
 }
 
+typedef struct {
+	Server *server;
+	Channel *channel;
+	char *nick;
+} NickMenuData;
+
+static const char *get_nicks(Server **server, Channel **channel,
+			     void *user_data)
+{
+	NickMenuData *data = user_data;
+
+	if (server == NULL) {
+		/* destroy */
+                server_unref(data->server);
+		g_free(data->nick);
+		g_free(data);
+		return NULL;
+	}
+
+	if (data->server->disconnected)
+		return NULL;
+
+	*server = data->server;
+	*channel = g_slist_find(data->server->channels, data->channel) != NULL ?
+		data->channel : NULL;
+	return data->nick;
+}
+
 static void sig_window_press(Window *window, const char *word,
 			     GtkTextTag *tag, GdkEventButton *event)
 {
+	NickMenuData *data;
 	Server *server;
-	GSList *nicks;
 
 	if (event->button != 3)
 		return;
@@ -154,10 +182,13 @@ static void sig_window_press(Window *window, const char *word,
 	if (server == NULL)
 		return;
 
-	nicks = g_slist_prepend(NULL, (void *) word);
-	gui_menu_nick_popup(server, CHANNEL(active_win->active),
-			    nicks, event->button);
-	g_slist_free(nicks);
+	data = g_new(NickMenuData, 1);
+	data->server = server;
+	data->channel = CHANNEL(active_win->active);
+	data->nick = g_strdup(word);
+	server_ref(server);
+
+	gui_menu_nick_popup(get_nicks, data, event->button);
 }
 
 static void sig_nicklist_enter(NicklistView *view, Nick *nick)

@@ -45,12 +45,55 @@ static gboolean event_destroy(GtkWidget *widget, NicklistView *view)
 static void sel_get_nicks(GtkTreeModel *model, GtkTreePath *path,
 			  GtkTreeIter *iter, gpointer data)
 {
-	GSList **list = data;
+	GString *nicks = data;
 	Nick *nick;
 
 	gtk_tree_model_get(model, iter, 0, &nick, -1);
-	if (nick != NULL)
-		*list = g_slist_prepend(*list, nick->nick);
+	if (nick != NULL) {
+		if (nicks->len > 0)
+			g_string_append_c(nicks, ' ');
+		g_string_append(nicks, nick->nick);
+	}
+}
+
+static const char *get_nicks(Server **server, Channel **channel,
+			     void *user_data)
+{
+	NicklistView *view = user_data;
+	GtkTreeSelection *sel;
+	GString *nicks;
+
+	if (server == NULL) {
+		/* destroy */
+		nicks = g_object_get_data(G_OBJECT(view->widget),
+					  "selected_nicks");
+		g_string_free(nicks, TRUE);
+
+		gtk_widget_unref(GTK_WIDGET(view->view));
+		gtk_widget_unref(view->widget);
+		return NULL;
+	}
+
+	if (view->nicklist == NULL) {
+		/* channel was destroyed */
+		return NULL;
+	}
+
+	/* get selected nicks */
+	nicks = g_string_new(NULL);
+	sel = gtk_tree_view_get_selection(view->view);
+	gtk_tree_selection_selected_foreach(sel, sel_get_nicks, nicks);
+
+	if (nicks->len == 0) {
+		/* no nicks selected */
+		g_string_free(nicks, TRUE);
+		return NULL;
+	}
+
+	*channel = view->nicklist->channel;
+	*server = (*channel)->server;
+	g_object_set_data(G_OBJECT(view->widget), "selected_nicks", nicks);
+	return nicks->str;
 }
 
 static gboolean event_button_press(GtkTreeView *tree, GdkEventButton *event,
@@ -76,39 +119,12 @@ static gboolean event_button_press(GtkTreeView *tree, GdkEventButton *event,
 			signal_emit("command query", 2, nick->nick,
 				    view->nicklist->channel->server);
 		}
+	} else if (event->button == 3 && event->type == GDK_BUTTON_PRESS) {
+		/* right mouse click - show the popup menu. */
+		gtk_widget_ref(view->widget);
+		gtk_widget_ref(GTK_WIDGET(view->view));
+		gui_menu_nick_popup(get_nicks, view, event->button);
 	}
-	return FALSE;
-}
-
-static gboolean event_button_release(GtkTreeView *tree, GdkEventButton *event,
-				     NicklistView *view)
-{
-	GtkTreeSelection *sel;
-	GSList *nicks;
-
-	if (event->button != 3)
-		return FALSE;
-
-	/* right mouse click - show the popup menu. */
-
-	/* first get selected nicks to linked list */
-	nicks = NULL;
-	sel = gtk_tree_view_get_selection(view->view);
-        gtk_tree_selection_selected_foreach(sel, sel_get_nicks, &nicks);
-
-	if (nicks == NULL) {
-		/* no nicks selected */
-		return FALSE;
-	}
-
-	/* popup menu - FIXME: try to get this in button_press_event.
-	   it just has the problem of not updating the selections yet,
-	   one possible solution would be to read the selected nicks later
-	   which might actually be very good idea since selected nicks might
-	   leave the channel while popup menu is being open.. */
-	gui_menu_nick_popup(view->nicklist->channel->server,
-			    view->nicklist->channel, nicks, 0);
-	g_slist_free(nicks);
 	return FALSE;
 }
 
@@ -250,8 +266,6 @@ NicklistView *gui_nicklist_view_new(Tab *tab)
 	list = gtk_tree_view_new();
 	g_signal_connect(G_OBJECT(list), "button_press_event",
 			 G_CALLBACK(event_button_press), view);
-	g_signal_connect(G_OBJECT(list), "button_release_event",
-			 G_CALLBACK(event_button_release), view);
 	g_signal_connect(G_OBJECT(list), "motion_notify_event",
 			 G_CALLBACK(event_motion), view);
 	g_signal_connect(G_OBJECT(list), "leave_notify_event",
