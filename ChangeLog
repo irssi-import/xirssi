@@ -1,3 +1,13 @@
+2002-05-18 19:51  Timo Sirainen <tss@iki.fi>
+
+	* glade/irssi.glade, src/Makefile.am, src/gui.c, src/gui.h,
+	src/module.h, src/setup-channels-list.c, src/setup-channels.c,
+	src/setup-highlighting-edit.c, src/setup-highlighting.c,
+	src/setup-ignores-edit.c, src/setup-ignores.c, src/setup-prefs.c,
+	src/setup.c, src/setup.h, src/glade/interface.c,
+	src/glade/interface.h: Highlighting works + other cleanups and
+	fixes.
+
 2002-05-18 12:18  Timo Sirainen <tss@iki.fi>
 
 	* src/setup-ignores.c: was missing
