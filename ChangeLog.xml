@@ -3,6 +3,24 @@
 <changelog xmlns="http://www.red-bean.com/xmlns/cvs2cl/">
 
 <entry>
+<date>2002-05-08</date>
+<weekday>Wednesday</weekday>
+<time>01:36</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>pixmaps/Makefile.am</name>
+<revision>1.10</revision>
+</file>
+<file>
+<name>pixmaps/right.xpm</name>
+<revision>1.1</revision>
+</file>
+<commondir>pixmaps/</commondir>
+<msg>forgot to add
+</msg>
+</entry>
+
+<entry>
 <date>2002-05-07</date>
 <weekday>Tuesday</weekday>
 <time>19:58</time>
