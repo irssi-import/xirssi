@@ -20,6 +20,7 @@
 
 #include "module.h"
 #include "signals.h"
+#include "settings.h"
 
 #include "printtext.h"
 
@@ -395,6 +396,7 @@ static void sig_gui_printtext_finished(Window *window)
 {
 	WindowGui *gui;
 	GtkTextIter start_iter, end_iter;
+	int lines, max_lines, burst;
 
 	gui = WINDOW_GUI(window);
 	if (gui->indent != 0) {
@@ -409,11 +411,25 @@ static void sig_gui_printtext_finished(Window *window)
 		gui->indent = 0;
 	}
 
+        lines = gtk_text_buffer_get_line_count(gui->buffer);
+	burst = settings_get_int("scrollback_burst_remove");
+	max_lines = settings_get_int("scrollback_lines");
+
+	if (lines >= max_lines+burst) {
+		/* remove first lines */
+		gtk_text_buffer_get_iter_at_line(gui->buffer, &start_iter, 0);
+		gtk_text_buffer_get_iter_at_line(gui->buffer, &end_iter, burst);
+		gtk_text_buffer_delete(gui->buffer, &start_iter, &end_iter);
+	}
+
 	gui->newline = TRUE;
 }
 
 void gui_windows_init(void)
 {
+	settings_add_int("history", "scrollback_lines", 500);
+	settings_add_int("history", "scrollback_burst_remove", 10);
+
 	window_create_override = -1;
 
 	signal_add("gui window create override", (SIGNAL_FUNC) sig_window_create_override);
