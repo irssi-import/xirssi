@@ -1,1 +1,14 @@
-irssi gtk
+ xirssi
+ ------
+
+Installation:
+
+You need to have GTK+ v2.0 or later installed, and irssi sources compiled
+with --with-glib2 option. Then the usual:
+
+	./configure --with-irssi=~/cvs/irssi
+	make
+	make install
+
+configure looks for irssi in ../, ../irssi/ and ../../irssi/ directories,
+so if it's in one of those you don't need to give the --with-irssi option.
