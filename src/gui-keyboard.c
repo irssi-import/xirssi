@@ -304,7 +304,7 @@ static void key_send_line(const char *data, Entry *entry)
 {
 	HISTORY_REC *history;
 	const char *line;
-	char *str, *add_history;
+	char *str, *next, *add_history;
 
 	line = gtk_entry_get_text(entry->entry);
 	if (line == NULL || *line == '\0')
@@ -322,10 +322,26 @@ static void key_send_line(const char *data, Entry *entry)
 	}
 	translate_output(str);
 
-        gui_entry_ref(entry);
-	signal_emit("send command", 3, str,
-		    entry->active_win->active_server,
-		    entry->active_win->active);
+	gui_entry_ref(entry);
+
+	/* str may contain \r or \n chars, split the line from there */
+	do {
+		for (next = str; ; next++) {
+			if (*next == '\0' || *next == '\r' || *next == '\n')
+				break;
+		}
+
+		if (*next == '\0')
+			next = NULL;
+		else
+			*next++ = '\0';
+
+		signal_emit("send command", 3, str,
+			    entry->active_win->active_server,
+			    entry->active_win->active);
+
+		str = next;
+	} while (str != NULL);
 
 	if (add_history != NULL) {
 		history = command_history_find(history);
