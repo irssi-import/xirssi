@@ -1,3 +1,7 @@
+2002-05-08 01:36  Timo Sirainen <tss@iki.fi>
+
+	* pixmaps/: Makefile.am, right.xpm: forgot to add
+
 2002-05-07 19:58  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-tab.c, gui-tab.h, gui-window.c: Show focus icon in
