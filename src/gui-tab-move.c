@@ -293,7 +293,7 @@ static void tab_pane_move(Tab *dest_tab, TabPane *pane)
 
 	/* update tabs' active windows */
 	if (dest_tab->active_win == NULL && pane->view != NULL)
-		dest_tab->active_win = pane->view->window->window;
+                gui_tab_set_active_window(dest_tab, pane->view->window->window);
         gui_tab_update_active_window(pane->tab);
 
 	/* remove */
