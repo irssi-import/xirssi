@@ -14,9 +14,14 @@ AM_DISABLE_STATIC
 AM_PROG_LIBTOOL
 
 AC_ARG_WITH(irssi,
-[  --with-irssi     Irssi directory],
+[  --with-irssi            Irssi directory],
 	IRSSI_INCLUDE=$withval,
 	IRSSI_INCLUDE="")
+
+AC_ARG_WITH(irssi,
+[  --with-irssi-lib        Irssi library directory],
+	IRSSI_LIB=$withval,
+	IRSSI_LIB="")
 
 if test x$IRSSI_INCLUDE = x; then
   dnl * --with-irssi not given, try to find irssi
@@ -26,7 +31,13 @@ if test x$IRSSI_INCLUDE = x; then
     IRSSI_INCLUDE="../irssi"
   elif test -f ../../irssi/irssi-config; then
     IRSSI_INCLUDE="../../irssi"
+  else
+    AC_ERROR(Irssi directory not found, use --with-irssi=/path/to/irssi)
   fi
+fi
+
+if test x$IRSSI_LIB = x; then
+  IRSSI_LIB=$IRSSI_INCLUDE
 fi
 
 # fix relative paths
@@ -36,10 +47,10 @@ cd $old
 
 AC_SUBST(IRSSI_INCLUDE)
 
-if test ! -f $IRSSI_INCLUDE/irssi-config; then
-  AC_ERROR(Not irssi directory: $IRSSI_INCLUDE)
+if test ! -f $IRSSI_LIB/irssi-config; then
+  AC_ERROR(Not irssi directory: $IRSSI_LIB)
 fi
-eval `cat $IRSSI_INCLUDE/irssi-config|sed 's,\.\./,$IRSSI_INCLUDE/src/,g'`
+eval `cat $IRSSI_LIB/irssi-config|sed 's,\.\./,$IRSSI_LIB/src/,g'`
 
 if test "x`echo $PROG_LIBS|grep glib-2.0`" = "x"; then
   AC_ERROR(Irssi needs to be configured with --with-glib2 option)
