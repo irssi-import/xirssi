@@ -1,0 +1,57 @@
+AC_INIT(src)
+
+AM_CONFIG_HEADER(config-plugin.h)
+AM_INIT_AUTOMAKE(xirssi, 0.1)
+
+AM_MAINTAINER_MODE
+
+AC_ISC_POSIX
+AC_PROG_CC
+AC_PROG_CPP
+AC_STDC_HEADERS
+AC_ARG_PROGRAM
+AM_DISABLE_STATIC
+AM_PROG_LIBTOOL
+
+AC_ARG_WITH(irssi,
+[  --with-irssi     Irssi directory],
+	IRSSI_INCLUDE=$withval,
+	IRSSI_INCLUDE="")
+
+if test x$IRSSI_INCLUDE = x; then
+	IRSSI_INCLUDE=".."
+fi
+
+# fix relative paths
+old=`pwd`
+IRSSI_INCLUDE=`eval cd $IRSSI_INCLUDE; pwd`
+cd $old
+
+AC_SUBST(IRSSI_INCLUDE)
+
+if test ! -f $IRSSI_INCLUDE/irssi-config; then
+  AC_ERROR(Not irssi directory: $IRSSI_INCLUDE)
+fi
+eval `cat $IRSSI_INCLUDE/irssi-config|sed 's,\.\./,$IRSSI_INCLUDE/src/,g'`
+
+if test "x`echo $PROG_LIBS|grep glib-2.0`" = "x"; then
+  AC_ERROR(Irssi needs to be configured with --with-glib2 option)
+fi
+
+AC_SUBST(COMMON_LIBS)
+AC_SUBST(PERL_LINK_LIBS)
+AC_SUBST(PERL_FE_LINK_LIBS)
+AC_SUBST(PERL_LINK_FLAGS)
+
+AM_PATH_GTK_2_0(2.0.0,,, gmodule)
+
+# gcc specific options
+if test "x$ac_cv_prog_gcc" = "xyes"; then
+  CFLAGS="$CFLAGS -Wall"
+fi
+
+AC_OUTPUT(
+Makefile
+src/Makefile
+pixmaps/Makefile
+stamp.h)

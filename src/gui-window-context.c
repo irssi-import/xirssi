@@ -1,0 +1,280 @@
+/*
+ gui-window-context.c : irssi
+
+    Copyright (C) 2002 Timo Sirainen
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
+#include "module.h"
+#include "signals.h"
+#include "servers.h"
+#include "channels.h"
+#include "nicklist.h"
+
+#include "formats.h"
+
+#include "gui-window.h"
+#include "gui-window-view.h"
+#include "gui-window-context.h"
+
+typedef struct {
+	Window *window;
+
+	int tag_event;
+	GtkTextTag *tag;
+	int mouse_offset;
+	int start_offset;
+	char *word;
+} ContextEvent;
+
+static void get_tag_start(GtkTextIter *start_iter, const GtkTextIter *iter,
+			  GtkTextTag *tag)
+{
+	memcpy(start_iter, iter, sizeof(GtkTextIter));
+
+	/* go to beginning of the tag */
+	while (gtk_text_iter_backward_char(start_iter)) {
+		if (!gtk_text_iter_has_tag(start_iter, tag)) {
+			gtk_text_iter_forward_char(start_iter);
+			break;
+		}
+	}
+}
+
+static char *get_tag_word(GtkTextIter *start_iter, const GtkTextIter *iter,
+			  GtkTextTag *tag)
+{
+	GtkTextIter end_iter;
+
+	memcpy(&end_iter, iter, sizeof(end_iter));
+
+	/* go to end of tag */
+	while (gtk_text_iter_forward_char(&end_iter)) {
+		if (!gtk_text_iter_has_tag(&end_iter, tag))
+			break;
+	}
+
+	/* get the text in tag */
+	return gtk_text_buffer_get_text(gtk_text_iter_get_buffer(iter),
+					start_iter, &end_iter, TRUE);
+}
+
+static gboolean event_tag(GtkTextTag *tag, GtkWidget *widget,
+			  GdkEventButton *event, const GtkTextIter *iter)
+{
+	GtkTextIter start_iter;
+        ContextEvent *context;
+	int offset, moved;
+
+	context = g_object_get_data(G_OBJECT(widget), "context");
+	context->tag_event = TRUE;
+
+	if (event->type != GDK_MOTION_NOTIFY &&
+	    event->type != GDK_BUTTON_PRESS)
+		return FALSE;
+
+	/* a) motion, b) mouse button press */
+	moved = FALSE;
+	offset = gtk_text_iter_get_offset(iter);
+	if (context->mouse_offset != offset) {
+		/* moved - get the start offset */
+		get_tag_start(&start_iter, iter, tag);
+		context->mouse_offset = offset;
+
+		offset = gtk_text_iter_get_offset(&start_iter);
+		if (context->start_offset != offset) {
+			/* nope, we've moved, get the word at the tag */
+			context->start_offset = offset;
+			moved = TRUE;
+
+			if (context->tag != NULL) {
+				/* moved directly from tag to another,
+				   send the leave signal for the old one */
+				signal_emit("gui window context leave", 3,
+					    context->window, context->word,
+					    context->tag);
+			}
+
+			g_free(context->word);
+			context->word = get_tag_word(&start_iter, iter, tag);
+		}
+
+	}
+
+	if (moved || context->tag != tag) {
+		context->tag = tag;
+		signal_emit("gui window context enter", 3,
+			    context->window, context->word, tag);
+	}
+
+	if (event->type == GDK_BUTTON_PRESS) {
+		signal_emit("gui window context press", 4, context->window,
+			    context->word, tag, event);
+	}
+
+	return FALSE;
+}
+
+static GtkTextTag *create_tag(WindowGui *window, const char *name)
+{
+	GtkTextTag *tag;
+
+	tag = gtk_text_buffer_create_tag(window->buffer, name, NULL);
+	g_signal_connect(G_OBJECT(tag), "event", G_CALLBACK(event_tag), NULL);
+	return tag;
+}
+
+static GtkTextTag *word_get_tag(WindowGui *window, Channel *channel,
+				const char *word)
+{
+	GtkTextTag *tag;
+	char *name;
+
+	/* common urls */
+	if (strncmp(word, "http://", 7) == 0 || strncmp(word, "www.", 4) == 0 ||
+	    strncmp(word, "ftp://", 6) == 0 || strncmp(word, "ftp.", 4) == 0 ||
+	    strncmp(word, "irc://", 6) == 0 || strncmp(word, "mailto:", 7) == 0) {
+		tag = gtk_text_tag_table_lookup(window->tagtable, "url");
+		if (tag == NULL)
+			tag = create_tag(window, "url");
+		return tag;
+	}
+
+	/* nick? */
+	if (channel != NULL && nicklist_find(channel, word) != NULL) {
+		name = g_strconcat("nick ", channel->server->tag, NULL);
+		tag = gtk_text_tag_table_lookup(window->tagtable, name);
+		if (tag == NULL)
+			tag = create_tag(window, name);
+		g_free(name);
+		return tag;
+	}
+
+	return NULL;
+}
+
+void gui_window_print_mark_context(WindowGui *window, TextDest *dest,
+				   GtkTextIter *iter, const char *text)
+{
+	GtkTextIter start_iter, end_iter;
+	GtkTextTag *tag;
+	Channel *channel;
+	const char *start;
+	char *word;
+	int len, line, index;
+
+	channel = dest == NULL || dest->server == NULL ||
+		dest->target == NULL ? NULL :
+		channel_find(dest->server, dest->target);
+
+	/* mark context words if there's any */
+	line = gtk_text_iter_get_line(iter);
+	index = gtk_text_iter_get_line_index(iter);
+	for (start = text; ; text++) {
+		if (*text != '\0' && *text != '\t' && *text != ' ')
+			continue;
+
+		if (text == start)
+			len = 0;
+		else {
+			/* got a word */
+			word = g_strndup(start, (int) (text-start));
+			len = strlen(word);
+			tag = word_get_tag(window, channel, word);
+			g_free(word);
+
+			if (tag != NULL) {
+				/* apply the context tag */
+				gtk_text_buffer_get_iter_at_line_index(window->buffer, &start_iter, line, index);
+				gtk_text_buffer_get_iter_at_line_index(window->buffer, &end_iter, line, index+len);
+				gtk_text_buffer_apply_tag(window->buffer, tag,
+							  &start_iter, &end_iter);
+			}
+		}
+
+		if (*text == '\0')
+			break;
+		start = text+1;
+		index += len+1;
+	}
+}
+
+gboolean gui_window_context_event_motion(GtkWidget *widget, GdkEvent *event,
+					 WindowView *view)
+{
+        ContextEvent *context;
+	GdkWindow *window;
+
+	/* needed to call this so the motion events won't get stuck */
+	gdk_window_get_pointer(widget->window, NULL, NULL, NULL);
+
+	/* GTK has already called the tag's event handler,
+	   so we just need to see if it was called */
+	context = g_object_get_data(G_OBJECT(widget), "context");
+	if (context->tag_event) {
+		/* mouse is over a tag */
+		context->tag_event = FALSE;
+		if (!view->cursor_link) {
+			view->cursor_link = TRUE;
+
+			window = gtk_text_view_get_window(view->view,
+							  GTK_TEXT_WINDOW_TEXT);
+			gdk_window_set_cursor(window, view->hand_cursor);
+		}
+	} else if (view->cursor_link) {
+		/* moved out of tag */
+		view->cursor_link = FALSE;
+		window = gtk_text_view_get_window(view->view,
+						  GTK_TEXT_WINDOW_TEXT);
+                gdk_window_set_cursor(window, NULL);
+
+		signal_emit("gui window context leave", 3,
+			    context->window, context->word, context->tag);
+		context->tag = NULL;
+	}
+
+	return FALSE;
+}
+
+static void sig_gui_window_view_created(WindowView *view)
+{
+        ContextEvent *context;
+
+	context = g_new0(ContextEvent, 1);
+	context->window = view->window->window;
+	g_object_set_data(G_OBJECT(view->view), "context", context);
+}
+
+static void sig_gui_window_view_destroyed(WindowView *view)
+{
+        ContextEvent *context;
+
+	context = g_object_get_data(G_OBJECT(view->view), "context");
+	g_free(context->word);
+	g_free(context);
+}
+
+void gui_window_contexts_init(void)
+{
+	signal_add("gui window view created", (SIGNAL_FUNC) sig_gui_window_view_created);
+	signal_add("gui window view destroyed", (SIGNAL_FUNC) sig_gui_window_view_destroyed);
+}
+
+void gui_window_contexts_deinit(void)
+{
+	signal_remove("gui window view created", (SIGNAL_FUNC) sig_gui_window_view_created);
+	signal_remove("gui window view destroyed", (SIGNAL_FUNC) sig_gui_window_view_destroyed);
+}
