@@ -3,6 +3,19 @@
 <changelog xmlns="http://www.red-bean.com/xmlns/cvs2cl/">
 
 <entry>
+<date>2002-11-20</date>
+<weekday>Wednesday</weekday>
+<time>17:04</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/Makefile.am</name>
+<revision>1.23</revision>
+</file>
+<msg>Added @PROG_LIBS@ to linker flags
+</msg>
+</entry>
+
+<entry>
 <date>2002-09-25</date>
 <weekday>Wednesday</weekday>
 <time>07:52</time>
