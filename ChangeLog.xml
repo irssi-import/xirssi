@@ -3,6 +3,69 @@
 <changelog xmlns="http://www.red-bean.com/xmlns/cvs2cl/">
 
 <entry>
+<date>2002-05-05</date>
+<weekday>Sunday</weekday>
+<time>00:51</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-itemlist.c</name>
+<revision>1.2</revision>
+</file>
+<msg>don't show itemlist if there's only one window item in tab.
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-05</date>
+<weekday>Sunday</weekday>
+<time>00:37</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/Makefile.am</name>
+<revision>1.9</revision>
+</file>
+<file>
+<name>src/gui-frame.c</name>
+<revision>1.16</revision>
+</file>
+<file>
+<name>src/gui-frame.h</name>
+<revision>1.6</revision>
+</file>
+<file>
+<name>src/gui-itemlist.c</name>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-itemlist.h</name>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-keyboard.c</name>
+<revision>1.5</revision>
+</file>
+<file>
+<name>src/gui-tab-move.c</name>
+<revision>1.3</revision>
+</file>
+<file>
+<name>src/gui-tab.c</name>
+<revision>1.7</revision>
+</file>
+<file>
+<name>src/irssi.c</name>
+<revision>1.6</revision>
+</file>
+<file>
+<name>src/module.h</name>
+<revision>1.4</revision>
+</file>
+<commondir>src/</commondir>
+<msg>added itemlist + some other minor fixes.
+</msg>
+</entry>
+
+<entry>
 <date>2002-05-04</date>
 <weekday>Saturday</weekday>
 <time>22:06</time>
