@@ -1,3 +1,8 @@
+2002-05-10 00:33  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-nicklist-cell-renderer.c, gui-nicklist-cell-renderer.h,
+	gui-nicklist-view.c: somewhat simplified the nicklist rendering.
+
 2002-05-09 20:54  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-window.c: if /set scrollback_lines <= 0, keep it
