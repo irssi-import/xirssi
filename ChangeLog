@@ -1,3 +1,8 @@
+2002-05-09 20:54  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-window.c: if /set scrollback_lines <= 0, keep it
+	unlimited.
+
 2002-05-09 19:06  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-frame.c: default tab position is now at bottom.
