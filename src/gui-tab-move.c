@@ -399,6 +399,7 @@ static void tab_drop_real(TabDrag *drag, int x, int y)
 		gtk_widget_show(child);
 		gtk_widget_unref(child);
 
+		gui_reset_tab_labels(orig_frame);
 		gui_reset_tab_labels(drag->dest_frame);
 	}
 }
