@@ -102,7 +102,7 @@ static void gui_nicklist_update_label(Nicklist *nicklist)
 			(GFunc) gui_nicklist_view_label_updated, NULL);
 }
 
-static void gui_nicklist_add(Channel *channel, Nick *nick)
+static void gui_nicklist_add(Channel *channel, Nick *nick, int update_label)
 {
 	ChannelGui *gui;
 	GdkPixbuf *pixbuf;
@@ -135,7 +135,7 @@ static void gui_nicklist_add(Channel *channel, Nick *nick)
 	gui_nicklist_update_label(gui->nicklist);
 }
 
-static void gui_nicklist_remove(Channel *channel, Nick *nick)
+static void gui_nicklist_remove(Channel *channel, Nick *nick, int update_label)
 {
 	ChannelGui *gui;
 	GtkTreeModel *model;
@@ -178,8 +178,39 @@ static void gui_nicklist_remove(Channel *channel, Nick *nick)
 
 static void gui_nicklist_changed(Channel *channel, Nick *nick)
 {
-	gui_nicklist_remove(channel, nick);
-	gui_nicklist_add(channel, nick);
+	gui_nicklist_remove(channel, nick, FALSE);
+	gui_nicklist_add(channel, nick, TRUE);
+}
+
+static void gui_nicklist_mode_changed(Channel *channel, Nick *nick)
+{
+	GSList *nicks, *tmp;
+	ChannelGui *gui;
+
+	gui_nicklist_remove(channel, nick, FALSE);
+	gui_nicklist_add(channel, nick, FALSE);
+
+	/* nick counts are messed up now, we have to recalculate them */
+	gui = CHANNEL_GUI(channel);
+	gui->nicklist->ops = gui->nicklist->halfops =
+		gui->nicklist->voices = gui->nicklist->normal = 0;
+
+	nicks = nicklist_getnicks(channel);
+	for (tmp = nicks; tmp != NULL; tmp = tmp->next) {
+		Nick *nick = tmp->data;
+
+		if (nick->op)
+			gui->nicklist->ops++;
+		else if (nick->halfop)
+			gui->nicklist->halfops++;
+		else if (nick->voice)
+			gui->nicklist->voices++;
+		else
+			gui->nicklist->normal++;
+	}
+	g_slist_free(nicks);
+
+	gui_nicklist_update_label(gui->nicklist);
 }
 
 void gui_nicklists_init(void)
@@ -194,7 +225,7 @@ void gui_nicklists_init(void)
 	signal_add("nicklist new", (SIGNAL_FUNC) gui_nicklist_add);
 	signal_add("nicklist remove", (SIGNAL_FUNC) gui_nicklist_remove);
 	signal_add("nicklist changed", (SIGNAL_FUNC) gui_nicklist_changed);
-	signal_add("nick mode changed", (SIGNAL_FUNC) gui_nicklist_changed);
+	signal_add("nick mode changed", (SIGNAL_FUNC) gui_nicklist_mode_changed);
 }
 
 void gui_nicklists_deinit(void)
@@ -202,5 +233,5 @@ void gui_nicklists_deinit(void)
 	signal_remove("nicklist new", (SIGNAL_FUNC) gui_nicklist_add);
 	signal_remove("nicklist remove", (SIGNAL_FUNC) gui_nicklist_remove);
 	signal_remove("nicklist changed", (SIGNAL_FUNC) gui_nicklist_changed);
-	signal_remove("nick mode changed", (SIGNAL_FUNC) gui_nicklist_changed);
+	signal_remove("nick mode changed", (SIGNAL_FUNC) gui_nicklist_mode_changed);
 }
