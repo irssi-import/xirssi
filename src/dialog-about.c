@@ -46,7 +46,7 @@ static gboolean event_website_press(GtkWidget *widget, GdkEventButton *event)
 
 void dialog_about_show(void)
 {
-	GtkWidget *vbox, *hbox, *eventbox1, *eventbox2, *label, *img;
+	GtkWidget *vbox, *hbox, *eventbox1, *eventbox2, *label, *img, *hsep;
         PangoFontDescription *font_desc;
 	GdkCursor *cursor;
 	char str[100];
@@ -64,6 +64,21 @@ void dialog_about_show(void)
 	g_signal_connect(G_OBJECT(dialog), "response",
 			 GTK_SIGNAL_FUNC(gtk_widget_destroy), NULL);
 
+	/* name */
+	label = gtk_label_new(PACKAGE);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), label,
+			   FALSE, FALSE, 10);
+
+	font_desc = pango_font_description_from_string("helvetica bold 25");
+	gtk_widget_modify_font(label, font_desc);
+	pango_font_description_free(font_desc);
+
+	/* separator */
+	/* name */
+	hsep = gtk_hseparator_new();
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), hsep,
+			   FALSE, FALSE, 0);
+
 	hbox = gtk_hbox_new(FALSE, 10);
 	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), hbox,
 			   TRUE, TRUE, 0);
@@ -75,15 +90,7 @@ void dialog_about_show(void)
 
 	vbox = gtk_vbox_new(FALSE, 5);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox), 10);
-	gtk_box_pack_start(GTK_BOX(hbox), vbox, TRUE, TRUE, 0);
-
-	/* name */
-	label = gtk_label_new(PACKAGE);
-	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
-
-	font_desc = pango_font_description_from_string("helvetica bold 25");
-	gtk_widget_modify_font(label, font_desc);
-	pango_font_description_free(font_desc);
+	gtk_box_pack_start(GTK_BOX(hbox), vbox, FALSE, FALSE, 0);
 
 	/* version */
 	g_snprintf(str, sizeof(str), "version " IRSSI_VERSION " (%d %04d)",
