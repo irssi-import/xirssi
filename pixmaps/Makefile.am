@@ -4,13 +4,13 @@ SUFFIXES = .png .h
 	gdk-pixbuf-csource --raw --name=`echo $*|sed 's/-/_/'` $< > $*.h
 
 xpm_pixmaps = \
-	arrow-down.xpm \
-	arrow-left-twist.xpm \
 	arrow-up.xpm \
-	arrow-down-twist.xpm \
+	arrow-down.xpm \
+	arrow-left.xpm \
 	arrow-right.xpm \
 	arrow-up-twist.xpm \
-	arrow-left.xpm \
+	arrow-down-twist.xpm \
+	arrow-left-twist.xpm \
 	arrow-right-twist.xpm \
 	detach-box.xpm \
 	move.xpm
