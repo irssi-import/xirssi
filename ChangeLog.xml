@@ -5,6 +5,28 @@
 <entry>
 <date>2002-05-16</date>
 <weekday>Thursday</weekday>
+<time>05:40</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-colors.c</name>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-colors.h</name>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-window.c</name>
+<revision>1.15</revision>
+</file>
+<commondir>src/</commondir>
+<msg>updated color handling
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-16</date>
+<weekday>Thursday</weekday>
 <time>04:20</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
