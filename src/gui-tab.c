@@ -428,6 +428,8 @@ void gui_tab_set_active(Tab *tab)
 
 	page = gtk_notebook_page_num(tab->frame->notebook, tab->widget);
 	gtk_notebook_set_current_page(tab->frame->notebook, page);
+
+	gui_frame_set_active_window(tab->frame, tab->active_win);
 }
 
 void gui_tab_set_active_window(Tab *tab, Window *window)
