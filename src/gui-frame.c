@@ -205,6 +205,15 @@ Tab *gui_frame_new_tab(Frame *frame)
 	return tab;
 }
 
+Tab *gui_frame_get_tab(Frame *frame, int page)
+{
+	GtkWidget *child;
+
+	child = gtk_notebook_get_nth_page(frame->notebook, page);
+	return child == NULL ? NULL :
+		g_object_get_data(G_OBJECT(child), "irssi tab");
+}
+
 void gui_frame_set_active(Frame *frame)
 {
 	active_frame = frame;

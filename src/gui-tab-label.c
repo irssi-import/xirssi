@@ -32,6 +32,8 @@
 
 #include "gui-frame.h"
 #include "gui-tab.h"
+#include "gui-window.h"
+#include "gui-window-view.h"
 
 #define MAGIC_PADDING 4
 
@@ -246,6 +248,61 @@ static void move_arrows(GtkNotebook *notebook, int pos)
 	}
 }
 
+static void tab_drop(Tab *tab)
+{
+	GtkWidget *child;
+	GSList *tmp;
+	Tab *newtab;
+	int current_page, new_page;
+
+	current_page = gtk_notebook_get_current_page(tab->frame->notebook);
+	child = gtk_notebook_get_nth_page(tab->frame->notebook, current_page);
+
+	if (tab->drag_pos < 0) {
+		/* detaching as new window */
+		if (g_list_length(tab->frame->notebook->children) == 1) {
+			/* only tab in this window - no point in detaching */
+			return;
+		}
+
+		/* remove from old frame */
+		g_object_ref(G_OBJECT(child));
+		gtk_widget_hide(child);
+		gtk_notebook_remove_page(tab->frame->notebook, current_page);
+
+		/* create and move into new frame */
+		gui_frame_set_active(gui_frame_new());
+		tab->frame = active_frame;
+		gtk_notebook_append_page(tab->frame->notebook, tab->widget,
+					 tab->tab_label);
+
+		gtk_widget_show(child);
+		g_object_unref(G_OBJECT(child));
+		return;
+	}
+
+	new_page = tab->drag_pos/2;
+	if (new_page == current_page)
+		return;
+
+	if ((tab->drag_pos & 1) == 0) {
+		/* just move the tab */
+		gtk_notebook_reorder_child(tab->frame->notebook,
+					   child, new_page);
+	} else {
+		/* move into tab as split window */
+		newtab = gui_frame_get_tab(tab->frame, new_page);
+		g_return_if_fail(newtab != NULL);
+
+		for (tmp = tab->views; tmp != NULL; tmp = tmp->next) {
+			WindowView *view = tmp->data;
+
+                        gui_window_add_view(view->window, newtab);
+		}
+                gtk_notebook_remove_page(tab->frame->notebook, current_page);
+	}
+}
+
 static gboolean event_button_press(GtkWidget *widget, GdkEventButton *event,
 				   Tab *tab)
 {
@@ -271,6 +328,8 @@ static gboolean event_button_release(GtkWidget *widget, GdkEventButton *event,
 	tab->pressing = FALSE;
 	tab->dragging = FALSE;
 	hide_arrows();
+
+	tab_drop(tab);
 	return FALSE;
 }
 

@@ -18,6 +18,8 @@ struct _WindowView {
 
 	int approx_width, approx_height; /* as characters */
 
+	gulong sig_changed;
+
 	unsigned int bottom:1;
 	unsigned int cursor_link:1;
 };

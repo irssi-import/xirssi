@@ -42,6 +42,8 @@ static gboolean event_destroy(GtkWidget *widget, WindowView *view)
 {
 	signal_emit("gui window view destroyed", 1, view);
 
+	g_signal_handler_disconnect(G_OBJECT(view->window->buffer),
+				    view->sig_changed);
 	gdk_cursor_destroy(view->hand_cursor);
 	gui_window_remove_view(view->window, view);
 
@@ -119,8 +121,8 @@ WindowView *gui_window_view_new(Tab *tab, WindowGui *window,
 	view->tab->views = g_slist_prepend(view->tab->views, view);
 	gui_tab_ref(view->tab);
 
-	g_signal_connect(G_OBJECT(buffer), "changed",
-			 G_CALLBACK(event_changed), view);
+	view->sig_changed = g_signal_connect(G_OBJECT(buffer), "changed",
+					     G_CALLBACK(event_changed), view);
 
 	/* scrolled window where to place text view */
 	view->widget = sw = gtk_scrolled_window_new(NULL, NULL);
