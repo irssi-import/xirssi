@@ -1,3 +1,8 @@
+2002-05-04 22:06  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-window.c: don't set autocreated windows active
+	automatically.
+
 2002-05-04 21:55  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-tab-move.c: tab label wasn't updated correctly when
