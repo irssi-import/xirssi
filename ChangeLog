@@ -1,3 +1,25 @@
+2002-05-12 13:43  Timo Sirainen <tss@iki.fi>
+
+	* glade/irssi.glade, src/glade/interface.c: updates
+
+2002-05-12 13:31  Timo Sirainen <tss@iki.fi>
+
+	* glade/irssi.glade, src/glade/interface.c: updates
+
+2002-05-12 13:13  Timo Sirainen <tss@iki.fi>
+
+	* TODO, configure.in, glade/.cvsignore, glade/irssi.glade,
+	pixmaps/Makefile.am, pixmaps/irssilogo.jpg, src/Makefile.am,
+	src/gui-menu-main.c, src/gui.c, src/gui.h, src/irssi.c,
+	src/setup-prefs.c, src/setup-servers-network.c,
+	src/setup-servers-server.c, src/setup-servers.c,
+	src/setup-servers.h, src/setup.c, src/setup.h,
+	src/glade/.cvsignore, src/glade/Makefile.am, src/glade/callbacks.h,
+	src/glade/interface.c, src/glade/interface.h, src/glade/support.c,
+	src/glade/support.h: Added setup dialog, generated with glade. It's
+	hardly working, but you should see what it's supposed to look like
+	now.
+
 2002-05-11 05:24  Timo Sirainen <tss@iki.fi>
 
 	* TODO: updated
