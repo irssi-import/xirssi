@@ -31,6 +31,7 @@
 
 #include "gui-entry.h"
 #include "gui-frame.h"
+#include "gui-tab.h"
 #include "gui-window.h"
 #include "gui-window-view.h"
 
@@ -425,6 +426,85 @@ static void key_active_window(const char *data, Entry *entry)
         key_command(entry, "command window goto", "active");
 }
 
+static void key_upper_window(const char *data, Entry *entry)
+{
+	TabPane *pane;
+	GList *tmp, *pos;
+
+	pane = WINDOW_GUI(entry->active_win)->active_view->pane;
+	pos = g_list_find(pane->tab->panes, pane);
+	if (pos == NULL)
+		return;
+
+	for (tmp = pos;;) {
+		tmp = tmp->prev;
+		if (tmp == NULL)
+			tmp = g_list_last(pos);
+
+		if (tmp == pos)
+			break;
+
+		pane = tmp->data;
+		if (pane->view != NULL) {
+			/* found a view */
+			window_set_active(pane->view->window->window);
+			break;
+		}
+	}
+}
+
+static void key_lower_window(const char *data, Entry *entry)
+{
+	TabPane *pane;
+	GList *tmp, *pos;
+
+	pane = WINDOW_GUI(entry->active_win)->active_view->pane;
+	pos = g_list_find(pane->tab->panes, pane);
+	if (pos == NULL) {
+		return;
+	}
+
+	for (tmp = pos;;) {
+		tmp = tmp->next;
+		if (tmp == NULL)
+			tmp = pane->tab->panes;
+
+		if (tmp == pos)
+			break;
+
+		pane = tmp->data;
+		if (pane->view != NULL) {
+			/* found a view */
+			window_set_active(pane->view->window->window);
+			break;
+		}
+	}
+}
+
+static void key_left_window(const char *data, Entry *entry)
+{
+	Frame *frame;
+	int page;
+
+	frame = WINDOW_GUI(entry->active_win)->active_view->pane->tab->frame;
+        page = gtk_notebook_get_current_page(frame->notebook);
+	if (page == 0)
+		page = g_list_length(frame->notebook->children);
+	gtk_notebook_set_current_page(frame->notebook, page-1);
+}
+
+static void key_right_window(const char *data, Entry *entry)
+{
+	Frame *frame;
+	int page;
+
+	frame = WINDOW_GUI(entry->active_win)->active_view->pane->tab->frame;
+        page = gtk_notebook_get_current_page(frame->notebook);
+	if (page == g_list_length(frame->notebook->children)-1)
+		page = -1;
+	gtk_notebook_set_current_page(frame->notebook, page+1);
+}
+
 static void key_previous_window_item(void)
 {
 	SERVER_REC *server;
@@ -599,8 +679,12 @@ void gui_keyboards_init(void)
 	key_bind("check_replaces", "Check word replaces", NULL, NULL, (SIGNAL_FUNC) key_check_replaces);
 
         /* window managing */
-	key_bind("previous_window", "Previous window", "^P", NULL, (SIGNAL_FUNC) key_previous_window);
-	key_bind("next_window", "Next window", "^N", NULL, (SIGNAL_FUNC) key_next_window);
+	key_bind("previous_window", "Previous window", NULL, NULL, (SIGNAL_FUNC) key_previous_window);
+	key_bind("next_window", "Next window", NULL, NULL, (SIGNAL_FUNC) key_next_window);
+	key_bind("upper_window", "Upper window", "meta-up", NULL, (SIGNAL_FUNC) key_upper_window);
+	key_bind("lower_window", "Lower window", "meta-down", NULL, (SIGNAL_FUNC) key_lower_window);
+	key_bind("left_window", "Window in left", "^P", NULL, (SIGNAL_FUNC) key_left_window);
+	key_bind("right_window", "Window in right", "^N", NULL, (SIGNAL_FUNC) key_right_window);
 	key_bind("active_window", "Go to next window with the highest activity", "meta-a", NULL, (SIGNAL_FUNC) key_active_window);
 	key_bind("next_window_item", "Next channel/query", "^X", NULL, (SIGNAL_FUNC) key_next_window_item);
 	key_bind("previous_window_item", "Previous channel/query", NULL, NULL, (SIGNAL_FUNC) key_previous_window_item);
@@ -662,6 +746,10 @@ void gui_keyboards_deinit(void)
 
 	key_unbind("previous_window", (SIGNAL_FUNC) key_previous_window);
 	key_unbind("next_window", (SIGNAL_FUNC) key_next_window);
+	key_unbind("upper_window", (SIGNAL_FUNC) key_upper_window);
+	key_unbind("lower_window", (SIGNAL_FUNC) key_lower_window);
+	key_unbind("left_window", (SIGNAL_FUNC) key_left_window);
+	key_unbind("right_window", (SIGNAL_FUNC) key_right_window);
 	key_unbind("active_window", (SIGNAL_FUNC) key_active_window);
 	key_unbind("next_window_item", (SIGNAL_FUNC) key_next_window_item);
 	key_unbind("previous_window_item", (SIGNAL_FUNC) key_previous_window_item);
