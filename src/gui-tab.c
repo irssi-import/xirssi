@@ -461,7 +461,8 @@ void gui_tab_set_active_window(Tab *tab, Window *window)
 		gui_tab_set_active_window_item(tab, window);
 	}
 
-	gui_frame_set_active_window(tab->frame, window);
+	if (tab->frame->active_tab == tab)
+		gui_frame_set_active_window(tab->frame, window);
 }
 
 void gui_tab_set_active_window_item(Tab *tab, Window *window)
