@@ -5,6 +5,19 @@
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
+<time>19:06</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-frame.c</name>
+<revision>1.20</revision>
+</file>
+<msg>default tab position is now at bottom.
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-09</date>
+<weekday>Thursday</weekday>
 <time>18:52</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
