@@ -1,9 +1,9 @@
-2002-05-19 10:47  Timo Sirainen <tss@iki.fi>
+2002-05-19 08:47  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-menu-channel-topic.c, gui-menu-nick.c, gui-menu-url.c:
 	destroy popup menus after they're closed.
 
-2002-05-19 10:23  Timo Sirainen <tss@iki.fi>
+2002-05-19 08:23  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-context-nick.c, gui-menu-nick.c, gui-menu.h,
 	gui-nicklist-view.c: nicklist popup menu is now triggered on mouse
@@ -11,16 +11,16 @@
 	any of the originally selected nicks part the channel it won't be
 	affected.
 
-2002-05-18 22:27  Timo Sirainen <tss@iki.fi>
+2002-05-18 20:27  Timo Sirainen <tss@iki.fi>
 
 	* AUTHORS, TODO: updates
 
-2002-05-18 22:25  Timo Sirainen <tss@iki.fi>
+2002-05-18 20:25  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-frame.c: notebooks are now scrollable so they won't limit
 	the minimum width of window.
 
-2002-05-18 22:05  Timo Sirainen <tss@iki.fi>
+2002-05-18 20:05  Timo Sirainen <tss@iki.fi>
 
 	* glade/irssi.glade, src/Makefile.am, src/gui-frame.c,
 	src/gui-keyboard.c, src/gui-keyboard.h, src/module.h,
@@ -30,7 +30,7 @@
 	src/glade/interface.c, src/glade/interface.h: keyboard settings and
 	cleanups.
 
-2002-05-18 19:51  Timo Sirainen <tss@iki.fi>
+2002-05-18 17:51  Timo Sirainen <tss@iki.fi>
 
 	* glade/irssi.glade, src/Makefile.am, src/gui.c, src/gui.h,
 	src/module.h, src/setup-channels-list.c, src/setup-channels.c,
@@ -40,15 +40,15 @@
 	src/glade/interface.h: Highlighting works + other cleanups and
 	fixes.
 
-2002-05-18 12:18  Timo Sirainen <tss@iki.fi>
+2002-05-18 10:18  Timo Sirainen <tss@iki.fi>
 
 	* src/setup-ignores.c: was missing
 
-2002-05-18 09:49  Timo Sirainen <tss@iki.fi>
+2002-05-18 07:49  Timo Sirainen <tss@iki.fi>
 
 	* src/setup-ignores-edit.c: adding new ignores crashed..
 
-2002-05-18 09:38  Timo Sirainen <tss@iki.fi>
+2002-05-18 07:38  Timo Sirainen <tss@iki.fi>
 
 	* glade/irssi.glade, src/Makefile.am, src/gui-frame.c, src/gui.c,
 	src/gui.h, src/module.h, src/setup-channels.c,
@@ -57,26 +57,26 @@
 	src/glade/interface.c, src/glade/interface.h: Ignores work now +
 	many other smaller misc. fixes.
 
-2002-05-17 17:29  Timo Sirainen <tss@iki.fi>
+2002-05-17 15:29  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-itemlist.c: "window item name changed" wasn't handled
 	properly.
 
-2002-05-16 08:36  Timo Sirainen <tss@iki.fi>
+2002-05-16 06:36  Timo Sirainen <tss@iki.fi>
 
 	* src/setup-prefs.c: fixed sidebar behaviour.
 
-2002-05-16 08:27  Timo Sirainen <tss@iki.fi>
+2002-05-16 06:27  Timo Sirainen <tss@iki.fi>
 
 	* pixmaps/themes.png: updated
 
-2002-05-16 08:17  Timo Sirainen <tss@iki.fi>
+2002-05-16 06:17  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-frame.c, gui-frame.h, gui-menu-main.c: implemented
 	showing/hiding menubar/statusbar/nicklist - now if only the menubar
 	shows their actual value correctly..
 
-2002-05-16 07:49  Timo Sirainen <tss@iki.fi>
+2002-05-16 05:49  Timo Sirainen <tss@iki.fi>
 
 	* TODO, glade/irssi.glade, pixmaps/advanced-logging.png,
 	pixmaps/irc.png, pixmaps/keyboard.png, pixmaps/queries.png,
@@ -90,52 +90,52 @@
 	src/glade/interface.h: added completions, channels, setup icons and
 	changed some stuff.
 
-2002-05-16 05:40  Timo Sirainen <tss@iki.fi>
+2002-05-16 03:40  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-colors.c, gui-colors.h, gui-window.c: updated color
 	handling
 
-2002-05-16 04:20  Timo Sirainen <tss@iki.fi>
+2002-05-16 02:20  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-itemlist.c, gui-window-view.c: name -> visible_name
 	fixes
 
-2002-05-16 01:21  Timo Sirainen <tss@iki.fi>
+2002-05-15 23:21  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-keyboard.c: ^ key wasn't working with /BINDs
 
-2002-05-13 12:50  Timo Sirainen <tss@iki.fi>
+2002-05-13 10:50  Timo Sirainen <tss@iki.fi>
 
 	* glade/irssi.glade, src/gui.c, src/gui.h, src/setup-aliases.c,
 	src/setup-servers.c, src/glade/interface.c: alias list is now fully
 	working.
 
-2002-05-12 17:04  Timo Sirainen <tss@iki.fi>
+2002-05-12 15:04  Timo Sirainen <tss@iki.fi>
 
 	* src/: Makefile.am, gui.c, gui.h, setup-aliases.c, setup-prefs.c,
 	setup-servers.c: half-working alias editing
 
-2002-05-12 15:51  Timo Sirainen <tss@iki.fi>
+2002-05-12 13:51  Timo Sirainen <tss@iki.fi>
 
 	* src/setup-servers.c: added autoconnect-column
 
-2002-05-12 14:33  Timo Sirainen <tss@iki.fi>
+2002-05-12 12:33  Timo Sirainen <tss@iki.fi>
 
 	* src/setup-prefs.c: updated
 
-2002-05-12 14:04  Timo Sirainen <tss@iki.fi>
+2002-05-12 12:04  Timo Sirainen <tss@iki.fi>
 
 	* autogen.sh: #!/bin/sh was missing.
 
-2002-05-12 13:43  Timo Sirainen <tss@iki.fi>
+2002-05-12 11:43  Timo Sirainen <tss@iki.fi>
 
 	* glade/irssi.glade, src/glade/interface.c: updates
 
-2002-05-12 13:31  Timo Sirainen <tss@iki.fi>
+2002-05-12 11:31  Timo Sirainen <tss@iki.fi>
 
 	* glade/irssi.glade, src/glade/interface.c: updates
 
-2002-05-12 13:13  Timo Sirainen <tss@iki.fi>
+2002-05-12 11:13  Timo Sirainen <tss@iki.fi>
 
 	* TODO, configure.in, glade/.cvsignore, glade/irssi.glade,
 	pixmaps/Makefile.am, pixmaps/irssilogo.jpg, src/Makefile.am,
@@ -149,78 +149,78 @@
 	hardly working, but you should see what it's supposed to look like
 	now.
 
-2002-05-11 05:24  Timo Sirainen <tss@iki.fi>
+2002-05-11 03:24  Timo Sirainen <tss@iki.fi>
 
 	* TODO: updated
 
-2002-05-11 05:04  Timo Sirainen <tss@iki.fi>
+2002-05-11 03:04  Timo Sirainen <tss@iki.fi>
 
 	* src/setup-servers.c: show networks with bold
 
-2002-05-11 05:00  Timo Sirainen <tss@iki.fi>
+2002-05-11 03:00  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-window.c: when destroying last tab in frame, destroy the
 	tab too.
 
-2002-05-11 04:37  Timo Sirainen <tss@iki.fi>
+2002-05-11 02:37  Timo Sirainen <tss@iki.fi>
 
 	* src/: Makefile.am, gui.c, gui.h, irssi.c, module.h,
 	setup-servers-network.c, setup-servers-server.c, setup-servers.c,
 	setup-servers.h, setup.c, setup.h: added server dialog, and
 	gui.[ch] for some helper functions.
 
-2002-05-10 23:31  Timo Sirainen <tss@iki.fi>
+2002-05-10 21:31  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-nicklist-cell-renderer.h, gui-nicklist-cell-renderer.c:
 	not needed, removed.
 
-2002-05-10 23:12  Timo Sirainen <tss@iki.fi>
+2002-05-10 21:12  Timo Sirainen <tss@iki.fi>
 
 	* src/: Makefile.am, gui-nicklist-view.c, gui-nicklist-view.h,
 	gui-nicklist.c, gui-nicklist.h, irssi.c: yet another rewrite of
 	nicklist rendering.
 
-2002-05-10 00:33  Timo Sirainen <tss@iki.fi>
+2002-05-09 22:33  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-nicklist-cell-renderer.c, gui-nicklist-cell-renderer.h,
 	gui-nicklist-view.c: somewhat simplified the nicklist rendering.
 
-2002-05-09 20:54  Timo Sirainen <tss@iki.fi>
+2002-05-09 18:54  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-window.c: if /set scrollback_lines <= 0, keep it
 	unlimited.
 
-2002-05-09 19:06  Timo Sirainen <tss@iki.fi>
+2002-05-09 17:06  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-frame.c: default tab position is now at bottom.
 
-2002-05-09 18:52  Timo Sirainen <tss@iki.fi>
+2002-05-09 16:52  Timo Sirainen <tss@iki.fi>
 
 	* src/dialog-about.c: minor update
 
-2002-05-09 18:30  Timo Sirainen <tss@iki.fi>
+2002-05-09 16:30  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-tab-move.c: when detaching tab, the origin frame's tabs
 	weren't renumbered.
 
-2002-05-09 18:04  Timo Sirainen <tss@iki.fi>
+2002-05-09 16:04  Timo Sirainen <tss@iki.fi>
 
 	* AUTHORS, TODO, pixmaps/Makefile.am, pixmaps/lock.xpm,
 	src/gui-channel.c, src/gui-menu-main.c, src/gui-url.c,
 	src/gui-url.h: forgot to add gui-url.*, using grey background
 	instead of lock icon now for topic locking, few minor changes.
 
-2002-05-09 16:46  Timo Sirainen <tss@iki.fi>
+2002-05-09 14:46  Timo Sirainen <tss@iki.fi>
 
 	* src/dialog-about.c: minor changes
 
-2002-05-09 16:35  Timo Sirainen <tss@iki.fi>
+2002-05-09 14:35  Timo Sirainen <tss@iki.fi>
 
 	* src/: Makefile.am, dialog-about.c, gui-menu-main.c,
 	gui-menu-url.c, gui-menu.c, gui-menu.h, irssi.c: menu/image
 	updates.
 
-2002-05-09 15:41  Timo Sirainen <tss@iki.fi>
+2002-05-09 13:41  Timo Sirainen <tss@iki.fi>
 
 	* src/: Makefile.am, dialog-about.c, dialogs.h, gui-frame.c,
 	gui-menu-channel-topic.c, gui-menu-main.c, gui-menu-nick.c,
@@ -229,150 +229,150 @@
 	working server settings. Updated menu code. Added menubar (will be
 	optional later).
 
-2002-05-09 05:44  Timo Sirainen <tss@iki.fi>
+2002-05-09 03:44  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-window.c: added /set scrollback_lines + /set
 	scrollback_burst_remove
 
-2002-05-09 05:28  Timo Sirainen <tss@iki.fi>
+2002-05-09 03:28  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-nicklist-cell-renderer.c: small bugfix for background
 	drawing
 
-2002-05-09 05:26  Timo Sirainen <tss@iki.fi>
+2002-05-09 03:26  Timo Sirainen <tss@iki.fi>
 
 	* src/: Makefile.am, gui-nicklist-cell-renderer.c,
 	gui-nicklist-cell-renderer.h, gui-nicklist-view.c,
 	gui-nicklist-view.h, gui-nicklist.c, gui-nicklist.h, gui-tab.c:
 	moved the "x ops, y total" label inside nicklist.
 
-2002-05-09 05:24  Timo Sirainen <tss@iki.fi>
+2002-05-09 03:24  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-window-activity.c: fix for clearing activity in split
 	windows
 
-2002-05-08 02:26  Timo Sirainen <tss@iki.fi>
+2002-05-08 00:26  Timo Sirainen <tss@iki.fi>
 
 	* src/Makefile.am: link with -export-dynamic so modules work
 
-2002-05-08 01:36  Timo Sirainen <tss@iki.fi>
+2002-05-07 23:36  Timo Sirainen <tss@iki.fi>
 
 	* pixmaps/: Makefile.am, right.xpm: forgot to add
 
-2002-05-07 19:58  Timo Sirainen <tss@iki.fi>
+2002-05-07 17:58  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-tab.c, gui-tab.h, gui-window.c: Show focus icon in
 	active window
 
-2002-05-06 02:06  Timo Sirainen <tss@iki.fi>
+2002-05-06 00:06  Timo Sirainen <tss@iki.fi>
 
 	* TODO: updated
 
-2002-05-06 02:03  Timo Sirainen <tss@iki.fi>
+2002-05-06 00:03  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-keyboard.c: added bind actions left_window, right_window,
 	upper_window and lower_window
 
-2002-05-06 00:43  Timo Sirainen <tss@iki.fi>
+2002-05-05 22:43  Timo Sirainen <tss@iki.fi>
 
 	* AUTHORS, pixmaps/Makefile.am, pixmaps/lock.xpm, src/Makefile.am,
 	src/gui-channel.c, src/gui-channel.h, src/gui-frame.c,
 	src/gui-frame.h, src/gui-menu-channel-topic.c, src/gui-menu-nick.c,
 	src/gui-menu-url.c, src/gui-menu.h: Channel topic editing works now
 
-2002-05-05 18:59  Timo Sirainen <tss@iki.fi>
+2002-05-05 16:59  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-keyboard.c: pgup/pgdown works
 
-2002-05-05 18:35  Timo Sirainen <tss@iki.fi>
+2002-05-05 16:35  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-window-view.c, gui-window.c, gui-window.h, gui-tab.c:
 	Fixes to window scrolling.
 
-2002-05-05 17:20  Timo Sirainen <tss@iki.fi>
+2002-05-05 15:20  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-tab.c: tab numbers weren't updated when tab was closed.
 
-2002-05-05 17:15  Timo Sirainen <tss@iki.fi>
+2002-05-05 15:15  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-window-activity.c: Activity colors weren't cleared
 	properly.
 
-2002-05-05 04:35  Timo Sirainen <tss@iki.fi>
+2002-05-05 02:35  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-frame.c, gui-tab.c, gui-window-activity.c: color fixes
 
-2002-05-05 03:56  Timo Sirainen <tss@iki.fi>
+2002-05-05 01:56  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-tab-move.c, gui-tab.c, gui-tab.h,
 	gui-window-activity.c, gui-window-view.c: show tab number + all
 	window items in tab.
 
-2002-05-05 01:18  Timo Sirainen <tss@iki.fi>
+2002-05-04 23:18  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-itemlist.c, gui-tab-move.c, gui-tab.c: crashfixes
 
-2002-05-05 01:10  Timo Sirainen <tss@iki.fi>
+2002-05-04 23:10  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-window-activity.c: window activity was broken
 
-2002-05-05 01:09  Timo Sirainen <tss@iki.fi>
+2002-05-04 23:09  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-tab.c: changing window name didn't update tab's label.
 
-2002-05-05 00:51  Timo Sirainen <tss@iki.fi>
+2002-05-04 22:51  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-itemlist.c: don't show itemlist if there's only one
 	window item in tab.
 
-2002-05-05 00:37  Timo Sirainen <tss@iki.fi>
+2002-05-04 22:37  Timo Sirainen <tss@iki.fi>
 
 	* src/: Makefile.am, gui-frame.c, gui-frame.h, gui-itemlist.c,
 	gui-itemlist.h, gui-keyboard.c, gui-tab-move.c, gui-tab.c, irssi.c,
 	module.h: added itemlist + some other minor fixes.
 
-2002-05-04 22:06  Timo Sirainen <tss@iki.fi>
+2002-05-04 20:06  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-window.c: don't set autocreated windows active
 	automatically.
 
-2002-05-04 21:55  Timo Sirainen <tss@iki.fi>
+2002-05-04 19:55  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-tab-move.c: tab label wasn't updated correctly when
 	extractng pane into tab.
 
-2002-05-04 21:48  Timo Sirainen <tss@iki.fi>
+2002-05-04 19:48  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-tab.c, irssi.c: removed debugging things.
 
-2002-05-04 21:48  Timo Sirainen <tss@iki.fi>
+2002-05-04 19:48  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-frame.c: call /quit before last window is destroyed, so
 	it can print the quit messages while there's still windows.
 
-2002-05-04 21:41  Timo Sirainen <tss@iki.fi>
+2002-05-04 19:41  Timo Sirainen <tss@iki.fi>
 
 	* pixmaps/Makefile.am: make clean shouldn't delete non-generated
 	pixmaps :)
 
-2002-05-04 21:39  Timo Sirainen <tss@iki.fi>
+2002-05-04 19:39  Timo Sirainen <tss@iki.fi>
 
 	* pixmaps/Makefile.am: just moving around files :)
 
-2002-05-04 21:26  Timo Sirainen <tss@iki.fi>
+2002-05-04 19:26  Timo Sirainen <tss@iki.fi>
 
 	* AUTHORS: updated
 
-2002-05-04 21:26  Timo Sirainen <tss@iki.fi>
+2002-05-04 19:26  Timo Sirainen <tss@iki.fi>
 
 	* pixmaps/: Makefile.am, move.xpm: added move.xpm
 
-2002-05-04 21:25  Timo Sirainen <tss@iki.fi>
+2002-05-04 19:25  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-frame.c, gui-tab.c, gui-window-view.c: removed
 	debugging info.
 
-2002-05-04 21:17  Timo Sirainen <tss@iki.fi>
+2002-05-04 19:17  Timo Sirainen <tss@iki.fi>
 
 	* src/: Makefile.am, gui-channel.c, gui-context-nick.c,
 	gui-entry.c, gui-entry.h, gui-frame.c, gui-frame.h, gui-keyboard.c,
@@ -386,35 +386,35 @@
 	with reparenting widgets (== window d&d, which works excellently
 	now :)
 
-2002-05-01 22:41  Timo Sirainen <tss@iki.fi>
+2002-05-01 20:41  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-frame.c, gui-frame.h, gui-tab.c, gui-tab.h,
 	gui-window.c: removed some warnings at quit
 
-2002-05-01 22:26  Timo Sirainen <tss@iki.fi>
+2002-05-01 20:26  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-tab-label.c, gui-tab.h: moving tabs between windows
 	works now.
 
-2002-04-30 17:05  Timo Sirainen <tss@iki.fi>
+2002-04-30 15:05  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-tab-label.c: crashfix
 
-2002-04-30 04:30  Timo Sirainen <tss@iki.fi>
+2002-04-30 02:30  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-frame.c, gui-frame.h, gui-tab-label.c,
 	gui-window-view.c, gui-window-view.h: drag'n'drop moving tabs works
 	now. still needs to be able to drop tabs into existing windows..
 
-2002-04-30 03:21  Timo Sirainen <tss@iki.fi>
+2002-04-30 01:21  Timo Sirainen <tss@iki.fi>
 
 	* README: updated
 
-2002-04-30 03:13  Timo Sirainen <tss@iki.fi>
+2002-04-30 01:13  Timo Sirainen <tss@iki.fi>
 
 	* .cvsignore, AUTHORS: updates
 
-2002-04-30 03:00  Timo Sirainen <tss@iki.fi>
+2002-04-30 01:00  Timo Sirainen <tss@iki.fi>
 
 	* pixmaps/Makefile.am, pixmaps/arrow-down-twist.xpm,
 	pixmaps/arrow-down.xpm, pixmaps/arrow-left-twist.xpm,
@@ -427,85 +427,85 @@
 	of tabs, or at least the dragging but dropping doesn't really work
 	yet :) Also removed the deprecated GTK calls.
 
-2002-04-27 23:14  Timo Sirainen <tss@iki.fi>
+2002-04-27 21:14  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-keyboard.c: handle pasting multiple lines properly
 
-2002-04-27 23:05  Timo Sirainen <tss@iki.fi>
+2002-04-27 21:05  Timo Sirainen <tss@iki.fi>
 
 	* autogen.sh: more gtk.m4 updates..
 
-2002-04-27 23:04  Timo Sirainen <tss@iki.fi>
+2002-04-27 21:04  Timo Sirainen <tss@iki.fi>
 
 	* autogen.sh: gtk-2.0.m4 updates..
 
-2002-04-27 23:04  Timo Sirainen <tss@iki.fi>
+2002-04-27 21:04  Timo Sirainen <tss@iki.fi>
 
 	* config-plugin.h.in: shouldn't be in cvs
 
-2002-04-27 23:04  Timo Sirainen <tss@iki.fi>
+2002-04-27 21:04  Timo Sirainen <tss@iki.fi>
 
 	* configure.in, gtk-2.0.m4_: gtk-2.0.m4 isn't required anymore to
 	be in system.
 
-2002-04-27 20:57  Timo Sirainen <tss@iki.fi>
+2002-04-27 18:57  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-nicklist.c: mode changes messed up ops-counter above
 	nicklist.
 
-2002-04-27 20:35  Timo Sirainen <tss@iki.fi>
+2002-04-27 18:35  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-menu-url.c: /exec -quiet galeon so it stops complaining
 	about using existing process :)
 
-2002-04-27 20:35  Timo Sirainen <tss@iki.fi>
+2002-04-27 18:35  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-frame.c: crashfix
 
-2002-04-27 20:11  Timo Sirainen <tss@iki.fi>
+2002-04-27 18:11  Timo Sirainen <tss@iki.fi>
 
 	* TODO, pixmaps/Makefile.am, src/Makefile.am: updates
 
-2002-04-27 19:46  Timo Sirainen <tss@iki.fi>
+2002-04-27 17:46  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-frame.c: key handling changes
 
-2002-04-27 19:31  Timo Sirainen <tss@iki.fi>
+2002-04-27 17:31  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-window.c: indent fixes
 
-2002-04-27 19:24  Timo Sirainen <tss@iki.fi>
+2002-04-27 17:24  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-window-view.c, gui-window.c, gui-window.h: Moved
 	printing with one big tag into multiple smaller tags, finally
 	figured out that this is the correct way it should have been done
 	from beginning :) Also added proper indenting to lines
 
-2002-04-27 18:14  Timo Sirainen <tss@iki.fi>
+2002-04-27 16:14  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-nicklist-view.c: doubleclicking nick did /query, but with
 	invalid nick name
 
-2002-04-27 17:49  Timo Sirainen <tss@iki.fi>
+2002-04-27 15:49  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-channel.c, gui-context-nick.c, gui-frame.c: window size
 	fixes, locale -> utf8 converting for topics and nick infos.
 
-2002-04-27 17:23  Timo Sirainen <tss@iki.fi>
+2002-04-27 15:23  Timo Sirainen <tss@iki.fi>
 
 	* Makefile.am, pixmaps/Makefile.am: added "make clean" and fixed
 	the src/pixmaps dir order
 
-2002-04-27 16:53  Timo Sirainen <tss@iki.fi>
+2002-04-27 14:53  Timo Sirainen <tss@iki.fi>
 
 	* .cvsignore: added
 
-2002-04-27 16:53  Timo Sirainen <tss@iki.fi>
+2002-04-27 14:53  Timo Sirainen <tss@iki.fi>
 
 	* autogen.sh, pixmaps/generate.sh: whops, generate.sh wasn't needed
 	:)
 
-2002-04-27 16:50  Timo Sirainen <tss@iki.fi>
+2002-04-27 14:50  Timo Sirainen <tss@iki.fi>
 
 	* TODO, autogen.sh, pixmaps/.cvsignore, pixmaps/Makefile.am,
 	pixmaps/ball-blue.png, pixmaps/ball-green.png,
@@ -516,55 +516,55 @@
 	src/gui-nicklist.c: changed nicklist pixmaps to 3d-like balls :)
 	pixmaps by ccr.
 
-2002-04-27 03:24  Timo Sirainen <tss@iki.fi>
+2002-04-27 01:24  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-frame.c: focus was automoved too late to entry line and
 	it lost the keypress that brought it there.
 
-2002-04-27 03:21  Timo Sirainen <tss@iki.fi>
+2002-04-27 01:21  Timo Sirainen <tss@iki.fi>
 
 	* TODO: updated
 
-2002-04-27 03:15  Timo Sirainen <tss@iki.fi>
+2002-04-27 01:15  Timo Sirainen <tss@iki.fi>
 
 	* src/: Makefile.am, gui-context-nick.c, gui-context-url.c,
 	gui-menu-nick.c, gui-menu-nick.h, gui-menu-url.c, gui-menu.h,
 	gui-nicklist-view.c: support for url popup menus
 
-2002-04-27 02:49  Timo Sirainen <tss@iki.fi>
+2002-04-27 00:49  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-frame.c: fix up/down/tab keys to work again properly
 
-2002-04-27 02:17  Timo Sirainen <tss@iki.fi>
+2002-04-27 00:17  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-entry.c: enter-key was broken..
 
-2002-04-27 01:30  Timo Sirainen <tss@iki.fi>
+2002-04-26 23:30  Timo Sirainen <tss@iki.fi>
 
 	* TODO: updated
 
-2002-04-27 01:14  Timo Sirainen <tss@iki.fi>
+2002-04-26 23:14  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-frame.c, gui-keyboard.c: support for mod2..mod5, and
 	fixed deadkeys
 
-2002-04-27 01:04  Timo Sirainen <tss@iki.fi>
+2002-04-26 23:04  Timo Sirainen <tss@iki.fi>
 
 	* src/: Makefile.am, gui-entry.c, gui-entry.h, gui-frame.c,
 	gui-keyboard.c, gui-keyboard.h, irssi.c: moved keyboard handling to
 	gui-keyboard.c. added the rest of the bind actions.
 
-2002-04-26 23:48  Timo Sirainen <tss@iki.fi>
+2002-04-26 21:48  Timo Sirainen <tss@iki.fi>
 
 	* src/: Makefile.am, gui-tab.h, gui-window-activity.c,
 	gui-window-view.c, gui-window.c, gui-window.h: Added window
 	activity code.
 
-2002-04-26 23:46  Timo Sirainen <tss@iki.fi>
+2002-04-26 21:46  Timo Sirainen <tss@iki.fi>
 
 	* src/.cvsignore: added xirssi
 
-2002-04-26 22:47  Timo Sirainen <tss@iki.fi>
+2002-04-26 20:47  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-context-nick.c, gui-entry.c, gui-frame.c,
 	gui-menu-nick.c, gui-menu-nick.h, gui-nicklist-view.c,
@@ -572,25 +572,25 @@
 	gui-window.c: utf8 <-> locale conversion by default, popup menu
 	fixes
 
-2002-04-26 19:56  Timo Sirainen <tss@iki.fi>
+2002-04-26 17:56  Timo Sirainen <tss@iki.fi>
 
 	* src/: Makefile.am, gui-context-nick.c, gui-context-url.c,
 	gui-menu-nick.c, gui-menu.c, gui-menu.h, gui-window-context.c,
 	gui-window-context.h, irssi.c: popup menu / context stuff fixes.
 	nick popup works.
 
-2002-04-26 17:41  Timo Sirainen <tss@iki.fi>
+2002-04-26 15:41  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-context-nick.c, gui-nicklist-view.c,
 	gui-window-context.c, gui-window-context.h, gui-window-view.c,
 	gui-window.c, gui-window.h: support for monospace fonts, fixes for
 	showing nick info in statusbar
 
-2002-04-22 11:33  Timo Sirainen <tss@iki.fi>
+2002-04-22 09:33  Timo Sirainen <tss@iki.fi>
 
 	* configure.in: check ../irssi/ for irssi sources too
 
-2002-04-22 11:06  Timo Sirainen <tss@iki.fi>
+2002-04-22 09:06  Timo Sirainen <tss@iki.fi>
 
 	* AUTHORS, Makefile.am, NEWS, README, TODO, acconfig.h, autogen.sh,
 	config-plugin.h.in, configure.in, stamp.h.in, pixmaps/Makefile.am,
@@ -606,7 +606,7 @@
 	src/gui-menu-nick.h, src/gui-window-context.c,
 	src/gui-window-context.h: Initial revision
 
-2002-04-22 11:06  Timo Sirainen <tss@iki.fi>
+2002-04-22 09:06  Timo Sirainen <tss@iki.fi>
 
 	* AUTHORS, Makefile.am, NEWS, README, TODO, acconfig.h, autogen.sh,
 	config-plugin.h.in, configure.in, stamp.h.in, pixmaps/Makefile.am,
