@@ -1,3 +1,17 @@
+2002-05-16 07:49  Timo Sirainen <tss@iki.fi>
+
+	* TODO, glade/irssi.glade, pixmaps/advanced-logging.png,
+	pixmaps/irc.png, pixmaps/keyboard.png, pixmaps/queries.png,
+	pixmaps/servers.png, pixmaps/settings.png, pixmaps/themes.png,
+	src/Makefile.am, src/gui-keyboard.c, src/gui-menu-main.c,
+	src/gui-menu.c, src/gui-menu.h, src/irssi.c, src/module.h,
+	src/setup-aliases.c, src/setup-channels-edit.c,
+	src/setup-channels.c, src/setup-completion.c, src/setup-prefs.c,
+	src/setup-servers-network.c, src/setup-servers-server.c,
+	src/setup-servers.c, src/setup.h, src/glade/interface.c,
+	src/glade/interface.h: added completions, channels, setup icons and
+	changed some stuff.
+
 2002-05-16 05:40  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-colors.c, gui-colors.h, gui-window.c: updated color
