@@ -3,6 +3,44 @@
 <changelog xmlns="http://www.red-bean.com/xmlns/cvs2cl/">
 
 <entry>
+<date>2002-04-26</date>
+<weekday>Friday</weekday>
+<time>17:41</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-context-nick.c</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>src/gui-nicklist-view.c</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>src/gui-window-context.c</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>src/gui-window-context.h</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>src/gui-window-view.c</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>src/gui-window.c</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>src/gui-window.h</name>
+<revision>1.2</revision>
+</file>
+<commondir>src/</commondir>
+<msg>support for monospace fonts, fixes for showing nick info in statusbar
+</msg>
+</entry>
+
+<entry>
 <date>2002-04-22</date>
 <weekday>Monday</weekday>
 <time>11:33</time>
