@@ -267,12 +267,20 @@ static void sig_window_create_override(gpointer tab)
 
 static void sig_window_created(Window *window, void *automatic)
 {
+	Frame *frame;
+	Tab *tab;
 	WindowGui *gui;
 
-	if (window_create_override == 0 || active_frame == NULL)
-		gui_frame_set_active(gui_frame_new(TRUE));
-	if (window_create_override <= 1 || active_frame->active_tab == NULL)
-		gui_tab_set_active(gui_tab_new(active_frame));
+	frame = window_create_override == 0 || active_frame == NULL ?
+		gui_frame_new(TRUE) : active_frame;
+	tab = window_create_override <= 1 || active_frame->active_tab == NULL ?
+		gui_tab_new(frame) : active_frame->active_tab;
+
+	if (!automatic || active_frame == NULL) {
+		gui_frame_set_active(frame);
+		gui_tab_set_active(tab);
+	}
+
 	window_create_override = -1;
 
 	gui = g_new0(WindowGui, 1);
@@ -294,7 +302,7 @@ static void sig_window_created(Window *window, void *automatic)
 	g_object_set(G_OBJECT(gui->tag_monospace), "font-desc",
 		     gui->font_monospace, NULL);
 
-	gui_window_add_view(gui, active_frame->active_tab);
+	gui_window_add_view(gui, tab);
 	g_object_unref(G_OBJECT(gui->buffer));
 
 	/* just to make sure it won't contain invalid value before
