@@ -45,7 +45,7 @@ static GdkPixbuf *autolog_pixbuf, *adv_logging_pixbuf;
 static GdkPixbuf *windows_pixbuf, *queries_pixbuf, *completion_pixbuf;
 static GdkPixbuf *aliases_pixbuf, *keyboard_pixbuf;
 static GdkPixbuf *ignores_pixbuf, *highlighting_pixbuf, *input_sets_pixbuf;
-static GdkPixbuf *window_output_pixbuf, *fontscolors_pixbuf, *themes_pixbuf;
+static GdkPixbuf *fontscolors_pixbuf, *themes_pixbuf, *appearance_sets_pixbuf;
 
 static SetupPrefs prefs[] = {
 	{ "Connections" },
@@ -70,9 +70,9 @@ static SetupPrefs prefs[] = {
 
 	{ "Appearance" },
 	{ "Highlighting",	"page_highlighting", &highlighting_pixbuf, setup_highlighting_init },
-	{ "Window Output",	"page_window_output", &window_output_pixbuf },
 	{ "Fonts & Colors",	"page_fontscolors", &fontscolors_pixbuf },
-	{ "Themes",		"page_themes", &themes_pixbuf }
+	{ "Themes",		"page_themes", &themes_pixbuf },
+	{ "Settings",		"page_appearance_settings", &appearance_sets_pixbuf }
 };
 
 GtkWidget *setup_dialog;
@@ -229,7 +229,7 @@ static void images_init(void)
 	highlighting_pixbuf = create_pixbuf("highlighting.png");
 	input_sets_pixbuf = create_pixbuf("input-settings.png");
 
-	window_output_pixbuf = create_pixbuf("window-output.png");
+	appearance_sets_pixbuf = create_pixbuf("appearance-settings.png");
 	fontscolors_pixbuf = create_pixbuf("fontscolors.png");
 	themes_pixbuf = create_pixbuf("themes.png");
 }

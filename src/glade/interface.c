@@ -269,7 +269,7 @@ create_preferences (void)
   GtkWidget *bind_remove;
   GtkWidget *label74;
   GtkWidget *label102;
-  GtkWidget *page_window_output;
+  GtkWidget *page_appearance_settings;
   GtkWidget *frame29;
   GtkWidget *table8;
   GtkWidget *timestamp_level;
@@ -1908,15 +1908,15 @@ create_preferences (void)
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 13), label102);
   gtk_label_set_justify (GTK_LABEL (label102), GTK_JUSTIFY_LEFT);
 
-  page_window_output = gtk_vbox_new (FALSE, 10);
-  gtk_widget_set_name (page_window_output, "page_window_output");
-  gtk_widget_show (page_window_output);
-  gtk_container_add (GTK_CONTAINER (prefs_notebook), page_window_output);
+  page_appearance_settings = gtk_vbox_new (FALSE, 10);
+  gtk_widget_set_name (page_appearance_settings, "page_appearance_settings");
+  gtk_widget_show (page_appearance_settings);
+  gtk_container_add (GTK_CONTAINER (prefs_notebook), page_appearance_settings);
 
   frame29 = gtk_frame_new (NULL);
   gtk_widget_set_name (frame29, "frame29");
   gtk_widget_show (frame29);
-  gtk_box_pack_start (GTK_BOX (page_window_output), frame29, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (page_appearance_settings), frame29, FALSE, TRUE, 0);
 
   table8 = gtk_table_new (3, 3, FALSE);
   gtk_widget_set_name (table8, "table8");
@@ -1981,7 +1981,7 @@ create_preferences (void)
   frame30 = gtk_frame_new (NULL);
   gtk_widget_set_name (frame30, "frame30");
   gtk_widget_show (frame30);
-  gtk_box_pack_start (GTK_BOX (page_window_output), frame30, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (page_appearance_settings), frame30, FALSE, TRUE, 0);
 
   vbox14 = gtk_vbox_new (FALSE, 3);
   gtk_widget_set_name (vbox14, "vbox14");
@@ -2008,7 +2008,7 @@ create_preferences (void)
   frame48 = gtk_frame_new (NULL);
   gtk_widget_set_name (frame48, "frame48");
   gtk_widget_show (frame48);
-  gtk_box_pack_start (GTK_BOX (page_window_output), frame48, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (page_appearance_settings), frame48, FALSE, TRUE, 0);
 
   vbox18 = gtk_vbox_new (FALSE, 2);
   gtk_widget_set_name (vbox18, "vbox18");
@@ -3076,7 +3076,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, bind_remove, "bind_remove");
   GLADE_HOOKUP_OBJECT (preferences, label74, "label74");
   GLADE_HOOKUP_OBJECT (preferences, label102, "label102");
-  GLADE_HOOKUP_OBJECT (preferences, page_window_output, "page_window_output");
+  GLADE_HOOKUP_OBJECT (preferences, page_appearance_settings, "page_appearance_settings");
   GLADE_HOOKUP_OBJECT (preferences, frame29, "frame29");
   GLADE_HOOKUP_OBJECT (preferences, table8, "table8");
   GLADE_HOOKUP_OBJECT (preferences, timestamp_level, "timestamp_level");
