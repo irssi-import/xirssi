@@ -5,6 +5,75 @@
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
+<time>23:14</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-keyboard.c</name>
+<revision>1.3</revision>
+</file>
+<msg>handle pasting multiple lines properly
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-27</date>
+<weekday>Saturday</weekday>
+<time>23:05</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>autogen.sh</name>
+<revision>1.5</revision>
+</file>
+<msg>more gtk.m4 updates..
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-27</date>
+<weekday>Saturday</weekday>
+<time>23:04</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>autogen.sh</name>
+<revision>1.4</revision>
+</file>
+<msg>gtk-2.0.m4 updates..
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-27</date>
+<weekday>Saturday</weekday>
+<time>23:04</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>config-plugin.h.in</name>
+<revision>1.2</revision>
+</file>
+<msg>shouldn't be in cvs
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-27</date>
+<weekday>Saturday</weekday>
+<time>23:04</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>configure.in</name>
+<revision>1.3</revision>
+</file>
+<file>
+<name>gtk-2.0.m4_</name>
+<revision>1.1</revision>
+</file>
+<msg>gtk-2.0.m4 isn't required anymore to be in system.
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-27</date>
+<weekday>Saturday</weekday>
 <time>20:57</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
