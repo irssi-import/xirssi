@@ -1,3 +1,10 @@
+2002-04-26 17:41  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-context-nick.c, gui-nicklist-view.c,
+	gui-window-context.c, gui-window-context.h, gui-window-view.c,
+	gui-window.c, gui-window.h: support for monospace fonts, fixes for
+	showing nick info in statusbar
+
 2002-04-22 11:33  Timo Sirainen <tss@iki.fi>
 
 	* configure.in: check ../irssi/ for irssi sources too
