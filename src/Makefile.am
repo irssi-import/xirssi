@@ -14,12 +14,14 @@ xirssi_DEPENDENCIES = \
 	@PERL_LINK_LIBS@ \
 	@PERL_FE_LINK_LIBS@
 
+xirssi_LDFLAGS = -export-dynamic
+
 xirssi_LDADD = \
+        @GTK_LIBS@ \
 	@COMMON_LIBS@ \
 	@PERL_LINK_LIBS@ \
 	@PERL_FE_LINK_LIBS@ \
-	@PERL_LINK_FLAGS@ \
-        @GTK_LIBS@
+	@PERL_LINK_FLAGS@
 
 xirssi_SOURCES = \
 	gui-channel.c \
