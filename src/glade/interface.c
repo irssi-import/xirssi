@@ -39,8 +39,6 @@ create_preferences (void)
   GtkWidget *frame36;
   GtkWidget *image1;
   GtkWidget *label37;
-  GtkWidget *empty_notebook_page;
-  GtkWidget *label39;
   GtkWidget *page_servers;
   GtkWidget *hbox2;
   GtkWidget *frame8;
@@ -105,29 +103,32 @@ create_preferences (void)
   GtkWidget *label8;
   GtkWidget *label44;
   GtkWidget *page_autolog;
-  GtkWidget *table5;
-  GtkWidget *autolog;
-  GtkWidget *autolog_level;
-  GtkWidget *label23;
-  GtkWidget *label24;
-  GtkWidget *level4;
-  GtkWidget *autolog_path;
-  GtkWidget *hseparator1;
-  GtkWidget *label25;
-  GtkWidget *label36;
-  GtkWidget *table6;
-  GtkWidget *label26;
-  GtkWidget *label27;
-  GtkWidget *label28;
-  GtkWidget *label29;
-  GtkWidget *label30;
-  GtkWidget *label31;
-  GtkWidget *label32;
-  GtkWidget *label33;
-  GtkWidget *label34;
-  GtkWidget *label35;
-  GtkWidget *label22;
-  GtkWidget *label48;
+  GtkWidget *frame37;
+  GtkWidget *table14;
+  GtkWidget *checkbutton1;
+  GtkWidget *entry1;
+  GtkWidget *label119;
+  GtkWidget *label120;
+  GtkWidget *button42;
+  GtkWidget *entry2;
+  GtkWidget *hseparator12;
+  GtkWidget *label121;
+  GtkWidget *label122;
+  GtkWidget *table15;
+  GtkWidget *label123;
+  GtkWidget *label124;
+  GtkWidget *label125;
+  GtkWidget *label126;
+  GtkWidget *label127;
+  GtkWidget *label128;
+  GtkWidget *label129;
+  GtkWidget *label130;
+  GtkWidget *label131;
+  GtkWidget *label132;
+  GtkWidget *label133;
+  GtkWidget *label50;
+  GtkWidget *empty_notebook_page;
+  GtkWidget *label52;
   GtkWidget *page_advanced_logging;
   GtkWidget *hbox8;
   GtkWidget *frame13;
@@ -144,7 +145,7 @@ create_preferences (void)
   GtkWidget *button20;
   GtkWidget *button21;
   GtkWidget *label53;
-  GtkWidget *label50;
+  GtkWidget *label54;
   GtkWidget *page_ignores;
   GtkWidget *hbox9;
   GtkWidget *frame15;
@@ -155,7 +156,7 @@ create_preferences (void)
   GtkWidget *button23;
   GtkWidget *button24;
   GtkWidget *label56;
-  GtkWidget *label52;
+  GtkWidget *label55;
   GtkWidget *page_highlighting;
   GtkWidget *frame31;
   GtkWidget *hbox18;
@@ -174,7 +175,7 @@ create_preferences (void)
   GtkWidget *label82;
   GtkWidget *hilight_color;
   GtkWidget *label81;
-  GtkWidget *label54;
+  GtkWidget *label73;
   GtkWidget *page_input_settings;
   GtkWidget *frame18;
   GtkWidget *vbox7;
@@ -186,7 +187,7 @@ create_preferences (void)
   GtkWidget *hide_colors;
   GtkWidget *hide_text_style;
   GtkWidget *label58;
-  GtkWidget *label55;
+  GtkWidget *label95;
   GtkWidget *page_windows;
   GtkWidget *frame19;
   GtkWidget *table7;
@@ -210,7 +211,7 @@ create_preferences (void)
   GtkWidget *hseparator4;
   GtkWidget *activity_hide_targets;
   GtkWidget *label59;
-  GtkWidget *label73;
+  GtkWidget *label96;
   GtkWidget *page_queries;
   GtkWidget *frame20;
   GtkWidget *vbox10;
@@ -225,7 +226,7 @@ create_preferences (void)
   GtkWidget *autoclose_query;
   GtkWidget *label68;
   GtkWidget *label65;
-  GtkWidget *label95;
+  GtkWidget *label97;
   GtkWidget *page_completion;
   GtkWidget *frame21;
   GtkWidget *vbox12;
@@ -245,7 +246,7 @@ create_preferences (void)
   GtkWidget *button31;
   GtkWidget *button32;
   GtkWidget *label71;
-  GtkWidget *label96;
+  GtkWidget *label99;
   GtkWidget *page_aliases;
   GtkWidget *hbox16;
   GtkWidget *frame26;
@@ -255,7 +256,7 @@ create_preferences (void)
   GtkWidget *button33;
   GtkWidget *button34;
   GtkWidget *label72;
-  GtkWidget *label97;
+  GtkWidget *label101;
   GtkWidget *page_keyboard;
   GtkWidget *hbox17;
   GtkWidget *frame28;
@@ -266,7 +267,7 @@ create_preferences (void)
   GtkWidget *button36;
   GtkWidget *button37;
   GtkWidget *label74;
-  GtkWidget *label99;
+  GtkWidget *label102;
   GtkWidget *page_window_output;
   GtkWidget *frame29;
   GtkWidget *table8;
@@ -282,7 +283,7 @@ create_preferences (void)
   GtkWidget *show_nickmode;
   GtkWidget *Show_nick_s_channel_status_before_nickname_in_public_msgs;
   GtkWidget *label77;
-  GtkWidget *label101;
+  GtkWidget *label103;
   GtkWidget *page_irc_dcc;
   GtkWidget *frame34;
   GtkWidget *table9;
@@ -309,7 +310,7 @@ create_preferences (void)
   GtkWidget *browsedir1;
   GtkWidget *browsedir2;
   GtkWidget *label83;
-  GtkWidget *label102;
+  GtkWidget *label134;
   GtkWidget *page_irc_defaults;
   GtkWidget *frame35;
   GtkWidget *table10;
@@ -320,7 +321,7 @@ create_preferences (void)
   GtkWidget *part_message;
   GtkWidget *quit_message;
   GtkWidget *label91;
-  GtkWidget *label103;
+  GtkWidget *label135;
   GtkWidget *dialog_action_area1;
   GtkWidget *cancelbutton1;
   GtkWidget *okbutton1;
@@ -383,16 +384,6 @@ create_preferences (void)
   gtk_widget_show (label37);
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 0), label37);
   gtk_label_set_justify (GTK_LABEL (label37), GTK_JUSTIFY_LEFT);
-
-  empty_notebook_page = gtk_vbox_new (FALSE, 0);
-  gtk_widget_show (empty_notebook_page);
-  gtk_container_add (GTK_CONTAINER (prefs_notebook), empty_notebook_page);
-
-  label39 = gtk_label_new ("");
-  gtk_widget_set_name (label39, "label39");
-  gtk_widget_show (label39);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 1), label39);
-  gtk_label_set_justify (GTK_LABEL (label39), GTK_JUSTIFY_LEFT);
 
   page_servers = gtk_frame_new (NULL);
   gtk_widget_set_name (page_servers, "page_servers");
@@ -462,7 +453,7 @@ create_preferences (void)
   label41 = gtk_label_new ("");
   gtk_widget_set_name (label41, "label41");
   gtk_widget_show (label41);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 2), label41);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 1), label41);
   gtk_label_set_justify (GTK_LABEL (label41), GTK_JUSTIFY_LEFT);
 
   page_channels = gtk_frame_new (NULL);
@@ -527,7 +518,7 @@ create_preferences (void)
   label43 = gtk_label_new ("");
   gtk_widget_set_name (label43, "label43");
   gtk_widget_show (label43);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 3), label43);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 2), label43);
   gtk_label_set_justify (GTK_LABEL (label43), GTK_JUSTIFY_LEFT);
   gtk_misc_set_alignment (GTK_MISC (label43), 0.45, 0.5);
 
@@ -791,205 +782,220 @@ create_preferences (void)
   label44 = gtk_label_new ("");
   gtk_widget_set_name (label44, "label44");
   gtk_widget_show (label44);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 4), label44);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 3), label44);
   gtk_label_set_justify (GTK_LABEL (label44), GTK_JUSTIFY_LEFT);
 
-  page_autolog = gtk_frame_new (NULL);
+  page_autolog = gtk_vbox_new (FALSE, 0);
   gtk_widget_set_name (page_autolog, "page_autolog");
   gtk_widget_show (page_autolog);
   gtk_container_add (GTK_CONTAINER (prefs_notebook), page_autolog);
 
-  table5 = gtk_table_new (7, 3, FALSE);
-  gtk_widget_set_name (table5, "table5");
-  gtk_widget_show (table5);
-  gtk_container_add (GTK_CONTAINER (page_autolog), table5);
-  gtk_container_set_border_width (GTK_CONTAINER (table5), 7);
-  gtk_table_set_row_spacings (GTK_TABLE (table5), 3);
-  gtk_table_set_col_spacings (GTK_TABLE (table5), 7);
+  frame37 = gtk_frame_new (NULL);
+  gtk_widget_set_name (frame37, "frame37");
+  gtk_widget_show (frame37);
+  gtk_box_pack_start (GTK_BOX (page_autolog), frame37, FALSE, TRUE, 0);
 
-  autolog = gtk_check_button_new_with_mnemonic ("Use automatic logging");
-  gtk_widget_set_name (autolog, "autolog");
-  gtk_widget_show (autolog);
-  gtk_table_attach (GTK_TABLE (table5), autolog, 0, 3, 0, 1,
+  table14 = gtk_table_new (7, 3, FALSE);
+  gtk_widget_set_name (table14, "table14");
+  gtk_widget_show (table14);
+  gtk_container_add (GTK_CONTAINER (frame37), table14);
+  gtk_container_set_border_width (GTK_CONTAINER (table14), 7);
+  gtk_table_set_row_spacings (GTK_TABLE (table14), 3);
+  gtk_table_set_col_spacings (GTK_TABLE (table14), 7);
+
+  checkbutton1 = gtk_check_button_new_with_mnemonic ("Use automatic logging");
+  gtk_widget_set_name (checkbutton1, "checkbutton1");
+  gtk_widget_show (checkbutton1);
+  gtk_table_attach (GTK_TABLE (table14), checkbutton1, 0, 3, 0, 1,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
-  autolog_level = gtk_entry_new ();
-  gtk_widget_set_name (autolog_level, "autolog_level");
-  gtk_widget_show (autolog_level);
-  gtk_table_attach (GTK_TABLE (table5), autolog_level, 1, 2, 2, 3,
+  entry1 = gtk_entry_new ();
+  gtk_widget_set_name (entry1, "entry1");
+  gtk_widget_show (entry1);
+  gtk_table_attach (GTK_TABLE (table14), entry1, 1, 2, 2, 3,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
-  label23 = gtk_label_new ("Path");
-  gtk_widget_set_name (label23, "label23");
-  gtk_widget_show (label23);
-  gtk_table_attach (GTK_TABLE (table5), label23, 0, 1, 1, 2,
+  label119 = gtk_label_new ("Path");
+  gtk_widget_set_name (label119, "label119");
+  gtk_widget_show (label119);
+  gtk_table_attach (GTK_TABLE (table14), label119, 0, 1, 1, 2,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label23), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label23), 1, 0.5);
+  gtk_label_set_justify (GTK_LABEL (label119), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label119), 1, 0.5);
 
-  label24 = gtk_label_new ("Level");
-  gtk_widget_set_name (label24, "label24");
-  gtk_widget_show (label24);
-  gtk_table_attach (GTK_TABLE (table5), label24, 0, 1, 2, 3,
+  label120 = gtk_label_new ("Level");
+  gtk_widget_set_name (label120, "label120");
+  gtk_widget_show (label120);
+  gtk_table_attach (GTK_TABLE (table14), label120, 0, 1, 2, 3,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label24), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label24), 1, 0.5);
+  gtk_label_set_justify (GTK_LABEL (label120), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label120), 1, 0.5);
 
-  level4 = gtk_button_new_with_mnemonic ("Change...");
-  gtk_widget_set_name (level4, "level4");
-  gtk_widget_show (level4);
-  gtk_table_attach (GTK_TABLE (table5), level4, 2, 3, 2, 3,
+  button42 = gtk_button_new_with_mnemonic ("Change...");
+  gtk_widget_set_name (button42, "button42");
+  gtk_widget_show (button42);
+  gtk_table_attach (GTK_TABLE (table14), button42, 2, 3, 2, 3,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
-  autolog_path = gtk_entry_new ();
-  gtk_widget_set_name (autolog_path, "autolog_path");
-  gtk_widget_show (autolog_path);
-  gtk_table_attach (GTK_TABLE (table5), autolog_path, 1, 3, 1, 2,
+  entry2 = gtk_entry_new ();
+  gtk_widget_set_name (entry2, "entry2");
+  gtk_widget_show (entry2);
+  gtk_table_attach (GTK_TABLE (table14), entry2, 1, 3, 1, 2,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
-  hseparator1 = gtk_hseparator_new ();
-  gtk_widget_set_name (hseparator1, "hseparator1");
-  gtk_widget_show (hseparator1);
-  gtk_table_attach (GTK_TABLE (table5), hseparator1, 0, 3, 3, 4,
+  hseparator12 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator12, "hseparator12");
+  gtk_widget_show (hseparator12);
+  gtk_table_attach (GTK_TABLE (table14), hseparator12, 0, 3, 3, 4,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (GTK_FILL), 0, 5);
 
-  label25 = gtk_label_new ("Autolog can rotate logfiles automatically based on the filename you give. There's several special tags you can use with it:");
-  gtk_widget_set_name (label25, "label25");
-  gtk_widget_show (label25);
-  gtk_table_attach (GTK_TABLE (table5), label25, 0, 3, 4, 5,
+  label121 = gtk_label_new ("Autolog can rotate logfiles automatically based on the filename you give. There's several special tags you can use with it:");
+  gtk_widget_set_name (label121, "label121");
+  gtk_widget_show (label121);
+  gtk_table_attach (GTK_TABLE (table14), label121, 0, 3, 4, 5,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label25), GTK_JUSTIFY_LEFT);
-  gtk_label_set_line_wrap (GTK_LABEL (label25), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (label25), 0, 0.5);
+  gtk_label_set_justify (GTK_LABEL (label121), GTK_JUSTIFY_LEFT);
+  gtk_label_set_line_wrap (GTK_LABEL (label121), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (label121), 0, 0.5);
 
-  label36 = gtk_label_new ("Rest of the % timecodes can be found from strftime(3) man page. Also, all irssi's $variables can be used.");
-  gtk_widget_set_name (label36, "label36");
-  gtk_widget_show (label36);
-  gtk_table_attach (GTK_TABLE (table5), label36, 0, 3, 6, 7,
+  label122 = gtk_label_new ("Rest of the % timecodes can be found from strftime(3) man page. Also, all irssi's $variables can be used.");
+  gtk_widget_set_name (label122, "label122");
+  gtk_widget_show (label122);
+  gtk_table_attach (GTK_TABLE (table14), label122, 0, 3, 6, 7,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label36), GTK_JUSTIFY_LEFT);
-  gtk_label_set_line_wrap (GTK_LABEL (label36), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (label36), 0, 0.5);
+  gtk_label_set_justify (GTK_LABEL (label122), GTK_JUSTIFY_LEFT);
+  gtk_label_set_line_wrap (GTK_LABEL (label122), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (label122), 0, 0.5);
 
-  table6 = gtk_table_new (5, 2, FALSE);
-  gtk_widget_set_name (table6, "table6");
-  gtk_widget_show (table6);
-  gtk_table_attach (GTK_TABLE (table5), table6, 0, 3, 5, 6,
+  table15 = gtk_table_new (5, 2, FALSE);
+  gtk_widget_set_name (table15, "table15");
+  gtk_widget_show (table15);
+  gtk_table_attach (GTK_TABLE (table14), table15, 0, 3, 5, 6,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (GTK_FILL), 0, 0);
-  gtk_container_set_border_width (GTK_CONTAINER (table6), 10);
-  gtk_table_set_col_spacings (GTK_TABLE (table6), 10);
+  gtk_container_set_border_width (GTK_CONTAINER (table15), 10);
+  gtk_table_set_col_spacings (GTK_TABLE (table15), 10);
 
-  label26 = gtk_label_new ("$0");
-  gtk_widget_set_name (label26, "label26");
-  gtk_widget_show (label26);
-  gtk_table_attach (GTK_TABLE (table6), label26, 0, 1, 0, 1,
+  label123 = gtk_label_new ("$0");
+  gtk_widget_set_name (label123, "label123");
+  gtk_widget_show (label123);
+  gtk_table_attach (GTK_TABLE (table15), label123, 0, 1, 0, 1,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label26), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label26), 0, 0.5);
+  gtk_label_set_justify (GTK_LABEL (label123), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label123), 0, 0.5);
 
-  label27 = gtk_label_new ("$1");
-  gtk_widget_set_name (label27, "label27");
-  gtk_widget_show (label27);
-  gtk_table_attach (GTK_TABLE (table6), label27, 0, 1, 1, 2,
+  label124 = gtk_label_new ("$1");
+  gtk_widget_set_name (label124, "label124");
+  gtk_widget_show (label124);
+  gtk_table_attach (GTK_TABLE (table15), label124, 0, 1, 1, 2,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label27), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label27), 0, 0.5);
+  gtk_label_set_justify (GTK_LABEL (label124), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label124), 0, 0.5);
 
-  label28 = gtk_label_new ("%d");
-  gtk_widget_set_name (label28, "label28");
-  gtk_widget_show (label28);
-  gtk_table_attach (GTK_TABLE (table6), label28, 0, 1, 2, 3,
+  label125 = gtk_label_new ("%d");
+  gtk_widget_set_name (label125, "label125");
+  gtk_widget_show (label125);
+  gtk_table_attach (GTK_TABLE (table15), label125, 0, 1, 2, 3,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label28), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label28), 0, 0.5);
+  gtk_label_set_justify (GTK_LABEL (label125), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label125), 0, 0.5);
 
-  label29 = gtk_label_new ("%m");
-  gtk_widget_set_name (label29, "label29");
-  gtk_widget_show (label29);
-  gtk_table_attach (GTK_TABLE (table6), label29, 0, 1, 3, 4,
+  label126 = gtk_label_new ("%m");
+  gtk_widget_set_name (label126, "label126");
+  gtk_widget_show (label126);
+  gtk_table_attach (GTK_TABLE (table15), label126, 0, 1, 3, 4,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label29), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label29), 0, 0.5);
+  gtk_label_set_justify (GTK_LABEL (label126), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label126), 0, 0.5);
 
-  label30 = gtk_label_new ("%Y");
-  gtk_widget_set_name (label30, "label30");
-  gtk_widget_show (label30);
-  gtk_table_attach (GTK_TABLE (table6), label30, 0, 1, 4, 5,
+  label127 = gtk_label_new ("%Y");
+  gtk_widget_set_name (label127, "label127");
+  gtk_widget_show (label127);
+  gtk_table_attach (GTK_TABLE (table15), label127, 0, 1, 4, 5,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label30), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label30), 0, 0.5);
+  gtk_label_set_justify (GTK_LABEL (label127), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label127), 0, 0.5);
 
-  label31 = gtk_label_new ("Year");
-  gtk_widget_set_name (label31, "label31");
-  gtk_widget_show (label31);
-  gtk_table_attach (GTK_TABLE (table6), label31, 1, 2, 4, 5,
+  label128 = gtk_label_new ("Year");
+  gtk_widget_set_name (label128, "label128");
+  gtk_widget_show (label128);
+  gtk_table_attach (GTK_TABLE (table15), label128, 1, 2, 4, 5,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label31), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label31), 0, 0.5);
+  gtk_label_set_justify (GTK_LABEL (label128), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label128), 0, 0.5);
 
-  label32 = gtk_label_new ("Month");
-  gtk_widget_set_name (label32, "label32");
-  gtk_widget_show (label32);
-  gtk_table_attach (GTK_TABLE (table6), label32, 1, 2, 3, 4,
+  label129 = gtk_label_new ("Month");
+  gtk_widget_set_name (label129, "label129");
+  gtk_widget_show (label129);
+  gtk_table_attach (GTK_TABLE (table15), label129, 1, 2, 3, 4,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label32), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label32), 0, 0.5);
+  gtk_label_set_justify (GTK_LABEL (label129), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label129), 0, 0.5);
 
-  label33 = gtk_label_new ("Day of the month");
-  gtk_widget_set_name (label33, "label33");
-  gtk_widget_show (label33);
-  gtk_table_attach (GTK_TABLE (table6), label33, 1, 2, 2, 3,
+  label130 = gtk_label_new ("Day of the month");
+  gtk_widget_set_name (label130, "label130");
+  gtk_widget_show (label130);
+  gtk_table_attach (GTK_TABLE (table15), label130, 1, 2, 2, 3,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label33), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label33), 0, 0.5);
+  gtk_label_set_justify (GTK_LABEL (label130), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label130), 0, 0.5);
 
-  label34 = gtk_label_new ("Server tag");
-  gtk_widget_set_name (label34, "label34");
-  gtk_widget_show (label34);
-  gtk_table_attach (GTK_TABLE (table6), label34, 1, 2, 1, 2,
+  label131 = gtk_label_new ("Server tag");
+  gtk_widget_set_name (label131, "label131");
+  gtk_widget_show (label131);
+  gtk_table_attach (GTK_TABLE (table15), label131, 1, 2, 1, 2,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label34), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label34), 0, 0.5);
+  gtk_label_set_justify (GTK_LABEL (label131), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label131), 0, 0.5);
 
-  label35 = gtk_label_new ("Log target - channel or nick name");
-  gtk_widget_set_name (label35, "label35");
-  gtk_widget_show (label35);
-  gtk_table_attach (GTK_TABLE (table6), label35, 1, 2, 0, 1,
+  label132 = gtk_label_new ("Log target - channel or nick name");
+  gtk_widget_set_name (label132, "label132");
+  gtk_widget_show (label132);
+  gtk_table_attach (GTK_TABLE (table15), label132, 1, 2, 0, 1,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label35), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label35), 0, 0.5);
+  gtk_label_set_justify (GTK_LABEL (label132), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label132), 0, 0.5);
 
-  label22 = gtk_label_new ("Automatic Logging");
-  gtk_widget_set_name (label22, "label22");
-  gtk_widget_show (label22);
-  gtk_frame_set_label_widget (GTK_FRAME (page_autolog), label22);
-  gtk_label_set_justify (GTK_LABEL (label22), GTK_JUSTIFY_LEFT);
+  label133 = gtk_label_new ("Automatic Logging");
+  gtk_widget_set_name (label133, "label133");
+  gtk_widget_show (label133);
+  gtk_frame_set_label_widget (GTK_FRAME (frame37), label133);
+  gtk_label_set_justify (GTK_LABEL (label133), GTK_JUSTIFY_LEFT);
 
-  label48 = gtk_label_new ("");
-  gtk_widget_set_name (label48, "label48");
-  gtk_widget_show (label48);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 5), label48);
-  gtk_label_set_justify (GTK_LABEL (label48), GTK_JUSTIFY_LEFT);
+  label50 = gtk_label_new ("");
+  gtk_widget_set_name (label50, "label50");
+  gtk_widget_show (label50);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 4), label50);
+  gtk_label_set_justify (GTK_LABEL (label50), GTK_JUSTIFY_LEFT);
+
+  empty_notebook_page = gtk_vbox_new (FALSE, 0);
+  gtk_widget_show (empty_notebook_page);
+  gtk_container_add (GTK_CONTAINER (prefs_notebook), empty_notebook_page);
+
+  label52 = gtk_label_new ("");
+  gtk_widget_set_name (label52, "label52");
+  gtk_widget_show (label52);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 5), label52);
+  gtk_label_set_justify (GTK_LABEL (label52), GTK_JUSTIFY_LEFT);
 
   page_advanced_logging = gtk_frame_new (NULL);
   gtk_widget_set_name (page_advanced_logging, "page_advanced_logging");
@@ -1086,11 +1092,11 @@ create_preferences (void)
   gtk_frame_set_label_widget (GTK_FRAME (page_advanced_logging), label53);
   gtk_label_set_justify (GTK_LABEL (label53), GTK_JUSTIFY_LEFT);
 
-  label50 = gtk_label_new ("");
-  gtk_widget_set_name (label50, "label50");
-  gtk_widget_show (label50);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 6), label50);
-  gtk_label_set_justify (GTK_LABEL (label50), GTK_JUSTIFY_LEFT);
+  label54 = gtk_label_new ("");
+  gtk_widget_set_name (label54, "label54");
+  gtk_widget_show (label54);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 6), label54);
+  gtk_label_set_justify (GTK_LABEL (label54), GTK_JUSTIFY_LEFT);
 
   page_ignores = gtk_frame_new (NULL);
   gtk_widget_set_name (page_ignores, "page_ignores");
@@ -1151,11 +1157,11 @@ create_preferences (void)
   gtk_frame_set_label_widget (GTK_FRAME (page_ignores), label56);
   gtk_label_set_justify (GTK_LABEL (label56), GTK_JUSTIFY_LEFT);
 
-  label52 = gtk_label_new ("");
-  gtk_widget_set_name (label52, "label52");
-  gtk_widget_show (label52);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 7), label52);
-  gtk_label_set_justify (GTK_LABEL (label52), GTK_JUSTIFY_LEFT);
+  label55 = gtk_label_new ("");
+  gtk_widget_set_name (label55, "label55");
+  gtk_widget_show (label55);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 7), label55);
+  gtk_label_set_justify (GTK_LABEL (label55), GTK_JUSTIFY_LEFT);
 
   page_highlighting = gtk_vbox_new (FALSE, 10);
   gtk_widget_set_name (page_highlighting, "page_highlighting");
@@ -1259,11 +1265,11 @@ create_preferences (void)
   gtk_frame_set_label_widget (GTK_FRAME (frame33), label81);
   gtk_label_set_justify (GTK_LABEL (label81), GTK_JUSTIFY_LEFT);
 
-  label54 = gtk_label_new ("");
-  gtk_widget_set_name (label54, "label54");
-  gtk_widget_show (label54);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 8), label54);
-  gtk_label_set_justify (GTK_LABEL (label54), GTK_JUSTIFY_LEFT);
+  label73 = gtk_label_new ("");
+  gtk_widget_set_name (label73, "label73");
+  gtk_widget_show (label73);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 8), label73);
+  gtk_label_set_justify (GTK_LABEL (label73), GTK_JUSTIFY_LEFT);
 
   page_input_settings = gtk_vbox_new (FALSE, 0);
   gtk_widget_set_name (page_input_settings, "page_input_settings");
@@ -1323,11 +1329,11 @@ create_preferences (void)
   gtk_frame_set_label_widget (GTK_FRAME (frame18), label58);
   gtk_label_set_justify (GTK_LABEL (label58), GTK_JUSTIFY_LEFT);
 
-  label55 = gtk_label_new ("");
-  gtk_widget_set_name (label55, "label55");
-  gtk_widget_show (label55);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 9), label55);
-  gtk_label_set_justify (GTK_LABEL (label55), GTK_JUSTIFY_LEFT);
+  label95 = gtk_label_new ("");
+  gtk_widget_set_name (label95, "label95");
+  gtk_widget_show (label95);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 9), label95);
+  gtk_label_set_justify (GTK_LABEL (label95), GTK_JUSTIFY_LEFT);
 
   page_windows = gtk_vbox_new (FALSE, 0);
   gtk_widget_set_name (page_windows, "page_windows");
@@ -1497,11 +1503,11 @@ create_preferences (void)
   gtk_frame_set_label_widget (GTK_FRAME (frame19), label59);
   gtk_label_set_justify (GTK_LABEL (label59), GTK_JUSTIFY_LEFT);
 
-  label73 = gtk_label_new ("");
-  gtk_widget_set_name (label73, "label73");
-  gtk_widget_show (label73);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 10), label73);
-  gtk_label_set_justify (GTK_LABEL (label73), GTK_JUSTIFY_LEFT);
+  label96 = gtk_label_new ("");
+  gtk_widget_set_name (label96, "label96");
+  gtk_widget_show (label96);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 10), label96);
+  gtk_label_set_justify (GTK_LABEL (label96), GTK_JUSTIFY_LEFT);
 
   page_queries = gtk_vbox_new (FALSE, 0);
   gtk_widget_set_name (page_queries, "page_queries");
@@ -1575,11 +1581,11 @@ create_preferences (void)
   gtk_frame_set_label_widget (GTK_FRAME (frame20), label65);
   gtk_label_set_justify (GTK_LABEL (label65), GTK_JUSTIFY_LEFT);
 
-  label95 = gtk_label_new ("");
-  gtk_widget_set_name (label95, "label95");
-  gtk_widget_show (label95);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 11), label95);
-  gtk_label_set_justify (GTK_LABEL (label95), GTK_JUSTIFY_LEFT);
+  label97 = gtk_label_new ("");
+  gtk_widget_set_name (label97, "label97");
+  gtk_widget_show (label97);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 11), label97);
+  gtk_label_set_justify (GTK_LABEL (label97), GTK_JUSTIFY_LEFT);
 
   page_completion = gtk_vbox_new (FALSE, 10);
   gtk_widget_set_name (page_completion, "page_completion");
@@ -1687,11 +1693,11 @@ create_preferences (void)
   gtk_frame_set_label_widget (GTK_FRAME (frame23), label71);
   gtk_label_set_justify (GTK_LABEL (label71), GTK_JUSTIFY_LEFT);
 
-  label96 = gtk_label_new ("");
-  gtk_widget_set_name (label96, "label96");
-  gtk_widget_show (label96);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 12), label96);
-  gtk_label_set_justify (GTK_LABEL (label96), GTK_JUSTIFY_LEFT);
+  label99 = gtk_label_new ("");
+  gtk_widget_set_name (label99, "label99");
+  gtk_widget_show (label99);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 12), label99);
+  gtk_label_set_justify (GTK_LABEL (label99), GTK_JUSTIFY_LEFT);
 
   page_aliases = gtk_frame_new (NULL);
   gtk_widget_set_name (page_aliases, "page_aliases");
@@ -1746,11 +1752,11 @@ create_preferences (void)
   gtk_frame_set_label_widget (GTK_FRAME (page_aliases), label72);
   gtk_label_set_justify (GTK_LABEL (label72), GTK_JUSTIFY_LEFT);
 
-  label97 = gtk_label_new ("");
-  gtk_widget_set_name (label97, "label97");
-  gtk_widget_show (label97);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 13), label97);
-  gtk_label_set_justify (GTK_LABEL (label97), GTK_JUSTIFY_LEFT);
+  label101 = gtk_label_new ("");
+  gtk_widget_set_name (label101, "label101");
+  gtk_widget_show (label101);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 13), label101);
+  gtk_label_set_justify (GTK_LABEL (label101), GTK_JUSTIFY_LEFT);
 
   page_keyboard = gtk_frame_new (NULL);
   gtk_widget_set_name (page_keyboard, "page_keyboard");
@@ -1811,11 +1817,11 @@ create_preferences (void)
   gtk_frame_set_label_widget (GTK_FRAME (page_keyboard), label74);
   gtk_label_set_justify (GTK_LABEL (label74), GTK_JUSTIFY_LEFT);
 
-  label99 = gtk_label_new ("");
-  gtk_widget_set_name (label99, "label99");
-  gtk_widget_show (label99);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 14), label99);
-  gtk_label_set_justify (GTK_LABEL (label99), GTK_JUSTIFY_LEFT);
+  label102 = gtk_label_new ("");
+  gtk_widget_set_name (label102, "label102");
+  gtk_widget_show (label102);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 14), label102);
+  gtk_label_set_justify (GTK_LABEL (label102), GTK_JUSTIFY_LEFT);
 
   page_window_output = gtk_vbox_new (FALSE, 10);
   gtk_widget_set_name (page_window_output, "page_window_output");
@@ -1914,11 +1920,11 @@ create_preferences (void)
   gtk_frame_set_label_widget (GTK_FRAME (frame30), label77);
   gtk_label_set_justify (GTK_LABEL (label77), GTK_JUSTIFY_LEFT);
 
-  label101 = gtk_label_new ("");
-  gtk_widget_set_name (label101, "label101");
-  gtk_widget_show (label101);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 15), label101);
-  gtk_label_set_justify (GTK_LABEL (label101), GTK_JUSTIFY_LEFT);
+  label103 = gtk_label_new ("");
+  gtk_widget_set_name (label103, "label103");
+  gtk_widget_show (label103);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 15), label103);
+  gtk_label_set_justify (GTK_LABEL (label103), GTK_JUSTIFY_LEFT);
 
   page_irc_dcc = gtk_vbox_new (FALSE, 0);
   gtk_widget_set_name (page_irc_dcc, "page_irc_dcc");
@@ -2111,11 +2117,11 @@ create_preferences (void)
   gtk_frame_set_label_widget (GTK_FRAME (frame34), label83);
   gtk_label_set_justify (GTK_LABEL (label83), GTK_JUSTIFY_LEFT);
 
-  label102 = gtk_label_new ("");
-  gtk_widget_set_name (label102, "label102");
-  gtk_widget_show (label102);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 16), label102);
-  gtk_label_set_justify (GTK_LABEL (label102), GTK_JUSTIFY_LEFT);
+  label134 = gtk_label_new ("");
+  gtk_widget_set_name (label134, "label134");
+  gtk_widget_show (label134);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 16), label134);
+  gtk_label_set_justify (GTK_LABEL (label134), GTK_JUSTIFY_LEFT);
 
   page_irc_defaults = gtk_vbox_new (FALSE, 0);
   gtk_widget_set_name (page_irc_defaults, "page_irc_defaults");
@@ -2189,11 +2195,11 @@ create_preferences (void)
   gtk_frame_set_label_widget (GTK_FRAME (frame35), label91);
   gtk_label_set_justify (GTK_LABEL (label91), GTK_JUSTIFY_LEFT);
 
-  label103 = gtk_label_new ("");
-  gtk_widget_set_name (label103, "label103");
-  gtk_widget_show (label103);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 17), label103);
-  gtk_label_set_justify (GTK_LABEL (label103), GTK_JUSTIFY_LEFT);
+  label135 = gtk_label_new ("");
+  gtk_widget_set_name (label135, "label135");
+  gtk_widget_show (label135);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 17), label135);
+  gtk_label_set_justify (GTK_LABEL (label135), GTK_JUSTIFY_LEFT);
 
   dialog_action_area1 = GTK_DIALOG (preferences)->action_area;
   gtk_widget_set_name (dialog_action_area1, "dialog_action_area1");
@@ -2225,7 +2231,6 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, frame36, "frame36");
   GLADE_HOOKUP_OBJECT (preferences, image1, "image1");
   GLADE_HOOKUP_OBJECT (preferences, label37, "label37");
-  GLADE_HOOKUP_OBJECT (preferences, label39, "label39");
   GLADE_HOOKUP_OBJECT (preferences, page_servers, "page_servers");
   GLADE_HOOKUP_OBJECT (preferences, hbox2, "hbox2");
   GLADE_HOOKUP_OBJECT (preferences, frame8, "frame8");
@@ -2288,29 +2293,31 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, label8, "label8");
   GLADE_HOOKUP_OBJECT (preferences, label44, "label44");
   GLADE_HOOKUP_OBJECT (preferences, page_autolog, "page_autolog");
-  GLADE_HOOKUP_OBJECT (preferences, table5, "table5");
-  GLADE_HOOKUP_OBJECT (preferences, autolog, "autolog");
-  GLADE_HOOKUP_OBJECT (preferences, autolog_level, "autolog_level");
-  GLADE_HOOKUP_OBJECT (preferences, label23, "label23");
-  GLADE_HOOKUP_OBJECT (preferences, label24, "label24");
-  GLADE_HOOKUP_OBJECT (preferences, level4, "level4");
-  GLADE_HOOKUP_OBJECT (preferences, autolog_path, "autolog_path");
-  GLADE_HOOKUP_OBJECT (preferences, hseparator1, "hseparator1");
-  GLADE_HOOKUP_OBJECT (preferences, label25, "label25");
-  GLADE_HOOKUP_OBJECT (preferences, label36, "label36");
-  GLADE_HOOKUP_OBJECT (preferences, table6, "table6");
-  GLADE_HOOKUP_OBJECT (preferences, label26, "label26");
-  GLADE_HOOKUP_OBJECT (preferences, label27, "label27");
-  GLADE_HOOKUP_OBJECT (preferences, label28, "label28");
-  GLADE_HOOKUP_OBJECT (preferences, label29, "label29");
-  GLADE_HOOKUP_OBJECT (preferences, label30, "label30");
-  GLADE_HOOKUP_OBJECT (preferences, label31, "label31");
-  GLADE_HOOKUP_OBJECT (preferences, label32, "label32");
-  GLADE_HOOKUP_OBJECT (preferences, label33, "label33");
-  GLADE_HOOKUP_OBJECT (preferences, label34, "label34");
-  GLADE_HOOKUP_OBJECT (preferences, label35, "label35");
-  GLADE_HOOKUP_OBJECT (preferences, label22, "label22");
-  GLADE_HOOKUP_OBJECT (preferences, label48, "label48");
+  GLADE_HOOKUP_OBJECT (preferences, frame37, "frame37");
+  GLADE_HOOKUP_OBJECT (preferences, table14, "table14");
+  GLADE_HOOKUP_OBJECT (preferences, checkbutton1, "checkbutton1");
+  GLADE_HOOKUP_OBJECT (preferences, entry1, "entry1");
+  GLADE_HOOKUP_OBJECT (preferences, label119, "label119");
+  GLADE_HOOKUP_OBJECT (preferences, label120, "label120");
+  GLADE_HOOKUP_OBJECT (preferences, button42, "button42");
+  GLADE_HOOKUP_OBJECT (preferences, entry2, "entry2");
+  GLADE_HOOKUP_OBJECT (preferences, hseparator12, "hseparator12");
+  GLADE_HOOKUP_OBJECT (preferences, label121, "label121");
+  GLADE_HOOKUP_OBJECT (preferences, label122, "label122");
+  GLADE_HOOKUP_OBJECT (preferences, table15, "table15");
+  GLADE_HOOKUP_OBJECT (preferences, label123, "label123");
+  GLADE_HOOKUP_OBJECT (preferences, label124, "label124");
+  GLADE_HOOKUP_OBJECT (preferences, label125, "label125");
+  GLADE_HOOKUP_OBJECT (preferences, label126, "label126");
+  GLADE_HOOKUP_OBJECT (preferences, label127, "label127");
+  GLADE_HOOKUP_OBJECT (preferences, label128, "label128");
+  GLADE_HOOKUP_OBJECT (preferences, label129, "label129");
+  GLADE_HOOKUP_OBJECT (preferences, label130, "label130");
+  GLADE_HOOKUP_OBJECT (preferences, label131, "label131");
+  GLADE_HOOKUP_OBJECT (preferences, label132, "label132");
+  GLADE_HOOKUP_OBJECT (preferences, label133, "label133");
+  GLADE_HOOKUP_OBJECT (preferences, label50, "label50");
+  GLADE_HOOKUP_OBJECT (preferences, label52, "label52");
   GLADE_HOOKUP_OBJECT (preferences, page_advanced_logging, "page_advanced_logging");
   GLADE_HOOKUP_OBJECT (preferences, hbox8, "hbox8");
   GLADE_HOOKUP_OBJECT (preferences, frame13, "frame13");
@@ -2327,7 +2334,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, button20, "button20");
   GLADE_HOOKUP_OBJECT (preferences, button21, "button21");
   GLADE_HOOKUP_OBJECT (preferences, label53, "label53");
-  GLADE_HOOKUP_OBJECT (preferences, label50, "label50");
+  GLADE_HOOKUP_OBJECT (preferences, label54, "label54");
   GLADE_HOOKUP_OBJECT (preferences, page_ignores, "page_ignores");
   GLADE_HOOKUP_OBJECT (preferences, hbox9, "hbox9");
   GLADE_HOOKUP_OBJECT (preferences, frame15, "frame15");
@@ -2338,7 +2345,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, button23, "button23");
   GLADE_HOOKUP_OBJECT (preferences, button24, "button24");
   GLADE_HOOKUP_OBJECT (preferences, label56, "label56");
-  GLADE_HOOKUP_OBJECT (preferences, label52, "label52");
+  GLADE_HOOKUP_OBJECT (preferences, label55, "label55");
   GLADE_HOOKUP_OBJECT (preferences, page_highlighting, "page_highlighting");
   GLADE_HOOKUP_OBJECT (preferences, frame31, "frame31");
   GLADE_HOOKUP_OBJECT (preferences, hbox18, "hbox18");
@@ -2357,7 +2364,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, label82, "label82");
   GLADE_HOOKUP_OBJECT (preferences, hilight_color, "hilight_color");
   GLADE_HOOKUP_OBJECT (preferences, label81, "label81");
-  GLADE_HOOKUP_OBJECT (preferences, label54, "label54");
+  GLADE_HOOKUP_OBJECT (preferences, label73, "label73");
   GLADE_HOOKUP_OBJECT (preferences, page_input_settings, "page_input_settings");
   GLADE_HOOKUP_OBJECT (preferences, frame18, "frame18");
   GLADE_HOOKUP_OBJECT (preferences, vbox7, "vbox7");
@@ -2368,7 +2375,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, hide_colors, "hide_colors");
   GLADE_HOOKUP_OBJECT (preferences, hide_text_style, "hide_text_style");
   GLADE_HOOKUP_OBJECT (preferences, label58, "label58");
-  GLADE_HOOKUP_OBJECT (preferences, label55, "label55");
+  GLADE_HOOKUP_OBJECT (preferences, label95, "label95");
   GLADE_HOOKUP_OBJECT (preferences, page_windows, "page_windows");
   GLADE_HOOKUP_OBJECT (preferences, frame19, "frame19");
   GLADE_HOOKUP_OBJECT (preferences, table7, "table7");
@@ -2392,7 +2399,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, hseparator4, "hseparator4");
   GLADE_HOOKUP_OBJECT (preferences, activity_hide_targets, "activity_hide_targets");
   GLADE_HOOKUP_OBJECT (preferences, label59, "label59");
-  GLADE_HOOKUP_OBJECT (preferences, label73, "label73");
+  GLADE_HOOKUP_OBJECT (preferences, label96, "label96");
   GLADE_HOOKUP_OBJECT (preferences, page_queries, "page_queries");
   GLADE_HOOKUP_OBJECT (preferences, frame20, "frame20");
   GLADE_HOOKUP_OBJECT (preferences, vbox10, "vbox10");
@@ -2406,7 +2413,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, autoclose_query, "autoclose_query");
   GLADE_HOOKUP_OBJECT (preferences, label68, "label68");
   GLADE_HOOKUP_OBJECT (preferences, label65, "label65");
-  GLADE_HOOKUP_OBJECT (preferences, label95, "label95");
+  GLADE_HOOKUP_OBJECT (preferences, label97, "label97");
   GLADE_HOOKUP_OBJECT (preferences, page_completion, "page_completion");
   GLADE_HOOKUP_OBJECT (preferences, frame21, "frame21");
   GLADE_HOOKUP_OBJECT (preferences, vbox12, "vbox12");
@@ -2426,7 +2433,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, button31, "button31");
   GLADE_HOOKUP_OBJECT (preferences, button32, "button32");
   GLADE_HOOKUP_OBJECT (preferences, label71, "label71");
-  GLADE_HOOKUP_OBJECT (preferences, label96, "label96");
+  GLADE_HOOKUP_OBJECT (preferences, label99, "label99");
   GLADE_HOOKUP_OBJECT (preferences, page_aliases, "page_aliases");
   GLADE_HOOKUP_OBJECT (preferences, hbox16, "hbox16");
   GLADE_HOOKUP_OBJECT (preferences, frame26, "frame26");
@@ -2436,7 +2443,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, button33, "button33");
   GLADE_HOOKUP_OBJECT (preferences, button34, "button34");
   GLADE_HOOKUP_OBJECT (preferences, label72, "label72");
-  GLADE_HOOKUP_OBJECT (preferences, label97, "label97");
+  GLADE_HOOKUP_OBJECT (preferences, label101, "label101");
   GLADE_HOOKUP_OBJECT (preferences, page_keyboard, "page_keyboard");
   GLADE_HOOKUP_OBJECT (preferences, hbox17, "hbox17");
   GLADE_HOOKUP_OBJECT (preferences, frame28, "frame28");
@@ -2447,7 +2454,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, button36, "button36");
   GLADE_HOOKUP_OBJECT (preferences, button37, "button37");
   GLADE_HOOKUP_OBJECT (preferences, label74, "label74");
-  GLADE_HOOKUP_OBJECT (preferences, label99, "label99");
+  GLADE_HOOKUP_OBJECT (preferences, label102, "label102");
   GLADE_HOOKUP_OBJECT (preferences, page_window_output, "page_window_output");
   GLADE_HOOKUP_OBJECT (preferences, frame29, "frame29");
   GLADE_HOOKUP_OBJECT (preferences, table8, "table8");
@@ -2463,7 +2470,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, show_nickmode, "show_nickmode");
   GLADE_HOOKUP_OBJECT (preferences, Show_nick_s_channel_status_before_nickname_in_public_msgs, "Show_nick_s_channel_status_before_nickname_in_public_msgs");
   GLADE_HOOKUP_OBJECT (preferences, label77, "label77");
-  GLADE_HOOKUP_OBJECT (preferences, label101, "label101");
+  GLADE_HOOKUP_OBJECT (preferences, label103, "label103");
   GLADE_HOOKUP_OBJECT (preferences, page_irc_dcc, "page_irc_dcc");
   GLADE_HOOKUP_OBJECT (preferences, frame34, "frame34");
   GLADE_HOOKUP_OBJECT (preferences, table9, "table9");
@@ -2489,7 +2496,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, browsedir1, "browsedir1");
   GLADE_HOOKUP_OBJECT (preferences, browsedir2, "browsedir2");
   GLADE_HOOKUP_OBJECT (preferences, label83, "label83");
-  GLADE_HOOKUP_OBJECT (preferences, label102, "label102");
+  GLADE_HOOKUP_OBJECT (preferences, label134, "label134");
   GLADE_HOOKUP_OBJECT (preferences, page_irc_defaults, "page_irc_defaults");
   GLADE_HOOKUP_OBJECT (preferences, frame35, "frame35");
   GLADE_HOOKUP_OBJECT (preferences, table10, "table10");
@@ -2500,7 +2507,7 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, part_message, "part_message");
   GLADE_HOOKUP_OBJECT (preferences, quit_message, "quit_message");
   GLADE_HOOKUP_OBJECT (preferences, label91, "label91");
-  GLADE_HOOKUP_OBJECT (preferences, label103, "label103");
+  GLADE_HOOKUP_OBJECT (preferences, label135, "label135");
   GLADE_HOOKUP_OBJECT_NO_REF (preferences, dialog_action_area1, "dialog_action_area1");
   GLADE_HOOKUP_OBJECT (preferences, cancelbutton1, "cancelbutton1");
   GLADE_HOOKUP_OBJECT (preferences, okbutton1, "okbutton1");
