@@ -475,28 +475,35 @@ enum {
 static void key_scroll(Entry *entry, int pos)
 {
 	WindowGui *gui;
-	GtkTextView *view;
+	WindowView *view;
 	GtkTextIter iter;
+	GtkAdjustment *adj;
+	gdouble value;
 
 	gui = WINDOW_GUI(entry->active_win);
-	view = gui->active_view->view;
+	view = gui->active_view;
 
 	switch (pos) {
 	case KEY_SCROLL_START:
 		gtk_text_buffer_get_iter_at_offset(gui->buffer, &iter, 0);
+		gtk_text_view_scroll_to_iter(view->view, &iter, 0, 0, 0, 0);
 		break;
 	case KEY_SCROLL_END:
 		gtk_text_buffer_get_iter_at_mark(gui->buffer, &iter,
 			gtk_text_buffer_get_insert(gui->buffer));
+		gtk_text_view_scroll_to_iter(view->view, &iter, 0, 0, 0, 0);
 		break;
 	case KEY_SCROLL_BACKWARD:
-		/* FIXME */
-		break;
 	case KEY_SCROLL_FORWARD:
-		/* FIXME */
+		adj = view->adj;
+		if (pos == KEY_SCROLL_BACKWARD)
+			value = adj->value - adj->page_increment / 2;
+		else
+			value = adj->value + adj->page_increment / 2;
+		value = CLAMP(value, adj->lower, adj->upper - adj->page_size);
+		gtk_adjustment_set_value(adj, value);
 		break;
 	}
-        gtk_text_view_scroll_to_iter(view, &iter, 0, 0, 0, 0);
 }
 
 static void key_scroll_start(const char *data, Entry *entry)
@@ -600,9 +607,9 @@ void gui_keyboards_init(void)
 
 	key_bind("scroll_start", "Beginning of the window", "", NULL, (SIGNAL_FUNC) key_scroll_start);
 	key_bind("scroll_end", "End of the window", "", NULL, (SIGNAL_FUNC) key_scroll_end);
-	key_bind("scroll_backward", "Previous page", "prior", NULL, (SIGNAL_FUNC) key_scroll_backward);
+	key_bind("scroll_backward", "Previous page", "page_up", NULL, (SIGNAL_FUNC) key_scroll_backward);
 	key_bind("scroll_backward", NULL, "meta-p", NULL, (SIGNAL_FUNC) key_scroll_backward);
-	key_bind("scroll_forward", "Next page", "next", NULL, (SIGNAL_FUNC) key_scroll_forward);
+	key_bind("scroll_forward", "Next page", "page_down", NULL, (SIGNAL_FUNC) key_scroll_forward);
 	key_bind("scroll_forward", NULL, "meta-n", NULL, (SIGNAL_FUNC) key_scroll_forward);
 
 	/* .. */
