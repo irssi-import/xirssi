@@ -1,3 +1,8 @@
+2002-05-16 04:20  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-itemlist.c, gui-window-view.c: name -> visible_name
+	fixes
+
 2002-05-16 01:21  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-keyboard.c: ^ key wasn't working with /BINDs
