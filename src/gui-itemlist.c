@@ -101,8 +101,10 @@ Itemlist *gui_itemlist_new(Frame *frame)
 
 static char *witem_get_name(WindowItem *witem, int long_view)
 {
-	return witem->server == NULL || !long_view ? g_strdup(witem->name) :
-		g_strdup_printf("%s (%s)", witem->name, witem->server->tag);
+	return witem->server == NULL || !long_view ?
+		g_strdup(witem->visible_name) :
+		g_strdup_printf("%s (%s)", witem->visible_name,
+				witem->server->tag);
 }
 
 static char *server_get_name(Server *server, int long_view)

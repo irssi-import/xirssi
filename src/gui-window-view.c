@@ -189,7 +189,7 @@ static char *window_get_label(Window *window)
 
 		if (str->len > 0)
 			g_string_append_c(str, ' ');
-		g_string_append(str, item->name);
+		g_string_append(str, item->visible_name);
 	}
 	ret = str->str;
 	g_string_free(str, FALSE);
@@ -226,7 +226,7 @@ void gui_window_view_set_title(WindowView *view)
 		title = witem_gui != NULL && witem_gui->get_title != NULL ?
 			witem_gui->get_title(window->active) : NULL;
 		if (title == NULL)
-			title = gtk_label_new(window->active->name);
+			title = gtk_label_new(window->active->visible_name);
 	}
 
 	if (view->title != NULL)
