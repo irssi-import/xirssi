@@ -1,3 +1,8 @@
+2002-04-27 18:14  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-nicklist-view.c: doubleclicking nick did /query, but with
+	invalid nick name
+
 2002-04-27 17:49  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-channel.c, gui-context-nick.c, gui-frame.c: window size
