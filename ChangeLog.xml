@@ -9,10 +9,10 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>configure.in</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
-<msg>fix
-</msg>
+<msg>fix</msg>
 </entry>
 
 <entry>
@@ -22,14 +22,15 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>.cvsignore</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>COPYING</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
-<msg>Added exception to linking against OpenSSL
-</msg>
+<msg>Added exception to linking against OpenSSL</msg>
 </entry>
 
 <entry>
@@ -39,10 +40,10 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.23</revision>
 </file>
-<msg>Added @PROG_LIBS@ to linker flags
-</msg>
+<msg>Added @PROG_LIBS@ to linker flags</msg>
 </entry>
 
 <entry>
@@ -52,10 +53,10 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/dcc.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
-<msg>added
-</msg>
+<msg>added</msg>
 </entry>
 
 <entry>
@@ -65,10 +66,10 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.18</revision>
 </file>
-<msg>focus fixes
-</msg>
+<msg>focus fixes</msg>
 </entry>
 
 <entry>
@@ -78,10 +79,10 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>configure.in</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
-<msg>--with-irssi-lib was buggy.
-</msg>
+<msg>--with-irssi-lib was buggy.</msg>
 </entry>
 
 <entry>
@@ -91,11 +92,11 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>configure.in</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <msg>Added --with-irssi-lib option to specify where irssi-config is located.
---with-irssi directory is used for include files.
-</msg>
+--with-irssi directory is used for include files.</msg>
 </entry>
 
 <entry>
@@ -105,10 +106,10 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>autogen.sh</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
-<msg>call libtoolize
-</msg>
+<msg>call libtoolize</msg>
 </entry>
 
 <entry>
@@ -118,10 +119,10 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.12</revision>
 </file>
-<msg>updated
-</msg>
+<msg>updated</msg>
 </entry>
 
 <entry>
@@ -131,10 +132,10 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>AUTHORS</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
-<msg>updated
-</msg>
+<msg>updated</msg>
 </entry>
 
 <entry>
@@ -144,14 +145,15 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.12</revision>
 </file>
 <file>
 <name>src/glade/interface.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.12</revision>
 </file>
-<msg>fix
-</msg>
+<msg>fix</msg>
 </entry>
 
 <entry>
@@ -161,18 +163,20 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/channels.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/filtering-settings.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup-prefs.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.12</revision>
 </file>
-<msg>updated pixmaps
-</msg>
+<msg>updated pixmaps</msg>
 </entry>
 
 <entry>
@@ -182,23 +186,26 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/highlighting.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/ignores.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/keyboard.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>pixmaps/themes.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <commondir>pixmaps/</commondir>
-<msg>updated
-</msg>
+<msg>updated</msg>
 </entry>
 
 <entry>
@@ -208,18 +215,20 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.11</revision>
 </file>
 <file>
 <name>src/setup-prefs.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.11</revision>
 </file>
 <file>
 <name>src/glade/interface.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.11</revision>
 </file>
-<msg>Setup -&gt; Appearance: "window output" -&gt; "settings".
-</msg>
+<msg>Setup -&gt; Appearance: "window output" -&gt; "settings".</msg>
 </entry>
 
 <entry>
@@ -229,15 +238,16 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-context-url.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-menu-url.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <commondir>src/</commondir>
-<msg>Support for https URLs.
-</msg>
+<msg>Support for https URLs.</msg>
 </entry>
 
 <entry>
@@ -247,15 +257,16 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/autolog.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/fontscolors.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <commondir>pixmaps/</commondir>
-<msg>new icons
-</msg>
+<msg>new icons</msg>
 </entry>
 
 <entry>
@@ -265,11 +276,11 @@
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-keyboard.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.13</revision>
 </file>
 <msg>use only mod2+mod4 (alt + hyper), so num/scroll lock state doesn't affect
-keyboard bindings.
-</msg>
+keyboard bindings.</msg>
 </entry>
 
 <entry>
@@ -279,24 +290,27 @@ keyboard bindings.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-entry.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.25</revision>
 </file>
 <file>
 <name>src/gui-keyboard.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.12</revision>
 </file>
 <file>
 <name>src/gui-keyboard.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <commondir>src/</commondir>
 <msg>More fixes with handling dead key presses. Automatic completions should work
-with space key again.
-</msg>
+with space key again.</msg>
 </entry>
 
 <entry>
@@ -306,10 +320,10 @@ with space key again.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.17</revision>
 </file>
-<msg>focus change fixes.
-</msg>
+<msg>focus change fixes.</msg>
 </entry>
 
 <entry>
@@ -319,18 +333,20 @@ with space key again.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.10</revision>
 </file>
 <file>
 <name>src/setup-prefs.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.10</revision>
 </file>
 <file>
 <name>src/glade/interface.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.10</revision>
 </file>
-<msg>setup changes.
-</msg>
+<msg>setup changes.</msg>
 </entry>
 
 <entry>
@@ -340,10 +356,10 @@ with space key again.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-keyboard.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.11</revision>
 </file>
-<msg>Added default meta-d = delete_next_word
-</msg>
+<msg>Added default meta-d = delete_next_word</msg>
 </entry>
 
 <entry>
@@ -353,63 +369,76 @@ with space key again.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
 <file>
 <name>src/gui-channel.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.16</revision>
 </file>
 <file>
 <name>src/gui-tab.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
 <file>
 <name>src/gui-window-item-rec.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-window-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.12</revision>
 </file>
 <file>
 <name>src/setup-channels.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/setup-prefs.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
 <file>
 <name>src/setup-servers-network.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/setup-servers-server.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/setup-servers.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.10</revision>
 </file>
 <file>
 <name>src/setup.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/setup.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/glade/interface.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
 <msg>setup dialog changes, and active window title is now colored. There's the
-setup dialog for changing the color, but it doesn't actually work yet..
-</msg>
+setup dialog for changing the color, but it doesn't actually work yet..</msg>
 </entry>
 
 <entry>
@@ -419,19 +448,21 @@ setup dialog for changing the color, but it doesn't actually work yet..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-menu-channel-topic.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-menu-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
 <file>
 <name>src/gui-menu-url.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <commondir>src/</commondir>
-<msg>destroy popup menus after they're closed.
-</msg>
+<msg>destroy popup menus after they're closed.</msg>
 </entry>
 
 <entry>
@@ -441,25 +472,28 @@ setup dialog for changing the color, but it doesn't actually work yet..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-context-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
 <file>
 <name>src/gui-menu-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/gui-menu.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/gui-nicklist-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.11</revision>
 </file>
 <commondir>src/</commondir>
 <msg>nicklist popup menu is now triggered on mouse press. the nicks are looked
 when the menuitem is executed, so if any of the originally selected nicks
-part the channel it won't be affected.
-</msg>
+part the channel it won't be affected.</msg>
 </entry>
 
 <entry>
@@ -469,14 +503,15 @@ part the channel it won't be affected.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>AUTHORS</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>TODO</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.11</revision>
 </file>
-<msg>updates
-</msg>
+<msg>updates</msg>
 </entry>
 
 <entry>
@@ -486,11 +521,11 @@ part the channel it won't be affected.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.24</revision>
 </file>
 <msg>notebooks are now scrollable so they won't limit the minimum width of
-window.
-</msg>
+window.</msg>
 </entry>
 
 <entry>
@@ -500,66 +535,80 @@ window.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.22</revision>
 </file>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.23</revision>
 </file>
 <file>
 <name>src/gui-keyboard.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.10</revision>
 </file>
 <file>
 <name>src/gui-keyboard.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/module.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
 <file>
 <name>src/setup-channels-edit.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/setup-channels.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/setup-highlighting-edit.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/setup-ignores-edit.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/setup-keyboard-edit.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup-keyboard.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup-prefs.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
 <file>
 <name>src/glade/interface.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
 <file>
 <name>src/glade/interface.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
-<msg>keyboard settings and cleanups.
-</msg>
+<msg>keyboard settings and cleanups.</msg>
 </entry>
 
 <entry>
@@ -569,70 +618,85 @@ window.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.21</revision>
 </file>
 <file>
 <name>src/gui.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/gui.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/module.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
 <file>
 <name>src/setup-channels-list.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup-channels.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/setup-highlighting-edit.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup-highlighting.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup-ignores-edit.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/setup-ignores.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/setup-prefs.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/setup.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/setup.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/glade/interface.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/glade/interface.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
-<msg>Highlighting works + other cleanups and fixes.
-</msg>
+<msg>Highlighting works + other cleanups and fixes.</msg>
 </entry>
 
 <entry>
@@ -642,10 +706,10 @@ window.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/setup-ignores.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
-<msg>was missing
-</msg>
+<msg>was missing</msg>
 </entry>
 
 <entry>
@@ -655,10 +719,10 @@ window.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/setup-ignores-edit.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>adding new ignores crashed..
-</msg>
+<msg>adding new ignores crashed..</msg>
 </entry>
 
 <entry>
@@ -668,62 +732,75 @@ window.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.20</revision>
 </file>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.22</revision>
 </file>
 <file>
 <name>src/gui.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/module.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/setup-channels.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/setup-completion.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/setup-ignores-edit.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup-prefs.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/setup-servers.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
 <file>
 <name>src/setup.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/glade/interface.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/glade/interface.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
-<msg>Ignores work now + many other smaller misc. fixes.
-</msg>
+<msg>Ignores work now + many other smaller misc. fixes.</msg>
 </entry>
 
 <entry>
@@ -733,10 +810,10 @@ window.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-itemlist.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
-<msg>"window item name changed" wasn't handled properly.
-</msg>
+<msg>"window item name changed" wasn't handled properly.</msg>
 </entry>
 
 <entry>
@@ -746,10 +823,10 @@ window.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/setup-prefs.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
-<msg>fixed sidebar behaviour.
-</msg>
+<msg>fixed sidebar behaviour.</msg>
 </entry>
 
 <entry>
@@ -759,10 +836,10 @@ window.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/themes.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>updated
-</msg>
+<msg>updated</msg>
 </entry>
 
 <entry>
@@ -772,20 +849,22 @@ window.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.21</revision>
 </file>
 <file>
 <name>src/gui-frame.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
 <file>
 <name>src/gui-menu-main.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <commondir>src/</commondir>
 <msg>implemented showing/hiding menubar/statusbar/nicklist - now if only the
-menubar shows their actual value correctly..
-</msg>
+menubar shows their actual value correctly..</msg>
 </entry>
 
 <entry>
@@ -795,114 +874,140 @@ menubar shows their actual value correctly..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.10</revision>
 </file>
 <file>
 <name>glade/irssi.glade</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>pixmaps/advanced-logging.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/irc.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/keyboard.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/queries.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/servers.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/settings.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/themes.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.19</revision>
 </file>
 <file>
 <name>src/gui-keyboard.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
 <file>
 <name>src/gui-menu-main.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-menu.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-menu.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/irssi.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.12</revision>
 </file>
 <file>
 <name>src/module.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/setup-aliases.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/setup-channels-edit.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup-channels.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup-completion.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup-prefs.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/setup-servers-network.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/setup-servers-server.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/setup-servers.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
 <file>
 <name>src/setup.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/glade/interface.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/glade/interface.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>added completions, channels, setup icons and changed some stuff.
-</msg>
+<msg>added completions, channels, setup icons and changed some stuff.</msg>
 </entry>
 
 <entry>
@@ -912,19 +1017,21 @@ menubar shows their actual value correctly..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-colors.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-colors.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.15</revision>
 </file>
 <commondir>src/</commondir>
-<msg>updated color handling
-</msg>
+<msg>updated color handling</msg>
 </entry>
 
 <entry>
@@ -934,15 +1041,16 @@ menubar shows their actual value correctly..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-itemlist.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-window-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.11</revision>
 </file>
 <commondir>src/</commondir>
-<msg>name -&gt; visible_name fixes
-</msg>
+<msg>name -&gt; visible_name fixes</msg>
 </entry>
 
 <entry>
@@ -952,10 +1060,10 @@ menubar shows their actual value correctly..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-keyboard.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
-<msg>^ key wasn't working with /BINDs
-</msg>
+<msg>^ key wasn't working with /BINDs</msg>
 </entry>
 
 <entry>
@@ -965,30 +1073,35 @@ menubar shows their actual value correctly..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/setup-aliases.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/setup-servers.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/glade/interface.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
-<msg>alias list is now fully working.
-</msg>
+<msg>alias list is now fully working.</msg>
 </entry>
 
 <entry>
@@ -998,31 +1111,36 @@ menubar shows their actual value correctly..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.18</revision>
 </file>
 <file>
 <name>src/gui.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/setup-aliases.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup-prefs.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/setup-servers.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <commondir>src/</commondir>
-<msg>half-working alias editing
-</msg>
+<msg>half-working alias editing</msg>
 </entry>
 
 <entry>
@@ -1032,10 +1150,10 @@ menubar shows their actual value correctly..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/setup-servers.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
-<msg>added autoconnect-column
-</msg>
+<msg>added autoconnect-column</msg>
 </entry>
 
 <entry>
@@ -1045,10 +1163,10 @@ menubar shows their actual value correctly..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/setup-prefs.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>updated
-</msg>
+<msg>updated</msg>
 </entry>
 
 <entry>
@@ -1058,10 +1176,10 @@ menubar shows their actual value correctly..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>autogen.sh</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
-<msg>#!/bin/sh was missing.
-</msg>
+<msg>#!/bin/sh was missing.</msg>
 </entry>
 
 <entry>
@@ -1071,14 +1189,15 @@ menubar shows their actual value correctly..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/glade/interface.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
-<msg>updates
-</msg>
+<msg>updates</msg>
 </entry>
 
 <entry>
@@ -1088,14 +1207,15 @@ menubar shows their actual value correctly..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/glade/interface.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>updates
-</msg>
+<msg>updates</msg>
 </entry>
 
 <entry>
@@ -1105,107 +1225,131 @@ menubar shows their actual value correctly..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
 <file>
 <name>configure.in</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>glade/.cvsignore</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>glade/irssi.glade</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.12</revision>
 </file>
 <file>
 <name>pixmaps/irssilogo.jpg</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.17</revision>
 </file>
 <file>
 <name>src/gui-menu-main.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/irssi.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.11</revision>
 </file>
 <file>
 <name>src/setup-prefs.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup-servers-network.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/setup-servers-server.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/setup-servers.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/setup-servers.h</name>
+<cvsstate>dead</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/setup.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/setup.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/glade/.cvsignore</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/glade/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/glade/callbacks.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/glade/interface.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/glade/interface.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/glade/support.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/glade/support.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <msg>Added setup dialog, generated with glade. It's hardly working, but you
-should see what it's supposed to look like now.
-</msg>
+should see what it's supposed to look like now.</msg>
 </entry>
 
 <entry>
@@ -1215,10 +1359,10 @@ should see what it's supposed to look like now.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
-<msg>updated
-</msg>
+<msg>updated</msg>
 </entry>
 
 <entry>
@@ -1228,10 +1372,10 @@ should see what it's supposed to look like now.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/setup-servers.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
-<msg>show networks with bold
-</msg>
+<msg>show networks with bold</msg>
 </entry>
 
 <entry>
@@ -1241,10 +1385,10 @@ should see what it's supposed to look like now.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.14</revision>
 </file>
-<msg>when destroying last tab in frame, destroy the tab too.
-</msg>
+<msg>when destroying last tab in frame, destroy the tab too.</msg>
 </entry>
 
 <entry>
@@ -1254,51 +1398,61 @@ should see what it's supposed to look like now.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.16</revision>
 </file>
 <file>
 <name>src/gui.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/irssi.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.10</revision>
 </file>
 <file>
 <name>src/module.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/setup-servers-network.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup-servers-server.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup-servers.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/setup-servers.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/setup.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/setup.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <commondir>src/</commondir>
-<msg>added server dialog, and gui.[ch] for some helper functions.
-</msg>
+<msg>added server dialog, and gui.[ch] for some helper functions.</msg>
 </entry>
 
 <entry>
@@ -1308,15 +1462,16 @@ should see what it's supposed to look like now.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-nicklist-cell-renderer.h</name>
+<cvsstate>dead</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-nicklist-cell-renderer.c</name>
+<cvsstate>dead</cvsstate>
 <revision>1.4</revision>
 </file>
 <commondir>src/</commondir>
-<msg>not needed, removed.
-</msg>
+<msg>not needed, removed.</msg>
 </entry>
 
 <entry>
@@ -1326,31 +1481,36 @@ should see what it's supposed to look like now.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.15</revision>
 </file>
 <file>
 <name>src/gui-nicklist-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.10</revision>
 </file>
 <file>
 <name>src/gui-nicklist-view.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-nicklist.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/gui-nicklist.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/irssi.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
 <commondir>src/</commondir>
-<msg>yet another rewrite of nicklist rendering.
-</msg>
+<msg>yet another rewrite of nicklist rendering.</msg>
 </entry>
 
 <entry>
@@ -1360,19 +1520,21 @@ should see what it's supposed to look like now.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-nicklist-cell-renderer.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-nicklist-cell-renderer.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-nicklist-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
 <commondir>src/</commondir>
-<msg>somewhat simplified the nicklist rendering.
-</msg>
+<msg>somewhat simplified the nicklist rendering.</msg>
 </entry>
 
 <entry>
@@ -1382,10 +1544,10 @@ should see what it's supposed to look like now.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.13</revision>
 </file>
-<msg>if /set scrollback_lines &lt;= 0, keep it unlimited.
-</msg>
+<msg>if /set scrollback_lines &lt;= 0, keep it unlimited.</msg>
 </entry>
 
 <entry>
@@ -1395,10 +1557,10 @@ should see what it's supposed to look like now.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.20</revision>
 </file>
-<msg>default tab position is now at bottom.
-</msg>
+<msg>default tab position is now at bottom.</msg>
 </entry>
 
 <entry>
@@ -1408,10 +1570,10 @@ should see what it's supposed to look like now.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/dialog-about.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
-<msg>minor update
-</msg>
+<msg>minor update</msg>
 </entry>
 
 <entry>
@@ -1421,10 +1583,10 @@ should see what it's supposed to look like now.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab-move.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
-<msg>when detaching tab, the origin frame's tabs weren't renumbered.
-</msg>
+<msg>when detaching tab, the origin frame's tabs weren't renumbered.</msg>
 </entry>
 
 <entry>
@@ -1434,39 +1596,46 @@ should see what it's supposed to look like now.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>AUTHORS</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>TODO</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>pixmaps/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.11</revision>
 </file>
 <file>
 <name>pixmaps/lock.xpm</name>
+<cvsstate>dead</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-channel.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-menu-main.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-url.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-url.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <msg>forgot to add gui-url.*, using grey background instead of lock icon now for
-topic locking, few minor changes.
-</msg>
+topic locking, few minor changes.</msg>
 </entry>
 
 <entry>
@@ -1476,10 +1645,10 @@ topic locking, few minor changes.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/dialog-about.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
-<msg>minor changes
-</msg>
+<msg>minor changes</msg>
 </entry>
 
 <entry>
@@ -1489,35 +1658,41 @@ topic locking, few minor changes.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.14</revision>
 </file>
 <file>
 <name>src/dialog-about.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-menu-main.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-menu-url.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-menu.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-menu.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/irssi.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
 <commondir>src/</commondir>
-<msg>menu/image updates.
-</msg>
+<msg>menu/image updates.</msg>
 </entry>
 
 <entry>
@@ -1527,68 +1702,82 @@ topic locking, few minor changes.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.13</revision>
 </file>
 <file>
 <name>src/dialog-about.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/dialogs.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.19</revision>
 </file>
 <file>
 <name>src/gui-menu-channel-topic.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-menu-main.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-menu-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/gui-menu-url.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-menu.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-menu.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/irssi.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/setup-servers.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup-servers.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/setup.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <commondir>src/</commondir>
 <msg>Setup code with partially working server settings. Updated menu code. Added
-menubar (will be optional later).
-</msg>
+menubar (will be optional later).</msg>
 </entry>
 
 <entry>
@@ -1598,10 +1787,10 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.12</revision>
 </file>
-<msg>added /set scrollback_lines + /set scrollback_burst_remove
-</msg>
+<msg>added /set scrollback_lines + /set scrollback_burst_remove</msg>
 </entry>
 
 <entry>
@@ -1611,10 +1800,10 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-nicklist-cell-renderer.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>small bugfix for background drawing
-</msg>
+<msg>small bugfix for background drawing</msg>
 </entry>
 
 <entry>
@@ -1624,39 +1813,46 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.12</revision>
 </file>
 <file>
 <name>src/gui-nicklist-cell-renderer.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-nicklist-cell-renderer.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-nicklist-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
 <file>
 <name>src/gui-nicklist-view.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-nicklist.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-nicklist.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.15</revision>
 </file>
 <commondir>src/</commondir>
-<msg>moved the "x ops, y total" label inside nicklist.
-</msg>
+<msg>moved the "x ops, y total" label inside nicklist.</msg>
 </entry>
 
 <entry>
@@ -1666,10 +1862,10 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window-activity.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
-<msg>fix for clearing activity in split windows
-</msg>
+<msg>fix for clearing activity in split windows</msg>
 </entry>
 
 <entry>
@@ -1679,10 +1875,10 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.11</revision>
 </file>
-<msg>link with -export-dynamic so modules work
-</msg>
+<msg>link with -export-dynamic so modules work</msg>
 </entry>
 
 <entry>
@@ -1692,15 +1888,16 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.10</revision>
 </file>
 <file>
 <name>pixmaps/right.xpm</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <commondir>pixmaps/</commondir>
-<msg>forgot to add
-</msg>
+<msg>forgot to add</msg>
 </entry>
 
 <entry>
@@ -1710,19 +1907,21 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.14</revision>
 </file>
 <file>
 <name>src/gui-tab.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
 <file>
 <name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.11</revision>
 </file>
 <commondir>src/</commondir>
-<msg>Show focus icon in active window
-</msg>
+<msg>Show focus icon in active window</msg>
 </entry>
 
 <entry>
@@ -1732,10 +1931,10 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
-<msg>updated
-</msg>
+<msg>updated</msg>
 </entry>
 
 <entry>
@@ -1745,10 +1944,10 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-keyboard.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
-<msg>added bind actions left_window, right_window, upper_window and lower_window
-</msg>
+<msg>added bind actions left_window, right_window, upper_window and lower_window</msg>
 </entry>
 
 <entry>
@@ -1758,54 +1957,65 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>AUTHORS</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>pixmaps/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
 <file>
 <name>pixmaps/lock.xpm</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.10</revision>
 </file>
 <file>
 <name>src/gui-channel.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-channel.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.18</revision>
 </file>
 <file>
 <name>src/gui-frame.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/gui-menu-channel-topic.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-menu-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-menu-url.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-menu.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
-<msg>Channel topic editing works now
-</msg>
+<msg>Channel topic editing works now</msg>
 </entry>
 
 <entry>
@@ -1815,10 +2025,10 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-keyboard.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
-<msg>pgup/pgdown works
-</msg>
+<msg>pgup/pgdown works</msg>
 </entry>
 
 <entry>
@@ -1828,23 +2038,26 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.10</revision>
 </file>
 <file>
 <name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.10</revision>
 </file>
 <file>
 <name>src/gui-window.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.13</revision>
 </file>
 <commondir>src/</commondir>
-<msg>Fixes to window scrolling.
-</msg>
+<msg>Fixes to window scrolling.</msg>
 </entry>
 
 <entry>
@@ -1854,10 +2067,10 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.12</revision>
 </file>
-<msg>tab numbers weren't updated when tab was closed.
-</msg>
+<msg>tab numbers weren't updated when tab was closed.</msg>
 </entry>
 
 <entry>
@@ -1867,10 +2080,10 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window-activity.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
-<msg>Activity colors weren't cleared properly.
-</msg>
+<msg>Activity colors weren't cleared properly.</msg>
 </entry>
 
 <entry>
@@ -1880,19 +2093,21 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.17</revision>
 </file>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.11</revision>
 </file>
 <file>
 <name>src/gui-window-activity.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <commondir>src/</commondir>
-<msg>color fixes
-</msg>
+<msg>color fixes</msg>
 </entry>
 
 <entry>
@@ -1902,27 +2117,31 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab-move.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.10</revision>
 </file>
 <file>
 <name>src/gui-tab.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/gui-window-activity.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-window-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
 <commondir>src/</commondir>
-<msg>show tab number + all window items in tab.
-</msg>
+<msg>show tab number + all window items in tab.</msg>
 </entry>
 
 <entry>
@@ -1932,19 +2151,21 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-itemlist.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-tab-move.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
 <commondir>src/</commondir>
-<msg>crashfixes
-</msg>
+<msg>crashfixes</msg>
 </entry>
 
 <entry>
@@ -1954,10 +2175,10 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window-activity.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
-<msg>window activity was broken
-</msg>
+<msg>window activity was broken</msg>
 </entry>
 
 <entry>
@@ -1967,10 +2188,10 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
-<msg>changing window name didn't update tab's label.
-</msg>
+<msg>changing window name didn't update tab's label.</msg>
 </entry>
 
 <entry>
@@ -1980,10 +2201,10 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-itemlist.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>don't show itemlist if there's only one window item in tab.
-</msg>
+<msg>don't show itemlist if there's only one window item in tab.</msg>
 </entry>
 
 <entry>
@@ -1993,47 +2214,56 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.16</revision>
 </file>
 <file>
 <name>src/gui-frame.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/gui-itemlist.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-itemlist.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-keyboard.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-tab-move.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/irssi.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/module.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <commondir>src/</commondir>
-<msg>added itemlist + some other minor fixes.
-</msg>
+<msg>added itemlist + some other minor fixes.</msg>
 </entry>
 
 <entry>
@@ -2043,10 +2273,10 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
-<msg>don't set autocreated windows active automatically.
-</msg>
+<msg>don't set autocreated windows active automatically.</msg>
 </entry>
 
 <entry>
@@ -2056,10 +2286,10 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab-move.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>tab label wasn't updated correctly when extractng pane into tab.
-</msg>
+<msg>tab label wasn't updated correctly when extractng pane into tab.</msg>
 </entry>
 
 <entry>
@@ -2069,15 +2299,16 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/irssi.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <commondir>src/</commondir>
-<msg>removed debugging things.
-</msg>
+<msg>removed debugging things.</msg>
 </entry>
 
 <entry>
@@ -2087,11 +2318,11 @@ menubar (will be optional later).
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.15</revision>
 </file>
 <msg>call /quit before last window is destroyed, so it can print the quit
-messages while there's still windows.
-</msg>
+messages while there's still windows.</msg>
 </entry>
 
 <entry>
@@ -2101,10 +2332,10 @@ messages while there's still windows.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
-<msg>make clean shouldn't delete non-generated pixmaps :)
-</msg>
+<msg>make clean shouldn't delete non-generated pixmaps :)</msg>
 </entry>
 
 <entry>
@@ -2114,10 +2345,10 @@ messages while there's still windows.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
-<msg>just moving around files :)
-</msg>
+<msg>just moving around files :)</msg>
 </entry>
 
 <entry>
@@ -2127,10 +2358,10 @@ messages while there's still windows.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>AUTHORS</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
-<msg>updated
-</msg>
+<msg>updated</msg>
 </entry>
 
 <entry>
@@ -2140,15 +2371,16 @@ messages while there's still windows.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>pixmaps/move.xpm</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <commondir>pixmaps/</commondir>
-<msg>added move.xpm
-</msg>
+<msg>added move.xpm</msg>
 </entry>
 
 <entry>
@@ -2158,19 +2390,21 @@ messages while there's still windows.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.14</revision>
 </file>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-window-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
 <commondir>src/</commondir>
-<msg>removed debugging info.
-</msg>
+<msg>removed debugging info.</msg>
 </entry>
 
 <entry>
@@ -2180,113 +2414,138 @@ messages while there's still windows.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
 <file>
 <name>src/gui-channel.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-context-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
 <file>
 <name>src/gui-entry.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-entry.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.13</revision>
 </file>
 <file>
 <name>src/gui-frame.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-keyboard.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-nicklist-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/gui-nicklist-view.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-nicklist.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-nicklist.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-tab-label.c</name>
+<cvsstate>dead</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-tab-label.h</name>
+<cvsstate>dead</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-tab-move.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-tab-move.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-tab.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/gui-window-activity.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-window-context.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-window-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/gui-window-view.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
 <file>
 <name>src/gui-window.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/irssi.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/module.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <commondir>src/</commondir>
 <msg>Rewriting stuff. Irssi's structs are more tied to gtk widgets, and removed
 refcounting from irssi's side. All this to get code working better with
-reparenting widgets (== window d&amp;d, which works excellently now :)
-</msg>
+reparenting widgets (== window d&amp;d, which works excellently now :)</msg>
 </entry>
 
 <entry>
@@ -2296,27 +2555,31 @@ reparenting widgets (== window d&amp;d, which works excellently now :)
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.12</revision>
 </file>
 <file>
 <name>src/gui-frame.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-tab.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <commondir>src/</commondir>
-<msg>removed some warnings at quit
-</msg>
+<msg>removed some warnings at quit</msg>
 </entry>
 
 <entry>
@@ -2326,15 +2589,16 @@ reparenting widgets (== window d&amp;d, which works excellently now :)
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab-label.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-tab.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <commondir>src/</commondir>
-<msg>moving tabs between windows works now.
-</msg>
+<msg>moving tabs between windows works now.</msg>
 </entry>
 
 <entry>
@@ -2344,10 +2608,10 @@ reparenting widgets (== window d&amp;d, which works excellently now :)
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab-label.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
-<msg>crashfix
-</msg>
+<msg>crashfix</msg>
 </entry>
 
 <entry>
@@ -2357,28 +2621,32 @@ reparenting widgets (== window d&amp;d, which works excellently now :)
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.11</revision>
 </file>
 <file>
 <name>src/gui-frame.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-tab-label.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-window-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/gui-window-view.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <commondir>src/</commondir>
 <msg>drag'n'drop moving tabs works now. still needs to be able to drop tabs into
-existing windows..
-</msg>
+existing windows..</msg>
 </entry>
 
 <entry>
@@ -2388,10 +2656,10 @@ existing windows..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>README</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>updated
-</msg>
+<msg>updated</msg>
 </entry>
 
 <entry>
@@ -2401,14 +2669,15 @@ existing windows..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>.cvsignore</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>AUTHORS</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>updates
-</msg>
+<msg>updates</msg>
 </entry>
 
 <entry>
@@ -2418,83 +2687,101 @@ existing windows..
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>pixmaps/arrow-down-twist.xpm</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/arrow-down.xpm</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/arrow-left-twist.xpm</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/arrow-left.xpm</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/arrow-right-twist.xpm</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/arrow-right.xpm</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/arrow-up-twist.xpm</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/arrow-up.xpm</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/detach-box.xpm</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.10</revision>
 </file>
 <file>
 <name>src/gui-frame.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-nicklist-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/gui-tab-label.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-tab-label.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-tab.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/module.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <msg>Added drag and drop moving/detaching of tabs, or at least the dragging but
-dropping doesn't really work yet :) Also removed the deprecated GTK calls.
-</msg>
+dropping doesn't really work yet :) Also removed the deprecated GTK calls.</msg>
 </entry>
 
 <entry>
@@ -2504,10 +2791,10 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-keyboard.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
-<msg>handle pasting multiple lines properly
-</msg>
+<msg>handle pasting multiple lines properly</msg>
 </entry>
 
 <entry>
@@ -2517,10 +2804,10 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>autogen.sh</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
-<msg>more gtk.m4 updates..
-</msg>
+<msg>more gtk.m4 updates..</msg>
 </entry>
 
 <entry>
@@ -2530,10 +2817,10 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>autogen.sh</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
-<msg>gtk-2.0.m4 updates..
-</msg>
+<msg>gtk-2.0.m4 updates..</msg>
 </entry>
 
 <entry>
@@ -2543,10 +2830,10 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>config-plugin.h.in</name>
+<cvsstate>dead</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>shouldn't be in cvs
-</msg>
+<msg>shouldn't be in cvs</msg>
 </entry>
 
 <entry>
@@ -2556,14 +2843,15 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>configure.in</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>gtk-2.0.m4_</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
-<msg>gtk-2.0.m4 isn't required anymore to be in system.
-</msg>
+<msg>gtk-2.0.m4 isn't required anymore to be in system.</msg>
 </entry>
 
 <entry>
@@ -2573,10 +2861,10 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-nicklist.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
-<msg>mode changes messed up ops-counter above nicklist.
-</msg>
+<msg>mode changes messed up ops-counter above nicklist.</msg>
 </entry>
 
 <entry>
@@ -2586,10 +2874,10 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-menu-url.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>/exec -quiet galeon so it stops complaining about using existing process :)
-</msg>
+<msg>/exec -quiet galeon so it stops complaining about using existing process :)</msg>
 </entry>
 
 <entry>
@@ -2599,10 +2887,10 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.9</revision>
 </file>
-<msg>crashfix
-</msg>
+<msg>crashfix</msg>
 </entry>
 
 <entry>
@@ -2612,18 +2900,20 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>pixmaps/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
-<msg>updates
-</msg>
+<msg>updates</msg>
 </entry>
 
 <entry>
@@ -2633,10 +2923,10 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.8</revision>
 </file>
-<msg>key handling changes
-</msg>
+<msg>key handling changes</msg>
 </entry>
 
 <entry>
@@ -2646,10 +2936,10 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
-<msg>indent fixes
-</msg>
+<msg>indent fixes</msg>
 </entry>
 
 <entry>
@@ -2659,21 +2949,23 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-window.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <commondir>src/</commondir>
 <msg>Moved printing with one big tag into multiple smaller tags, finally figured
 out that this is the correct way it should have been done from beginning :)
-Also added proper indenting to lines
-</msg>
+Also added proper indenting to lines</msg>
 </entry>
 
 <entry>
@@ -2683,10 +2975,10 @@ Also added proper indenting to lines
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-nicklist-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
-<msg>doubleclicking nick did /query, but with invalid nick name
-</msg>
+<msg>doubleclicking nick did /query, but with invalid nick name</msg>
 </entry>
 
 <entry>
@@ -2696,19 +2988,21 @@ Also added proper indenting to lines
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-channel.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-context-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.7</revision>
 </file>
 <commondir>src/</commondir>
-<msg>window size fixes, locale -&gt; utf8 converting for topics and nick infos.
-</msg>
+<msg>window size fixes, locale -&gt; utf8 converting for topics and nick infos.</msg>
 </entry>
 
 <entry>
@@ -2718,14 +3012,15 @@ Also added proper indenting to lines
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>pixmaps/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
-<msg>added "make clean" and fixed the src/pixmaps dir order
-</msg>
+<msg>added "make clean" and fixed the src/pixmaps dir order</msg>
 </entry>
 
 <entry>
@@ -2735,10 +3030,10 @@ Also added proper indenting to lines
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>.cvsignore</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
-<msg>added
-</msg>
+<msg>added</msg>
 </entry>
 
 <entry>
@@ -2748,14 +3043,15 @@ Also added proper indenting to lines
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>autogen.sh</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>pixmaps/generate.sh</name>
+<cvsstate>dead</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>whops, generate.sh wasn't needed :)
-</msg>
+<msg>whops, generate.sh wasn't needed :)</msg>
 </entry>
 
 <entry>
@@ -2765,74 +3061,90 @@ Also added proper indenting to lines
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>autogen.sh</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>pixmaps/.cvsignore</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>pixmaps/ball-blue.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/ball-green.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/ball-lightblue.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/ball-orange.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/ball-pink.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/ball-red.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/ball-yellow.png</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/generate.sh</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>pixmaps/halfop.xpm</name>
+<cvsstate>dead</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>pixmaps/op.xpm</name>
+<cvsstate>dead</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>pixmaps/voice.xpm</name>
+<cvsstate>dead</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-context-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <file>
 <name>src/gui-nicklist.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>changed nicklist pixmaps to 3d-like balls :) pixmaps by ccr.
-</msg>
+<msg>changed nicklist pixmaps to 3d-like balls :) pixmaps by ccr.</msg>
 </entry>
 
 <entry>
@@ -2842,11 +3154,11 @@ Also added proper indenting to lines
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.6</revision>
 </file>
 <msg>focus was automoved too late to entry line and it lost the keypress that
-brought it there.
-</msg>
+brought it there.</msg>
 </entry>
 
 <entry>
@@ -2856,10 +3168,10 @@ brought it there.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
-<msg>updated
-</msg>
+<msg>updated</msg>
 </entry>
 
 <entry>
@@ -2869,39 +3181,46 @@ brought it there.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-context-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
 <file>
 <name>src/gui-context-url.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-menu-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-menu-nick.h</name>
+<cvsstate>dead</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-menu-url.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-menu.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-nicklist-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <commondir>src/</commondir>
-<msg>support for url popup menus
-</msg>
+<msg>support for url popup menus</msg>
 </entry>
 
 <entry>
@@ -2911,10 +3230,10 @@ brought it there.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.5</revision>
 </file>
-<msg>fix up/down/tab keys to work again properly
-</msg>
+<msg>fix up/down/tab keys to work again properly</msg>
 </entry>
 
 <entry>
@@ -2924,10 +3243,10 @@ brought it there.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-entry.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
-<msg>enter-key was broken..
-</msg>
+<msg>enter-key was broken..</msg>
 </entry>
 
 <entry>
@@ -2937,10 +3256,10 @@ brought it there.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>updated
-</msg>
+<msg>updated</msg>
 </entry>
 
 <entry>
@@ -2950,15 +3269,16 @@ brought it there.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-keyboard.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <commondir>src/</commondir>
-<msg>support for mod2..mod5, and fixed deadkeys
-</msg>
+<msg>support for mod2..mod5, and fixed deadkeys</msg>
 </entry>
 
 <entry>
@@ -2968,35 +3288,41 @@ brought it there.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-entry.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-entry.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-keyboard.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-keyboard.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/irssi.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <commondir>src/</commondir>
-<msg>moved keyboard handling to gui-keyboard.c. added the rest of the bind actions.
-</msg>
+<msg>moved keyboard handling to gui-keyboard.c. added the rest of the bind actions.</msg>
 </entry>
 
 <entry>
@@ -3006,31 +3332,36 @@ brought it there.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-tab.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-window-activity.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-window-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-window.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <commondir>src/</commondir>
-<msg>Added window activity code.
-</msg>
+<msg>Added window activity code.</msg>
 </entry>
 
 <entry>
@@ -3040,10 +3371,10 @@ brought it there.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/.cvsignore</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>added xirssi
-</msg>
+<msg>added xirssi</msg>
 </entry>
 
 <entry>
@@ -3053,47 +3384,56 @@ brought it there.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-context-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-entry.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-menu-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-menu-nick.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-nicklist-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-window-context.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-window-context.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.4</revision>
 </file>
 <file>
 <name>src/gui-window-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <commondir>src/</commondir>
-<msg>utf8 &lt;-&gt; locale conversion by default, popup menu fixes
-</msg>
+<msg>utf8 &lt;-&gt; locale conversion by default, popup menu fixes</msg>
 </entry>
 
 <entry>
@@ -3103,43 +3443,51 @@ brought it there.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-context-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-context-url.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-menu-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-menu.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-menu.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1</revision>
 </file>
 <file>
 <name>src/gui-window-context.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/gui-window-context.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.3</revision>
 </file>
 <file>
 <name>src/irssi.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <commondir>src/</commondir>
-<msg>popup menu / context stuff fixes. nick popup works.
-</msg>
+<msg>popup menu / context stuff fixes. nick popup works.</msg>
 </entry>
 
 <entry>
@@ -3149,35 +3497,41 @@ brought it there.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-context-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-nicklist-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-window-context.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-window-context.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-window-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <file>
 <name>src/gui-window.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
 <commondir>src/</commondir>
-<msg>support for monospace fonts, fixes for showing nick info in statusbar
-</msg>
+<msg>support for monospace fonts, fixes for showing nick info in statusbar</msg>
 </entry>
 
 <entry>
@@ -3187,10 +3541,10 @@ brought it there.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>configure.in</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.2</revision>
 </file>
-<msg>check ../irssi/ for irssi sources too
-</msg>
+<msg>check ../irssi/ for irssi sources too</msg>
 </entry>
 
 <entry>
@@ -3200,375 +3554,453 @@ brought it there.
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>AUTHORS</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>Makefile.am</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>NEWS</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>README</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>TODO</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>acconfig.h</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>autogen.sh</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>config-plugin.h.in</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>configure.in</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>stamp.h.in</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>pixmaps/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>pixmaps/halfop.xpm</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>pixmaps/op.xpm</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>pixmaps/voice.xpm</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/.cvsignore</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-frame.h</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-nicklist.c</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-nicklist.h</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-window-view.h</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-window.h</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/irssi.c</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/module.h</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-entry.c</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-entry.h</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-window-view.c</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-channel.c</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-channel.h</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-menu-nick.c</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-nicklist-view.c</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-nicklist-view.h</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-tab.h</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-window-item-rec.h</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-context-nick.c</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-menu-nick.h</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-window-context.c</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-window-context.h</name>
+<cvsstate>Exp</cvsstate>
+<revision>1.1</revision>
+</file>
+<msg>Initial revision</msg>
+</entry>
+
+<entry>
+<date>2002-04-22</date>
+<weekday>Monday</weekday>
+<time>09:06</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>AUTHORS</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>NEWS</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>README</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>TODO</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>acconfig.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>autogen.sh</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>config-plugin.h.in</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>configure.in</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>stamp.h.in</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>pixmaps/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>pixmaps/halfop.xpm</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>pixmaps/op.xpm</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>pixmaps/voice.xpm</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/.cvsignore</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/Makefile.am</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-frame.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-nicklist.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-nicklist.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-window-view.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-window.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/irssi.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/module.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-frame.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-window.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-entry.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-entry.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-window-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-channel.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-channel.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-menu-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-nicklist-view.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-nicklist-view.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-tab.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-tab.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-window-item-rec.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-context-nick.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-menu-nick.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-window-context.c</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <file>
 <name>src/gui-window-context.h</name>
+<cvsstate>Exp</cvsstate>
 <revision>1.1.1.1</revision>
 <tag>r0_1</tag>
 </file>
 <msg>initial import
-
-</msg>
-</entry>
-
-<entry>
-<date>2002-04-22</date>
-<weekday>Monday</weekday>
-<time>09:06</time>
-<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
-<file>
-<name>AUTHORS</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>Makefile.am</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>NEWS</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>README</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>TODO</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>acconfig.h</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>autogen.sh</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>config-plugin.h.in</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>configure.in</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>stamp.h.in</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>pixmaps/Makefile.am</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>pixmaps/halfop.xpm</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>pixmaps/op.xpm</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>pixmaps/voice.xpm</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/.cvsignore</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/Makefile.am</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-frame.h</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-nicklist.c</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-nicklist.h</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-window-view.h</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-window.h</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/irssi.c</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/module.h</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-frame.c</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-window.c</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-entry.c</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-entry.h</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-window-view.c</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-channel.c</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-channel.h</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-menu-nick.c</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-nicklist-view.c</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-nicklist-view.h</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-tab.c</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-tab.h</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-window-item-rec.h</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-context-nick.c</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-menu-nick.h</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-window-context.c</name>
-<revision>1.1</revision>
-</file>
-<file>
-<name>src/gui-window-context.h</name>
-<revision>1.1</revision>
-</file>
-<msg>Initial revision
 </msg>
 </entry>
 
