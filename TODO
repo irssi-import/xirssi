@@ -3,7 +3,6 @@ BUGS:
 
  - make sure popup menus are really destroyed when they're hidden -
    they're not automatically destroyed..
- - fix preferences dialog, add missing irc pages (put them there separately)
  - text widget problems:
    - everything fixed in gtk cvs?
       - crashing sometimes when closing windows (tabs?)
@@ -23,7 +22,6 @@ FEATURES:
  - keyboard:
    - fix yank_from_cutbuffer
    - redirections don't work
-   - doesn't work at all with darix?
    - shift-tab = reverse completion
 
  - menus / popups
@@ -45,7 +43,11 @@ FEATURES:
     - add gui stuff
     - in add server/channel dialog, when chat protocol is changed the
       network list should be updated to list only networks using that proto
+    - separate irc stuff from glade file, and make it work.
+    - add colors, themes and advanced logging pages
 
+ - clean about dialog, add ccr there
+ - galeon-like tab size settings..?
  - statusbar
  - lots of irc-specific stuff
  - nicklist: show ignored people with overstrike font, show away people with
