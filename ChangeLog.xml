@@ -5,6 +5,32 @@
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
+<time>02:49</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-frame.c</name>
+<revision>1.5</revision>
+</file>
+<msg>fix up/down/tab keys to work again properly
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-27</date>
+<weekday>Saturday</weekday>
+<time>02:17</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-entry.c</name>
+<revision>1.4</revision>
+</file>
+<msg>enter-key was broken..
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-27</date>
+<weekday>Saturday</weekday>
 <time>01:30</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
