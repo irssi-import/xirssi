@@ -8,6 +8,10 @@ void gui_window_print_mark_context(WindowGui *window, TextDest *dest,
 gboolean gui_window_context_event_motion(GtkWidget *widget, GdkEvent *event,
 					 WindowView *view);
 
+/* leave_notify_event handler */
+gboolean gui_window_context_event_leave(GtkWidget *widget, GdkEvent *event,
+					WindowView *view);
+
 void gui_window_contexts_init(void);
 void gui_window_contexts_deinit(void);
 

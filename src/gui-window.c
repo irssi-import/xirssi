@@ -144,9 +144,10 @@ static void gui_window_print(WindowGui *window, TextDest *dest,
 		colortab = mirc_colors;
 	}
 
-	g_snprintf(tag_name, sizeof(tag_name), "c_%d_%d%c%c", fg, bg,
+	g_snprintf(tag_name, sizeof(tag_name), "c_%d_%d%c%c%c", fg, bg,
 		   (flags & GUI_PRINT_FLAG_UNDERLINE) ? '-' : '_',
-		   (flags & GUI_PRINT_FLAG_MIRC_COLOR) ? 'M' : '_');
+		   (flags & GUI_PRINT_FLAG_MIRC_COLOR) ? 'M' : '_',
+		   (flags & GUI_PRINT_FLAG_MONOSPACE) ? '#' : '_');
 
 	tag = gtk_text_tag_table_lookup(window->tagtable, tag_name);
 	if (tag == NULL) {
@@ -165,7 +166,11 @@ static void gui_window_print(WindowGui *window, TextDest *dest,
 
 		if (flags & GUI_PRINT_FLAG_UNDERLINE) {
 			g_object_set(G_OBJECT(tag), "underline",
-				     PANGO_UNDERLINE_SINGLE);
+				     PANGO_UNDERLINE_SINGLE, NULL);
+		}
+		if (flags & GUI_PRINT_FLAG_MONOSPACE) {
+			g_object_set(G_OBJECT(tag), "font-desc",
+				     window->monospace_font, NULL);
 		}
 	}
 
@@ -200,6 +205,7 @@ static void sig_window_created(Window *window, void *automatic)
 	gui->window = window;
 	window->gui_data = gui;
 
+	gui->monospace_font = pango_font_description_from_string("fixed 10");
 	gui->buffer = gtk_text_buffer_new(NULL);
 	gui->tagtable = gtk_text_buffer_get_tag_table(gui->buffer);
 	gui_window_add_view(gui, active_frame->active_tab);
@@ -229,6 +235,8 @@ static void sig_window_destroyed(Window *window)
 		gui->views = g_slist_remove(gui->views, view);
 		gui_tab_remove_widget(view->tab, view->widget);
 	}
+
+	pango_font_description_free(gui->monospace_font);
 
 	g_free(gui);
 	window->gui_data = NULL;

@@ -43,6 +43,7 @@ static void statusbar_push_nick(GtkStatusbar *statusbar, Nick *nick)
 
 	str = g_strdup_printf("Nick: %s  -  Host: %s  -  Name: %s",
 			      nick->nick, nick->host, nick->realname);
+	gtk_statusbar_pop(statusbar, id);
 	gtk_statusbar_push(statusbar, id, str);
 	g_free(str);
 }

@@ -85,13 +85,14 @@ static gboolean event_changed(GtkWidget *widget, WindowView *view)
 	return FALSE;
 }
 
-static void get_font_size(GtkWidget *widget, int *width, int *height)
+static void get_font_size(GtkWidget *widget, PangoFontDescription *font_desc,
+			  int *width, int *height)
 {
       PangoContext *context;
       PangoFontMetrics *metrics;
 
       context = gtk_widget_get_pango_context(widget);
-      metrics = pango_context_get_metrics(context, widget->style->font_desc,
+      metrics = pango_context_get_metrics(context, font_desc,
 					  pango_context_get_language(context));
       *width = PANGO_PIXELS(pango_font_metrics_get_approximate_digit_width(metrics));
       *height = PANGO_PIXELS(pango_font_metrics_get_ascent(metrics) +
@@ -104,7 +105,7 @@ WindowView *gui_window_view_new(Tab *tab, WindowGui *window,
 {
         WindowView *view;
 	GtkWidget *sw, *text_view;
-	PangoFontDescription *font_desc;
+	/*PangoFontDescription *font_desc;*/
 	GdkColor color;
 
 	view = g_new0(WindowView, 1);
@@ -136,12 +137,14 @@ WindowView *gui_window_view_new(Tab *tab, WindowGui *window,
 			       G_CALLBACK(event_resize), view);
 	g_signal_connect(G_OBJECT(text_view), "motion_notify_event",
 			 G_CALLBACK(gui_window_context_event_motion), view);
+	g_signal_connect(G_OBJECT(text_view), "leave_notify_event",
+			 G_CALLBACK(gui_window_context_event_leave), view);
 	gtk_container_add(GTK_CONTAINER(sw), text_view);
 
 	/* FIXME: configurable */
-	font_desc = pango_font_description_from_string("fixed 10");
+	/*font_desc = pango_font_description_from_string("fixed 10");
 	gtk_widget_modify_font(text_view, font_desc);
-	pango_font_description_free(font_desc);
+	pango_font_description_free(font_desc);*/
 
 	gtk_text_view_set_cursor_visible(view->view, FALSE);
 	gtk_text_view_set_wrap_mode(view->view, GTK_WRAP_WORD);
@@ -156,7 +159,8 @@ WindowView *gui_window_view_new(Tab *tab, WindowGui *window,
 	gtk_widget_modify_text(text_view, GTK_STATE_NORMAL, &color);
 
 	gtk_widget_show_all(view->widget);
-	get_font_size(text_view, &view->font_width, &view->font_height);
+	get_font_size(text_view, window->monospace_font,
+		      &view->font_width, &view->font_height);
 
 	gui_window_view_set_title(view);
 

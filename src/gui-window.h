@@ -10,6 +10,7 @@ struct _WindowGui {
 
 	GtkTextBuffer *buffer;
 	GtkTextTagTable *tagtable;
+        PangoFontDescription *monospace_font;
 
 	GSList *views;
 	WindowView *active_view;

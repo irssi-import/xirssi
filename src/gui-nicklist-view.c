@@ -163,6 +163,19 @@ static gboolean event_motion(GtkWidget *tree, GdkEventButton *event,
 	return FALSE;
 }
 
+static gboolean event_leave(GtkWidget *tree, GdkEventCrossing *event,
+			    NicklistView *view)
+{
+	Nick *old_nick;
+
+	old_nick = g_object_get_data(G_OBJECT(tree), "nick");
+	if (old_nick != NULL) {
+		g_object_set_data(G_OBJECT(tree), "nick", NULL);
+		signal_emit("gui nicklist leave", 2, view, old_nick);
+	}
+	return FALSE;
+}
+
 NicklistView *gui_nicklist_view_new(Tab *tab)
 {
 	GtkWidget *sw, *list, *vbox, *frame;
@@ -203,6 +216,8 @@ NicklistView *gui_nicklist_view_new(Tab *tab)
 			   GTK_SIGNAL_FUNC(event_button_release), view);
 	gtk_signal_connect(GTK_OBJECT(list), "motion_notify_event",
 			   GTK_SIGNAL_FUNC(event_motion), view);
+	gtk_signal_connect(GTK_OBJECT(list), "leave_notify_event",
+			   GTK_SIGNAL_FUNC(event_leave), view);
 	view->view = GTK_TREE_VIEW(list);
 	gtk_container_add(GTK_CONTAINER(sw), list);
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(list), FALSE);

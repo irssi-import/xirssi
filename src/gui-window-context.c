@@ -212,6 +212,20 @@ void gui_window_print_mark_context(WindowGui *window, TextDest *dest,
 	}
 }
 
+static void window_context_leave(WindowView *view, ContextEvent *context)
+{
+	GdkWindow *window;
+
+	view->cursor_link = FALSE;
+	window = gtk_text_view_get_window(view->view,
+					  GTK_TEXT_WINDOW_TEXT);
+	gdk_window_set_cursor(window, NULL);
+
+	signal_emit("gui window context leave", 3,
+		    context->window, context->word, context->tag);
+	context->tag = NULL;
+}
+
 gboolean gui_window_context_event_motion(GtkWidget *widget, GdkEvent *event,
 					 WindowView *view)
 {
@@ -236,16 +250,21 @@ gboolean gui_window_context_event_motion(GtkWidget *widget, GdkEvent *event,
 		}
 	} else if (view->cursor_link) {
 		/* moved out of tag */
-		view->cursor_link = FALSE;
-		window = gtk_text_view_get_window(view->view,
-						  GTK_TEXT_WINDOW_TEXT);
-                gdk_window_set_cursor(window, NULL);
-
-		signal_emit("gui window context leave", 3,
-			    context->window, context->word, context->tag);
-		context->tag = NULL;
+		window_context_leave(view, context);
 	}
 
+	return FALSE;
+}
+
+gboolean gui_window_context_event_leave(GtkWidget *widget, GdkEvent *event,
+					WindowView *view)
+{
+        ContextEvent *context;
+
+	if (view->cursor_link) {
+		context = g_object_get_data(G_OBJECT(widget), "context");
+		window_context_leave(view, context);
+	}
 	return FALSE;
 }
 
