@@ -3,6 +3,19 @@
 <changelog xmlns="http://www.red-bean.com/xmlns/cvs2cl/">
 
 <entry>
+<date>2002-05-16</date>
+<weekday>Thursday</weekday>
+<time>01:21</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-keyboard.c</name>
+<revision>1.8</revision>
+</file>
+<msg>^ key wasn't working with /BINDs
+</msg>
+</entry>
+
+<entry>
 <date>2002-05-13</date>
 <weekday>Monday</weekday>
 <time>12:50</time>
