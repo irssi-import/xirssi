@@ -3,6 +3,56 @@
 <changelog xmlns="http://www.red-bean.com/xmlns/cvs2cl/">
 
 <entry>
+<date>2002-05-19</date>
+<weekday>Sunday</weekday>
+<time>10:47</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-menu-channel-topic.c</name>
+<revision>1.3</revision>
+</file>
+<file>
+<name>src/gui-menu-nick.c</name>
+<revision>1.8</revision>
+</file>
+<file>
+<name>src/gui-menu-url.c</name>
+<revision>1.6</revision>
+</file>
+<commondir>src/</commondir>
+<msg>destroy popup menus after they're closed.
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-19</date>
+<weekday>Sunday</weekday>
+<time>10:23</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-context-nick.c</name>
+<revision>1.9</revision>
+</file>
+<file>
+<name>src/gui-menu-nick.c</name>
+<revision>1.7</revision>
+</file>
+<file>
+<name>src/gui-menu.h</name>
+<revision>1.7</revision>
+</file>
+<file>
+<name>src/gui-nicklist-view.c</name>
+<revision>1.11</revision>
+</file>
+<commondir>src/</commondir>
+<msg>nicklist popup menu is now triggered on mouse press. the nicks are looked
+when the menuitem is executed, so if any of the originally selected nicks
+part the channel it won't be affected.
+</msg>
+</entry>
+
+<entry>
 <date>2002-05-18</date>
 <weekday>Saturday</weekday>
 <time>22:27</time>
