@@ -35,6 +35,7 @@ static gboolean event_destroy(GtkWidget *window, Tab *tab)
 	if (tab->frame->active_tab == tab)
 		tab->frame->active_tab = NULL;
 
+	tab->destroying = TRUE;
 	tab->widget = NULL;
 	tab->tab_label = NULL;
 	tab->label = NULL;
@@ -347,6 +348,9 @@ void gui_tab_set_active_window_item(Tab *tab, Window *window)
 {
 	WindowItem *witem;
 	ChannelGui *gui;
+
+	if (tab->destroying)
+		return;
 
 	witem = window->active;
 	if (witem == NULL) {

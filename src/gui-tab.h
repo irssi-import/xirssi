@@ -21,6 +21,8 @@ struct _Tab {
 	unsigned int pressing:1;
 	unsigned int dragging:1;
 	unsigned int detaching:1;
+
+	unsigned int destroying:1;
 };
 
 Tab *gui_tab_new(Frame *frame);

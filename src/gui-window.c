@@ -327,14 +327,9 @@ static void sig_window_destroyed(Window *window)
 static void sig_window_changed(Window *window)
 {
 	WindowGui *gui = WINDOW_GUI(window);
-	GSList *tmp;
 
-	for (tmp = gui->views; tmp != NULL; tmp = tmp->next) {
-		WindowView *view = tmp->data;
-
-		gui_tab_set_active_window(view->tab, window);
-		gui_frame_set_active_tab(view->tab);
-	}
+	gui_tab_set_active_window(gui->active_view->tab, window);
+	gui_frame_set_active_tab(gui->active_view->tab);
 }
 
 static void sig_window_item_changed(Window *window, WindowItem *witem)

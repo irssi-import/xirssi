@@ -10,6 +10,8 @@ struct _Frame {
 	Entry *entry;
 
 	Tab *active_tab;
+
+	unsigned int destroying:1;
 };
 
 extern GSList *frames;

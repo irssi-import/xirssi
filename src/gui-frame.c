@@ -41,6 +41,7 @@ static gboolean event_destroy(GtkWidget *window, Frame *frame)
 
 	signal_emit("gui frame destroyed", 1, frame);
 
+	frame->destroying = TRUE;
 	frame->window = NULL;
 	frame->notebook = NULL;
 
@@ -209,6 +210,8 @@ Tab *gui_frame_get_tab(Frame *frame, int page)
 {
 	GtkWidget *child;
 
+	g_return_val_if_fail(!frame->destroying, NULL);
+
 	child = gtk_notebook_get_nth_page(frame->notebook, page);
 	return child == NULL ? NULL :
 		g_object_get_data(G_OBJECT(child), "irssi tab");
@@ -230,6 +233,9 @@ void gui_frame_set_active_window(Frame *frame, Window *window)
 void gui_frame_set_active_tab(Tab *tab)
 {
 	int page;
+
+	if (tab->destroying || tab->frame->destroying)
+		return;
 
 	page = gtk_notebook_page_num(tab->frame->notebook, tab->widget);
 	gtk_notebook_set_current_page(tab->frame->notebook, page);
