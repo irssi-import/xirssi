@@ -98,6 +98,13 @@ static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
 	GtkWidget *entry;
 	int pos;
 
+	if (g_slist_find(frame->focusable_widgets,
+			 gtk_window_get_focus(frame->window)) != NULL) {
+		/* focus is in another widget where it's allowed -
+		   don't do anything */
+		return FALSE;
+	}
+
 	if (event->keyval == GDK_Tab ||
 	    event->keyval == GDK_Up ||
 	    event->keyval == GDK_Down ||
@@ -117,7 +124,7 @@ static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
 		   to unselect it so that the text isn't replaced with the
 		   next key press */
                 pos = gtk_editable_get_position(GTK_EDITABLE(entry));
-		gtk_widget_grab_focus(GTK_WIDGET(entry));
+		gtk_widget_grab_focus(entry);
 		gtk_editable_select_region(GTK_EDITABLE(entry), pos, pos);
 	}
 
@@ -206,6 +213,18 @@ Frame *gui_frame_new(int show)
 
 	signal_emit("gui frame created", 1, frame);
 	return frame;
+}
+
+void gui_frame_add_focusable_widget(Frame *frame, GtkWidget *widget)
+{
+	frame->focusable_widgets =
+		g_slist_prepend(frame->focusable_widgets, widget);
+}
+
+void gui_frame_remove_focusable_widget(Frame *frame, GtkWidget *widget)
+{
+	frame->focusable_widgets =
+		g_slist_remove(frame->focusable_widgets, widget);
 }
 
 void gui_frame_set_active(Frame *frame)

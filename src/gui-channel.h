@@ -13,6 +13,9 @@ struct _ChannelGui {
 	GSList *titles;
 };
 
+void gui_channel_topic_lock(GtkWidget *widget);
+void gui_channel_topic_unlock(GtkWidget *widget);
+
 void gui_channels_init(void);
 void gui_channels_deinit(void);
 

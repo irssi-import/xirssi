@@ -97,7 +97,7 @@ void gui_menu_nick_popup(Server *server, Channel *channel,
 	space_nicks = gslist_to_string(nicks, " ");
 	comma_nicks = gslist_to_string(nicks, ",");
 
-	/* create the menu as item menu */
+	/* create the menu */
 	menu = gtk_menu_new();
 
 	g_signal_connect(G_OBJECT(menu), "destroy",

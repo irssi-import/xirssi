@@ -13,6 +13,7 @@ xpm_pixmaps = \
 	arrow-left-twist.xpm \
 	arrow-right-twist.xpm \
 	detach-box.xpm \
+	lock.xpm \
 	move.xpm
 
 generated_pixmaps = \

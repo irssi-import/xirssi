@@ -30,6 +30,7 @@ xirssi_SOURCES = \
 	gui-itemlist.c \
 	gui-keyboard.c \
 	gui-menu.c \
+	gui-menu-channel-topic.c \
 	gui-menu-nick.c \
 	gui-menu-url.c \
 	gui-nicklist.c \

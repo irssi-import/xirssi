@@ -21,5 +21,7 @@ void gui_menu_fill(GtkWidget *menu, MenuItem *items, int items_count,
 void gui_menu_nick_popup(Server *server, Channel *channel,
 			 GSList *nicks, int button);
 void gui_menu_url_popup(const char *url, int button);
+void gui_menu_channel_topic_popup(Channel *channel, GtkWidget *widget,
+				  int locked, int button);
 
 #endif

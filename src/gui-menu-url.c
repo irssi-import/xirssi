@@ -96,7 +96,7 @@ void gui_menu_url_popup(const char *url, int button)
 	if (new_url == NULL)
 		new_url = g_strdup(url);
 
-	/* create the menu as item menu */
+	/* create the menu */
 	menu = gtk_menu_new();
 
 	g_signal_connect(G_OBJECT(menu), "destroy",
