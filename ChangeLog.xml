@@ -5,6 +5,27 @@
 <entry>
 <date>2002-06-06</date>
 <weekday>Thursday</weekday>
+<time>21:39</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>glade/irssi.glade</name>
+<revision>1.10</revision>
+</file>
+<file>
+<name>src/setup-prefs.c</name>
+<revision>1.10</revision>
+</file>
+<file>
+<name>src/glade/interface.c</name>
+<revision>1.10</revision>
+</file>
+<msg>setup changes.
+</msg>
+</entry>
+
+<entry>
+<date>2002-06-06</date>
+<weekday>Thursday</weekday>
 <time>19:15</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
