@@ -5,7 +5,7 @@
 <entry>
 <date>2002-05-19</date>
 <weekday>Sunday</weekday>
-<time>10:47</time>
+<time>08:47</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-menu-channel-topic.c</name>
@@ -27,7 +27,7 @@
 <entry>
 <date>2002-05-19</date>
 <weekday>Sunday</weekday>
-<time>10:23</time>
+<time>08:23</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-context-nick.c</name>
@@ -55,7 +55,7 @@ part the channel it won't be affected.
 <entry>
 <date>2002-05-18</date>
 <weekday>Saturday</weekday>
-<time>22:27</time>
+<time>20:27</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>AUTHORS</name>
@@ -72,7 +72,7 @@ part the channel it won't be affected.
 <entry>
 <date>2002-05-18</date>
 <weekday>Saturday</weekday>
-<time>22:25</time>
+<time>20:25</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
@@ -86,7 +86,7 @@ window.
 <entry>
 <date>2002-05-18</date>
 <weekday>Saturday</weekday>
-<time>22:05</time>
+<time>20:05</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
@@ -155,7 +155,7 @@ window.
 <entry>
 <date>2002-05-18</date>
 <weekday>Saturday</weekday>
-<time>19:51</time>
+<time>17:51</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
@@ -228,7 +228,7 @@ window.
 <entry>
 <date>2002-05-18</date>
 <weekday>Saturday</weekday>
-<time>12:18</time>
+<time>10:18</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/setup-ignores.c</name>
@@ -241,7 +241,7 @@ window.
 <entry>
 <date>2002-05-18</date>
 <weekday>Saturday</weekday>
-<time>09:49</time>
+<time>07:49</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/setup-ignores-edit.c</name>
@@ -254,7 +254,7 @@ window.
 <entry>
 <date>2002-05-18</date>
 <weekday>Saturday</weekday>
-<time>09:38</time>
+<time>07:38</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
@@ -319,7 +319,7 @@ window.
 <entry>
 <date>2002-05-17</date>
 <weekday>Friday</weekday>
-<time>17:29</time>
+<time>15:29</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-itemlist.c</name>
@@ -332,7 +332,7 @@ window.
 <entry>
 <date>2002-05-16</date>
 <weekday>Thursday</weekday>
-<time>08:36</time>
+<time>06:36</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/setup-prefs.c</name>
@@ -345,7 +345,7 @@ window.
 <entry>
 <date>2002-05-16</date>
 <weekday>Thursday</weekday>
-<time>08:27</time>
+<time>06:27</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/themes.png</name>
@@ -358,7 +358,7 @@ window.
 <entry>
 <date>2002-05-16</date>
 <weekday>Thursday</weekday>
-<time>08:17</time>
+<time>06:17</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
@@ -381,7 +381,7 @@ menubar shows their actual value correctly..
 <entry>
 <date>2002-05-16</date>
 <weekday>Thursday</weekday>
-<time>07:49</time>
+<time>05:49</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
@@ -498,7 +498,7 @@ menubar shows their actual value correctly..
 <entry>
 <date>2002-05-16</date>
 <weekday>Thursday</weekday>
-<time>05:40</time>
+<time>03:40</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-colors.c</name>
@@ -520,7 +520,7 @@ menubar shows their actual value correctly..
 <entry>
 <date>2002-05-16</date>
 <weekday>Thursday</weekday>
-<time>04:20</time>
+<time>02:20</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-itemlist.c</name>
@@ -536,9 +536,9 @@ menubar shows their actual value correctly..
 </entry>
 
 <entry>
-<date>2002-05-16</date>
-<weekday>Thursday</weekday>
-<time>01:21</time>
+<date>2002-05-15</date>
+<weekday>Wednesday</weekday>
+<time>23:21</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-keyboard.c</name>
@@ -551,7 +551,7 @@ menubar shows their actual value correctly..
 <entry>
 <date>2002-05-13</date>
 <weekday>Monday</weekday>
-<time>12:50</time>
+<time>10:50</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
@@ -584,7 +584,7 @@ menubar shows their actual value correctly..
 <entry>
 <date>2002-05-12</date>
 <weekday>Sunday</weekday>
-<time>17:04</time>
+<time>15:04</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
@@ -618,7 +618,7 @@ menubar shows their actual value correctly..
 <entry>
 <date>2002-05-12</date>
 <weekday>Sunday</weekday>
-<time>15:51</time>
+<time>13:51</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/setup-servers.c</name>
@@ -631,7 +631,7 @@ menubar shows their actual value correctly..
 <entry>
 <date>2002-05-12</date>
 <weekday>Sunday</weekday>
-<time>14:33</time>
+<time>12:33</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/setup-prefs.c</name>
@@ -644,7 +644,7 @@ menubar shows their actual value correctly..
 <entry>
 <date>2002-05-12</date>
 <weekday>Sunday</weekday>
-<time>14:04</time>
+<time>12:04</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>autogen.sh</name>
@@ -657,7 +657,7 @@ menubar shows their actual value correctly..
 <entry>
 <date>2002-05-12</date>
 <weekday>Sunday</weekday>
-<time>13:43</time>
+<time>11:43</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
@@ -674,7 +674,7 @@ menubar shows their actual value correctly..
 <entry>
 <date>2002-05-12</date>
 <weekday>Sunday</weekday>
-<time>13:31</time>
+<time>11:31</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>glade/irssi.glade</name>
@@ -691,7 +691,7 @@ menubar shows their actual value correctly..
 <entry>
 <date>2002-05-12</date>
 <weekday>Sunday</weekday>
-<time>13:13</time>
+<time>11:13</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
@@ -801,7 +801,7 @@ should see what it's supposed to look like now.
 <entry>
 <date>2002-05-11</date>
 <weekday>Saturday</weekday>
-<time>05:24</time>
+<time>03:24</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
@@ -814,7 +814,7 @@ should see what it's supposed to look like now.
 <entry>
 <date>2002-05-11</date>
 <weekday>Saturday</weekday>
-<time>05:04</time>
+<time>03:04</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/setup-servers.c</name>
@@ -827,7 +827,7 @@ should see what it's supposed to look like now.
 <entry>
 <date>2002-05-11</date>
 <weekday>Saturday</weekday>
-<time>05:00</time>
+<time>03:00</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window.c</name>
@@ -840,7 +840,7 @@ should see what it's supposed to look like now.
 <entry>
 <date>2002-05-11</date>
 <weekday>Saturday</weekday>
-<time>04:37</time>
+<time>02:37</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
@@ -894,7 +894,7 @@ should see what it's supposed to look like now.
 <entry>
 <date>2002-05-10</date>
 <weekday>Friday</weekday>
-<time>23:31</time>
+<time>21:31</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-nicklist-cell-renderer.h</name>
@@ -912,7 +912,7 @@ should see what it's supposed to look like now.
 <entry>
 <date>2002-05-10</date>
 <weekday>Friday</weekday>
-<time>23:12</time>
+<time>21:12</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
@@ -944,9 +944,9 @@ should see what it's supposed to look like now.
 </entry>
 
 <entry>
-<date>2002-05-10</date>
-<weekday>Friday</weekday>
-<time>00:33</time>
+<date>2002-05-09</date>
+<weekday>Thursday</weekday>
+<time>22:33</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-nicklist-cell-renderer.c</name>
@@ -968,7 +968,7 @@ should see what it's supposed to look like now.
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
-<time>20:54</time>
+<time>18:54</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window.c</name>
@@ -981,7 +981,7 @@ should see what it's supposed to look like now.
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
-<time>19:06</time>
+<time>17:06</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
@@ -994,7 +994,7 @@ should see what it's supposed to look like now.
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
-<time>18:52</time>
+<time>16:52</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/dialog-about.c</name>
@@ -1007,7 +1007,7 @@ should see what it's supposed to look like now.
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
-<time>18:30</time>
+<time>16:30</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab-move.c</name>
@@ -1020,7 +1020,7 @@ should see what it's supposed to look like now.
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
-<time>18:04</time>
+<time>16:04</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>AUTHORS</name>
@@ -1062,7 +1062,7 @@ topic locking, few minor changes.
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
-<time>16:46</time>
+<time>14:46</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/dialog-about.c</name>
@@ -1075,7 +1075,7 @@ topic locking, few minor changes.
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
-<time>16:35</time>
+<time>14:35</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
@@ -1113,7 +1113,7 @@ topic locking, few minor changes.
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
-<time>15:41</time>
+<time>13:41</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
@@ -1184,7 +1184,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
-<time>05:44</time>
+<time>03:44</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window.c</name>
@@ -1197,7 +1197,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
-<time>05:28</time>
+<time>03:28</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-nicklist-cell-renderer.c</name>
@@ -1210,7 +1210,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
-<time>05:26</time>
+<time>03:26</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
@@ -1252,7 +1252,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
-<time>05:24</time>
+<time>03:24</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window-activity.c</name>
@@ -1265,7 +1265,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-08</date>
 <weekday>Wednesday</weekday>
-<time>02:26</time>
+<time>00:26</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
@@ -1276,9 +1276,9 @@ menubar (will be optional later).
 </entry>
 
 <entry>
-<date>2002-05-08</date>
-<weekday>Wednesday</weekday>
-<time>01:36</time>
+<date>2002-05-07</date>
+<weekday>Tuesday</weekday>
+<time>23:36</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/Makefile.am</name>
@@ -1296,7 +1296,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-07</date>
 <weekday>Tuesday</weekday>
-<time>19:58</time>
+<time>17:58</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab.c</name>
@@ -1318,7 +1318,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-06</date>
 <weekday>Monday</weekday>
-<time>02:06</time>
+<time>00:06</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
@@ -1331,7 +1331,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-06</date>
 <weekday>Monday</weekday>
-<time>02:03</time>
+<time>00:03</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-keyboard.c</name>
@@ -1342,9 +1342,9 @@ menubar (will be optional later).
 </entry>
 
 <entry>
-<date>2002-05-06</date>
-<weekday>Monday</weekday>
-<time>00:43</time>
+<date>2002-05-05</date>
+<weekday>Sunday</weekday>
+<time>22:43</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>AUTHORS</name>
@@ -1401,7 +1401,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-05</date>
 <weekday>Sunday</weekday>
-<time>18:59</time>
+<time>16:59</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-keyboard.c</name>
@@ -1414,7 +1414,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-05</date>
 <weekday>Sunday</weekday>
-<time>18:35</time>
+<time>16:35</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window-view.c</name>
@@ -1440,7 +1440,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-05</date>
 <weekday>Sunday</weekday>
-<time>17:20</time>
+<time>15:20</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab.c</name>
@@ -1453,7 +1453,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-05</date>
 <weekday>Sunday</weekday>
-<time>17:15</time>
+<time>15:15</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window-activity.c</name>
@@ -1466,7 +1466,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-05</date>
 <weekday>Sunday</weekday>
-<time>04:35</time>
+<time>02:35</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
@@ -1488,7 +1488,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-05</date>
 <weekday>Sunday</weekday>
-<time>03:56</time>
+<time>01:56</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab-move.c</name>
@@ -1516,9 +1516,9 @@ menubar (will be optional later).
 </entry>
 
 <entry>
-<date>2002-05-05</date>
-<weekday>Sunday</weekday>
-<time>01:18</time>
+<date>2002-05-04</date>
+<weekday>Saturday</weekday>
+<time>23:18</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-itemlist.c</name>
@@ -1538,9 +1538,9 @@ menubar (will be optional later).
 </entry>
 
 <entry>
-<date>2002-05-05</date>
-<weekday>Sunday</weekday>
-<time>01:10</time>
+<date>2002-05-04</date>
+<weekday>Saturday</weekday>
+<time>23:10</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window-activity.c</name>
@@ -1551,9 +1551,9 @@ menubar (will be optional later).
 </entry>
 
 <entry>
-<date>2002-05-05</date>
-<weekday>Sunday</weekday>
-<time>01:09</time>
+<date>2002-05-04</date>
+<weekday>Saturday</weekday>
+<time>23:09</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab.c</name>
@@ -1564,9 +1564,9 @@ menubar (will be optional later).
 </entry>
 
 <entry>
-<date>2002-05-05</date>
-<weekday>Sunday</weekday>
-<time>00:51</time>
+<date>2002-05-04</date>
+<weekday>Saturday</weekday>
+<time>22:51</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-itemlist.c</name>
@@ -1577,9 +1577,9 @@ menubar (will be optional later).
 </entry>
 
 <entry>
-<date>2002-05-05</date>
-<weekday>Sunday</weekday>
-<time>00:37</time>
+<date>2002-05-04</date>
+<weekday>Saturday</weekday>
+<time>22:37</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
@@ -1629,7 +1629,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-04</date>
 <weekday>Saturday</weekday>
-<time>22:06</time>
+<time>20:06</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window.c</name>
@@ -1642,7 +1642,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-04</date>
 <weekday>Saturday</weekday>
-<time>21:55</time>
+<time>19:55</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab-move.c</name>
@@ -1655,7 +1655,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-04</date>
 <weekday>Saturday</weekday>
-<time>21:48</time>
+<time>19:48</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab.c</name>
@@ -1673,7 +1673,7 @@ menubar (will be optional later).
 <entry>
 <date>2002-05-04</date>
 <weekday>Saturday</weekday>
-<time>21:48</time>
+<time>19:48</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
@@ -1687,7 +1687,7 @@ messages while there's still windows.
 <entry>
 <date>2002-05-04</date>
 <weekday>Saturday</weekday>
-<time>21:41</time>
+<time>19:41</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/Makefile.am</name>
@@ -1700,7 +1700,7 @@ messages while there's still windows.
 <entry>
 <date>2002-05-04</date>
 <weekday>Saturday</weekday>
-<time>21:39</time>
+<time>19:39</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/Makefile.am</name>
@@ -1713,7 +1713,7 @@ messages while there's still windows.
 <entry>
 <date>2002-05-04</date>
 <weekday>Saturday</weekday>
-<time>21:26</time>
+<time>19:26</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>AUTHORS</name>
@@ -1726,7 +1726,7 @@ messages while there's still windows.
 <entry>
 <date>2002-05-04</date>
 <weekday>Saturday</weekday>
-<time>21:26</time>
+<time>19:26</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/Makefile.am</name>
@@ -1744,7 +1744,7 @@ messages while there's still windows.
 <entry>
 <date>2002-05-04</date>
 <weekday>Saturday</weekday>
-<time>21:25</time>
+<time>19:25</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
@@ -1766,7 +1766,7 @@ messages while there's still windows.
 <entry>
 <date>2002-05-04</date>
 <weekday>Saturday</weekday>
-<time>21:17</time>
+<time>19:17</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
@@ -1882,7 +1882,7 @@ reparenting widgets (== window d&amp;d, which works excellently now :)
 <entry>
 <date>2002-05-01</date>
 <weekday>Wednesday</weekday>
-<time>22:41</time>
+<time>20:41</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
@@ -1912,7 +1912,7 @@ reparenting widgets (== window d&amp;d, which works excellently now :)
 <entry>
 <date>2002-05-01</date>
 <weekday>Wednesday</weekday>
-<time>22:26</time>
+<time>20:26</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab-label.c</name>
@@ -1930,7 +1930,7 @@ reparenting widgets (== window d&amp;d, which works excellently now :)
 <entry>
 <date>2002-04-30</date>
 <weekday>Tuesday</weekday>
-<time>17:05</time>
+<time>15:05</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-tab-label.c</name>
@@ -1943,7 +1943,7 @@ reparenting widgets (== window d&amp;d, which works excellently now :)
 <entry>
 <date>2002-04-30</date>
 <weekday>Tuesday</weekday>
-<time>04:30</time>
+<time>02:30</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
@@ -1974,7 +1974,7 @@ existing windows..
 <entry>
 <date>2002-04-30</date>
 <weekday>Tuesday</weekday>
-<time>03:21</time>
+<time>01:21</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>README</name>
@@ -1987,7 +1987,7 @@ existing windows..
 <entry>
 <date>2002-04-30</date>
 <weekday>Tuesday</weekday>
-<time>03:13</time>
+<time>01:13</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>.cvsignore</name>
@@ -2004,7 +2004,7 @@ existing windows..
 <entry>
 <date>2002-04-30</date>
 <weekday>Tuesday</weekday>
-<time>03:00</time>
+<time>01:00</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>pixmaps/Makefile.am</name>
@@ -2090,7 +2090,7 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>23:14</time>
+<time>21:14</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-keyboard.c</name>
@@ -2103,7 +2103,7 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>23:05</time>
+<time>21:05</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>autogen.sh</name>
@@ -2116,7 +2116,7 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>23:04</time>
+<time>21:04</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>autogen.sh</name>
@@ -2129,7 +2129,7 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>23:04</time>
+<time>21:04</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>config-plugin.h.in</name>
@@ -2142,7 +2142,7 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>23:04</time>
+<time>21:04</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>configure.in</name>
@@ -2159,7 +2159,7 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>20:57</time>
+<time>18:57</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-nicklist.c</name>
@@ -2172,7 +2172,7 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>20:35</time>
+<time>18:35</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-menu-url.c</name>
@@ -2185,7 +2185,7 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>20:35</time>
+<time>18:35</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
@@ -2198,7 +2198,7 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>20:11</time>
+<time>18:11</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
@@ -2219,7 +2219,7 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>19:46</time>
+<time>17:46</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
@@ -2232,7 +2232,7 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>19:31</time>
+<time>17:31</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window.c</name>
@@ -2245,7 +2245,7 @@ dropping doesn't really work yet :) Also removed the deprecated GTK calls.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>19:24</time>
+<time>17:24</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-window-view.c</name>
@@ -2269,7 +2269,7 @@ Also added proper indenting to lines
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>18:14</time>
+<time>16:14</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-nicklist-view.c</name>
@@ -2282,7 +2282,7 @@ Also added proper indenting to lines
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>17:49</time>
+<time>15:49</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-channel.c</name>
@@ -2304,7 +2304,7 @@ Also added proper indenting to lines
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>17:23</time>
+<time>15:23</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>Makefile.am</name>
@@ -2321,7 +2321,7 @@ Also added proper indenting to lines
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>16:53</time>
+<time>14:53</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>.cvsignore</name>
@@ -2334,7 +2334,7 @@ Also added proper indenting to lines
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>16:53</time>
+<time>14:53</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>autogen.sh</name>
@@ -2351,7 +2351,7 @@ Also added proper indenting to lines
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>16:50</time>
+<time>14:50</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
@@ -2428,7 +2428,7 @@ Also added proper indenting to lines
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>03:24</time>
+<time>01:24</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
@@ -2442,7 +2442,7 @@ brought it there.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>03:21</time>
+<time>01:21</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
@@ -2455,7 +2455,7 @@ brought it there.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>03:15</time>
+<time>01:15</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
@@ -2497,7 +2497,7 @@ brought it there.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>02:49</time>
+<time>00:49</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
@@ -2510,7 +2510,7 @@ brought it there.
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
-<time>02:17</time>
+<time>00:17</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-entry.c</name>
@@ -2521,9 +2521,9 @@ brought it there.
 </entry>
 
 <entry>
-<date>2002-04-27</date>
-<weekday>Saturday</weekday>
-<time>01:30</time>
+<date>2002-04-26</date>
+<weekday>Friday</weekday>
+<time>23:30</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>TODO</name>
@@ -2534,9 +2534,9 @@ brought it there.
 </entry>
 
 <entry>
-<date>2002-04-27</date>
-<weekday>Saturday</weekday>
-<time>01:14</time>
+<date>2002-04-26</date>
+<weekday>Friday</weekday>
+<time>23:14</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-frame.c</name>
@@ -2552,9 +2552,9 @@ brought it there.
 </entry>
 
 <entry>
-<date>2002-04-27</date>
-<weekday>Saturday</weekday>
-<time>01:04</time>
+<date>2002-04-26</date>
+<weekday>Friday</weekday>
+<time>23:04</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
@@ -2592,7 +2592,7 @@ brought it there.
 <entry>
 <date>2002-04-26</date>
 <weekday>Friday</weekday>
-<time>23:48</time>
+<time>21:48</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
@@ -2626,7 +2626,7 @@ brought it there.
 <entry>
 <date>2002-04-26</date>
 <weekday>Friday</weekday>
-<time>23:46</time>
+<time>21:46</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/.cvsignore</name>
@@ -2639,7 +2639,7 @@ brought it there.
 <entry>
 <date>2002-04-26</date>
 <weekday>Friday</weekday>
-<time>22:47</time>
+<time>20:47</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-context-nick.c</name>
@@ -2689,7 +2689,7 @@ brought it there.
 <entry>
 <date>2002-04-26</date>
 <weekday>Friday</weekday>
-<time>19:56</time>
+<time>17:56</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/Makefile.am</name>
@@ -2735,7 +2735,7 @@ brought it there.
 <entry>
 <date>2002-04-26</date>
 <weekday>Friday</weekday>
-<time>17:41</time>
+<time>15:41</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>src/gui-context-nick.c</name>
@@ -2773,7 +2773,7 @@ brought it there.
 <entry>
 <date>2002-04-22</date>
 <weekday>Monday</weekday>
-<time>11:33</time>
+<time>09:33</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>configure.in</name>
@@ -2786,7 +2786,7 @@ brought it there.
 <entry>
 <date>2002-04-22</date>
 <weekday>Monday</weekday>
-<time>11:06</time>
+<time>09:06</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>AUTHORS</name>
@@ -2955,7 +2955,7 @@ brought it there.
 <entry>
 <date>2002-04-22</date>
 <weekday>Monday</weekday>
-<time>11:06</time>
+<time>09:06</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
 <name>AUTHORS</name>
