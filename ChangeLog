@@ -1,3 +1,14 @@
+2002-06-05 22:40  Timo Sirainen <tss@iki.fi>
+
+	* glade/irssi.glade, src/gui-channel.c, src/gui-tab.c,
+	src/gui-tab.h, src/gui-window-item-rec.h, src/gui-window-view.c,
+	src/setup-channels.c, src/setup-prefs.c,
+	src/setup-servers-network.c, src/setup-servers-server.c,
+	src/setup-servers.c, src/setup.c, src/setup.h,
+	src/glade/interface.c: setup dialog changes, and active window
+	title is now colored. There's the setup dialog for changing the
+	color, but it doesn't actually work yet..
+
 2002-05-19 08:47  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-menu-channel-topic.c, gui-menu-nick.c, gui-menu-url.c:
