@@ -22,3 +22,6 @@ pixmaps = \
 #	ball-red.png
 
 all: $(pixmaps)
+
+clean-generic:
+	rm -f $(pixmaps)

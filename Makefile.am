@@ -1,2 +1,2 @@
-SUBDIRS = src pixmaps
+SUBDIRS = pixmaps src
 
