@@ -27,7 +27,7 @@
 #include "gui-menu.h"
 
 static MenuItem http_items[] = {
-	{ ACTION_COMMAND,	"Open with _Galeon", "exec - -nosh galeon $0" },
+	{ ACTION_COMMAND,	"Open with _Galeon", "exec - -nosh -quiet galeon $0" },
 	{ ACTION_COMMAND,	"Open with _Mozilla", "exec - -nosh mozilla $0" }
 };
 
