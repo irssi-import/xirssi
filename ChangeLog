@@ -1,3 +1,12 @@
+2002-05-05 18:59  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-keyboard.c: pgup/pgdown works
+
+2002-05-05 18:35  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-window-view.c, gui-window.c, gui-window.h, gui-tab.c:
+	Fixes to window scrolling.
+
 2002-05-05 17:20  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-tab.c: tab numbers weren't updated when tab was closed.
