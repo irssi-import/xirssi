@@ -435,6 +435,20 @@ void setup_server_add_protocol_widget(GtkTable *table, int y,
 	}
 }
 
+static void server_set_func(GtkTreeViewColumn *column,
+			    GtkCellRenderer   *cell,
+			    GtkTreeModel      *model,
+			    GtkTreeIter       *iter,
+			    gpointer           data)
+{
+	void *iter_data;
+
+	gtk_tree_model_get(model, iter, 0, &iter_data, -1);
+
+	g_object_set(G_OBJECT(cell), "weight",
+		     IS_CHATNET(iter_data) ? PANGO_WEIGHT_BOLD : 0, NULL);
+}
+
 static GtkWidget *server_tree_new(void)
 {
 	GtkWidget *frame, *hbox, *sw, *view, *buttonbox, *button;
@@ -481,6 +495,8 @@ static GtkWidget *server_tree_new(void)
 	column = gtk_tree_view_column_new_with_attributes("Name", renderer,
 							  "text", COL_NAME,
 							  NULL);
+	gtk_tree_view_column_set_cell_data_func(column, renderer,
+						server_set_func, NULL, NULL);
 	gtk_tree_view_append_column(tree_view, column);
 	gtk_tree_view_column_set_min_width(column, 200);
 
