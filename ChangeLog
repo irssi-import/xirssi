@@ -1,3 +1,7 @@
+2002-06-11 23:21  Timo Sirainen <tss@iki.fi>
+
+	* glade/irssi.glade, src/glade/interface.c: fix
+
 2002-06-11 23:14  Timo Sirainen <tss@iki.fi>
 
 	* pixmaps/channels.png, pixmaps/filtering-settings.png,
