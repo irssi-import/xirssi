@@ -1,21 +1,16 @@
- - hilight colors in window activity aren't handled..
-   they come as %codes, how to change them to rgb values?
-   core changes required to parse them i think..
+
+BUGS:
 
  - text widget problems:
-   - fix pango criticals (or rather wait for gtk+ people fix it)
-   - crashing at startup because of: 
-      - layout saved windows
-      - /echo foo ~/.irssi/startup + autoconnect to server
-   - crashing sometimes when closing windows (tabs?)..
+   - everything fixed in gtk cvs?
+      - crashing sometimes when closing windows (tabs?)
 
+FEATURES:
 
  - window moving:
-   - moving split windows up/down doesn't move their title
-   - allow moving tabs by dnd like galeon
-   - add "window drag" button and remove those arrow up/down buttons. drag
-     button could be used to move the window anywhere
+   - allow reordering split windows
    - .. should we change window's refnum when moving?
+   - /window move has no effect - should it?
 
  - charset stuff:
    - channel-specific charset settings
@@ -25,23 +20,25 @@
  - keyboard:
    - fix yank_from_cutbuffer
    - redirections don't work
-   - pgup/pgdown
+   - doesn't work at all with darix?
 
  - popups
    - channel/query popup for parting etc.
    - gui-context-channel.c for joining etc. probably irc-specific so it
      works with @#channel stuff in /whois etc.. also possibility to ask the
      channel topic with /list
+   - nick popup:
+      - uses /kickban -gui, maybe change go /guikick and implement it..
+      - a way to remote-whois multiple nicks, needs a new command..
 
- - add a pulldown menu containing all windows / window items in the tab, so
-   you can use it to switch to another channel or split window and easily
-   see which is currently active
+ - hilight colors in window activity aren't handled..
+   they come as %codes, how to change them to rgb values?
+   core changes required to parse them i think..
+
  - statusbar
  - lots of irc-specific stuff
  - nicklist: show ignored people with overstrike font, show away people
    with grey color (0.9 stuff maybe)
  - show notify list under nicklist
-
- - when connecting to server, the window won't scroll down sometimes..
-   and first window's width isn't updated immediately after showing nicklist
-   so it prints /names list too wide
+ - make /layout work
+ - /set scrollback stuff to limit text buffer sizes
