@@ -153,6 +153,7 @@ WindowView *gui_window_view_new(Tab *tab, WindowGui *window,
         gtk_text_view_set_editable(view->view, FALSE);
 	gtk_text_view_set_left_margin(view->view, 2);
 	gtk_text_view_set_right_margin(view->view, 2);
+	gtk_text_view_set_indent(view->view, -50);
 
 	/* FIXME: configurable */
 	gdk_color_parse("black", &color);
@@ -161,7 +162,7 @@ WindowView *gui_window_view_new(Tab *tab, WindowGui *window,
 	gtk_widget_modify_text(text_view, GTK_STATE_NORMAL, &color);
 
 	gtk_widget_show_all(view->widget);
-	get_font_size(text_view, window->monospace_font,
+	get_font_size(text_view, window->font_monospace,
 		      &view->font_width, &view->font_height);
 
 	gui_window_view_set_title(view);

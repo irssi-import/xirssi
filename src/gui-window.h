@@ -9,8 +9,13 @@ struct _WindowGui {
 	GtkWidget *widget;
 
 	GtkTextBuffer *buffer;
+
 	GtkTextTagTable *tagtable;
-        PangoFontDescription *monospace_font;
+	GtkTextTag *tag_underline;
+	GtkTextTag *tag_monospace;
+
+	PangoFontDescription *font_monospace;
+	int indent;
 
 	GSList *views;
 	WindowView *active_view;

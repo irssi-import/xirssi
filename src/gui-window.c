@@ -148,10 +148,10 @@ static void gui_window_print(WindowGui *window, TextDest *dest,
 			     const char *text, int fg, int bg, int flags)
 {
 	GtkTextTag *tag;
-	GtkTextIter iter;
+	GtkTextIter iter, start_iter;
 	GdkColor *colortab;
-	char *utf8_text, tag_name[50];
-	int offset;
+	char *utf8_text, fg_tag_name[20], bg_tag_name[20];
+	int start_offset;
 
 	utf8_text = g_locale_to_utf8(text, -1, NULL, NULL, NULL);
 	if (utf8_text == NULL) {
@@ -169,10 +169,41 @@ static void gui_window_print(WindowGui *window, TextDest *dest,
 
 	if (flags & GUI_PRINT_FLAG_NEWLINE)
 		gtk_text_buffer_insert(window->buffer, &iter, "\n", 1);
+
+	if (flags & GUI_PRINT_FLAG_INDENT) {
+		/* get the current cursor position from
+		   left margin in pixels */
+		GdkRectangle location;
+		GtkTextView *view;
+
+		view = window->active_view->view;
+		gtk_text_view_get_iter_location(view, &iter, &location);
+		window->indent = -location.x +
+			gtk_text_view_get_left_margin(view);
+	}
+
+	/* add text */
+	start_offset = gtk_text_iter_get_offset(&iter);
+	gtk_text_buffer_insert(window->buffer, &iter, utf8_text, -1);
+	gtk_text_buffer_place_cursor(window->buffer, &iter);
+	gtk_text_buffer_get_iter_at_offset(window->buffer, &start_iter,
+					   start_offset);
+
+	/* add tags */
+	if (flags & GUI_PRINT_FLAG_UNDERLINE) {
+		gtk_text_buffer_apply_tag(window->buffer, window->tag_underline,
+					  &start_iter, &iter);
+	}
+	if (flags & GUI_PRINT_FLAG_MONOSPACE) {
+		gtk_text_buffer_apply_tag(window->buffer, window->tag_monospace,
+					  &start_iter, &iter);
+	}
+
 	if (flags & GUI_PRINT_FLAG_BOLD)
 		fg |= 8;
 	if (flags & GUI_PRINT_FLAG_BLINK)
 		bg |= 8;
+
 	if ((flags & GUI_PRINT_FLAG_MIRC_COLOR) == 0) {
 		/* normal color */
 		if (fg < 0 || fg > COLORS)
@@ -180,53 +211,47 @@ static void gui_window_print(WindowGui *window, TextDest *dest,
 		if (bg < 0 || bg > COLORS)
 			bg = -1;
 		colortab = colors;
+
+		g_snprintf(fg_tag_name, sizeof(fg_tag_name), "c_%d", fg);
+		g_snprintf(bg_tag_name, sizeof(bg_tag_name), "bc_%d", bg);
 	} else {
 		/* mirc color */
 		fg %= MIRC_COLORS;
 		bg %= MIRC_COLORS;
 		colortab = mirc_colors;
+
+		g_snprintf(fg_tag_name, sizeof(fg_tag_name), "m_%d", fg);
+		g_snprintf(bg_tag_name, sizeof(bg_tag_name), "bm_%d", bg);
 	}
 
-	g_snprintf(tag_name, sizeof(tag_name), "c_%d_%d%c%c%c", fg, bg,
-		   (flags & GUI_PRINT_FLAG_UNDERLINE) ? '-' : '_',
-		   (flags & GUI_PRINT_FLAG_MIRC_COLOR) ? 'M' : '_',
-		   (flags & GUI_PRINT_FLAG_MONOSPACE) ? '#' : '_');
-
-	tag = gtk_text_tag_table_lookup(window->tagtable, tag_name);
-	if (tag == NULL) {
-		/* tag didn't exist, need to create it */
-		tag = gtk_text_buffer_create_tag(window->buffer,
-						 tag_name, NULL);
-		if (fg != -1) {
+	if (fg >= 0) {
+		tag = gtk_text_tag_table_lookup(window->tagtable, fg_tag_name);
+		if (tag == NULL) {
+			tag = gtk_text_buffer_create_tag(window->buffer,
+							 fg_tag_name, NULL);
 			g_object_set(G_OBJECT(tag), "foreground-gdk",
 				     &colortab[fg], NULL);
 		}
 
-		if (bg != -1) {
-			g_object_set(G_OBJECT(tag), "background-gdk",
-				     &colortab[bg], NULL);
-		}
-
-		if (flags & GUI_PRINT_FLAG_UNDERLINE) {
-			g_object_set(G_OBJECT(tag), "underline",
-				     PANGO_UNDERLINE_SINGLE, NULL);
-		}
-		if (flags & GUI_PRINT_FLAG_MONOSPACE) {
-			g_object_set(G_OBJECT(tag), "font-desc",
-				     window->monospace_font, NULL);
-		}
+		gtk_text_buffer_apply_tag(window->buffer, tag,
+					  &start_iter, &iter);
 	}
 
-	/* add text */
-	offset = gtk_text_iter_get_offset(&iter);
-	gtk_text_buffer_insert_with_tags(window->buffer, &iter,
-					 utf8_text, -1, tag, NULL);
-	gtk_text_buffer_place_cursor(window->buffer, &iter);
+	if (bg >= 0) {
+		tag = gtk_text_tag_table_lookup(window->tagtable, bg_tag_name);
+		if (tag == NULL) {
+			tag = gtk_text_buffer_create_tag(window->buffer,
+							 bg_tag_name, NULL);
+			g_object_set(G_OBJECT(tag), "background-gdk",
+				     &colortab[fg], NULL);
+		}
+
+		gtk_text_buffer_apply_tag(window->buffer, tag,
+					  &start_iter, &iter);
+	}
 
 	/* add context tags */
-	gtk_text_buffer_get_end_iter(window->buffer, &iter);
-	gtk_text_iter_set_offset(&iter, offset);
-	gui_window_print_mark_context(window, dest, &iter, utf8_text);
+	gui_window_print_mark_context(window, dest, &start_iter, utf8_text);
 
 	g_free(utf8_text);
 }
@@ -250,9 +275,21 @@ static void sig_window_created(Window *window, void *automatic)
 	gui->window = window;
 	window->gui_data = gui;
 
-	gui->monospace_font = pango_font_description_from_string("fixed 10");
 	gui->buffer = gtk_text_buffer_new(NULL);
 	gui->tagtable = gtk_text_buffer_get_tag_table(gui->buffer);
+	gui->font_monospace = pango_font_description_from_string("fixed 10");
+
+	/* underline tag */
+	gui->tag_underline =
+		gtk_text_buffer_create_tag(gui->buffer, NULL, NULL);
+	g_object_set(G_OBJECT(gui->tag_underline), "underline",
+		     PANGO_UNDERLINE_SINGLE, NULL);
+	/* monospace tag */
+	gui->tag_monospace =
+		gtk_text_buffer_create_tag(gui->buffer, NULL, NULL);
+	g_object_set(G_OBJECT(gui->tag_monospace), "font-desc",
+		     gui->font_monospace, NULL);
+
 	gui_window_add_view(gui, active_frame->active_tab);
 	g_object_unref(G_OBJECT(gui->buffer));
 
@@ -281,7 +318,7 @@ static void sig_window_destroyed(Window *window)
 		gui_tab_remove_widget(view->tab, view->widget);
 	}
 
-	pango_font_description_free(gui->monospace_font);
+	pango_font_description_free(gui->font_monospace);
 
 	g_free(gui);
 	window->gui_data = NULL;
@@ -328,9 +365,39 @@ static void sig_gui_print_text(Window *window, void *fgcolor,
 	gui_window_print(WINDOW_GUI(window), dest, str, fg, bg, flags);
 }
 
+static GtkTextTag *get_indent_tag(WindowGui *gui, int indent)
+{
+	GtkTextTag *tag;
+	char tag_name[50];
+
+	g_snprintf(tag_name, sizeof(tag_name), "i_%d", indent);
+	tag = gtk_text_tag_table_lookup(gui->tagtable, tag_name);
+	if (tag == NULL) {
+		tag = gtk_text_buffer_create_tag(gui->buffer, tag_name, NULL);
+		g_object_set(G_OBJECT(tag), "indent", indent, NULL);
+	}
+	return tag;
+}
+
 static void sig_gui_printtext_finished(Window *window)
 {
-	gui_window_print(WINDOW_GUI(window), NULL, "\n", -1, -1, 0);
+	WindowGui *gui;
+	GtkTextIter start_iter, end_iter;
+
+	gui = WINDOW_GUI(window);
+	if (gui->indent != 0) {
+		/* set indentation for line */
+		gtk_text_buffer_get_end_iter(gui->buffer, &end_iter);
+		memcpy(&start_iter, &end_iter, sizeof(end_iter));
+                gtk_text_iter_backward_line(&start_iter);
+
+		gtk_text_buffer_apply_tag(gui->buffer,
+					  get_indent_tag(gui, gui->indent),
+					  &start_iter, &end_iter);
+		gui->indent = 0;
+	}
+
+	gui_window_print(gui, NULL, "\n", -1, -1, 0);
 }
 
 void gui_windows_init(void)
