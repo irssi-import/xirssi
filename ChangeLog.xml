@@ -5,6 +5,19 @@
 <entry>
 <date>2002-05-12</date>
 <weekday>Sunday</weekday>
+<time>15:51</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/setup-servers.c</name>
+<revision>1.5</revision>
+</file>
+<msg>added autoconnect-column
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-12</date>
+<weekday>Sunday</weekday>
 <time>14:33</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
