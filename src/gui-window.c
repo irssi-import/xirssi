@@ -29,6 +29,9 @@
 #include "gui-window-view.h"
 #include "gui-window-context.h"
 
+void gui_window_activities_init(void);
+void gui_window_activities_deinit(void);
+
 #define COLORS 16
 static GdkColor colors[COLORS] = {
 	{ 0, 0, 0, 0 }, /* black */
@@ -111,6 +114,34 @@ void gui_window_update_width(WindowGui *window)
 
 	window->window->width = width;
 	window->window->height = height;
+}
+
+static int tab_has_window(Tab *tab, Window *window)
+{
+	GSList *tmp;
+
+	for (tmp = tab->views; tmp != NULL; tmp = tmp->next) {
+		WindowView *view = tmp->data;
+
+		if (view->window->window == window)
+			return TRUE;
+	}
+
+	return FALSE;
+}
+
+int gui_window_is_visible(Window *window)
+{
+	GSList *tmp;
+
+	for (tmp = frames; tmp != NULL; tmp = tmp->next) {
+		Frame *frame = tmp->data;
+
+		if (tab_has_window(frame->active_tab, window))
+			return TRUE;
+	}
+
+	return FALSE;
 }
 
 static void gui_window_print(WindowGui *window, TextDest *dest,
@@ -316,10 +347,12 @@ void gui_windows_init(void)
 
 	gui_window_views_init();
 	gui_window_contexts_init();
+        gui_window_activities_init();
 }
 
 void gui_windows_deinit(void)
 {
+        gui_window_activities_deinit();
 	gui_window_contexts_deinit();
 	gui_window_views_deinit();
 

@@ -33,6 +33,7 @@ xirssi_SOURCES = \
 	gui-nicklist-view.c \
 	gui-tab.c \
 	gui-window.c \
+	gui-window-activity.c \
 	gui-window-context.c \
 	gui-window-view.c \
         irssi.c

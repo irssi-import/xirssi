@@ -22,6 +22,8 @@ void gui_window_add_view(WindowGui *window, Tab *tab);
 void gui_window_remove_view(WindowGui *window, WindowView *view);
 
 void gui_window_update_width(WindowGui *window);
+/* Returns TRUE if window is visible in any of the frames. */
+int gui_window_is_visible(Window *window);
 
 void gui_windows_init(void);
 void gui_windows_deinit(void);

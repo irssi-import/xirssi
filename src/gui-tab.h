@@ -7,10 +7,13 @@ struct _Tab {
 
 	GtkWidget *widget;
 	GtkLabel *label;
+
 	GList *panes;
+	GSList *views;
 
 	NicklistView *nicklist;
 	Window *active_win;
+	int data_level;
 };
 
 Tab *gui_tab_new(Frame *frame);

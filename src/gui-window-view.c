@@ -44,6 +44,8 @@ static gboolean event_destroy(GtkWidget *widget, WindowView *view)
 
 	gdk_cursor_destroy(view->hand_cursor);
 	gui_window_remove_view(view->window, view);
+
+	view->tab->views = g_slist_remove(view->tab->views, view);
 	gui_tab_unref(view->tab);
 
 	g_free(view);
@@ -114,6 +116,7 @@ WindowView *gui_window_view_new(Tab *tab, WindowGui *window,
 	view->hand_cursor = gdk_cursor_new(GDK_HAND2);
 
 	view->tab = tab;
+	view->tab->views = g_slist_prepend(view->tab->views, view);
 	gui_tab_ref(view->tab);
 
 	g_signal_connect(G_OBJECT(buffer), "changed",
