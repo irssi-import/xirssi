@@ -32,8 +32,10 @@
 
 static gboolean event_destroy(GtkWidget *widget, Itemlist *itemlist)
 {
-	gtk_widget_unref(itemlist->short_menu);
-	gtk_widget_unref(itemlist->long_menu);
+	if (itemlist->short_menu != NULL) {
+		gtk_widget_unref(itemlist->short_menu);
+		gtk_widget_unref(itemlist->long_menu);
+	}
 	g_free(itemlist);
 	return FALSE;
 }

@@ -396,7 +396,7 @@ void gui_tab_set_active_window(Tab *tab, Window *window)
 
 static void tab_set_label(Tab *tab, Window *window)
 {
-	if (window->active == NULL) {
+	if (window == NULL || window->active == NULL) {
 		/* empty window */
 		gtk_label_set_text(tab->label,
 				   window != NULL && window->name != NULL ?

@@ -90,15 +90,16 @@ static void create_pixmap_popup(GtkWidget **widget, char **data)
 static Frame *frame_find_at(int x, int y)
 {
 	GSList *tmp;
-	int winx, winy;
+	GdkWindow *window;
+
+	window = gdk_window_at_pointer(&x, &y);
+	if (window != NULL)
+		window = gdk_window_get_toplevel(window);
 
 	for (tmp = frames; tmp != NULL; tmp = tmp->next) {
 		Frame *frame = tmp->data;
-		GtkAllocation *alloc = &GTK_WIDGET(frame->window)->allocation;
 
-		gtk_window_get_position(frame->window, &winx, &winy);
-		if (x >= winx && x < winx + alloc->width &&
-		    y >= winy && y < winy + alloc->height)
+		if (window == frame->widget->window)
 			return frame;
 	}
 
@@ -473,7 +474,8 @@ static gboolean event_motion(GtkWidget *widget, GdkEventButton *event,
 	if (frame != NULL) {
 		/* dragging inside notebook */
 		pos = notebook_get_pos_at(frame->notebook, x, y);
-		if (pos == drag->dest_pos && !drag->detaching)
+		if (!drag->detaching && frame == drag->dest_frame &&
+		    pos == drag->dest_pos)
 			return FALSE;
 
 		/* moved */
