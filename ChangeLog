@@ -1,3 +1,18 @@
+2002-04-27 03:24  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-frame.c: focus was automoved too late to entry line and
+	it lost the keypress that brought it there.
+
+2002-04-27 03:21  Timo Sirainen <tss@iki.fi>
+
+	* TODO: updated
+
+2002-04-27 03:15  Timo Sirainen <tss@iki.fi>
+
+	* src/: Makefile.am, gui-context-nick.c, gui-context-url.c,
+	gui-menu-nick.c, gui-menu-nick.h, gui-menu-url.c, gui-menu.h,
+	gui-nicklist-view.c: support for url popup menus
+
 2002-04-27 02:49  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-frame.c: fix up/down/tab keys to work again properly
