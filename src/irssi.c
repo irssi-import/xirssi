@@ -36,6 +36,7 @@
 #include "gui-nicklist.h"
 #include "gui-window.h"
 #include "gui-tab.h"
+#include "gui-url.h"
 
 #include "setup-servers.h"
 
@@ -108,7 +109,8 @@ static void gui_finish_init(void)
 	gui_channels_init();
         gui_context_nick_init();
         gui_context_url_init();
-        setup_servers_init();
+	gui_urls_init();
+	setup_servers_init();
 
 	fe_common_core_finish_init();
 
@@ -136,6 +138,7 @@ static void gui_deinit(void)
 	signal_remove("gui exit", (SIGNAL_FUNC) sig_exit);
 
         setup_servers_deinit();
+	gui_urls_deinit();
         gui_context_url_deinit();
         gui_context_nick_deinit();
 	gui_channels_deinit();

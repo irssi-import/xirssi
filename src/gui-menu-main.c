@@ -25,17 +25,26 @@
 #include "dialogs.h"
 #include "setup-servers.h"
 
+#define FAQ_URL "http://nl.irssi.org/?page=docs&doc=faq"
+#define STARTUP_HOWTO_URL "http://irssi.org/?page=docs&doc=startup-HOWTO"
+
 enum {
 	ACTION_QUIT = ACTION_CUSTOM,
 
 	ACTION_SETUP_SERVERS,
 
+	ACTION_FAQ,
+	ACTION_HOWTO,
+	ACTION_HOMEPAGE,
 	ACTION_ABOUT
 };
 
+static int images_initialized = FALSE;
+static GtkWidget *img_quit, *img_home;
+
 static MenuItem items[] = {
 	{ ACTION_SUB,		"_Irssi" },
-	{ ACTION_QUIT,		"_Quit" },
+	{ ACTION_QUIT,		"_Quit", NULL, &img_quit },
 	{ ACTION_ENDSUB },
 
 	{ ACTION_SUB,		"_Setup" },
@@ -43,6 +52,10 @@ static MenuItem items[] = {
 	{ ACTION_ENDSUB },
 
 	{ ACTION_SUB,		"_Help" },
+	{ ACTION_FAQ,		"_FAQ" },
+	{ ACTION_HOWTO,		"_Startup HOWTO" },
+	{ ACTION_HOMEPAGE,	"_Home Page", NULL, &img_home },
+	{ ACTION_SEPARATOR },
 	{ ACTION_ABOUT,		"_About" },
 	{ ACTION_ENDSUB }
 };
@@ -53,18 +66,37 @@ static void menu_callback(void *user_data, const char *item_data, int action)
 	case ACTION_QUIT:
 		signal_emit("command quit", 1, "");
 		break;
-	case ACTION_ABOUT:
-		dialog_about_show();
-		break;
 	case ACTION_SETUP_SERVERS:
 		setup_servers_show();
 		break;
+
+	case ACTION_FAQ:
+		signal_emit("url open", 2, FAQ_URL, "http");
+		break;
+	case ACTION_HOWTO:
+		signal_emit("url open", 2, STARTUP_HOWTO_URL, "http");
+		break;
+	case ACTION_HOMEPAGE:
+		signal_emit("url open", 2, IRSSI_WEBSITE, "http");
+		break;
+	case ACTION_ABOUT:
+		dialog_about_show();
+		break;
 	}
+}
+
+static void init_images(void)
+{
+	img_quit = gtk_image_new_from_stock(GTK_STOCK_QUIT, GTK_ICON_SIZE_MENU);
+	img_home = gtk_image_new_from_stock(GTK_STOCK_HOME, GTK_ICON_SIZE_MENU);
 }
 
 GtkWidget *gui_menu_bar_new(void)
 {
 	GtkWidget *menubar;
+
+	if (!images_initialized)
+		init_images();
 
 	menubar = gtk_menu_bar_new();
 	gui_main_menu_fill(menubar);

@@ -13,6 +13,8 @@ typedef struct {
 	MenuAction action;
 	char *name;
 	char *data;
+
+	GtkWidget **image;
 } MenuItem;
 
 typedef void (*MenuCallback) (void *user_data, const char *item_data,

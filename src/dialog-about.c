@@ -46,7 +46,7 @@ static gboolean event_website_press(GtkWidget *widget, GdkEventButton *event)
 
 void dialog_about_show(void)
 {
-	GtkWidget *vbox, *hbox, *eventbox1, *eventbox2, *label;
+	GtkWidget *vbox, *hbox, *eventbox1, *eventbox2, *label, *img;
         PangoFontDescription *font_desc;
 	GdkCursor *cursor;
 	char str[100];
@@ -64,10 +64,18 @@ void dialog_about_show(void)
 	g_signal_connect(G_OBJECT(dialog), "response",
 			 GTK_SIGNAL_FUNC(gtk_widget_destroy), NULL);
 
+	hbox = gtk_hbox_new(FALSE, 10);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), hbox,
+			   TRUE, TRUE, 0);
+
+	/* image */
+	img = gtk_image_new_from_stock(GTK_STOCK_DIALOG_INFO,
+				       GTK_ICON_SIZE_DIALOG);
+	gtk_box_pack_start(GTK_BOX(hbox), img, FALSE, FALSE, 0);
+
 	vbox = gtk_vbox_new(FALSE, 5);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox), 10);
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), vbox,
-			   TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox), vbox, TRUE, TRUE, 0);
 
 	/* name */
 	label = gtk_label_new(PACKAGE);

@@ -67,7 +67,12 @@ void gui_menu_fill(GtkWidget *menu, MenuItem *items, int items_count,
 			}
 			break;
 		default:
-			item = gtk_menu_item_new_with_mnemonic(items[i].name);
+			if (items[i].image != NULL) {
+				item = gtk_image_menu_item_new_with_mnemonic(items[i].name);
+                                gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(item), *items[i].image);
+			} else {
+				item = gtk_menu_item_new_with_mnemonic(items[i].name);
+			}
 			g_object_set_data(G_OBJECT(item), "item_data",
 					  items[i].data);
 			g_object_set_data(G_OBJECT(item), "callback",
