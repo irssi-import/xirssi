@@ -44,6 +44,7 @@ noinst_HEADERS = \
 	gui-channel.h \
 	gui-entry.h \
 	gui-frame.h \
+	gui-keyboard.h \
 	gui-menu.h \
 	gui-nicklist.h \
 	gui-nicklist-view.h \

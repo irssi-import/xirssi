@@ -2,6 +2,14 @@
    they come as %codes, how to change them to rgb values?
    core changes required to parse them i think..
 
+ - text widget problems:
+   - fix pango criticals (or rather wait for gtk+ people fix it)
+   - crashing at startup because of: 
+      - layout saved windows
+      - /echo foo ~/.irssi/startup + autoconnect to server
+   - crashing sometimes when closing windows (tabs?)..
+
+
  - window moving:
    - moving split windows up/down doesn't move their title
    - allow moving tabs by dnd like galeon
@@ -25,7 +33,6 @@
      works with @#channel stuff in /whois etc.. also possibility to ask the
      channel topic with /list
 
- - fix pango criticals (or rather wait for gtk+ people fix it)
  - add a pulldown menu containing all windows / window items in the tab, so
    you can use it to switch to another channel or split window and easily
    see which is currently active

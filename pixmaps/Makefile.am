@@ -12,14 +12,15 @@ pixmaps = \
 	ball-orange.h \
 	ball-red.h
 
-#EXTRA_DIST = \
-#	ball-blue.png \
-#	ball-lightblue.png \
-#	ball-pink.png \
-#	ball-yellow.png \
-#	ball-green.png \
-#	ball-orange.png \
-#	ball-red.png
+# .. can't I combine these lists into just one..?
+EXTRA_DIST = \
+	ball-blue.png \
+	ball-lightblue.png \
+	ball-pink.png \
+	ball-yellow.png \
+	ball-green.png \
+	ball-orange.png \
+	ball-red.png
 
 all: $(pixmaps)
 
