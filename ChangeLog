@@ -1,3 +1,53 @@
+2002-05-04 21:55  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-tab-move.c: tab label wasn't updated correctly when
+	extractng pane into tab.
+
+2002-05-04 21:48  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-tab.c, irssi.c: removed debugging things.
+
+2002-05-04 21:48  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-frame.c: call /quit before last window is destroyed, so
+	it can print the quit messages while there's still windows.
+
+2002-05-04 21:41  Timo Sirainen <tss@iki.fi>
+
+	* pixmaps/Makefile.am: make clean shouldn't delete non-generated
+	pixmaps :)
+
+2002-05-04 21:39  Timo Sirainen <tss@iki.fi>
+
+	* pixmaps/Makefile.am: just moving around files :)
+
+2002-05-04 21:26  Timo Sirainen <tss@iki.fi>
+
+	* AUTHORS: updated
+
+2002-05-04 21:26  Timo Sirainen <tss@iki.fi>
+
+	* pixmaps/: Makefile.am, move.xpm: added move.xpm
+
+2002-05-04 21:25  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-frame.c, gui-tab.c, gui-window-view.c: removed
+	debugging info.
+
+2002-05-04 21:17  Timo Sirainen <tss@iki.fi>
+
+	* src/: Makefile.am, gui-channel.c, gui-context-nick.c,
+	gui-entry.c, gui-entry.h, gui-frame.c, gui-frame.h, gui-keyboard.c,
+	gui-nicklist-view.c, gui-nicklist-view.h, gui-nicklist.c,
+	gui-nicklist.h, gui-tab-label.c, gui-tab-label.h, gui-tab-move.c,
+	gui-tab-move.h, gui-tab.c, gui-tab.h, gui-window-activity.c,
+	gui-window-context.c, gui-window-view.c, gui-window-view.h,
+	gui-window.c, gui-window.h, irssi.c, module.h: Rewriting stuff.
+	Irssi's structs are more tied to gtk widgets, and removed
+	refcounting from irssi's side. All this to get code working better
+	with reparenting widgets (== window d&d, which works excellently
+	now :)
+
 2002-05-01 22:41  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-frame.c, gui-frame.h, gui-tab.c, gui-tab.h,
