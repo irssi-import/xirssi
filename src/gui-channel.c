@@ -28,18 +28,15 @@
 #include "gui-nicklist.h"
 #include "gui-menu.h"
 
-#include "lock.xpm"
-
 #include <gdk/gdkkeysyms.h>
 
 typedef struct {
 	Channel *channel;
+	GdkColor lock_color, unlock_color;
 
-	GtkWidget *widget, *lock_image;
+	GtkWidget *widget;
 	GtkEntry *topic;
 } ChannelTitle;
-
-static GdkPixbuf *lock_pixbuf;
 
 void gui_channel_topic_lock(GtkWidget *widget)
 {
@@ -57,7 +54,8 @@ void gui_channel_topic_lock(GtkWidget *widget)
 				   title->channel->topic : "");
 
 		/* show lock image */
-		gtk_widget_show(title->lock_image);
+		gtk_widget_modify_base(GTK_WIDGET(title->topic),
+				       GTK_STATE_NORMAL, &title->lock_color);
 
 		/* remove focus */
 		gtk_widget_grab_focus(frame->entry->widget);
@@ -78,7 +76,8 @@ void gui_channel_topic_unlock(GtkWidget *widget)
 
 		/* hide lock image */
 		title = g_object_get_data(G_OBJECT(widget), "title");
-		gtk_widget_hide(title->lock_image);
+		gtk_widget_modify_base(GTK_WIDGET(title->topic),
+				       GTK_STATE_NORMAL, &title->unlock_color);
 
 		/* get focus */
 		gtk_widget_grab_focus(widget);
@@ -151,7 +150,7 @@ static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
 
 GtkWidget *_get_title(WindowItem *witem)
 {
-	GtkWidget *hbox, *topic, *image, *eventbox;
+	GtkWidget *hbox, *topic;
 	ChannelGui *gui;
 	ChannelTitle *title;
 
@@ -164,15 +163,6 @@ GtkWidget *_get_title(WindowItem *witem)
 	hbox = title->widget = gtk_hbox_new(FALSE, 0);
 	g_signal_connect(G_OBJECT(hbox), "destroy",
 			 G_CALLBACK(event_destroy), title);
-
-	/* lock image */
-	eventbox = gtk_event_box_new();
-	g_signal_connect(G_OBJECT(eventbox), "button_press_event",
-			 G_CALLBACK(event_button_press), title);
-	gtk_box_pack_start(GTK_BOX(hbox), eventbox, FALSE, FALSE, 2);
-
-	title->lock_image = image = gtk_image_new_from_pixbuf(lock_pixbuf);
-	gtk_container_add(GTK_CONTAINER(eventbox), image);
 
 	/* topic */
 	topic = gtk_entry_new();
@@ -187,6 +177,13 @@ GtkWidget *_get_title(WindowItem *witem)
 	if (title->channel->topic != NULL)
 		gtk_entry_set_text(title->topic, title->channel->topic);
 	gtk_box_pack_start(GTK_BOX(hbox), topic, TRUE, TRUE, 0);
+
+	/* set the lcoking colors */
+	memcpy(&title->lock_color, &topic->style->bg[GTK_STATE_NORMAL],
+	       sizeof(GdkColor));
+	memcpy(&title->unlock_color, &topic->style->base[GTK_STATE_NORMAL],
+	       sizeof(GdkColor));
+	gtk_widget_modify_base(topic, GTK_STATE_NORMAL, &title->lock_color);
 
 	gtk_widget_show_all(hbox);
 	return hbox;
@@ -251,8 +248,6 @@ static void sig_channel_topic_changed(Channel *channel)
 
 void gui_channels_init(void)
 {
-	lock_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **) lock_xpm);
-
 	signal_add_first("channel created", (SIGNAL_FUNC) sig_channel_created);
 	signal_add("channel destroyed", (SIGNAL_FUNC) sig_channel_destroyed);
 	signal_add("channel topic changed", (SIGNAL_FUNC) sig_channel_topic_changed);
@@ -260,8 +255,6 @@ void gui_channels_init(void)
 
 void gui_channels_deinit(void)
 {
-	gdk_pixbuf_unref(lock_pixbuf);
-
 	signal_remove("channel created", (SIGNAL_FUNC) sig_channel_created);
 	signal_remove("channel destroyed", (SIGNAL_FUNC) sig_channel_destroyed);
 	signal_remove("channel topic changed", (SIGNAL_FUNC) sig_channel_topic_changed);

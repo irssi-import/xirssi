@@ -22,7 +22,7 @@ FEATURES:
    - redirections don't work
    - doesn't work at all with darix?
 
- - popups
+ - menus / popups
    - channel/query popup for parting etc.
    - gui-context-channel.c for joining etc. probably irc-specific so it
      works with @#channel stuff in /whois etc.. also possibility to ask the
@@ -30,6 +30,7 @@ FEATURES:
    - nick popup:
       - uses /kickban -gui, maybe change go /guikick and implement it..
       - a way to remote-whois multiple nicks, needs a new command..
+   - make menubar optional, show menubar stuff in right-click-popup
 
  - hilight colors in window activity aren't handled..
    they come as %codes, how to change them to rgb values?
@@ -37,8 +38,7 @@ FEATURES:
 
  - statusbar
  - lots of irc-specific stuff
- - nicklist: show ignored people with overstrike font, show away people
-   with grey color (0.9 stuff maybe)
+ - nicklist: show ignored people with overstrike font, show away people with
+   grey color (0.9 stuff maybe, and gtk2.2 stuff - too difficult with 2.0)
  - show notify list under nicklist
  - make /layout work
- - /set scrollback stuff to limit text buffer sizes

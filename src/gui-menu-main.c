@@ -47,7 +47,7 @@ static MenuItem items[] = {
 	{ ACTION_QUIT,		"_Quit", NULL, &img_quit },
 	{ ACTION_ENDSUB },
 
-	{ ACTION_SUB,		"_Setup" },
+	{ ACTION_SUB,		"_Settings" },
 	{ ACTION_SETUP_SERVERS,	"_Servers" },
 	{ ACTION_ENDSUB },
 
