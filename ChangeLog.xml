@@ -5,6 +5,54 @@
 <entry>
 <date>2002-05-05</date>
 <weekday>Sunday</weekday>
+<time>01:18</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-itemlist.c</name>
+<revision>1.3</revision>
+</file>
+<file>
+<name>src/gui-tab-move.c</name>
+<revision>1.4</revision>
+</file>
+<file>
+<name>src/gui-tab.c</name>
+<revision>1.9</revision>
+</file>
+<commondir>src/</commondir>
+<msg>crashfixes
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-05</date>
+<weekday>Sunday</weekday>
+<time>01:10</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-window-activity.c</name>
+<revision>1.3</revision>
+</file>
+<msg>window activity was broken
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-05</date>
+<weekday>Sunday</weekday>
+<time>01:09</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-tab.c</name>
+<revision>1.8</revision>
+</file>
+<msg>changing window name didn't update tab's label.
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-05</date>
+<weekday>Sunday</weekday>
 <time>00:51</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
