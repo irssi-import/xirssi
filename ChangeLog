@@ -1,3 +1,14 @@
+2002-05-10 23:31  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-nicklist-cell-renderer.h, gui-nicklist-cell-renderer.c:
+	not needed, removed.
+
+2002-05-10 23:12  Timo Sirainen <tss@iki.fi>
+
+	* src/: Makefile.am, gui-nicklist-view.c, gui-nicklist-view.h,
+	gui-nicklist.c, gui-nicklist.h, irssi.c: yet another rewrite of
+	nicklist rendering.
+
 2002-05-10 00:33  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-nicklist-cell-renderer.c, gui-nicklist-cell-renderer.h,
