@@ -5,6 +5,74 @@
 <entry>
 <date>2002-05-09</date>
 <weekday>Thursday</weekday>
+<time>18:52</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/dialog-about.c</name>
+<revision>1.4</revision>
+</file>
+<msg>minor update
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-09</date>
+<weekday>Thursday</weekday>
+<time>18:30</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-tab-move.c</name>
+<revision>1.6</revision>
+</file>
+<msg>when detaching tab, the origin frame's tabs weren't renumbered.
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-09</date>
+<weekday>Thursday</weekday>
+<time>18:04</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>AUTHORS</name>
+<revision>1.5</revision>
+</file>
+<file>
+<name>TODO</name>
+<revision>1.7</revision>
+</file>
+<file>
+<name>pixmaps/Makefile.am</name>
+<revision>1.11</revision>
+</file>
+<file>
+<name>pixmaps/lock.xpm</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>src/gui-channel.c</name>
+<revision>1.5</revision>
+</file>
+<file>
+<name>src/gui-menu-main.c</name>
+<revision>1.3</revision>
+</file>
+<file>
+<name>src/gui-url.c</name>
+<revision>1.1</revision>
+</file>
+<file>
+<name>src/gui-url.h</name>
+<revision>1.1</revision>
+</file>
+<msg>forgot to add gui-url.*, using grey background instead of lock icon now for
+topic locking, few minor changes.
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-09</date>
+<weekday>Thursday</weekday>
 <time>16:46</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
