@@ -1,3 +1,8 @@
+2004-08-19 19:58  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-frame.c, gui-itemlist.c, gui-window-context.c,
+	  module.h, setup.c: Compiles and works again
+
 2002-12-05 17:16  Timo Sirainen <tss@iki.fi>
 
 	* configure.in: fix
