@@ -27,6 +27,7 @@ xirssi_SOURCES = \
 	gui-context-url.c \
 	gui-entry.c \
 	gui-frame.c \
+	gui-keyboard.c \
 	gui-menu.c \
 	gui-menu-nick.c \
 	gui-nicklist.c \

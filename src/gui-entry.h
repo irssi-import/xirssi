@@ -21,7 +21,4 @@ int gui_entry_unref(Entry *entry);
 
 void gui_entry_set_window(Entry *entry, Window *window);
 
-void gui_entries_init(void);
-void gui_entries_deinit(void);
-
 #endif

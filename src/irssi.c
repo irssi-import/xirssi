@@ -32,8 +32,8 @@
 #include "fe-common-core.h"
 //#include "themes.h"
 
-#include "gui-entry.h"
 #include "gui-channel.h"
+#include "gui-keyboard.h"
 #include "gui-nicklist.h"
 #include "gui-window.h"
 
@@ -87,7 +87,7 @@ static void gui_finish_init(void)
 #endif
 
 	gui_windows_init();
-	gui_entries_init();
+	gui_keyboards_init();
 	gui_nicklists_init();
 	gui_channels_init();
         gui_context_nick_init();
@@ -121,7 +121,7 @@ static void gui_deinit(void)
         gui_context_nick_deinit();
 	gui_channels_deinit();
 	gui_nicklists_deinit();
-	gui_entries_deinit();
+	gui_keyboards_deinit();
 	gui_windows_deinit();
 
 	//theme_unregister();

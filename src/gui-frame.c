@@ -24,6 +24,7 @@
 
 #include "gui-frame.h"
 #include "gui-entry.h"
+#include "gui-keyboard.h"
 #include "gui-tab.h"
 #include "gui-window.h"
 
@@ -61,52 +62,6 @@ static gboolean event_focus(GtkWidget *widget, GdkEventFocus *event,
 	return FALSE;
 }
 
-char *gui_key2str(GdkEventKey *event)
-{
-	GString *cmd;
-	char *ret;
-	int chr, len;
-
-	chr = event->keyval;
-
-	/* get alt/ctrl/shift masks */
-	cmd = g_string_new(NULL);
-	if (event->state & GDK_SHIFT_MASK) {
-		if (chr > 255)
-			g_string_prepend(cmd, "shift-");
-		else
-			chr = i_toupper(chr);
-	}
-
-	if (event->state & GDK_MOD1_MASK)
-		g_string_prepend(cmd, "meta-");
-
-	if (event->state & GDK_CONTROL_MASK) {
-		if (chr > 255)
-			g_string_prepend(cmd, "ctrl-");
-		else {
-			g_string_prepend(cmd, "^");
-			chr = i_toupper(chr);
-		}
-	}
-
-	/* get key name */
-	if (event->keyval > 255) {
-		len = cmd->len;
-		g_string_append(cmd, gdk_keyval_name(event->keyval));
-		g_strdown(cmd->str+len);
-	} else if (event->keyval == ' ')
-		g_string_append(cmd, "space");
-	else if (event->keyval == '\n')
-		g_string_append(cmd, "return");
-	else
-		g_string_sprintfa(cmd, "%c", chr);
-
-	ret = cmd->str;
-	g_string_free(cmd, FALSE);
-	return ret;
-}
-
 static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
 				Frame *frame)
 {
@@ -119,7 +74,7 @@ static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
 	    event->keyval == GDK_Alt_L || event->keyval == GDK_Alt_R)
 		return FALSE;
 
-	str = gui_key2str(event);
+	str = gui_keyboard_get_event_string(event);
 	if (key_pressed(frame->entry->keyboard, str)) {
 		g_signal_stop_emission_by_name(G_OBJECT(widget),
 					       "key_press_event");
