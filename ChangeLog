@@ -1,3 +1,18 @@
+2002-04-27 19:46  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-frame.c: key handling changes
+
+2002-04-27 19:31  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-window.c: indent fixes
+
+2002-04-27 19:24  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-window-view.c, gui-window.c, gui-window.h: Moved
+	printing with one big tag into multiple smaller tags, finally
+	figured out that this is the correct way it should have been done
+	from beginning :) Also added proper indenting to lines
+
 2002-04-27 18:14  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-nicklist-view.c: doubleclicking nick did /query, but with
