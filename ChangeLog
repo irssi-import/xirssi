@@ -1,3 +1,7 @@
+2002-11-20 17:04  Timo Sirainen <tss@iki.fi>
+
+	* src/Makefile.am: Added @PROG_LIBS@ to linker flags
+
 2002-09-25 07:52  Timo Sirainen <tss@iki.fi>
 
 	* pixmaps/dcc.png: added
