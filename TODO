@@ -14,9 +14,11 @@
    - convert nick info to utf8 for nicklist (some servers support non-ascii
      nicks) and statusbar (realname especially)
 
- - add url popup menu
+ - keyboard:
+   - fix yank_from_cutbuffer
+   - redirections don't work
+
  - fix pango criticals (or rather wait for gtk+ people fix it)
- - keyboard: fix yank_from_cutbuffer
  - add a combobox containing all windows / window items in the tab, so
    you can use it to switch to another channel or split window and easily
    see which is currently active
