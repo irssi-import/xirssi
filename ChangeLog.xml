@@ -5,6 +5,45 @@
 <entry>
 <date>2002-04-27</date>
 <weekday>Saturday</weekday>
+<time>17:49</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-channel.c</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>src/gui-context-nick.c</name>
+<revision>1.7</revision>
+</file>
+<file>
+<name>src/gui-frame.c</name>
+<revision>1.7</revision>
+</file>
+<commondir>src/</commondir>
+<msg>window size fixes, locale -&gt; utf8 converting for topics and nick infos.
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-27</date>
+<weekday>Saturday</weekday>
+<time>17:23</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>Makefile.am</name>
+<revision>1.2</revision>
+</file>
+<file>
+<name>pixmaps/Makefile.am</name>
+<revision>1.3</revision>
+</file>
+<msg>added "make clean" and fixed the src/pixmaps dir order
+</msg>
+</entry>
+
+<entry>
+<date>2002-04-27</date>
+<weekday>Saturday</weekday>
 <time>16:53</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
