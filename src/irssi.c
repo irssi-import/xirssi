@@ -34,6 +34,7 @@
 #include "gui-itemlist.h"
 #include "gui-keyboard.h"
 #include "gui-nicklist.h"
+#include "gui-nicklist-view.h"
 #include "gui-window.h"
 #include "gui-tab.h"
 #include "gui-url.h"
@@ -106,6 +107,7 @@ static void gui_finish_init(void)
 	gui_itemlists_init();
 	gui_keyboards_init();
 	gui_nicklists_init();
+	gui_nicklist_views_init();
 	gui_channels_init();
         gui_context_nick_init();
         gui_context_url_init();
@@ -142,6 +144,7 @@ static void gui_deinit(void)
         gui_context_url_deinit();
         gui_context_nick_deinit();
 	gui_channels_deinit();
+	gui_nicklist_views_deinit();
 	gui_nicklists_deinit();
 	gui_keyboards_deinit();
 	gui_itemlists_deinit();

@@ -39,7 +39,6 @@ xirssi_SOURCES = \
 	gui-menu-url.c \
 	gui-nicklist.c \
 	gui-nicklist-view.c \
-	gui-nicklist-cell-renderer.c \
 	gui-tab.c \
 	gui-tab-move.c \
 	gui-url.c \
@@ -68,7 +67,6 @@ noinst_HEADERS = \
 	gui-window-context.h \
 	gui-window-item-rec.h \
 	gui-window-view.h \
-	gui-nicklist-cell-renderer.h \
 	setup.h \
 	setup-servers.h \
 	module.h

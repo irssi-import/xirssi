@@ -3,12 +3,6 @@
 
 #include "nicklist.h"
 
-enum {
-	NICKLIST_COL_PTR,
-	NICKLIST_COL_NAME,
-	NICKLIST_COL_PIXMAP
-};
-
 struct _Nicklist {
 	Channel *channel;
 

@@ -27,53 +27,31 @@
 #include "gui-nicklist.h"
 #include "gui-nicklist-view.h"
 
-#include "ball-green.h"
-#include "ball-orange.h"
-#include "ball-yellow.h"
-
-static GdkPixbuf *op_pixbuf, *voice_pixbuf, *halfop_pixbuf;
-
 static gint nicklist_sort_func(GtkTreeModel *model,
 			       GtkTreeIter *a, GtkTreeIter *b,
 			       gpointer user_data)
 {
 	Nick *nick1, *nick2;
-	GValue value;
 
-	memset(&value, 0, sizeof(value));
+	gtk_tree_model_get(model, a, 0, &nick1, -1);
+	gtk_tree_model_get(model, b, 0, &nick2, -1);
 
-	gtk_tree_model_get_value(model, a, NICKLIST_COL_PTR, &value);
-	nick1 = value.data[0].v_pointer;
-	g_value_unset(&value);
-
-	gtk_tree_model_get_value(model, b, NICKLIST_COL_PTR, &value);
-	nick2 = value.data[0].v_pointer;
-	g_value_unset(&value);
-
-	return nick1 == NULL ? -1 : nick2 == NULL ? 1 :
-		nicklist_compare(nick1, nick2);
+	return nicklist_compare(nick1, nick2);
 }
 
 Nicklist *gui_nicklist_new(Channel *channel)
 {
 	Nicklist *nicklist;
 	GtkListStore *store;
-	GtkTreeIter iter;
 
 	nicklist = g_new0(Nicklist, 1);
 	nicklist->channel = channel;
 
-	nicklist->store = store =
-		gtk_list_store_new(3, G_TYPE_POINTER, G_TYPE_STRING,
-				   GDK_TYPE_PIXBUF);
-	gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(store),
-					NICKLIST_COL_NAME,
+	nicklist->store = store = gtk_list_store_new(1, G_TYPE_POINTER);
+	gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(store), 0,
 					nicklist_sort_func, NULL, NULL);
-	gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(store),
-					     NICKLIST_COL_NAME,
+	gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(store), 0,
 					     GTK_SORT_ASCENDING);
-
-	gtk_list_store_append(nicklist->store, &iter);
 
 	signal_emit("gui nicklist created", 1, nicklist);
 	return nicklist;
@@ -95,46 +73,39 @@ void gui_nicklist_destroy(Nicklist *nicklist)
 
 static void gui_nicklist_update_label(Nicklist *nicklist)
 {
-	GtkTreeIter iter;
+	GSList *tmp;
 	char label[128];
 
 	g_snprintf(label, sizeof(label), "%d ops, %d total",
 		   nicklist->ops, nicklist->nicks);
 
-	gtk_tree_model_get_iter_first(GTK_TREE_MODEL(nicklist->store), &iter);
-	gtk_list_store_set(nicklist->store, &iter,
-			   NICKLIST_COL_NAME, label, -1);
+	for (tmp = nicklist->views; tmp != NULL; tmp = tmp->next) {
+		NicklistView *view = tmp->data;
+
+		gui_nicklist_view_update_label(view, label);
+	}
 }
 
 static void gui_nicklist_add(Channel *channel, Nick *nick, int update_label)
 {
 	ChannelGui *gui;
-	GdkPixbuf *pixbuf;
 	GtkTreeIter iter;
 
 	gui = CHANNEL_GUI(channel);
 
-	if (nick->op) {
+	if (nick->op)
 		gui->nicklist->ops++;
-		pixbuf = op_pixbuf;
-	} else if (nick->halfop) {
+	else if (nick->halfop)
 		gui->nicklist->halfops++;
-		pixbuf = halfop_pixbuf;
-	} else if (nick->voice) {
+	else if (nick->voice)
 		gui->nicklist->voices++;
-		pixbuf = voice_pixbuf;
-	} else {
+	else
 		gui->nicklist->normal++;
-		pixbuf = NULL;
-	}
 	gui->nicklist->nicks++;
 
 	gtk_list_store_append(gui->nicklist->store, &iter);
 	gtk_list_store_set(gui->nicklist->store, &iter,
-			   NICKLIST_COL_PTR, nick,
-			   NICKLIST_COL_NAME, nick->nick,
-			   NICKLIST_COL_PIXMAP, pixbuf,
-			   -1);
+			   0, nick, -1);
 
 	gui_nicklist_update_label(gui->nicklist);
 }
@@ -144,7 +115,6 @@ static void gui_nicklist_remove(Channel *channel, Nick *nick, int update_label)
 	ChannelGui *gui;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	GValue value;
 	NICK_REC *val_nick;
 
 	gui = CHANNEL_GUI(channel);
@@ -161,16 +131,10 @@ static void gui_nicklist_remove(Channel *channel, Nick *nick, int update_label)
 		gui->nicklist->normal--;
 	gui->nicklist->nicks--;
 
-	memset(&value, 0, sizeof(value));
-
 	model = GTK_TREE_MODEL(gui->nicklist->store);
         gtk_tree_model_get_iter_first(model, &iter);
 	do {
-		gtk_tree_model_get_value(model, &iter, NICKLIST_COL_PTR,
-					 &value);
-		val_nick = value.data[0].v_pointer;
-		g_value_unset(&value);
-
+		gtk_tree_model_get(model, &iter, 0, &val_nick, -1);
 		if (val_nick == nick) {
 			gtk_list_store_remove(gui->nicklist->store, &iter);
 			break;
@@ -219,13 +183,6 @@ static void gui_nicklist_mode_changed(Channel *channel, Nick *nick)
 
 void gui_nicklists_init(void)
 {
-	op_pixbuf = gdk_pixbuf_new_from_inline(sizeof(ball_green),
-					       ball_green, FALSE, NULL);
-	halfop_pixbuf = gdk_pixbuf_new_from_inline(sizeof(ball_orange),
-						   ball_orange, FALSE, NULL);
-	voice_pixbuf = gdk_pixbuf_new_from_inline(sizeof(ball_yellow),
-						  ball_yellow, FALSE, NULL);
-
 	signal_add("nicklist new", (SIGNAL_FUNC) gui_nicklist_add);
 	signal_add("nicklist remove", (SIGNAL_FUNC) gui_nicklist_remove);
 	signal_add("nicklist changed", (SIGNAL_FUNC) gui_nicklist_changed);
@@ -234,10 +191,6 @@ void gui_nicklists_init(void)
 
 void gui_nicklists_deinit(void)
 {
-	gdk_pixbuf_unref(op_pixbuf);
-	gdk_pixbuf_unref(halfop_pixbuf);
-	gdk_pixbuf_unref(voice_pixbuf);
-
 	signal_remove("nicklist new", (SIGNAL_FUNC) gui_nicklist_add);
 	signal_remove("nicklist remove", (SIGNAL_FUNC) gui_nicklist_remove);
 	signal_remove("nicklist changed", (SIGNAL_FUNC) gui_nicklist_changed);

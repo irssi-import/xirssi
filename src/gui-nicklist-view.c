@@ -25,8 +25,13 @@
 #include "gui-tab.h"
 #include "gui-nicklist.h"
 #include "gui-nicklist-view.h"
-#include "gui-nicklist-cell-renderer.h"
 #include "gui-menu.h"
+
+#include "ball-green.h"
+#include "ball-orange.h"
+#include "ball-yellow.h"
+
+static GdkPixbuf *op_pixbuf, *voice_pixbuf, *halfop_pixbuf;
 
 static gboolean event_destroy(GtkWidget *widget, NicklistView *view)
 {
@@ -37,26 +42,13 @@ static gboolean event_destroy(GtkWidget *widget, NicklistView *view)
 	return FALSE;
 }
 
-static Nick *tree_get_nick(GtkTreeModel *model, GtkTreeIter *iter)
-{
-	GValue value;
-	Nick *nick;
-
-	memset(&value, 0, sizeof(value));
-	gtk_tree_model_get_value(model, iter, NICKLIST_COL_PTR, &value);
-	nick = value.data[0].v_pointer;
-	g_value_unset(&value);
-
-	return nick;
-}
-
 static void sel_get_nicks(GtkTreeModel *model, GtkTreePath *path,
 			  GtkTreeIter *iter, gpointer data)
 {
 	GSList **list = data;
 	Nick *nick;
 
-	nick = tree_get_nick(model, iter);
+	gtk_tree_model_get(model, iter, 0, &nick, -1);
 	if (nick != NULL)
 		*list = g_slist_prepend(*list, nick->nick);
 }
@@ -77,12 +69,9 @@ static gboolean event_button_press(GtkTreeView *tree, GdkEventButton *event,
 	if (!gtk_tree_model_get_iter(model, &iter, path))
 		return FALSE;
 
-	if (event->type == GDK_BUTTON_PRESS && !gtk_tree_path_prev(path)) {
-		/* clicked on first row - don't allow it */
-		return TRUE;
-	} else if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
+	if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
 		/* left-doubleclick - open the nick under mouse in query */
-		nick = tree_get_nick(model, &iter);
+		gtk_tree_model_get(model, &iter, 0, &nick, -1);
 		if (nick != NULL) {
 			signal_emit("command query", 2, nick->nick,
 				    view->nicklist->channel->server);
@@ -128,6 +117,7 @@ static Nick *get_nick_at(NicklistView *view, int x, int y)
 	GtkTreePath *path;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
+	Nick *nick;
 
 	/* get path to item under mouse */
 	if (!gtk_tree_view_get_path_at_pos(view->view, x, y,
@@ -139,7 +129,8 @@ static Nick *get_nick_at(NicklistView *view, int x, int y)
 	if (!gtk_tree_model_get_iter(model, &iter, path))
 		return NULL;
 
-	return tree_get_nick(model, &iter);
+	gtk_tree_model_get(model, &iter, 0, &nick, -1);
+	return nick;
 }
 
 static gboolean event_motion(GtkWidget *tree, GdkEventButton *event,
@@ -180,29 +171,47 @@ static gboolean event_leave(GtkWidget *tree, GdkEventCrossing *event,
 	return FALSE;
 }
 
-static void render_nickname(GtkTreeViewColumn *column,
-			    GtkCellRenderer   *cell,
-			    GtkTreeModel      *model,
-			    GtkTreeIter       *iter,
-			    gpointer           data)
+static void nick_set_func_pixbuf(GtkTreeViewColumn *column,
+				 GtkCellRenderer   *cell,
+				 GtkTreeModel      *model,
+				 GtkTreeIter       *iter,
+				 gpointer           data)
 {
-	NicklistView *view = data;
+	Nick *nick;
+	GdkPixbuf *pixbuf;
+
+	gtk_tree_model_get(model, iter, 0, &nick, -1);
+
+	if (nick->op)
+		pixbuf = op_pixbuf;
+	else if (nick->halfop)
+		pixbuf = halfop_pixbuf;
+	else if (nick->voice)
+		pixbuf = voice_pixbuf;
+	else
+		pixbuf = NULL;
+
+	g_object_set(GTK_CELL_RENDERER(cell), "pixbuf", pixbuf, NULL);
+}
+
+static void nick_set_func_text(GtkTreeViewColumn *column,
+			       GtkCellRenderer   *cell,
+			       GtkTreeModel      *model,
+			       GtkTreeIter       *iter,
+			       gpointer           data)
+{
 	Nick *nick;
 
-	nick = tree_get_nick(model, iter);
-	if (nick == NULL) {
-		g_object_set(G_OBJECT(cell), "background-gdk",
-			     &view->widget->style->bg[GTK_STATE_NORMAL], NULL);
-	} else {
-		g_object_set(G_OBJECT(cell), "background-gdk", NULL, NULL);
-	}
+	gtk_tree_model_get(model, iter, 0, &nick, -1);
+
+	g_object_set(G_OBJECT(cell), "background-gdk", NULL, NULL);
+	g_object_set(G_OBJECT(cell), "text", nick->nick, NULL);
 }
 
 NicklistView *gui_nicklist_view_new(Tab *tab)
 {
 	GtkWidget *space, *sw, *list, *vbox, *frame;
 	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
 	NicklistView *view;
 	int handle_size;
 
@@ -249,28 +258,25 @@ NicklistView *gui_nicklist_view_new(Tab *tab)
 			 G_CALLBACK(event_leave), view);
 	view->view = GTK_TREE_VIEW(list);
 	gtk_container_add(GTK_CONTAINER(sw), list);
-	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(list), FALSE);
 
 	gtk_tree_selection_set_mode(gtk_tree_view_get_selection(view->view),
 				    GTK_SELECTION_MULTIPLE);
 
-	/* nick mode pixmap */
-	renderer = gtk_cell_renderer_nicklist_pixmap_new();
-	column = gtk_tree_view_column_new_with_attributes(NULL, renderer,
-							  "pixbuf",
-							  NICKLIST_COL_PIXMAP,
-							  NULL);
-	gtk_tree_view_append_column(GTK_TREE_VIEW(list), column);
-
 	/* nick name text */
+	view->column = gtk_tree_view_column_new();
+        gtk_tree_view_column_set_alignment(view->column, 0.5);
+
+	renderer = gtk_cell_renderer_pixbuf_new ();
+	gtk_tree_view_column_pack_start(view->column, renderer, FALSE);
+	gtk_tree_view_column_set_cell_data_func(view->column, renderer,
+						nick_set_func_pixbuf,
+						NULL, NULL);
 	renderer = gtk_cell_renderer_text_new();
-	column = gtk_tree_view_column_new_with_attributes(NULL, renderer,
-							  "text",
-							  NICKLIST_COL_NAME,
-							  NULL);
-	gtk_tree_view_column_set_cell_data_func(column, renderer,
-						render_nickname, view, NULL);
-	gtk_tree_view_append_column(GTK_TREE_VIEW(list), column);
+	gtk_tree_view_column_pack_start(view->column, renderer, TRUE);
+	gtk_tree_view_column_set_cell_data_func(view->column, renderer,
+						nick_set_func_text,
+						NULL, NULL);
+	gtk_tree_view_append_column(GTK_TREE_VIEW(list), view->column);
 
 	signal_emit("gui nicklist view created", 1, view);
 	return view;
@@ -291,4 +297,26 @@ void gui_nicklist_view_set(NicklistView *view, Nicklist *nicklist)
 
 	gtk_tree_view_set_model(view->view, nicklist == NULL ? NULL :
 				GTK_TREE_MODEL(nicklist->store));
+}
+
+void gui_nicklist_view_update_label(NicklistView *view, const char *label)
+{
+	gtk_tree_view_column_set_title(view->column, label);
+}
+
+void gui_nicklist_views_init(void)
+{
+	op_pixbuf = gdk_pixbuf_new_from_inline(sizeof(ball_green),
+					       ball_green, FALSE, NULL);
+	halfop_pixbuf = gdk_pixbuf_new_from_inline(sizeof(ball_orange),
+						   ball_orange, FALSE, NULL);
+	voice_pixbuf = gdk_pixbuf_new_from_inline(sizeof(ball_yellow),
+						  ball_yellow, FALSE, NULL);
+}
+
+void gui_nicklist_views_deinit(void)
+{
+	gdk_pixbuf_unref(op_pixbuf);
+	gdk_pixbuf_unref(halfop_pixbuf);
+	gdk_pixbuf_unref(voice_pixbuf);
 }
