@@ -44,11 +44,13 @@ create_preferences (void)
   GtkWidget *frame8;
   GtkWidget *scrolledwindow1;
   GtkWidget *server_tree;
+  GtkWidget *vbox17;
   GtkWidget *vbuttonbox1;
   GtkWidget *server_add_network;
   GtkWidget *server_add_server;
   GtkWidget *server_edit;
   GtkWidget *server_remove;
+  GtkWidget *server_connect;
   GtkWidget *label4;
   GtkWidget *label41;
   GtkWidget *page_channels;
@@ -322,6 +324,78 @@ create_preferences (void)
   GtkWidget *quit_message;
   GtkWidget *label91;
   GtkWidget *label135;
+  GtkWidget *page_fontscolors;
+  GtkWidget *frame45;
+  GtkWidget *table24;
+  GtkWidget *label193;
+  GtkWidget *label194;
+  GtkWidget *font;
+  GtkWidget *font_monospace;
+  GtkWidget *font_font;
+  GtkWidget *font_font_monospace;
+  GtkWidget *table27;
+  GtkWidget *button34;
+  GtkWidget *color_default_text;
+  GtkWidget *button35;
+  GtkWidget *color_bold_text;
+  GtkWidget *label201;
+  GtkWidget *button37;
+  GtkWidget *color_background;
+  GtkWidget *label203;
+  GtkWidget *label200;
+  GtkWidget *hseparator30;
+  GtkWidget *label202;
+  GtkWidget *font_bold;
+  GtkWidget *font_font_bold;
+  GtkWidget *label187;
+  GtkWidget *frame46;
+  GtkWidget *table25;
+  GtkWidget *label190;
+  GtkWidget *label192;
+  GtkWidget *button27;
+  GtkWidget *color_active_title_background;
+  GtkWidget *button28;
+  GtkWidget *color_active_title_text;
+  GtkWidget *button29;
+  GtkWidget *color_inactive_title_background;
+  GtkWidget *button30;
+  GtkWidget *color_inactive_title_text;
+  GtkWidget *window_title_defaults;
+  GtkWidget *label189;
+  GtkWidget *hseparator31;
+  GtkWidget *label191;
+  GtkWidget *label188;
+  GtkWidget *frame47;
+  GtkWidget *table26;
+  GtkWidget *button31;
+  GtkWidget *color_activity_text;
+  GtkWidget *button32;
+  GtkWidget *color_activity_msg;
+  GtkWidget *button33;
+  GtkWidget *color_activity_highlight;
+  GtkWidget *label197;
+  GtkWidget *label198;
+  GtkWidget *label199;
+  GtkWidget *label195;
+  GtkWidget *label185;
+  GtkWidget *page_themes;
+  GtkWidget *frame43;
+  GtkWidget *table23;
+  GtkWidget *checkbutton1;
+  GtkWidget *vbuttonbox16;
+  GtkWidget *theme_refresh;
+  GtkWidget *theme_select;
+  GtkWidget *theme_delete;
+  GtkWidget *frame44;
+  GtkWidget *scrolledwindow16;
+  GtkWidget *theme_tree;
+  GtkWidget *frame42;
+  GtkWidget *scrolledwindow15;
+  GtkWidget *theme_preview;
+  GtkWidget *hseparator29;
+  GtkWidget *label204;
+  GtkWidget *label183;
+  GtkWidget *label186;
   GtkWidget *dialog_action_area1;
   GtkWidget *cancelbutton1;
   GtkWidget *okbutton1;
@@ -413,10 +487,15 @@ create_preferences (void)
   gtk_widget_show (server_tree);
   gtk_container_add (GTK_CONTAINER (scrolledwindow1), server_tree);
 
+  vbox17 = gtk_vbox_new (FALSE, 0);
+  gtk_widget_set_name (vbox17, "vbox17");
+  gtk_widget_show (vbox17);
+  gtk_box_pack_start (GTK_BOX (hbox2), vbox17, FALSE, TRUE, 0);
+
   vbuttonbox1 = gtk_vbutton_box_new ();
   gtk_widget_set_name (vbuttonbox1, "vbuttonbox1");
   gtk_widget_show (vbuttonbox1);
-  gtk_box_pack_start (GTK_BOX (hbox2), vbuttonbox1, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox17), vbuttonbox1, FALSE, TRUE, 0);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (vbuttonbox1), GTK_BUTTONBOX_START);
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (vbuttonbox1), 5);
 
@@ -443,6 +522,11 @@ create_preferences (void)
   gtk_widget_show (server_remove);
   gtk_container_add (GTK_CONTAINER (vbuttonbox1), server_remove);
   GTK_WIDGET_SET_FLAGS (server_remove, GTK_CAN_DEFAULT);
+
+  server_connect = gtk_button_new_with_mnemonic ("Connect");
+  gtk_widget_set_name (server_connect, "server_connect");
+  gtk_widget_show (server_connect);
+  gtk_box_pack_start (GTK_BOX (vbox17), server_connect, FALSE, FALSE, 28);
 
   label4 = gtk_label_new ("Servers");
   gtk_widget_set_name (label4, "label4");
@@ -2203,6 +2287,513 @@ create_preferences (void)
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 16), label135);
   gtk_label_set_justify (GTK_LABEL (label135), GTK_JUSTIFY_LEFT);
 
+  page_fontscolors = gtk_vbox_new (FALSE, 7);
+  gtk_widget_set_name (page_fontscolors, "page_fontscolors");
+  gtk_widget_show (page_fontscolors);
+  gtk_container_add (GTK_CONTAINER (prefs_notebook), page_fontscolors);
+
+  frame45 = gtk_frame_new (NULL);
+  gtk_widget_set_name (frame45, "frame45");
+  gtk_widget_show (frame45);
+  gtk_box_pack_start (GTK_BOX (page_fontscolors), frame45, FALSE, TRUE, 0);
+
+  table24 = gtk_table_new (4, 3, FALSE);
+  gtk_widget_set_name (table24, "table24");
+  gtk_widget_show (table24);
+  gtk_container_add (GTK_CONTAINER (frame45), table24);
+  gtk_container_set_border_width (GTK_CONTAINER (table24), 7);
+  gtk_table_set_row_spacings (GTK_TABLE (table24), 3);
+  gtk_table_set_col_spacings (GTK_TABLE (table24), 7);
+
+  label193 = gtk_label_new ("Default font");
+  gtk_widget_set_name (label193, "label193");
+  gtk_widget_show (label193);
+  gtk_table_attach (GTK_TABLE (table24), label193, 0, 1, 0, 1,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label193), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label193), 1, 0.5);
+
+  label194 = gtk_label_new ("Monospace font");
+  gtk_widget_set_name (label194, "label194");
+  gtk_widget_show (label194);
+  gtk_table_attach (GTK_TABLE (table24), label194, 0, 1, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label194), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label194), 1, 0.5);
+
+  font = gtk_entry_new ();
+  gtk_widget_set_name (font, "font");
+  gtk_widget_show (font);
+  gtk_table_attach (GTK_TABLE (table24), font, 1, 2, 0, 1,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  font_monospace = gtk_entry_new ();
+  gtk_widget_set_name (font_monospace, "font_monospace");
+  gtk_widget_show (font_monospace);
+  gtk_table_attach (GTK_TABLE (table24), font_monospace, 1, 2, 2, 3,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  font_font = gtk_button_new_with_mnemonic ("Change...");
+  gtk_widget_set_name (font_font, "font_font");
+  gtk_widget_show (font_font);
+  gtk_table_attach (GTK_TABLE (table24), font_font, 2, 3, 0, 1,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  font_font_monospace = gtk_button_new_with_mnemonic ("Change...");
+  gtk_widget_set_name (font_font_monospace, "font_font_monospace");
+  gtk_widget_show (font_font_monospace);
+  gtk_table_attach (GTK_TABLE (table24), font_font_monospace, 2, 3, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  table27 = gtk_table_new (3, 4, FALSE);
+  gtk_widget_set_name (table27, "table27");
+  gtk_widget_show (table27);
+  gtk_table_attach (GTK_TABLE (table24), table27, 0, 3, 3, 4,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+  gtk_table_set_row_spacings (GTK_TABLE (table27), 3);
+  gtk_table_set_col_spacings (GTK_TABLE (table27), 7);
+
+  button34 = gtk_button_new ();
+  gtk_widget_set_name (button34, "button34");
+  gtk_widget_show (button34);
+  gtk_table_attach (GTK_TABLE (table27), button34, 0, 1, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  color_default_text = gtk_event_box_new ();
+  gtk_widget_set_name (color_default_text, "color_default_text");
+  gtk_widget_show (color_default_text);
+  gtk_container_add (GTK_CONTAINER (button34), color_default_text);
+  gtk_widget_set_usize (color_default_text, 16, 16);
+
+  button35 = gtk_button_new ();
+  gtk_widget_set_name (button35, "button35");
+  gtk_widget_show (button35);
+  gtk_table_attach (GTK_TABLE (table27), button35, 0, 1, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  color_bold_text = gtk_event_box_new ();
+  gtk_widget_set_name (color_bold_text, "color_bold_text");
+  gtk_widget_show (color_bold_text);
+  gtk_container_add (GTK_CONTAINER (button35), color_bold_text);
+  gtk_widget_set_usize (color_bold_text, 16, 16);
+
+  label201 = gtk_label_new ("Bold text color");
+  gtk_widget_set_name (label201, "label201");
+  gtk_widget_show (label201);
+  gtk_table_attach (GTK_TABLE (table27), label201, 1, 2, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label201), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label201), 0, 0.5);
+
+  button37 = gtk_button_new ();
+  gtk_widget_set_name (button37, "button37");
+  gtk_widget_show (button37);
+  gtk_table_attach (GTK_TABLE (table27), button37, 2, 3, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  color_background = gtk_event_box_new ();
+  gtk_widget_set_name (color_background, "color_background");
+  gtk_widget_show (color_background);
+  gtk_container_add (GTK_CONTAINER (button37), color_background);
+  gtk_widget_set_usize (color_background, 16, 16);
+
+  label203 = gtk_label_new ("Background");
+  gtk_widget_set_name (label203, "label203");
+  gtk_widget_show (label203);
+  gtk_table_attach (GTK_TABLE (table27), label203, 3, 4, 1, 2,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label203), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label203), 0, 0.5);
+
+  label200 = gtk_label_new ("Default text color");
+  gtk_widget_set_name (label200, "label200");
+  gtk_widget_show (label200);
+  gtk_table_attach (GTK_TABLE (table27), label200, 1, 2, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label200), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label200), 0, 0.5);
+
+  hseparator30 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator30, "hseparator30");
+  gtk_widget_show (hseparator30);
+  gtk_table_attach (GTK_TABLE (table27), hseparator30, 0, 4, 0, 1,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+
+  label202 = gtk_label_new ("Bold font");
+  gtk_widget_set_name (label202, "label202");
+  gtk_widget_show (label202);
+  gtk_table_attach (GTK_TABLE (table24), label202, 0, 1, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label202), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label202), 1, 0.5);
+
+  font_bold = gtk_entry_new ();
+  gtk_widget_set_name (font_bold, "font_bold");
+  gtk_widget_show (font_bold);
+  gtk_table_attach (GTK_TABLE (table24), font_bold, 1, 2, 1, 2,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  font_font_bold = gtk_button_new_with_mnemonic ("Change...");
+  gtk_widget_set_name (font_font_bold, "font_font_bold");
+  gtk_widget_show (font_font_bold);
+  gtk_table_attach (GTK_TABLE (table24), font_font_bold, 2, 3, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  label187 = gtk_label_new ("Windows");
+  gtk_widget_set_name (label187, "label187");
+  gtk_widget_show (label187);
+  gtk_frame_set_label_widget (GTK_FRAME (frame45), label187);
+  gtk_label_set_justify (GTK_LABEL (label187), GTK_JUSTIFY_LEFT);
+
+  frame46 = gtk_frame_new (NULL);
+  gtk_widget_set_name (frame46, "frame46");
+  gtk_widget_show (frame46);
+  gtk_box_pack_start (GTK_BOX (page_fontscolors), frame46, FALSE, TRUE, 0);
+
+  table25 = gtk_table_new (4, 4, FALSE);
+  gtk_widget_set_name (table25, "table25");
+  gtk_widget_show (table25);
+  gtk_container_add (GTK_CONTAINER (frame46), table25);
+  gtk_container_set_border_width (GTK_CONTAINER (table25), 7);
+  gtk_table_set_row_spacings (GTK_TABLE (table25), 3);
+  gtk_table_set_col_spacings (GTK_TABLE (table25), 7);
+
+  label190 = gtk_label_new ("Active title text");
+  gtk_widget_set_name (label190, "label190");
+  gtk_widget_show (label190);
+  gtk_table_attach (GTK_TABLE (table25), label190, 1, 2, 3, 4,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label190), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label190), 0, 0.5);
+
+  label192 = gtk_label_new ("Inactive title text");
+  gtk_widget_set_name (label192, "label192");
+  gtk_widget_show (label192);
+  gtk_table_attach (GTK_TABLE (table25), label192, 3, 4, 3, 4,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label192), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label192), 0, 0.5);
+
+  button27 = gtk_button_new ();
+  gtk_widget_set_name (button27, "button27");
+  gtk_widget_show (button27);
+  gtk_table_attach (GTK_TABLE (table25), button27, 0, 1, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  color_active_title_background = gtk_event_box_new ();
+  gtk_widget_set_name (color_active_title_background, "color_active_title_background");
+  gtk_widget_show (color_active_title_background);
+  gtk_container_add (GTK_CONTAINER (button27), color_active_title_background);
+  gtk_widget_set_usize (color_active_title_background, 16, 16);
+
+  button28 = gtk_button_new ();
+  gtk_widget_set_name (button28, "button28");
+  gtk_widget_show (button28);
+  gtk_table_attach (GTK_TABLE (table25), button28, 0, 1, 3, 4,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  color_active_title_text = gtk_event_box_new ();
+  gtk_widget_set_name (color_active_title_text, "color_active_title_text");
+  gtk_widget_show (color_active_title_text);
+  gtk_container_add (GTK_CONTAINER (button28), color_active_title_text);
+  gtk_widget_set_usize (color_active_title_text, 16, 16);
+
+  button29 = gtk_button_new ();
+  gtk_widget_set_name (button29, "button29");
+  gtk_widget_show (button29);
+  gtk_table_attach (GTK_TABLE (table25), button29, 2, 3, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  color_inactive_title_background = gtk_event_box_new ();
+  gtk_widget_set_name (color_inactive_title_background, "color_inactive_title_background");
+  gtk_widget_show (color_inactive_title_background);
+  gtk_container_add (GTK_CONTAINER (button29), color_inactive_title_background);
+  gtk_widget_set_usize (color_inactive_title_background, 16, 16);
+
+  button30 = gtk_button_new ();
+  gtk_widget_set_name (button30, "button30");
+  gtk_widget_show (button30);
+  gtk_table_attach (GTK_TABLE (table25), button30, 2, 3, 3, 4,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  color_inactive_title_text = gtk_event_box_new ();
+  gtk_widget_set_name (color_inactive_title_text, "color_inactive_title_text");
+  gtk_widget_show (color_inactive_title_text);
+  gtk_container_add (GTK_CONTAINER (button30), color_inactive_title_text);
+  gtk_widget_set_usize (color_inactive_title_text, 16, 16);
+
+  window_title_defaults = gtk_check_button_new_with_mnemonic ("Use defaults from GTK theme");
+  gtk_widget_set_name (window_title_defaults, "window_title_defaults");
+  gtk_widget_show (window_title_defaults);
+  gtk_table_attach (GTK_TABLE (table25), window_title_defaults, 0, 4, 0, 1,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  label189 = gtk_label_new ("Active title background");
+  gtk_widget_set_name (label189, "label189");
+  gtk_widget_show (label189);
+  gtk_table_attach (GTK_TABLE (table25), label189, 1, 2, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label189), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label189), 0, 0.5);
+
+  hseparator31 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator31, "hseparator31");
+  gtk_widget_show (hseparator31);
+  gtk_table_attach (GTK_TABLE (table25), hseparator31, 0, 4, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+
+  label191 = gtk_label_new ("Inactive title background");
+  gtk_widget_set_name (label191, "label191");
+  gtk_widget_show (label191);
+  gtk_table_attach (GTK_TABLE (table25), label191, 3, 4, 2, 3,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label191), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label191), 0, 0.5);
+
+  label188 = gtk_label_new ("Window Titles");
+  gtk_widget_set_name (label188, "label188");
+  gtk_widget_show (label188);
+  gtk_frame_set_label_widget (GTK_FRAME (frame46), label188);
+  gtk_label_set_justify (GTK_LABEL (label188), GTK_JUSTIFY_LEFT);
+
+  frame47 = gtk_frame_new (NULL);
+  gtk_widget_set_name (frame47, "frame47");
+  gtk_widget_show (frame47);
+  gtk_box_pack_start (GTK_BOX (page_fontscolors), frame47, FALSE, TRUE, 0);
+
+  table26 = gtk_table_new (3, 2, FALSE);
+  gtk_widget_set_name (table26, "table26");
+  gtk_widget_show (table26);
+  gtk_container_add (GTK_CONTAINER (frame47), table26);
+  gtk_container_set_border_width (GTK_CONTAINER (table26), 7);
+  gtk_table_set_row_spacings (GTK_TABLE (table26), 3);
+  gtk_table_set_col_spacings (GTK_TABLE (table26), 7);
+
+  button31 = gtk_button_new ();
+  gtk_widget_set_name (button31, "button31");
+  gtk_widget_show (button31);
+  gtk_table_attach (GTK_TABLE (table26), button31, 0, 1, 0, 1,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  color_activity_text = gtk_event_box_new ();
+  gtk_widget_set_name (color_activity_text, "color_activity_text");
+  gtk_widget_show (color_activity_text);
+  gtk_container_add (GTK_CONTAINER (button31), color_activity_text);
+  gtk_widget_set_usize (color_activity_text, 16, 16);
+
+  button32 = gtk_button_new ();
+  gtk_widget_set_name (button32, "button32");
+  gtk_widget_show (button32);
+  gtk_table_attach (GTK_TABLE (table26), button32, 0, 1, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  color_activity_msg = gtk_event_box_new ();
+  gtk_widget_set_name (color_activity_msg, "color_activity_msg");
+  gtk_widget_show (color_activity_msg);
+  gtk_container_add (GTK_CONTAINER (button32), color_activity_msg);
+  gtk_widget_set_usize (color_activity_msg, 16, 16);
+
+  button33 = gtk_button_new ();
+  gtk_widget_set_name (button33, "button33");
+  gtk_widget_show (button33);
+  gtk_table_attach (GTK_TABLE (table26), button33, 0, 1, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  color_activity_highlight = gtk_event_box_new ();
+  gtk_widget_set_name (color_activity_highlight, "color_activity_highlight");
+  gtk_widget_show (color_activity_highlight);
+  gtk_container_add (GTK_CONTAINER (button33), color_activity_highlight);
+  gtk_widget_set_usize (color_activity_highlight, 16, 16);
+
+  label197 = gtk_label_new ("Private message or highlighted text in window");
+  gtk_widget_set_name (label197, "label197");
+  gtk_widget_show (label197);
+  gtk_table_attach (GTK_TABLE (table26), label197, 1, 2, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label197), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label197), 0, 0.5);
+
+  label198 = gtk_label_new ("New public message in window");
+  gtk_widget_set_name (label198, "label198");
+  gtk_widget_show (label198);
+  gtk_table_attach (GTK_TABLE (table26), label198, 1, 2, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label198), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label198), 0, 0.5);
+
+  label199 = gtk_label_new ("New text in window");
+  gtk_widget_set_name (label199, "label199");
+  gtk_widget_show (label199);
+  gtk_table_attach (GTK_TABLE (table26), label199, 1, 2, 0, 1,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label199), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label199), 0, 0.5);
+
+  label195 = gtk_label_new ("Window Activity");
+  gtk_widget_set_name (label195, "label195");
+  gtk_widget_show (label195);
+  gtk_frame_set_label_widget (GTK_FRAME (frame47), label195);
+  gtk_label_set_justify (GTK_LABEL (label195), GTK_JUSTIFY_LEFT);
+
+  label185 = gtk_label_new ("");
+  gtk_widget_set_name (label185, "label185");
+  gtk_widget_show (label185);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 17), label185);
+  gtk_label_set_justify (GTK_LABEL (label185), GTK_JUSTIFY_LEFT);
+
+  page_themes = gtk_vbox_new (FALSE, 10);
+  gtk_widget_set_name (page_themes, "page_themes");
+  gtk_widget_show (page_themes);
+  gtk_container_add (GTK_CONTAINER (prefs_notebook), page_themes);
+
+  frame43 = gtk_frame_new (NULL);
+  gtk_widget_set_name (frame43, "frame43");
+  gtk_widget_show (frame43);
+  gtk_box_pack_start (GTK_BOX (page_themes), frame43, TRUE, TRUE, 0);
+
+  table23 = gtk_table_new (5, 2, FALSE);
+  gtk_widget_set_name (table23, "table23");
+  gtk_widget_show (table23);
+  gtk_container_add (GTK_CONTAINER (frame43), table23);
+  gtk_container_set_border_width (GTK_CONTAINER (table23), 7);
+  gtk_table_set_row_spacings (GTK_TABLE (table23), 3);
+  gtk_table_set_col_spacings (GTK_TABLE (table23), 7);
+
+  checkbutton1 = gtk_check_button_new_with_mnemonic ("Connect to www.irssi.org to look for latest themes");
+  gtk_widget_set_name (checkbutton1, "checkbutton1");
+  gtk_widget_show (checkbutton1);
+  gtk_table_attach (GTK_TABLE (table23), checkbutton1, 0, 2, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  vbuttonbox16 = gtk_vbutton_box_new ();
+  gtk_widget_set_name (vbuttonbox16, "vbuttonbox16");
+  gtk_widget_show (vbuttonbox16);
+  gtk_table_attach (GTK_TABLE (table23), vbuttonbox16, 1, 2, 0, 1,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 0);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (vbuttonbox16), GTK_BUTTONBOX_START);
+  gtk_button_box_set_spacing (GTK_BUTTON_BOX (vbuttonbox16), 7);
+
+  theme_refresh = gtk_button_new_with_mnemonic ("Refresh list");
+  gtk_widget_set_name (theme_refresh, "theme_refresh");
+  gtk_widget_show (theme_refresh);
+  gtk_container_add (GTK_CONTAINER (vbuttonbox16), theme_refresh);
+  GTK_WIDGET_SET_FLAGS (theme_refresh, GTK_CAN_DEFAULT);
+
+  theme_select = gtk_button_new_with_mnemonic ("Select theme");
+  gtk_widget_set_name (theme_select, "theme_select");
+  gtk_widget_show (theme_select);
+  gtk_container_add (GTK_CONTAINER (vbuttonbox16), theme_select);
+  GTK_WIDGET_SET_FLAGS (theme_select, GTK_CAN_DEFAULT);
+
+  theme_delete = gtk_button_new_with_mnemonic ("Delete");
+  gtk_widget_set_name (theme_delete, "theme_delete");
+  gtk_widget_show (theme_delete);
+  gtk_container_add (GTK_CONTAINER (vbuttonbox16), theme_delete);
+  GTK_WIDGET_SET_FLAGS (theme_delete, GTK_CAN_DEFAULT);
+
+  frame44 = gtk_frame_new (NULL);
+  gtk_widget_set_name (frame44, "frame44");
+  gtk_widget_show (frame44);
+  gtk_table_attach (GTK_TABLE (table23), frame44, 0, 1, 0, 1,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+  gtk_frame_set_shadow_type (GTK_FRAME (frame44), GTK_SHADOW_IN);
+
+  scrolledwindow16 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_set_name (scrolledwindow16, "scrolledwindow16");
+  gtk_widget_show (scrolledwindow16);
+  gtk_container_add (GTK_CONTAINER (frame44), scrolledwindow16);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow16), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+
+  theme_tree = gtk_tree_view_new ();
+  gtk_widget_set_name (theme_tree, "theme_tree");
+  gtk_widget_show (theme_tree);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow16), theme_tree);
+
+  frame42 = gtk_frame_new (NULL);
+  gtk_widget_set_name (frame42, "frame42");
+  gtk_widget_show (frame42);
+  gtk_table_attach (GTK_TABLE (table23), frame42, 0, 2, 4, 5,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+  gtk_frame_set_shadow_type (GTK_FRAME (frame42), GTK_SHADOW_IN);
+
+  scrolledwindow15 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_set_name (scrolledwindow15, "scrolledwindow15");
+  gtk_widget_show (scrolledwindow15);
+  gtk_container_add (GTK_CONTAINER (frame42), scrolledwindow15);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow15), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+
+  theme_preview = gtk_text_view_new ();
+  gtk_widget_set_name (theme_preview, "theme_preview");
+  gtk_widget_show (theme_preview);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow15), theme_preview);
+  gtk_text_view_set_editable (GTK_TEXT_VIEW (theme_preview), FALSE);
+  gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (theme_preview), FALSE);
+
+  hseparator29 = gtk_hseparator_new ();
+  gtk_widget_set_name (hseparator29, "hseparator29");
+  gtk_widget_show (hseparator29);
+  gtk_table_attach (GTK_TABLE (table23), hseparator29, 0, 2, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 7);
+
+  label204 = gtk_label_new ("Preview");
+  gtk_widget_set_name (label204, "label204");
+  gtk_widget_show (label204);
+  gtk_table_attach (GTK_TABLE (table23), label204, 0, 2, 3, 4,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label204), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label204), 0, 0.5);
+
+  label183 = gtk_label_new ("Themes");
+  gtk_widget_set_name (label183, "label183");
+  gtk_widget_show (label183);
+  gtk_frame_set_label_widget (GTK_FRAME (frame43), label183);
+  gtk_label_set_justify (GTK_LABEL (label183), GTK_JUSTIFY_LEFT);
+
+  label186 = gtk_label_new ("");
+  gtk_widget_set_name (label186, "label186");
+  gtk_widget_show (label186);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (prefs_notebook), 18), label186);
+  gtk_label_set_justify (GTK_LABEL (label186), GTK_JUSTIFY_LEFT);
+
   dialog_action_area1 = GTK_DIALOG (preferences)->action_area;
   gtk_widget_set_name (dialog_action_area1, "dialog_action_area1");
   gtk_widget_show (dialog_action_area1);
@@ -2238,11 +2829,13 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, frame8, "frame8");
   GLADE_HOOKUP_OBJECT (preferences, scrolledwindow1, "scrolledwindow1");
   GLADE_HOOKUP_OBJECT (preferences, server_tree, "server_tree");
+  GLADE_HOOKUP_OBJECT (preferences, vbox17, "vbox17");
   GLADE_HOOKUP_OBJECT (preferences, vbuttonbox1, "vbuttonbox1");
   GLADE_HOOKUP_OBJECT (preferences, server_add_network, "server_add_network");
   GLADE_HOOKUP_OBJECT (preferences, server_add_server, "server_add_server");
   GLADE_HOOKUP_OBJECT (preferences, server_edit, "server_edit");
   GLADE_HOOKUP_OBJECT (preferences, server_remove, "server_remove");
+  GLADE_HOOKUP_OBJECT (preferences, server_connect, "server_connect");
   GLADE_HOOKUP_OBJECT (preferences, label4, "label4");
   GLADE_HOOKUP_OBJECT (preferences, label41, "label41");
   GLADE_HOOKUP_OBJECT (preferences, page_channels, "page_channels");
@@ -2511,6 +3104,78 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, quit_message, "quit_message");
   GLADE_HOOKUP_OBJECT (preferences, label91, "label91");
   GLADE_HOOKUP_OBJECT (preferences, label135, "label135");
+  GLADE_HOOKUP_OBJECT (preferences, page_fontscolors, "page_fontscolors");
+  GLADE_HOOKUP_OBJECT (preferences, frame45, "frame45");
+  GLADE_HOOKUP_OBJECT (preferences, table24, "table24");
+  GLADE_HOOKUP_OBJECT (preferences, label193, "label193");
+  GLADE_HOOKUP_OBJECT (preferences, label194, "label194");
+  GLADE_HOOKUP_OBJECT (preferences, font, "font");
+  GLADE_HOOKUP_OBJECT (preferences, font_monospace, "font_monospace");
+  GLADE_HOOKUP_OBJECT (preferences, font_font, "font_font");
+  GLADE_HOOKUP_OBJECT (preferences, font_font_monospace, "font_font_monospace");
+  GLADE_HOOKUP_OBJECT (preferences, table27, "table27");
+  GLADE_HOOKUP_OBJECT (preferences, button34, "button34");
+  GLADE_HOOKUP_OBJECT (preferences, color_default_text, "color_default_text");
+  GLADE_HOOKUP_OBJECT (preferences, button35, "button35");
+  GLADE_HOOKUP_OBJECT (preferences, color_bold_text, "color_bold_text");
+  GLADE_HOOKUP_OBJECT (preferences, label201, "label201");
+  GLADE_HOOKUP_OBJECT (preferences, button37, "button37");
+  GLADE_HOOKUP_OBJECT (preferences, color_background, "color_background");
+  GLADE_HOOKUP_OBJECT (preferences, label203, "label203");
+  GLADE_HOOKUP_OBJECT (preferences, label200, "label200");
+  GLADE_HOOKUP_OBJECT (preferences, hseparator30, "hseparator30");
+  GLADE_HOOKUP_OBJECT (preferences, label202, "label202");
+  GLADE_HOOKUP_OBJECT (preferences, font_bold, "font_bold");
+  GLADE_HOOKUP_OBJECT (preferences, font_font_bold, "font_font_bold");
+  GLADE_HOOKUP_OBJECT (preferences, label187, "label187");
+  GLADE_HOOKUP_OBJECT (preferences, frame46, "frame46");
+  GLADE_HOOKUP_OBJECT (preferences, table25, "table25");
+  GLADE_HOOKUP_OBJECT (preferences, label190, "label190");
+  GLADE_HOOKUP_OBJECT (preferences, label192, "label192");
+  GLADE_HOOKUP_OBJECT (preferences, button27, "button27");
+  GLADE_HOOKUP_OBJECT (preferences, color_active_title_background, "color_active_title_background");
+  GLADE_HOOKUP_OBJECT (preferences, button28, "button28");
+  GLADE_HOOKUP_OBJECT (preferences, color_active_title_text, "color_active_title_text");
+  GLADE_HOOKUP_OBJECT (preferences, button29, "button29");
+  GLADE_HOOKUP_OBJECT (preferences, color_inactive_title_background, "color_inactive_title_background");
+  GLADE_HOOKUP_OBJECT (preferences, button30, "button30");
+  GLADE_HOOKUP_OBJECT (preferences, color_inactive_title_text, "color_inactive_title_text");
+  GLADE_HOOKUP_OBJECT (preferences, window_title_defaults, "window_title_defaults");
+  GLADE_HOOKUP_OBJECT (preferences, label189, "label189");
+  GLADE_HOOKUP_OBJECT (preferences, hseparator31, "hseparator31");
+  GLADE_HOOKUP_OBJECT (preferences, label191, "label191");
+  GLADE_HOOKUP_OBJECT (preferences, label188, "label188");
+  GLADE_HOOKUP_OBJECT (preferences, frame47, "frame47");
+  GLADE_HOOKUP_OBJECT (preferences, table26, "table26");
+  GLADE_HOOKUP_OBJECT (preferences, button31, "button31");
+  GLADE_HOOKUP_OBJECT (preferences, color_activity_text, "color_activity_text");
+  GLADE_HOOKUP_OBJECT (preferences, button32, "button32");
+  GLADE_HOOKUP_OBJECT (preferences, color_activity_msg, "color_activity_msg");
+  GLADE_HOOKUP_OBJECT (preferences, button33, "button33");
+  GLADE_HOOKUP_OBJECT (preferences, color_activity_highlight, "color_activity_highlight");
+  GLADE_HOOKUP_OBJECT (preferences, label197, "label197");
+  GLADE_HOOKUP_OBJECT (preferences, label198, "label198");
+  GLADE_HOOKUP_OBJECT (preferences, label199, "label199");
+  GLADE_HOOKUP_OBJECT (preferences, label195, "label195");
+  GLADE_HOOKUP_OBJECT (preferences, label185, "label185");
+  GLADE_HOOKUP_OBJECT (preferences, page_themes, "page_themes");
+  GLADE_HOOKUP_OBJECT (preferences, frame43, "frame43");
+  GLADE_HOOKUP_OBJECT (preferences, table23, "table23");
+  GLADE_HOOKUP_OBJECT (preferences, checkbutton1, "checkbutton1");
+  GLADE_HOOKUP_OBJECT (preferences, vbuttonbox16, "vbuttonbox16");
+  GLADE_HOOKUP_OBJECT (preferences, theme_refresh, "theme_refresh");
+  GLADE_HOOKUP_OBJECT (preferences, theme_select, "theme_select");
+  GLADE_HOOKUP_OBJECT (preferences, theme_delete, "theme_delete");
+  GLADE_HOOKUP_OBJECT (preferences, frame44, "frame44");
+  GLADE_HOOKUP_OBJECT (preferences, scrolledwindow16, "scrolledwindow16");
+  GLADE_HOOKUP_OBJECT (preferences, theme_tree, "theme_tree");
+  GLADE_HOOKUP_OBJECT (preferences, frame42, "frame42");
+  GLADE_HOOKUP_OBJECT (preferences, scrolledwindow15, "scrolledwindow15");
+  GLADE_HOOKUP_OBJECT (preferences, theme_preview, "theme_preview");
+  GLADE_HOOKUP_OBJECT (preferences, hseparator29, "hseparator29");
+  GLADE_HOOKUP_OBJECT (preferences, label204, "label204");
+  GLADE_HOOKUP_OBJECT (preferences, label183, "label183");
+  GLADE_HOOKUP_OBJECT (preferences, label186, "label186");
   GLADE_HOOKUP_OBJECT_NO_REF (preferences, dialog_action_area1, "dialog_action_area1");
   GLADE_HOOKUP_OBJECT (preferences, cancelbutton1, "cancelbutton1");
   GLADE_HOOKUP_OBJECT (preferences, okbutton1, "okbutton1");
@@ -3680,7 +4345,6 @@ create_dialog_highlight_settings (void)
   GtkWidget *regexp;
   GtkWidget *regexp_invalid;
   GtkWidget *line;
-  GSList *line_group = NULL;
   GtkWidget *word;
   GtkWidget *nick;
   GtkWidget *hseparator26;
@@ -3827,8 +4491,8 @@ create_dialog_highlight_settings (void)
   gtk_table_attach (GTK_TABLE (table21), line, 0, 3, 9, 10,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_radio_button_set_group (GTK_RADIO_BUTTON (line), line_group);
-  line_group = gtk_radio_button_group (GTK_RADIO_BUTTON (line));
+  gtk_radio_button_set_group (GTK_RADIO_BUTTON (line), highlight_group);
+  highlight_group = gtk_radio_button_group (GTK_RADIO_BUTTON (line));
 
   word = gtk_radio_button_new_with_mnemonic (NULL, "Highlight matched word");
   gtk_widget_set_name (word, "word");
@@ -3836,8 +4500,8 @@ create_dialog_highlight_settings (void)
   gtk_table_attach (GTK_TABLE (table21), word, 0, 3, 10, 11,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
-  gtk_radio_button_set_group (GTK_RADIO_BUTTON (word), line_group);
-  line_group = gtk_radio_button_group (GTK_RADIO_BUTTON (word));
+  gtk_radio_button_set_group (GTK_RADIO_BUTTON (word), highlight_group);
+  highlight_group = gtk_radio_button_group (GTK_RADIO_BUTTON (word));
 
   nick = gtk_check_button_new_with_mnemonic ("Highlight only nick with public messages");
   gtk_widget_set_name (nick, "nick");

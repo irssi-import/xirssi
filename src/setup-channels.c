@@ -329,13 +329,26 @@ static void channel_set_func(GtkTreeViewColumn *column,
 			     GtkTreeIter       *iter,
 			     gpointer           data)
 {
-	void *iter_data;
+	ChannelConfig *channel;
+	char *name;
 
-	gtk_tree_model_get(model, iter, COL_PTR, &iter_data, -1);
+	gtk_tree_model_get(model, iter, COL_PTR, &channel, -1);
 
-	g_object_set(G_OBJECT(cell),
-		     "weight", iter_data == NULL ? PANGO_WEIGHT_BOLD : 0,
-		     NULL);
+	if (channel == NULL) {
+		/* network */
+		gtk_tree_model_get(model, iter, COL_NAME, &name, -1);
+		g_object_set(G_OBJECT(cell),
+			     "text", name,
+			     "weight", PANGO_WEIGHT_BOLD,
+			     NULL);
+		g_free(name);
+	} else {
+		/* channel */
+		g_object_set(G_OBJECT(cell),
+			     "text", channel->name,
+			     "weight", 0,
+			     NULL);
+	}
 }
 
 void setup_channels_init(GtkWidget *dialog)
@@ -365,27 +378,25 @@ void setup_channels_init(GtkWidget *dialog)
 				    GTK_SELECTION_MULTIPLE);
 
 	/* -- */
+	column = gtk_tree_view_column_new();
+	gtk_tree_view_column_set_title(column, "Autojoin / Name");
+
 	renderer = gtk_cell_renderer_toggle_new();
 	g_object_set(G_OBJECT(renderer), "activatable", TRUE, NULL);
 	g_signal_connect(G_OBJECT(renderer), "toggled",
 			 G_CALLBACK(autojoin_toggled), NULL);
-	column = gtk_tree_view_column_new_with_attributes("Autojoin", renderer,
-							  NULL);
+
+	gtk_tree_view_column_pack_start(column, renderer, FALSE);
 	gtk_tree_view_column_set_cell_data_func(column, renderer,
 						autojoin_set_func,
 						NULL, NULL);
-	gtk_tree_view_column_set_alignment(column, 1.0);
-	gtk_tree_view_append_column(tree_view, column);
 
-	/* -- */
 	renderer = gtk_cell_renderer_text_new();
-	column = gtk_tree_view_column_new_with_attributes("Name", renderer,
-							  "text", COL_NAME,
-							  NULL);
+	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_cell_data_func(column, renderer,
 						channel_set_func, NULL, NULL);
+
 	gtk_tree_view_append_column(tree_view, column);
-	gtk_tree_view_column_set_min_width(column, 200);
 
 	/* buttons */
 	button = g_object_get_data(G_OBJECT(dialog), "channel_add");
@@ -401,6 +412,8 @@ void setup_channels_init(GtkWidget *dialog)
 			 G_CALLBACK(event_remove), tree_view);
 
 	setup_channel_signals_init();
+
+	gtk_tree_view_expand_all(tree_view);
 }
 
 static void sig_channel_added(ChannelConfig *channel)

@@ -45,7 +45,7 @@ static GdkPixbuf *autolog_pixbuf, *adv_logging_pixbuf;
 static GdkPixbuf *windows_pixbuf, *queries_pixbuf, *completion_pixbuf;
 static GdkPixbuf *aliases_pixbuf, *keyboard_pixbuf;
 static GdkPixbuf *ignores_pixbuf, *highlighting_pixbuf, *input_sets_pixbuf;
-static GdkPixbuf *window_output_pixbuf, *colors_pixbuf, *themes_pixbuf;
+static GdkPixbuf *window_output_pixbuf, *fontscolors_pixbuf, *themes_pixbuf;
 
 static SetupPrefs prefs[] = {
 	{ "Connections" },
@@ -71,7 +71,7 @@ static SetupPrefs prefs[] = {
 
 	{ "Appearance" },
 	{ "Window Output",	"page_window_output", &window_output_pixbuf },
-	{ "Colors",		"page_colors", &colors_pixbuf },
+	{ "Fonts & Colors",	"page_fontscolors", &fontscolors_pixbuf },
 	{ "Themes",		"page_themes", &themes_pixbuf }
 };
 
@@ -230,7 +230,7 @@ static void images_init(void)
 	input_sets_pixbuf = create_pixbuf("input-settings.png");
 
 	window_output_pixbuf = create_pixbuf("window-output.png");
-	colors_pixbuf = create_pixbuf("colors.png");
+	fontscolors_pixbuf = create_pixbuf("fontscolors.png");
 	themes_pixbuf = create_pixbuf("themes.png");
 }
 

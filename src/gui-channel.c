@@ -23,6 +23,9 @@
 #include "signals.h"
 
 #include "gui-frame.h"
+#include "gui-tab.h"
+#include "gui-window-view.h"
+#include "gui-window.h"
 #include "gui-entry.h"
 #include "gui-channel.h"
 #include "gui-nicklist.h"
@@ -31,12 +34,45 @@
 #include <gdk/gdkkeysyms.h>
 
 typedef struct {
+	WindowView *view;
 	Channel *channel;
 	GdkColor lock_color, unlock_color;
 
 	GtkWidget *widget;
 	GtkEntry *topic;
+
+	unsigned int locked:1;
 } ChannelTitle;
+
+static gboolean colors_set = FALSE;
+static GdkColor unlocked_text, unlocked_bg, unlocked_base;
+
+static void colors_setup(GtkWidget *entry)
+{
+	colors_set = TRUE;
+
+	memcpy(&unlocked_base, &entry->style->base[GTK_STATE_NORMAL],
+	       sizeof(GdkColor));
+	memcpy(&unlocked_bg, &entry->style->bg[GTK_STATE_NORMAL],
+	       sizeof(GdkColor));
+	memcpy(&unlocked_text, &entry->style->text[GTK_STATE_NORMAL],
+	       sizeof(GdkColor));
+}
+
+static void title_set_colors(ChannelTitle *title)
+{
+	GtkWidget *topic;
+
+	topic = GTK_WIDGET(title->topic);
+
+	if (!title->locked) {
+		gtk_widget_modify_base(topic, GTK_STATE_NORMAL, &unlocked_base);
+		gtk_widget_modify_bg(topic, GTK_STATE_NORMAL, &unlocked_bg);
+		gtk_widget_modify_text(topic, GTK_STATE_NORMAL, &unlocked_text);
+	} else {
+		gui_tab_set_focus_colors(topic, title->view->pane->focused);
+	}
+}
 
 void gui_channel_topic_lock(GtkWidget *widget)
 {
@@ -53,9 +89,9 @@ void gui_channel_topic_lock(GtkWidget *widget)
 		gtk_entry_set_text(title->topic, title->channel->topic != NULL ?
 				   title->channel->topic : "");
 
-		/* show lock image */
-		gtk_widget_modify_base(GTK_WIDGET(title->topic),
-				       GTK_STATE_NORMAL, &title->lock_color);
+		/* set locked coloring */
+		title->locked = TRUE;
+                title_set_colors(title);
 
 		/* remove focus */
 		gtk_widget_grab_focus(frame->entry->widget);
@@ -76,8 +112,10 @@ void gui_channel_topic_unlock(GtkWidget *widget)
 
 		/* hide lock image */
 		title = g_object_get_data(G_OBJECT(widget), "title");
-		gtk_widget_modify_base(GTK_WIDGET(title->topic),
-				       GTK_STATE_NORMAL, &title->unlock_color);
+
+		/* set unlocked coloring */
+		title->locked = FALSE;
+		title_set_colors(title);
 
 		/* get focus */
 		gtk_widget_grab_focus(widget);
@@ -148,13 +186,14 @@ static gboolean event_key_press(GtkWidget *widget, GdkEventKey *event,
 	return FALSE;
 }
 
-GtkWidget *_get_title(WindowItem *witem)
+GtkWidget *_get_title(WindowView *view, WindowItem *witem)
 {
 	GtkWidget *hbox, *topic;
 	ChannelGui *gui;
 	ChannelTitle *title;
 
 	title = g_new0(ChannelTitle, 1);
+	title->view = view;
 	title->channel = CHANNEL(witem);
 
 	gui = CHANNEL_GUI(title->channel);
@@ -178,12 +217,12 @@ GtkWidget *_get_title(WindowItem *witem)
 		gtk_entry_set_text(title->topic, title->channel->topic);
 	gtk_box_pack_start(GTK_BOX(hbox), topic, TRUE, TRUE, 0);
 
-	/* set the lcoking colors */
-	memcpy(&title->lock_color, &topic->style->bg[GTK_STATE_NORMAL],
-	       sizeof(GdkColor));
-	memcpy(&title->unlock_color, &topic->style->base[GTK_STATE_NORMAL],
-	       sizeof(GdkColor));
-	gtk_widget_modify_base(topic, GTK_STATE_NORMAL, &title->lock_color);
+	/* set the locking colors */
+	if (!colors_set)
+		colors_setup(topic);
+
+	title->locked = TRUE;
+	title_set_colors(title);
 
 	gtk_widget_show_all(hbox);
 	return hbox;
@@ -246,11 +285,53 @@ static void sig_channel_topic_changed(Channel *channel)
 	g_free(text);
 }
 
+static ChannelTitle *channel_title_find(TabPane *pane)
+{
+	Channel *channel;
+	GSList *tmp;
+
+	if (pane->view == NULL)
+		return NULL;
+
+	channel = CHANNEL(pane->view->window->window->active);
+	if (channel == NULL)
+		return NULL;
+
+	for (tmp = CHANNEL_GUI(channel)->titles; tmp != NULL; tmp = tmp->next) {
+		ChannelTitle *title = tmp->data;
+
+		if (title->view == pane->view)
+			return title;
+	}
+
+	return NULL;
+}
+
+static void sig_pane_focused(TabPane *pane)
+{
+	ChannelTitle *title;
+
+	title = channel_title_find(pane);
+	if (title != NULL)
+		title_set_colors(title);
+}
+
+static void sig_pane_unfocused(TabPane *pane)
+{
+	ChannelTitle *title;
+
+	title = channel_title_find(pane);
+	if (title != NULL)
+                title_set_colors(title);
+}
+
 void gui_channels_init(void)
 {
 	signal_add_first("channel created", (SIGNAL_FUNC) sig_channel_created);
 	signal_add("channel destroyed", (SIGNAL_FUNC) sig_channel_destroyed);
 	signal_add("channel topic changed", (SIGNAL_FUNC) sig_channel_topic_changed);
+	signal_add("tab pane focused", (SIGNAL_FUNC) sig_pane_focused);
+	signal_add("tab pane unfocused", (SIGNAL_FUNC) sig_pane_unfocused);
 }
 
 void gui_channels_deinit(void)
@@ -258,4 +339,6 @@ void gui_channels_deinit(void)
 	signal_remove("channel created", (SIGNAL_FUNC) sig_channel_created);
 	signal_remove("channel destroyed", (SIGNAL_FUNC) sig_channel_destroyed);
 	signal_remove("channel topic changed", (SIGNAL_FUNC) sig_channel_topic_changed);
+	signal_remove("tab pane focused", (SIGNAL_FUNC) sig_pane_focused);
+	signal_remove("tab pane unfocused", (SIGNAL_FUNC) sig_pane_unfocused);
 }

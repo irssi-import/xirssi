@@ -26,6 +26,8 @@ struct _TabPane {
 	GtkLabel *label;
 	GtkBox *box, *titlebox;
 	WindowView *view;
+
+	unsigned int focused:1;
 };
 
 Tab *gui_tab_new(Frame *frame);
@@ -42,6 +44,7 @@ void gui_tab_set_active_window_item(Tab *tab, Window *window);
 void gui_tab_update_active_window(Tab *tab);
 
 void gui_reset_tab_labels(Frame *frame);
+void gui_tab_set_focus_colors(GtkWidget *widget, int focused);
 
 void gui_tabs_init(void);
 void gui_tabs_deinit(void);

@@ -54,16 +54,11 @@ static gboolean event_destroy(GtkWidget *widget, WindowView *view)
 static gboolean event_button_press(GtkWidget *widget, GdkEventButton *event,
 				   WindowView *view)
 {
-	/* disable internal popup menu */
-	return event->button == 3;
-}
-
-static gboolean event_button_release(GtkWidget *widget, GdkEventButton *event,
-				     WindowView *view)
-{
 	view->window->active_view = view;
 	window_set_active(view->window->window);
-	return FALSE;
+
+	/* disable internal popup menu */
+	return event->button == 3;
 }
 
 static gboolean event_resize(GtkWidget *widget, GtkAllocation *alloc,
@@ -130,8 +125,8 @@ WindowView *gui_window_view_new(TabPane *pane, WindowGui *window,
 	view->view = GTK_TEXT_VIEW(text_view);
 	g_signal_connect(G_OBJECT(text_view), "button_press_event",
 			 G_CALLBACK(event_button_press), view);
-	g_signal_connect(G_OBJECT(text_view), "button_release_event",
-			 G_CALLBACK(event_button_release), view);
+	g_signal_connect(G_OBJECT(pane->focus_widget), "button_press_event",
+			 G_CALLBACK(event_button_press), view);
 	g_signal_connect_after(G_OBJECT(text_view), "size_allocate",
 			       G_CALLBACK(event_resize), view);
 	g_signal_connect(G_OBJECT(text_view), "motion_notify_event",
@@ -218,15 +213,22 @@ void gui_window_view_set_title(WindowView *view)
 	if (window->active == NULL) {
 		/* empty window */
 		title = gtk_label_new(window->name);
+		gtk_misc_set_alignment(GTK_MISC(title), 0, 0.5);
+                gtk_misc_set_padding(GTK_MISC(title), 10, 0);
+		gui_tab_set_focus_colors(title, view->pane->focused);
 	} else {
 		/* window item */
 		WindowItemGui *witem_gui;
 
 		witem_gui = MODULE_DATA(window->active);
 		title = witem_gui != NULL && witem_gui->get_title != NULL ?
-			witem_gui->get_title(window->active) : NULL;
-		if (title == NULL)
+			witem_gui->get_title(view, window->active) : NULL;
+		if (title == NULL) {
 			title = gtk_label_new(window->active->visible_name);
+			gtk_misc_set_padding(GTK_MISC(title), 10, 0);
+			gtk_misc_set_alignment(GTK_MISC(title), 0, 0.5);
+			gui_tab_set_focus_colors(title, view->pane->focused);
+		}
 	}
 
 	if (view->title != NULL)

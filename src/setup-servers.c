@@ -138,7 +138,6 @@ static int fix_tree_networks(NetworkConfig *network)
 	gtk_tree_store_insert_before(server_store, &new_iter, NULL, &iter);
 	gtk_tree_store_set(server_store, &new_iter,
 			   COL_PTR, network,
-			   //COL_NAME, network->name,
 			   -1);
 	return 0;
 }
@@ -268,6 +267,26 @@ static gboolean event_remove(GtkWidget *widget, GtkTreeView *view)
 	return FALSE;
 }
 
+static void tree_server_connect(GtkTreeModel *model, GtkTreePath *path,
+				GtkTreeIter *iter, gpointer data)
+{
+	gtk_tree_model_get(model, iter, COL_PTR, &data, -1);
+
+	if (IS_SERVER_SETUP(data))
+		signal_emit("command connect", 1, SERVER_SETUP(data)->address);
+	else
+		signal_emit("command connect", 1, CHATNET(data)->name);
+}
+
+static gboolean event_connect(GtkWidget *widget, GtkTreeView *view)
+{
+	GtkTreeSelection *sel;
+
+	sel = gtk_tree_view_get_selection(view);
+	gtk_tree_selection_selected_foreach(sel, tree_server_connect, NULL);
+	return FALSE;
+}
+
 typedef struct {
 	gboolean found;
 	GtkTreeIter *iter;
@@ -306,8 +325,6 @@ static void store_setup_network(GtkTreeStore *store, GtkTreeIter *iter,
 {
 	gtk_tree_store_set(store, iter,
 			   COL_PTR, network,
-			   //COL_NAME, network->name,
-			   //COL_PROTOCOL, CHAT_PROTOCOL(network)->name,
 			   -1);
 }
 
@@ -316,9 +333,6 @@ static void store_setup_server(GtkTreeStore *store, GtkTreeIter *iter,
 {
 	gtk_tree_store_set(store, iter,
 			   COL_PTR, server,
-			   //COL_NAME, server->address,
-			   //COL_PORT, port,
-			   //COL_PROTOCOL, CHAT_PROTOCOL(server)->name,
 			   -1);
 }
 
@@ -513,28 +527,26 @@ void setup_servers_init(GtkWidget *dialog)
 				    GTK_SELECTION_MULTIPLE);
 
 	/* -- */
+	column = gtk_tree_view_column_new();
+	gtk_tree_view_column_set_title(column, "Autoconnect / Name");
+
 	renderer = gtk_cell_renderer_toggle_new();
 	g_object_set(G_OBJECT(renderer), "activatable", TRUE, NULL);
 	g_signal_connect(G_OBJECT(renderer), "toggled",
 			 G_CALLBACK(autoconnect_toggled), NULL);
-	column = gtk_tree_view_column_new_with_attributes("Autoconn", renderer,
-							  NULL);
+
+	gtk_tree_view_column_pack_start(column, renderer, FALSE);
 	gtk_tree_view_column_set_cell_data_func(column, renderer,
 						autoconnect_set_func,
 						NULL, NULL);
-	gtk_tree_view_column_set_alignment(column, 1.0);
-	gtk_tree_view_append_column(tree_view, column);
 
-	/* -- */
 	renderer = gtk_cell_renderer_text_new();
-	column = gtk_tree_view_column_new_with_attributes("Name", renderer,
-							  "text", COL_NAME,
-							  NULL);
+	gtk_tree_view_column_pack_start(column, renderer, TRUE);
+	gtk_tree_view_column_set_min_width(column, 150);
 	gtk_tree_view_column_set_cell_data_func(column, renderer,
 						name_set_func, NULL, NULL);
-	gtk_tree_view_column_set_min_width(column, 150);
+
 	gtk_tree_view_append_column(tree_view, column);
-        gtk_tree_view_set_expander_column(tree_view, column);
 
 	/* -- */
 	column = gtk_tree_view_column_new_with_attributes("Port", renderer,
@@ -568,6 +580,10 @@ void setup_servers_init(GtkWidget *dialog)
 	button = g_object_get_data(G_OBJECT(dialog), "server_remove");
 	g_signal_connect(G_OBJECT(button), "clicked",
 			 G_CALLBACK(event_remove), tree_view);
+
+	button = g_object_get_data(G_OBJECT(dialog), "server_connect");
+	g_signal_connect(G_OBJECT(button), "clicked",
+			 G_CALLBACK(event_connect), tree_view);
 
 	setup_server_signals_init();
 }

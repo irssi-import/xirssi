@@ -35,6 +35,25 @@
 
 static GdkPixbuf *move_pixbuf, *right_pixbuf;
 
+static gboolean colors_set = FALSE;
+static GdkColor focus_text, focus_bg;
+static GdkColor unfocus_text, unfocus_bg;
+
+static void colors_setup(GtkWidget *entry)
+{
+	colors_set = TRUE;
+
+	memcpy(&focus_bg, &entry->style->base[GTK_STATE_SELECTED],
+	       sizeof(GdkColor));
+	memcpy(&focus_text, &entry->style->text[GTK_STATE_SELECTED],
+	       sizeof(GdkColor));
+
+	memcpy(&unfocus_bg, &entry->style->bg[GTK_STATE_NORMAL],
+	       sizeof(GdkColor));
+	memcpy(&unfocus_text, &entry->style->text[GTK_STATE_NORMAL],
+	       sizeof(GdkColor));
+}
+
 static gboolean event_destroy(GtkWidget *window, Tab *tab)
 {
 	signal_emit("gui tab destroyed", 1, tab);
@@ -293,7 +312,7 @@ GtkPaned *gui_tab_add_paned(Tab *tab)
 
 TabPane *gui_tab_pane_new(Tab *tab)
 {
-	GtkWidget *vbox, *hbox, *button, *label;
+	GtkWidget *vbox, *hbox, *button, *label, *eventbox;
 	GtkPaned *paned;
 	TabPane *pane;
 
@@ -311,10 +330,13 @@ TabPane *gui_tab_pane_new(Tab *tab)
 			 G_CALLBACK(event_notify_pane), pane);
 	g_object_set_data(G_OBJECT(vbox), "TabPane", pane);
 
+	eventbox = pane->focus_widget = gtk_event_box_new();
+	gtk_box_pack_start(GTK_BOX(vbox), eventbox, FALSE, FALSE, 0);
+
 	hbox = gtk_hbox_new(FALSE, 5);
 	pane->titlebox = GTK_BOX(hbox);
 	gtk_container_set_border_width(GTK_CONTAINER(hbox), 2);
-	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+	gtk_container_add(GTK_CONTAINER(eventbox), hbox);
 
 	/* close button */
 	button = gui_close_button_new(pane);
@@ -325,10 +347,6 @@ TabPane *gui_tab_pane_new(Tab *tab)
 	gtk_box_pack_start(GTK_BOX(hbox), button, FALSE, FALSE, 0);
 
 	gtk_widget_show_all(vbox);
-
-	/* focus icon - NOTE: after ..show_all() above. */
-	pane->focus_widget = gtk_image_new_from_pixbuf(right_pixbuf);
-	gtk_box_pack_start(GTK_BOX(hbox), pane->focus_widget, FALSE, FALSE, 0);
 
 	/* pane's tab label */
 	label = gtk_label_new(NULL);
@@ -414,14 +432,30 @@ void gui_tab_set_active(Tab *tab)
 
 void gui_tab_set_active_window(Tab *tab, Window *window)
 {
+        TabPane *pane;
+
 	if (tab->active_win != window) {
 		if (tab->active_win != NULL) {
 			WindowGui *gui = WINDOW_GUI(tab->active_win);
-			if (gui->active_view != NULL)
-				gtk_widget_hide(gui->active_view->pane->focus_widget);
+			if (gui->active_view != NULL) {
+				pane = gui->active_view->pane;
+
+				pane->focused = FALSE;
+				gui_tab_set_focus_colors(pane->focus_widget,
+							 FALSE);
+				gui_tab_set_focus_colors(pane->view->title,
+							 FALSE);
+				signal_emit("tab pane unfocused", 1, pane);
+			}
 		}
-		if (window != NULL)
-			gtk_widget_show(WINDOW_GUI(window)->active_view->pane->focus_widget);
+		if (window != NULL) {
+			pane = WINDOW_GUI(window)->active_view->pane;
+
+			pane->focused = TRUE;
+			gui_tab_set_focus_colors(pane->focus_widget, TRUE);
+			gui_tab_set_focus_colors(pane->view->title, TRUE);
+			signal_emit("tab pane focused", 1, pane);
+		}
 
 		tab->active_win = window;
 		gui_tab_set_active_window_item(tab, window);
@@ -488,6 +522,21 @@ void gui_reset_tab_labels(Frame *frame)
                 gui_tab_set_label(tab);
 		i++;
 	}
+}
+
+void gui_tab_set_focus_colors(GtkWidget *widget, int focused)
+{
+	if (!colors_set)
+		colors_setup(widget);
+
+	gtk_widget_modify_base(widget, GTK_STATE_NORMAL,
+			       focused ? &focus_bg : &unfocus_bg);
+	gtk_widget_modify_bg(widget, GTK_STATE_NORMAL,
+			     focused ? &focus_bg : &unfocus_bg);
+	gtk_widget_modify_text(widget, GTK_STATE_NORMAL,
+			       focused ? &focus_text : &unfocus_text);
+	gtk_widget_modify_fg(widget, GTK_STATE_NORMAL,
+			     focused ? &focus_text : &unfocus_text);
 }
 
 void gui_tabs_init(void)

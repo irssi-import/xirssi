@@ -14,6 +14,7 @@ void setup_register(Setup *setup, GtkWidget *widget);
 
 void setup_register_level_button(GtkWidget *button, GtkWidget *entry);
 void setup_register_irssicolor_button(GtkWidget *button, GtkWidget *entry);
+void setup_register_color_button(GtkWidget *button, GtkWidget *eventbox);
 void setup_register_dir_button(GtkWidget *button, GtkWidget *entry);
 
 /* mark the setup to have changes */

@@ -113,5 +113,6 @@ void network_dialog_show(NetworkConfig *network)
 		gui_entry_set_from(obj, "autosendcmd", network->autosendcmd);
 	}
 
+	gtk_widget_grab_focus(g_object_get_data(obj, "name"));
 	gtk_widget_show(dialog);
 }

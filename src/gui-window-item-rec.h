@@ -1,1 +1,1 @@
-GtkWidget *(*get_title)(WindowItem *item);
+GtkWidget *(*get_title)(WindowView *view, WindowItem *item);

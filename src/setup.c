@@ -100,6 +100,17 @@ void setup_register(Setup *setup, GtkWidget *widget)
 		} else if (strncmp(name, "irssicolor_", 11) == 0) {
 			w2 = lookup_widget(widget, name+11);
                         setup_register_irssicolor_button(widget, w2);
+		} else {
+			/* maybe a button which has color eventbox inside? */
+			children = gtk_container_get_children(GTK_CONTAINER(widget));
+			w2 = children == NULL ? NULL : children->data;
+			g_list_free(children);
+
+			if (GTK_IS_EVENT_BOX(w2)) {
+				name = gtk_widget_get_name(w2);
+				if (strncmp(name, "color_", 6) == 0)
+					setup_register_color_button(widget, w2);
+			}
 		}
 	}
 
@@ -154,13 +165,52 @@ void setup_register_irssicolor_button(GtkWidget *button, GtkWidget *entry)
 	/* FIXME: */
 }
 
-static void event_destroy(GtkWidget *widget, GtkWidget *entry)
+static void event_color_response(GtkColorSelectionDialog *csd, int response_id,
+				 GtkWidget *eventbox)
 {
-	gtk_widget_unref(entry);
+	GdkColor color;
+
+	/* ok / cancel pressed */
+	if (response_id == GTK_RESPONSE_OK) {
+		gtk_color_selection_get_current_color(
+			GTK_COLOR_SELECTION(csd->colorsel), &color);
+                gtk_widget_modify_bg(eventbox, GTK_STATE_NORMAL, &color);
+                gtk_widget_modify_bg(eventbox, GTK_STATE_PRELIGHT, &color);
+                gtk_widget_modify_bg(eventbox, GTK_STATE_ACTIVE, &color);
+	}
+
+	gtk_widget_destroy(GTK_WIDGET(csd));
 }
 
-static void event_response(GtkFileSelection *filesel, int response_id,
-			   GtkEntry *entry)
+static gboolean event_color_button_clicked(GtkWidget *button,
+					   GtkWidget *eventbox)
+{
+	GtkWidget *colorsel;
+	GtkColorSelectionDialog *csd;
+
+	colorsel = gtk_color_selection_dialog_new(NULL);
+	csd = GTK_COLOR_SELECTION_DIALOG(colorsel);
+	gtk_color_selection_set_current_color(
+		GTK_COLOR_SELECTION(csd->colorsel),
+		&eventbox->style->bg[GTK_STATE_NORMAL]);
+
+	g_signal_connect_swapped(G_OBJECT(colorsel), "destroy",
+				 G_CALLBACK(gtk_widget_unref), eventbox);
+	g_signal_connect(G_OBJECT(colorsel), "response",
+			 G_CALLBACK(event_color_response), eventbox);
+	gtk_widget_ref(eventbox);
+	gtk_widget_show(colorsel);
+	return FALSE;
+}
+
+void setup_register_color_button(GtkWidget *button, GtkWidget *eventbox)
+{
+	g_signal_connect(G_OBJECT(button), "clicked",
+			 G_CALLBACK(event_color_button_clicked), eventbox);
+}
+
+static void event_dir_response(GtkFileSelection *filesel, int response_id,
+			       GtkEntry *entry)
 {
 	const char *fname;
 
@@ -181,10 +231,10 @@ static gboolean event_dir_button_clicked(GtkWidget *button, GtkEntry *entry)
 	gtk_file_selection_set_filename(GTK_FILE_SELECTION(filesel),
 					gtk_entry_get_text(entry));
 
-	g_signal_connect(G_OBJECT(filesel), "destroy",
-			 G_CALLBACK(event_destroy), entry);
+	g_signal_connect_swapped(G_OBJECT(filesel), "destroy",
+				 G_CALLBACK(gtk_widget_unref), entry);
 	g_signal_connect(G_OBJECT(filesel), "response",
-			 G_CALLBACK(event_response), entry);
+			 G_CALLBACK(event_dir_response), entry);
 	gtk_widget_ref(GTK_WIDGET(entry));
 	gtk_widget_show(filesel);
 	return FALSE;

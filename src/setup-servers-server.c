@@ -179,5 +179,6 @@ void server_dialog_show(ServerConfig *server, const char *network)
 		gui_toggle_set_from(obj, "no_proxy", server->no_proxy);
 	}
 
+	gtk_widget_grab_focus(g_object_get_data(obj, "address"));
 	gtk_widget_show(dialog);
 }
