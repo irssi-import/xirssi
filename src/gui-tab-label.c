@@ -161,13 +161,13 @@ static void show_arrows_horiz_into(GtkNotebook *notebook, GtkWidget *label)
 		create_pixmap_popup(&arrow_up_twist, arrow_up_twist_xpm);
 		arrow = arrow_up_twist;
 
-		x -= arrow_up->allocation.width;
+		x -= arrow->allocation.width;
 		y += arrow->allocation.height + MAGIC_PADDING;
 	} else {
 		create_pixmap_popup(&arrow_down_twist, arrow_down_twist_xpm);
 		arrow = arrow_down_twist;
 
-		x -= arrow_down->allocation.width / 2;
+		x -= arrow->allocation.width / 2;
 		y -= arrow->allocation.height + MAGIC_PADDING;
 	}
 
@@ -212,13 +212,13 @@ static void show_arrows_vert_into(GtkNotebook *notebook, GtkWidget *label)
 		arrow = arrow_left_twist;
 
 		x += label->allocation.width + MAGIC_PADDING;
-		y -= arrow_left->allocation.height/3;
+		y -= arrow->allocation.height/3;
 	} else {
 		create_pixmap_popup(&arrow_right_twist, arrow_right_twist_xpm);
 		arrow = arrow_right_twist;
 
 		x -= arrow->allocation.width + MAGIC_PADDING;
-		y -= arrow_right->allocation.height;
+		y -= arrow->allocation.height;
 	}
 
 	gtk_window_move(GTK_WINDOW(arrow), x, y);
