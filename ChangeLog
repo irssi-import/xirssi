@@ -1,3 +1,13 @@
+2002-05-01 22:41  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-frame.c, gui-frame.h, gui-tab.c, gui-tab.h,
+	gui-window.c: removed some warnings at quit
+
+2002-05-01 22:26  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-tab-label.c, gui-tab.h: moving tabs between windows
+	works now.
+
 2002-04-30 17:05  Timo Sirainen <tss@iki.fi>
 
 	* src/gui-tab-label.c: crashfix
