@@ -1,3 +1,25 @@
+2002-05-09 05:44  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-window.c: added /set scrollback_lines + /set
+	scrollback_burst_remove
+
+2002-05-09 05:28  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-nicklist-cell-renderer.c: small bugfix for background
+	drawing
+
+2002-05-09 05:26  Timo Sirainen <tss@iki.fi>
+
+	* src/: Makefile.am, gui-nicklist-cell-renderer.c,
+	gui-nicklist-cell-renderer.h, gui-nicklist-view.c,
+	gui-nicklist-view.h, gui-nicklist.c, gui-nicklist.h, gui-tab.c:
+	moved the "x ops, y total" label inside nicklist.
+
+2002-05-09 05:24  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-window-activity.c: fix for clearing activity in split
+	windows
+
 2002-05-08 02:26  Timo Sirainen <tss@iki.fi>
 
 	* src/Makefile.am: link with -export-dynamic so modules work
