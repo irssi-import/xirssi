@@ -97,11 +97,11 @@ void dialog_about_show(void)
 		   IRSSI_VERSION_DATE, IRSSI_VERSION_TIME);
 
 	label = gtk_label_new(str);
-	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
 
 	/* copyright / email */
 	hbox = gtk_hbox_new(FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
 
 	label = gtk_label_new(IRSSI_COPYRIGHT " <");
 	gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
@@ -122,7 +122,7 @@ void dialog_about_show(void)
 	eventbox2 = gtk_event_box_new();
 	g_signal_connect(G_OBJECT(eventbox2), "button_press_event",
 			 G_CALLBACK(event_website_press), NULL);
-	gtk_box_pack_start(GTK_BOX(vbox), eventbox2, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(vbox), eventbox2, FALSE, FALSE, 0);
 
 	label = gtk_label_new("<u>"IRSSI_WEBSITE"</u>");
 	gtk_label_set_use_markup(GTK_LABEL(label), TRUE);
