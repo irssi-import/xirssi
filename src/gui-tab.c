@@ -443,6 +443,10 @@ void gui_tab_set_active_window_item(Tab *tab, Window *window)
 		gui_nicklist_view_set(tab->nicklist, gui->nicklist);
 		gtk_widget_show(tab->nicklist->widget);
 	}
+
+	/* make sure the windows know their new size,
+	   before new text is printed */
+	gtk_container_check_resize(GTK_CONTAINER(tab->frame->widget));
 }
 
 void gui_tab_update_active_window(Tab *tab)

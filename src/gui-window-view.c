@@ -82,7 +82,7 @@ static gboolean event_resize(GtkWidget *widget, GtkAllocation *alloc,
 static gboolean event_changed(GtkWidget *widget, WindowView *view)
 {
 	/* new text added - save bottom status */
-	view->bottom = view->adj->value ==
+	view->bottom = view->adj->value+view->adj->step_increment >=
 		view->adj->upper - view->adj->page_size;
 	return FALSE;
 }
@@ -123,7 +123,7 @@ WindowView *gui_window_view_new(TabPane *pane, WindowGui *window,
 			 G_CALLBACK(event_destroy), view);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(sw),
 				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
+				       GTK_POLICY_ALWAYS);
 	view->adj = gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(sw));
 
 	text_view = gtk_text_view_new_with_buffer(buffer);

@@ -171,6 +171,11 @@ static void gui_window_print(WindowGui *window, TextDest *dest,
 
 	gtk_text_buffer_get_end_iter(window->buffer, &iter);
 
+	if (window->newline) {
+		gtk_text_buffer_insert(window->buffer, &iter, "\n", 1);
+		window->newline = FALSE;
+	}
+
 	if (flags & GUI_PRINT_FLAG_NEWLINE)
 		gtk_text_buffer_insert(window->buffer, &iter, "\n", 1);
 
@@ -404,7 +409,7 @@ static void sig_gui_printtext_finished(Window *window)
 		gui->indent = 0;
 	}
 
-	gui_window_print(gui, NULL, "\n", -1, -1, 0);
+	gui->newline = TRUE;
 }
 
 void gui_windows_init(void)

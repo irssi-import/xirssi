@@ -16,6 +16,7 @@ struct _WindowGui {
 
 	PangoFontDescription *font_monospace;
 	int indent;
+	unsigned int newline:1;
 
 	GSList *views;
 	WindowView *active_view;
