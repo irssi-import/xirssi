@@ -1,3 +1,15 @@
+2002-05-11 05:00  Timo Sirainen <tss@iki.fi>
+
+	* src/gui-window.c: when destroying last tab in frame, destroy the
+	tab too.
+
+2002-05-11 04:37  Timo Sirainen <tss@iki.fi>
+
+	* src/: Makefile.am, gui.c, gui.h, irssi.c, module.h,
+	setup-servers-network.c, setup-servers-server.c, setup-servers.c,
+	setup-servers.h, setup.c, setup.h: added server dialog, and
+	gui.[ch] for some helper functions.
+
 2002-05-10 23:31  Timo Sirainen <tss@iki.fi>
 
 	* src/: gui-nicklist-cell-renderer.h, gui-nicklist-cell-renderer.c:
