@@ -39,8 +39,6 @@
 #include "gui-tab.h"
 #include "gui-url.h"
 
-#include "setup-servers.h"
-
 #include <signal.h>
 
 #ifdef HAVE_STATIC_PERL
@@ -112,7 +110,6 @@ static void gui_finish_init(void)
         gui_context_nick_init();
         gui_context_url_init();
 	gui_urls_init();
-	setup_servers_init();
 
 	fe_common_core_finish_init();
 
@@ -139,7 +136,6 @@ static void gui_deinit(void)
 
 	signal_remove("gui exit", (SIGNAL_FUNC) sig_exit);
 
-        setup_servers_deinit();
 	gui_urls_deinit();
         gui_context_url_deinit();
         gui_context_nick_deinit();

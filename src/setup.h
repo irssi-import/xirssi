@@ -12,6 +12,9 @@ void setup_destroy(Setup *setup);
 /* register settings in widget and it's children */
 void setup_register(Setup *setup, GtkWidget *widget);
 
+/* mark the setup to have changes */
+void setup_set_changed(Setup *setup);
+
 /* apply setting changes */
 void setup_apply_changes(Setup *setup);
 

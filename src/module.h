@@ -15,6 +15,10 @@ typedef struct _WI_ITEM_REC WindowItem;
 typedef struct _KEYBOARD_REC Keyboard;
 typedef struct _TEXT_DEST_REC TextDest;
 
+typedef struct _CHAT_PROTOCOL_REC ChatProtocol;
+typedef struct _CHATNET_REC NetworkConfig;
+typedef struct _SERVER_SETUP_REC ServerConfig;
+
 typedef struct _Entry Entry;
 typedef struct _Frame Frame;
 typedef struct _Itemlist Itemlist;

@@ -162,14 +162,22 @@ static int setup_apply_widget(GtkWidget *widget, SETTINGS_REC *set,
 	return TRUE;
 }
 
+void setup_set_changed(Setup *setup)
+{
+	setup->changed = TRUE;
+}
+
 void setup_apply_changes(Setup *setup)
 {
 	if (!setup->changed)
 		return;
 
-	g_hash_table_foreach_remove(setup->changed_settings,
-				    (GHRFunc) setup_apply_widget,
-				    setup);
+	if (g_hash_table_size(setup->changed_settings) != 0) {
+		g_hash_table_foreach_remove(setup->changed_settings,
+					    (GHRFunc) setup_apply_widget,
+					    setup);
+		signal_emit("setup changed", 1);
+	}
 
-	signal_emit("setup changed", 1);
+	settings_save(NULL, FALSE);
 }

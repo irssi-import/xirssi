@@ -25,6 +25,7 @@ xirssi_LDADD = \
 
 xirssi_SOURCES = \
 	dialog-about.c \
+	gui.c \
 	gui-channel.c \
 	gui-context-nick.c \
 	gui-context-url.c \
@@ -48,10 +49,13 @@ xirssi_SOURCES = \
 	gui-window-view.c \
 	setup.c \
 	setup-servers.c \
+	setup-servers-network.c \
+	setup-servers-server.c \
         irssi.c
 
 noinst_HEADERS = \
 	dialogs.h \
+	gui.h \
 	gui-channel.h \
 	gui-entry.h \
 	gui-frame.h \
