@@ -5,6 +5,55 @@
 <entry>
 <date>2002-05-16</date>
 <weekday>Thursday</weekday>
+<time>08:36</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/setup-prefs.c</name>
+<revision>1.5</revision>
+</file>
+<msg>fixed sidebar behaviour.
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-16</date>
+<weekday>Thursday</weekday>
+<time>08:27</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>pixmaps/themes.png</name>
+<revision>1.2</revision>
+</file>
+<msg>updated
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-16</date>
+<weekday>Thursday</weekday>
+<time>08:17</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/gui-frame.c</name>
+<revision>1.21</revision>
+</file>
+<file>
+<name>src/gui-frame.h</name>
+<revision>1.8</revision>
+</file>
+<file>
+<name>src/gui-menu-main.c</name>
+<revision>1.6</revision>
+</file>
+<commondir>src/</commondir>
+<msg>implemented showing/hiding menubar/statusbar/nicklist - now if only the
+menubar shows their actual value correctly..
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-16</date>
+<weekday>Thursday</weekday>
 <time>07:49</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
