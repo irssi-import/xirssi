@@ -16,6 +16,7 @@ struct _Tab {
 	Window *active_win;
 	int data_level;
 
+	Frame *drag_frame;
 	int drag_pos;
 	unsigned int pressing:1;
 	unsigned int dragging:1;

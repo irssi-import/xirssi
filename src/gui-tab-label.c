@@ -72,15 +72,37 @@ static void create_pixmap_popup(GtkWidget **widget, char **data)
 
 	*widget = win;
 }
+
+/* Returns Frame at specified location */
+static Frame *frame_find_at(int x, int y)
+{
+	GSList *tmp;
+	int winx, winy;
+
+	for (tmp = frames; tmp != NULL; tmp = tmp->next) {
+		Frame *frame = tmp->data;
+		GtkAllocation *alloc = &GTK_WIDGET(frame->window)->allocation;
+
+		gtk_window_get_position(frame->window, &winx, &winy);
+		if (x >= winx && x < winx + alloc->width &&
+		    y >= winy && y < winy + alloc->height)
+			return frame;
+	}
+
+	return NULL;
+}
+
 /* Returns pos number*2, +1 if in center */
 static int notebook_get_pos_at(GtkNotebook *notebook, int x, int y)
 {
 	GtkWidget *tab, *child;
-	int horiz, pos, start, size, i, pagepos;
+	int winx, winy, horiz, pos, start, size, i, pagepos;
+
+	gdk_window_get_origin(GTK_WIDGET(notebook)->window, &winx, &winy);
 
 	horiz = notebook->tab_pos == GTK_POS_TOP ||
 		notebook->tab_pos == GTK_POS_BOTTOM;
-	pos = horiz ? x : y;
+	pos = horiz ? x-winx : y-winy;
 
 	pagepos = 0;
 	for (i = 0; ; i++) {
@@ -248,19 +270,41 @@ static void move_arrows(GtkNotebook *notebook, int pos)
 	}
 }
 
-static void tab_drop(Tab *tab)
+static void tab_drop(Tab *tab, int x, int y)
 {
 	GtkWidget *child;
 	GSList *tmp;
+	Frame *orig_frame;
 	Tab *newtab;
 	int current_page, new_page;
 
 	current_page = gtk_notebook_get_current_page(tab->frame->notebook);
 	child = gtk_notebook_get_nth_page(tab->frame->notebook, current_page);
 
-	if (tab->drag_pos < 0) {
-		/* detaching as new window */
-		if (g_list_length(tab->frame->notebook->children) == 1) {
+	new_page = tab->detaching ? -1 : tab->drag_pos/2;
+	if (new_page == current_page && tab->drag_frame == tab->frame)
+		return;
+
+	orig_frame = tab->frame;
+        if (!tab->detaching && (tab->drag_pos & 1)) {
+		/* move into tab as split window */
+		newtab = gui_frame_get_tab(tab->drag_frame, new_page);
+		g_return_if_fail(newtab != NULL);
+
+		for (tmp = tab->views; tmp != NULL; tmp = tmp->next) {
+			WindowView *view = tmp->data;
+
+                        gui_window_add_view(view->window, newtab);
+		}
+                gtk_notebook_remove_page(tab->frame->notebook, current_page);
+	} else if (!tab->detaching && tab->drag_frame == tab->frame) {
+		/* just move the tab */
+		gtk_notebook_reorder_child(tab->frame->notebook,
+					   child, new_page);
+	} else {
+		/* move to another frame, or detach as new window */
+		if (tab->detaching &&
+		    g_list_length(tab->frame->notebook->children) == 1) {
 			/* only tab in this window - no point in detaching */
 			return;
 		}
@@ -270,37 +314,24 @@ static void tab_drop(Tab *tab)
 		gtk_widget_hide(child);
 		gtk_notebook_remove_page(tab->frame->notebook, current_page);
 
-		/* create and move into new frame */
-		gui_frame_set_active(gui_frame_new());
-		tab->frame = active_frame;
+		/* create new frame if needed */
+		if (tab->detaching) {
+			tab->drag_frame = gui_frame_new();
+			gtk_window_move(tab->drag_frame->window, x, y);
+		}
+
+		/* move into new frame */
+		tab->frame = tab->drag_frame;
 		gtk_notebook_append_page(tab->frame->notebook, tab->widget,
 					 tab->tab_label);
 
 		gtk_widget_show(child);
 		g_object_unref(G_OBJECT(child));
-		return;
 	}
 
-	new_page = tab->drag_pos/2;
-	if (new_page == current_page)
-		return;
-
-	if ((tab->drag_pos & 1) == 0) {
-		/* just move the tab */
-		gtk_notebook_reorder_child(tab->frame->notebook,
-					   child, new_page);
-	} else {
-		/* move into tab as split window */
-		newtab = gui_frame_get_tab(tab->frame, new_page);
-		g_return_if_fail(newtab != NULL);
-
-		for (tmp = tab->views; tmp != NULL; tmp = tmp->next) {
-			WindowView *view = tmp->data;
-
-                        gui_window_add_view(view->window, newtab);
-		}
-                gtk_notebook_remove_page(tab->frame->notebook, current_page);
-	}
+	/* kill frame if we moved it's last tab */
+	if (orig_frame->notebook->children == NULL)
+		gtk_widget_destroy(GTK_WIDGET(orig_frame->window));
 }
 
 static gboolean event_button_press(GtkWidget *widget, GdkEventButton *event,
@@ -317,6 +348,8 @@ static gboolean event_button_press(GtkWidget *widget, GdkEventButton *event,
 static gboolean event_button_release(GtkWidget *widget, GdkEventButton *event,
 				     Tab *tab)
 {
+	int rootx, rooty;
+
 	if (event->button != 1 || !tab->dragging)
 		return FALSE;
 
@@ -329,7 +362,8 @@ static gboolean event_button_release(GtkWidget *widget, GdkEventButton *event,
 	tab->dragging = FALSE;
 	hide_arrows();
 
-	tab_drop(tab);
+	gdk_window_get_root_origin(widget->window, &rootx, &rooty);
+	tab_drop(tab, event->x + rootx, event->y + rooty);
 	return FALSE;
 }
 
@@ -337,7 +371,8 @@ static gboolean event_motion(GtkWidget *widget, GdkEventButton *event,
 			     Tab *tab)
 {
 	static GdkCursor *cursor = NULL;
-	int pos, x, y, rootx, rooty;
+	Frame *frame;
+	int pos, x, y, winx, winy;
 
 	if (!tab->pressing)
 		return FALSE;
@@ -368,10 +403,24 @@ static gboolean event_motion(GtkWidget *widget, GdkEventButton *event,
 				 NULL, cursor, 0);
 	}
 
-	if (x < 0 || y < 0 ||
-	    x > GTK_WIDGET(tab->frame->window)->allocation.width ||
-	    y > GTK_WIDGET(tab->frame->window)->allocation.height) {
-		/* detaching window */
+	/* get x/y relative to root */
+	gtk_window_get_position(tab->frame->window, &winx, &winy);
+	x += winx; y += winy;
+
+	frame = frame_find_at(x, y);
+	if (frame != NULL) {
+		/* dragging inside notebook */
+		pos = notebook_get_pos_at(frame->notebook, x, y);
+		if (pos == tab->drag_pos)
+			return FALSE;
+
+		/* moved */
+		tab->drag_frame = frame;
+		tab->drag_pos = pos;
+		tab->detaching = FALSE;
+		move_arrows(frame->notebook, pos);
+	} else {
+		/* cursor outside notebook - detaching window */
 		if (!tab->detaching) {
 			tab->detaching = TRUE;
 			tab->drag_pos = -1;
@@ -380,19 +429,8 @@ static gboolean event_motion(GtkWidget *widget, GdkEventButton *event,
 
 		create_pixmap_popup(&detach_box, detach_box_xpm);
 
-		gtk_window_get_position(tab->frame->window, &rootx, &rooty);
-		gtk_window_move(GTK_WINDOW(detach_box), x + rootx, y + rooty);
+		gtk_window_move(GTK_WINDOW(detach_box), x, y);
 		gtk_widget_show(detach_box);
-	} else {
-		/* notebook dragging - get position */
-		pos = notebook_get_pos_at(tab->frame->notebook, x, y);
-		if (pos == tab->drag_pos)
-			return FALSE;
-
-		/* moved */
-		tab->drag_pos = pos;
-		tab->detaching = FALSE;
-		move_arrows(tab->frame->notebook, pos);
 	}
 	return FALSE;
 }
