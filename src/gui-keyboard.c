@@ -81,6 +81,8 @@ char *gui_keyboard_get_event_string(GdkEventKey *event)
 		g_string_append(cmd, "space");
 	else if (event->keyval == '\n')
 		g_string_append(cmd, "return");
+	else if (event->keyval == '^')
+		g_string_append(cmd, "^^");
 	else
 		g_string_sprintfa(cmd, "%c", chr);
 
