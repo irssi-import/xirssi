@@ -1,3 +1,13 @@
+2002-04-27 17:49  Timo Sirainen <tss@iki.fi>
+
+	* src/: gui-channel.c, gui-context-nick.c, gui-frame.c: window size
+	fixes, locale -> utf8 converting for topics and nick infos.
+
+2002-04-27 17:23  Timo Sirainen <tss@iki.fi>
+
+	* Makefile.am, pixmaps/Makefile.am: added "make clean" and fixed
+	the src/pixmaps dir order
+
 2002-04-27 16:53  Timo Sirainen <tss@iki.fi>
 
 	* .cvsignore: added
