@@ -5,6 +5,19 @@
 <entry>
 <date>2002-05-18</date>
 <weekday>Saturday</weekday>
+<time>12:18</time>
+<author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
+<file>
+<name>src/setup-ignores.c</name>
+<revision>1.1</revision>
+</file>
+<msg>was missing
+</msg>
+</entry>
+
+<entry>
+<date>2002-05-18</date>
+<weekday>Saturday</weekday>
 <time>09:49</time>
 <author>Timo Sirainen &lt;tss@iki.fi&gt;</author>
 <file>
