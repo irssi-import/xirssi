@@ -89,3 +89,24 @@ void gui_toggle_set_from(GObject *object, const char *key, gboolean value)
 	toggle = g_object_get_data(object, key);
 	gtk_toggle_button_set_active(toggle, value);
 }
+
+gint gui_tree_strcase_sort_func(GtkTreeModel *model,
+				GtkTreeIter *a, GtkTreeIter *b,
+				gpointer user_data)
+{
+	int column = GPOINTER_TO_INT(user_data);
+	GValue a_value = { 0, };
+	GValue b_value = { 0, };
+	int ret;
+
+	gtk_tree_model_get_value(model, a, column, &a_value);
+	gtk_tree_model_get_value(model, b, column, &b_value);
+
+	ret = strcasecmp(g_value_get_string(&a_value),
+			 g_value_get_string(&b_value));
+
+	g_value_unset(&a_value);
+	g_value_unset(&b_value);
+
+	return ret;
+}

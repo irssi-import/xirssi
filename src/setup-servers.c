@@ -391,36 +391,6 @@ GList *get_chat_protocol_names(void)
 	return list;
 }
 
-void setup_server_add_protocol_widget(GtkTable *table, int y,
-				      ChatProtocol *proto,
-				      int default_proto)
-{
-	GtkWidget *label, *combo;
-	GList *list;
-
-	label = gtk_label_new("Protocol");
-	gtk_misc_set_alignment(GTK_MISC(label), 1, .5);
-	gtk_table_attach(table, label, 0, 1, y, y+1, GTK_FILL, 0, 0, 0);
-
-	if (proto == NULL) {
-		/* allow changing only if it's new */
-		combo = gtk_combo_new();
-		gtk_table_attach_defaults(table, combo, 1, 2, y, y+1);
-
-		list = get_chat_protocol_names();
-		gtk_combo_set_popdown_strings(GTK_COMBO(combo), list);
-		g_list_free(list);
-
-		gtk_editable_set_editable(GTK_EDITABLE(GTK_COMBO(combo)->entry),
-				       FALSE);
-		g_object_set_data(G_OBJECT(table), "protocol",
-				  GTK_COMBO(combo)->entry);
-	} else {
-		label = gtk_label_new(proto->name);
-		gtk_table_attach_defaults(table, label, 1, 2, y, y+1);
-	}
-}
-
 static void autoconnect_set_func(GtkTreeViewColumn *column,
 				 GtkCellRenderer   *cell,
 				 GtkTreeModel      *model,

@@ -16,4 +16,8 @@ void gui_entry_update(GObject *object, const char *name, char **value);
 void gui_entry_set_from(GObject *object, const char *key, const char *value);
 void gui_toggle_set_from(GObject *object, const char *key, gboolean value);
 
+gint gui_tree_strcase_sort_func(GtkTreeModel *model,
+				GtkTreeIter *a, GtkTreeIter *b,
+				gpointer user_data);
+
 #endif

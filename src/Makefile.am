@@ -55,6 +55,7 @@ xirssi_SOURCES = \
 	gui-window-context.c \
 	gui-window-view.c \
 	setup.c \
+	setup-aliases.c \
 	setup-prefs.c \
 	setup-servers.c \
 	setup-servers-network.c \

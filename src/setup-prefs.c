@@ -24,6 +24,7 @@
 #include "glade/interface.h"
 
 void setup_servers_init(GtkWidget *dialog);
+void setup_aliases_init(GtkWidget *dialog);
 
 typedef struct {
 	const char *name;
@@ -45,7 +46,7 @@ static SetupPrefs prefs[] = {
 	{ "Windows",		"page_windows" },
 	{ "Queries",		"page_queries" },
 	{ "Completion",		"page_completion" },
-	{ "Aliases",		"page_aliases" },
+	{ "Aliases",		"page_aliases", setup_aliases_init },
 	{ "Keyboard",		"page_keyboard" },
 
 	{ "Window Input" },
