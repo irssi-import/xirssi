@@ -27,7 +27,6 @@
 #include "keyboard.h"
 #include "completion.h"
 #include "command-history.h"
-#include "translation.h"
 
 #include "gui-keyboard.h"
 #include "gui-entry.h"
@@ -377,7 +376,6 @@ static void key_send_line(const char *data, Entry *entry)
 		/* error - fallback to utf8 */
 		str = g_strdup(line);
 	}
-	translate_output(str);
 
 	gtk_widget_ref(entry->widget);
 
@@ -424,7 +422,7 @@ static void key_completion(Entry *entry, int erase)
 	pos = gtk_editable_get_position(GTK_EDITABLE(entry->entry));
 
         text = gtk_entry_get_text(entry->entry);
-	line = word_complete(entry->active_win, text, &pos, erase);
+	line = word_complete(entry->active_win, text, &pos, erase, FALSE);
 
 	if (line != NULL) {
 		gtk_entry_set_text(entry->entry, line);

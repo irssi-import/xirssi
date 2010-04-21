@@ -113,7 +113,7 @@ static void menu_callback(void *user_data, const char *item_data, int action)
 		signal_emit("url open", 2, STARTUP_HOWTO_URL, "http");
 		break;
 	case ACTION_HOMEPAGE:
-		signal_emit("url open", 2, IRSSI_WEBSITE, "http");
+		signal_emit("url open", 2, "http://irssi.org/", "http");
 		break;
 	case ACTION_ABOUT:
 		dialog_about_show();

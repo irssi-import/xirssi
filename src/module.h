@@ -1,4 +1,5 @@
 #include "common.h"
+#include "irssi-config.h"
 
 #include <gtk/gtk.h>
 

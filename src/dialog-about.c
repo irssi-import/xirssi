@@ -24,6 +24,8 @@
 #include "gui-menu.h"
 
 #define IRSSI_COPYRIGHT "Copyright (C) 1999-2002 Timo Sirainen"
+#define IRSSI_WEBSITE "http://irssi.org/"
+#define IRSSI_AUTHOR_EMAIL "tss@iki.fi"
 
 static GtkWidget *dialog = NULL;
 
@@ -65,7 +67,7 @@ void dialog_about_show(void)
 			 GTK_SIGNAL_FUNC(gtk_widget_destroy), NULL);
 
 	/* name */
-	label = gtk_label_new(PACKAGE);
+	label = gtk_label_new(PACKAGE_NAME);
 	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), label,
 			   FALSE, FALSE, 10);
 
@@ -93,7 +95,7 @@ void dialog_about_show(void)
 	gtk_box_pack_start(GTK_BOX(hbox), vbox, FALSE, FALSE, 0);
 
 	/* version */
-	g_snprintf(str, sizeof(str), "version " IRSSI_VERSION " (%d %04d)",
+	g_snprintf(str, sizeof(str), "version " PACKAGE_VERSION " (%d %04d)",
 		   IRSSI_VERSION_DATE, IRSSI_VERSION_TIME);
 
 	label = gtk_label_new(str);

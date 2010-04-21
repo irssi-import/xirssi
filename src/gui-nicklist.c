@@ -21,6 +21,8 @@
 #include "module.h"
 #include "modules.h"
 #include "signals.h"
+#include "channels.h"
+#include "servers.h"
 #include "nicklist.h"
 
 #include "gui-channel.h"
@@ -36,20 +38,22 @@ static gint nicklist_sort_func(GtkTreeModel *model,
 	gtk_tree_model_get(model, a, 0, &nick1, -1);
 	gtk_tree_model_get(model, b, 0, &nick2, -1);
 
-	return nicklist_compare(nick1, nick2);
+	return nicklist_compare(nick1, nick2, user_data);
 }
 
 Nicklist *gui_nicklist_new(Channel *channel)
 {
 	Nicklist *nicklist;
 	GtkListStore *store;
+	const gchar *nick_flags = NULL;
 
 	nicklist = g_new0(Nicklist, 1);
 	nicklist->channel = channel;
+	nick_flags = channel->server->get_nick_flags(channel->server);
 
 	nicklist->store = store = gtk_list_store_new(1, G_TYPE_POINTER);
 	gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(store), 0,
-					nicklist_sort_func, NULL, NULL);
+					nicklist_sort_func, (void *)nick_flags, NULL);
 	gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(store), 0,
 					     GTK_SORT_ASCENDING);
 

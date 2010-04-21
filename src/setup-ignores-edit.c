@@ -52,7 +52,7 @@ static void ignore_save(GObject *obj, Ignore *ignore)
 
 	/* level */
 	entry = g_object_get_data(obj, "level");
-	ignore->level = level2bits(gtk_entry_get_text(entry));
+	ignore->level = level2bits(gtk_entry_get_text(entry), NULL);
 	if (ignore->level == 0)
 		ignore->level = MSGLEVEL_ALL;
 

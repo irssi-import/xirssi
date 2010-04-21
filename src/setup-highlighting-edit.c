@@ -46,7 +46,7 @@ static void highlight_save(GObject *obj, Highlight *highlight)
 
 	/* level */
 	entry = g_object_get_data(obj, "level");
-	highlight->level = level2bits(gtk_entry_get_text(entry));
+	highlight->level = level2bits(gtk_entry_get_text(entry), NULL);
 	if (highlight->level == 0)
 		highlight->level = MSGLEVEL_ALL;
 

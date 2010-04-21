@@ -163,7 +163,7 @@ int main(int argc, char **argv)
 {
 	gtk_init(&argc, &argv);
 
-	core_init_paths(argc, argv);
+	core_register_options();
 
 #ifdef HAVE_SOCKS
 	SOCKSinit(argv[0]);
@@ -173,6 +173,9 @@ int main(int argc, char **argv)
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 #endif
+
+	core_preinit(argv[0]);
+	core_init();
 
 	gui_init();
 	args_execute(argc, argv);
