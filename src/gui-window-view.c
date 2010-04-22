@@ -102,7 +102,7 @@ WindowView *gui_window_view_new(TabPane *pane, WindowGui *window,
 {
         WindowView *view;
 	GtkWidget *sw, *text_view;
-	/*PangoFontDescription *font_desc;*/
+	PangoFontDescription *font_desc;
 	GdkColor color;
 
 	view = g_new0(WindowView, 1);
@@ -134,9 +134,9 @@ WindowView *gui_window_view_new(TabPane *pane, WindowGui *window,
 	gtk_container_add(GTK_CONTAINER(sw), text_view);
 
 	/* FIXME: configurable */
-	/*font_desc = pango_font_description_from_string("fixed 10");
+	font_desc = pango_font_description_from_string("Monospace 10");
 	gtk_widget_modify_font(text_view, font_desc);
-	pango_font_description_free(font_desc);*/
+	pango_font_description_free(font_desc);
 
 	gtk_text_view_set_cursor_visible(view->view, FALSE);
 	gtk_text_view_set_wrap_mode(view->view, GTK_WRAP_WORD);

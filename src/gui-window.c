@@ -275,7 +275,7 @@ static void sig_window_created(Window *window, void *automatic)
 
 	gui->buffer = gtk_text_buffer_new(NULL);
 	gui->tagtable = gtk_text_buffer_get_tag_table(gui->buffer);
-	gui->font_monospace = pango_font_description_from_string("fixed 10");
+	gui->font_monospace = pango_font_description_from_string("Monospace 10");
 
 	/* underline tag */
 	gui->tag_underline =
