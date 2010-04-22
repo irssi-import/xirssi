@@ -28,6 +28,20 @@ generated_pixmaps = \
 # .. can't I combine these lists into just one..?
 EXTRA_DIST = \
 	$(xpm_pixmaps) \
+	advanced-logging.png \
+	autolog.png \
+	channels.png \
+	dcc.png \
+	filtering-settings.png \
+	fontscolors.png \
+	highlighting.png \
+	ignores.png \
+	irc.png \
+	keyboard.png \
+	queries.png \
+	servers.png \
+	settings.png \
+	themes.png \
 	ball-blue.png \
 	ball-lightblue.png \
 	ball-pink.png \
