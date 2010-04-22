@@ -161,9 +161,8 @@ static void gui_deinit(void)
 
 int main(int argc, char **argv)
 {
-	gtk_init(&argc, &argv);
-
 	core_register_options();
+	fe_common_core_register_options();
 
 #ifdef HAVE_SOCKS
 	SOCKSinit(argv[0]);
@@ -178,6 +177,8 @@ int main(int argc, char **argv)
 	core_init();
 
 	gui_init();
+
+	gtk_init(&argc, &argv);
 	args_execute(argc, argv);
 
 	gui_finish_init();
