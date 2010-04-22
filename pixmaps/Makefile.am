@@ -26,7 +26,8 @@ generated_pixmaps = \
 	ball-red.h
 
 # .. can't I combine these lists into just one..?
-EXTRA_DIST = \
+imagesdir = $(pkgdatadir)/images
+images_DATA = \
 	$(xpm_pixmaps) \
 	advanced-logging.png \
 	autolog.png \
@@ -50,6 +51,9 @@ EXTRA_DIST = \
 	ball-orange.png \
 	ball-red.png \
 	irssilogo.jpg
+
+EXTRA_DIST = $(images_DATA)
+
 all: $(generated_pixmaps)
 
 clean-generic:
