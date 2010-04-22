@@ -1,5 +1,6 @@
-
 BUGS:
+ - /upgrade causes a crash if you have a lot of windows, otherwise works fine
+
  - alt-a leaves focus to previous window (mjr)
  - pressing 3 keys at the same time:
 18:13 <@joose> cras: ** (xirssi:11740): CRITICAL **: file keyboard.c: line 563 
@@ -61,14 +62,11 @@ FEATURES:
     - add popup menus
 
  - clean about dialog, add ccr there
- - add configure time settings somewhere .. about dialog? /version?
-   (irssi's feature actually)
- - galeon-like tab size settings..?
- - statusbar
  - lots of irc-specific stuff
  - nicklist: show ignored people with overstrike font, show away people with
    grey color (0.9 stuff maybe)
  - show notify list under nicklist
  - make /layout work
- - use only one GtkTagTable for all GtkTextBuffers (is it possible?)
  - tooltips into buttons in main win
+
+ - window switcher: use a treeview here...
