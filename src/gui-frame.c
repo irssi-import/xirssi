@@ -184,7 +184,7 @@ Frame *gui_frame_new(int show)
 	g_signal_connect(G_OBJECT(notebook), "switch_page",
 			 G_CALLBACK(event_switch_page), frame);
 	frame->notebook = GTK_NOTEBOOK(notebook);
-	gtk_notebook_set_tab_pos(frame->notebook, GTK_POS_BOTTOM);
+	gtk_notebook_set_tab_pos(frame->notebook, GTK_POS_LEFT);
         gtk_notebook_set_scrollable(frame->notebook, TRUE);
 	gtk_box_pack_start(GTK_BOX(vbox), notebook, TRUE, TRUE, 0);
 
