@@ -93,6 +93,7 @@ static void gui_nicklist_add(Channel *channel, Nick *nick, int update_label)
 {
 	ChannelGui *gui;
 	GtkTreeIter iter;
+	gpointer nick_flags = NULL;
 
 	gui = CHANNEL_GUI(channel);
 
@@ -106,9 +107,12 @@ static void gui_nicklist_add(Channel *channel, Nick *nick, int update_label)
 		gui->nicklist->normal++;
 	gui->nicklist->nicks++;
 
+	if (channel->server->get_nick_flags != NULL)
+		nick_flags = channel->server->get_nick_flags(channel->server);
+
 	gtk_list_store_append(gui->nicklist->store, &iter);
 	gtk_list_store_set(gui->nicklist->store, &iter,
-			   0, nick, 1, channel->server->get_nick_flags(channel->server), -1);
+			   0, nick, 1, nick_flags, -1);
 
 	gui_nicklist_update_label(gui->nicklist);
 }
