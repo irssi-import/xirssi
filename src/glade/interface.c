@@ -335,8 +335,6 @@ create_preferences (void)
   GtkWidget *label194;
   GtkWidget *font;
   GtkWidget *font_monospace;
-  GtkWidget *font_font;
-  GtkWidget *font_font_monospace;
   GtkWidget *table27;
   GtkWidget *button34;
   GtkWidget *color_default_text;
@@ -350,7 +348,6 @@ create_preferences (void)
   GtkWidget *hseparator30;
   GtkWidget *label202;
   GtkWidget *font_bold;
-  GtkWidget *font_font_bold;
   GtkWidget *label187;
   GtkWidget *frame46;
   GtkWidget *table25;
@@ -2323,7 +2320,7 @@ create_preferences (void)
   gtk_widget_show (frame45);
   gtk_box_pack_start (GTK_BOX (page_fontscolors), frame45, FALSE, TRUE, 0);
 
-  table24 = gtk_table_new (4, 3, FALSE);
+  table24 = gtk_table_new (3, 3, FALSE);
   gtk_widget_set_name (table24, "table24");
   gtk_widget_show (table24);
   gtk_container_add (GTK_CONTAINER (frame45), table24);
@@ -2340,6 +2337,29 @@ create_preferences (void)
   gtk_label_set_justify (GTK_LABEL (label193), GTK_JUSTIFY_LEFT);
   gtk_misc_set_alignment (GTK_MISC (label193), 1, 0.5);
 
+  font = gtk_font_button_new();
+  gtk_widget_set_name (font, "font");
+  gtk_widget_show (font);
+  gtk_table_attach (GTK_TABLE (table24), font, 1, 2, 0, 1,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  label202 = gtk_label_new ("Bold font");
+  gtk_widget_set_name (label202, "label202");
+  gtk_widget_show (label202);
+  gtk_table_attach (GTK_TABLE (table24), label202, 0, 1, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_label_set_justify (GTK_LABEL (label202), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (label202), 1, 0.5);
+
+  font_bold = gtk_font_button_new();
+  gtk_widget_set_name (font_bold, "font_bold");
+  gtk_widget_show (font_bold);
+  gtk_table_attach (GTK_TABLE (table24), font_bold, 1, 2, 1, 2,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
   label194 = gtk_label_new ("Monospace font");
   gtk_widget_set_name (label194, "label194");
   gtk_widget_show (label194);
@@ -2349,32 +2369,11 @@ create_preferences (void)
   gtk_label_set_justify (GTK_LABEL (label194), GTK_JUSTIFY_LEFT);
   gtk_misc_set_alignment (GTK_MISC (label194), 1, 0.5);
 
-  font = gtk_entry_new ();
-  gtk_widget_set_name (font, "font");
-  gtk_widget_show (font);
-  gtk_table_attach (GTK_TABLE (table24), font, 1, 2, 0, 1,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  font_monospace = gtk_entry_new ();
+  font_monospace = gtk_font_button_new();
   gtk_widget_set_name (font_monospace, "font_monospace");
   gtk_widget_show (font_monospace);
   gtk_table_attach (GTK_TABLE (table24), font_monospace, 1, 2, 2, 3,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  font_font = gtk_button_new_with_mnemonic ("Change...");
-  gtk_widget_set_name (font_font, "font_font");
-  gtk_widget_show (font_font);
-  gtk_table_attach (GTK_TABLE (table24), font_font, 2, 3, 0, 1,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  font_font_monospace = gtk_button_new_with_mnemonic ("Change...");
-  gtk_widget_set_name (font_font_monospace, "font_font_monospace");
-  gtk_widget_show (font_font_monospace);
-  gtk_table_attach (GTK_TABLE (table24), font_font_monospace, 2, 3, 2, 3,
-                    (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
 
   table27 = gtk_table_new (3, 4, FALSE);
@@ -2458,29 +2457,6 @@ create_preferences (void)
   gtk_table_attach (GTK_TABLE (table27), hseparator30, 0, 4, 0, 1,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (GTK_FILL), 0, 7);
-
-  label202 = gtk_label_new ("Bold font");
-  gtk_widget_set_name (label202, "label202");
-  gtk_widget_show (label202);
-  gtk_table_attach (GTK_TABLE (table24), label202, 0, 1, 1, 2,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_label_set_justify (GTK_LABEL (label202), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label202), 1, 0.5);
-
-  font_bold = gtk_entry_new ();
-  gtk_widget_set_name (font_bold, "font_bold");
-  gtk_widget_show (font_bold);
-  gtk_table_attach (GTK_TABLE (table24), font_bold, 1, 2, 1, 2,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  font_font_bold = gtk_button_new_with_mnemonic ("Change...");
-  gtk_widget_set_name (font_font_bold, "font_font_bold");
-  gtk_widget_show (font_font_bold);
-  gtk_table_attach (GTK_TABLE (table24), font_font_bold, 2, 3, 1, 2,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
 
   label187 = gtk_label_new ("Windows");
   gtk_widget_set_name (label187, "label187");
@@ -3141,8 +3117,6 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, label194, "label194");
   GLADE_HOOKUP_OBJECT (preferences, font, "font");
   GLADE_HOOKUP_OBJECT (preferences, font_monospace, "font_monospace");
-  GLADE_HOOKUP_OBJECT (preferences, font_font, "font_font");
-  GLADE_HOOKUP_OBJECT (preferences, font_font_monospace, "font_font_monospace");
   GLADE_HOOKUP_OBJECT (preferences, table27, "table27");
   GLADE_HOOKUP_OBJECT (preferences, button34, "button34");
   GLADE_HOOKUP_OBJECT (preferences, color_default_text, "color_default_text");
@@ -3156,7 +3130,6 @@ create_preferences (void)
   GLADE_HOOKUP_OBJECT (preferences, hseparator30, "hseparator30");
   GLADE_HOOKUP_OBJECT (preferences, label202, "label202");
   GLADE_HOOKUP_OBJECT (preferences, font_bold, "font_bold");
-  GLADE_HOOKUP_OBJECT (preferences, font_font_bold, "font_font_bold");
   GLADE_HOOKUP_OBJECT (preferences, label187, "label187");
   GLADE_HOOKUP_OBJECT (preferences, frame46, "frame46");
   GLADE_HOOKUP_OBJECT (preferences, table25, "table25");
