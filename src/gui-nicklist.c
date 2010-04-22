@@ -34,26 +34,25 @@ static gint nicklist_sort_func(GtkTreeModel *model,
 			       gpointer user_data)
 {
 	Nick *nick1, *nick2;
+	gpointer channel_flags;
 
-	gtk_tree_model_get(model, a, 0, &nick1, -1);
-	gtk_tree_model_get(model, b, 0, &nick2, -1);
+	gtk_tree_model_get(model, a, 0, &nick1, 1, &channel_flags, -1);
+	gtk_tree_model_get(model, b, 0, &nick2, 1, &channel_flags, -1);
 
-	return nicklist_compare(nick1, nick2, user_data);
+	return nicklist_compare(nick1, nick2, channel_flags);
 }
 
 Nicklist *gui_nicklist_new(Channel *channel)
 {
 	Nicklist *nicklist;
 	GtkListStore *store;
-	const gchar *nick_flags = NULL;
 
 	nicklist = g_new0(Nicklist, 1);
 	nicklist->channel = channel;
-	nick_flags = channel->server->get_nick_flags(channel->server);
 
-	nicklist->store = store = gtk_list_store_new(1, G_TYPE_POINTER);
+	nicklist->store = store = gtk_list_store_new(2, G_TYPE_POINTER, G_TYPE_POINTER);
 	gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(store), 0,
-					nicklist_sort_func, (void *)nick_flags, NULL);
+					nicklist_sort_func, NULL, NULL);
 	gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(store), 0,
 					     GTK_SORT_ASCENDING);
 
@@ -109,7 +108,7 @@ static void gui_nicklist_add(Channel *channel, Nick *nick, int update_label)
 
 	gtk_list_store_append(gui->nicklist->store, &iter);
 	gtk_list_store_set(gui->nicklist->store, &iter,
-			   0, nick, -1);
+			   0, nick, 1, channel->server->get_nick_flags(channel->server), -1);
 
 	gui_nicklist_update_label(gui->nicklist);
 }
