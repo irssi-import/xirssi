@@ -102,7 +102,7 @@ static void gui_finish_init(void)
 	perl_core_init();
 	fe_perl_init();
 #endif
-        add_pixmap_directory("../pixmaps");
+        add_pixmap_directory(DATADIR "/images");
 
 	gui_tabs_init();
 	gui_windows_init();

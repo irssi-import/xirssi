@@ -9,7 +9,8 @@ INCLUDES = \
 	-I$(IRSSI_INCLUDE)/src/core/ \
 	-I$(IRSSI_INCLUDE)/src/fe-common/core/ \
 	$(GTK_CFLAGS) \
-	-DSYSCONFDIR=\""$(sysconfdir)"\"
+	-DSYSCONFDIR=\""$(sysconfdir)"\" \
+	-DDATADIR=\""$(pkgdatadir)"\"
 
 xirssi_libs = \
 	glade/libirssi_glade.a
