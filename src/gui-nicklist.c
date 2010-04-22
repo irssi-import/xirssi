@@ -188,8 +188,16 @@ static void gui_nicklist_mode_changed(Channel *channel, Nick *nick)
 	gui_nicklist_update_label(gui->nicklist);
 }
 
+static void gui_nicklist_channel_joined(Channel *channel)
+{
+	ChannelGui *gui = CHANNEL_GUI(channel);
+
+	gtk_tree_sortable_sort_column_changed(GTK_TREE_SORTABLE(gui->nicklist->store));
+}
+
 void gui_nicklists_init(void)
 {
+	signal_add("channel joined", (SIGNAL_FUNC) gui_nicklist_channel_joined);
 	signal_add("nicklist new", (SIGNAL_FUNC) gui_nicklist_add);
 	signal_add("nicklist remove", (SIGNAL_FUNC) gui_nicklist_remove);
 	signal_add("nicklist changed", (SIGNAL_FUNC) gui_nicklist_changed);
@@ -198,6 +206,7 @@ void gui_nicklists_init(void)
 
 void gui_nicklists_deinit(void)
 {
+	signal_remove("channel joined", (SIGNAL_FUNC) gui_nicklist_channel_joined);
 	signal_remove("nicklist new", (SIGNAL_FUNC) gui_nicklist_add);
 	signal_remove("nicklist remove", (SIGNAL_FUNC) gui_nicklist_remove);
 	signal_remove("nicklist changed", (SIGNAL_FUNC) gui_nicklist_changed);
