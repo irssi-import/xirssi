@@ -56,6 +56,13 @@ if test "x`echo $PROG_LIBS|grep glib-2.0`" = "x"; then
   AC_ERROR(Irssi needs to be configured with --with-glib2 option)
 fi
 
+if test "x$prefix" == "xNONE"; then
+  prefix="${ac_default_prefix}"
+fi
+
+pkgdatadir="$prefix/share/xirssi/"
+AC_DEFINE_UNQUOTED([XIRSSI_PKGDATADIR], ["$pkgdatadir"], [Data directory for xirssi])
+
 AC_SUBST(COMMON_LIBS)
 AC_SUBST(PROG_LIBS)
 AC_SUBST(PERL_LINK_LIBS)
