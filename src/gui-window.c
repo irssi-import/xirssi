@@ -118,6 +118,9 @@ static void gui_window_print(WindowGui *window, TextDest *dest,
 	char *utf8_text, fg_tag_name[20], bg_tag_name[20];
 	int start_offset;
 
+	memset(&iter, 0, sizeof(iter));
+	memset(&start_iter, 0, sizeof(start_iter));
+
 	utf8_text = g_locale_to_utf8(text, -1, NULL, NULL, NULL);
 	if (utf8_text == NULL) {
 		/* error - fallback to hardcoded charset (ms windows one) */
@@ -257,10 +260,13 @@ static void sig_window_created(Window *window, void *automatic)
 	Tab *tab;
 	WindowGui *gui;
 
-	frame = window_create_override == 0 || active_frame == NULL ?
-		gui_frame_new(TRUE) : active_frame;
-	tab = window_create_override <= 1 || active_frame->active_tab == NULL ?
-		gui_tab_new(frame) : active_frame->active_tab;
+	frame = active_frame;
+	if (window_create_override == 0 || active_frame == NULL)
+		frame = gui_frame_new(TRUE);
+
+	tab = frame->active_tab;
+	if (window_create_override <= 1 || frame->active_tab == NULL)
+		tab = gui_tab_new(frame);
 
 	if (!automatic || active_frame == NULL) {
 		gui_frame_set_active(frame);
