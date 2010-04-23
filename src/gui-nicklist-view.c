@@ -116,7 +116,7 @@ static gboolean event_button_press(GtkTreeView *tree, GdkEventButton *event,
 		/* left-doubleclick - open the nick under mouse in query */
 		gtk_tree_model_get(model, &iter, 0, &nick, -1);
 		if (nick != NULL) {
-			signal_emit("command query", 2, nick->nick,
+			signal_emit("command whois", 2, nick->nick,
 				    view->nicklist->channel->server);
 		}
 	} else if (event->button == 3 && event->type == GDK_BUTTON_PRESS) {
