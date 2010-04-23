@@ -57,15 +57,13 @@ static void tab_id_set_func(GtkTreeViewColumn *column,
 			    gpointer           data)
 {
 	Tab *tab;
-	gchar *tabid;
+	gchar tabid[20];
 
 	gtk_tree_model_get(model, iter, 0, &tab, -1);
 
-	tabid = g_strdup_printf("%d:", gtk_notebook_page_num(GTK_NOTEBOOK(tab->frame->notebook), tab->widget));
+	g_snprintf(tabid, 20, "%d:", gtk_notebook_page_num(GTK_NOTEBOOK(tab->frame->notebook), tab->widget) + 1);
 
 	g_object_set(G_OBJECT(cell), "text", tabid, NULL);
-
-	g_free(tabid);
 }
 
 static void tab_name_set_func(GtkTreeViewColumn *column,
@@ -120,4 +118,14 @@ WindowList *gui_windowlist_new(Frame *frame)
 	gtk_tree_view_column_set_cell_data_func(col, renderer, tab_name_set_func, NULL, NULL);
 
 	return winlist;
+}
+
+void gui_windowlist_init(void)
+{
+
+}
+
+void gui_windowlist_deinit(void)
+{
+
 }

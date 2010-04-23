@@ -36,6 +36,7 @@
 #include "gui-nicklist.h"
 #include "gui-nicklist-view.h"
 #include "gui-window.h"
+#include "gui-windowlist.h"
 #include "gui-tab.h"
 #include "gui-url.h"
 #include "setup.h"
@@ -104,6 +105,7 @@ static void gui_finish_init(void)
 #endif
         add_pixmap_directory(DATADIR "/images");
 
+	gui_windowlist_init();
 	gui_tabs_init();
 	gui_windows_init();
 	gui_itemlists_init();
@@ -152,6 +154,7 @@ static void gui_deinit(void)
 	gui_itemlists_deinit();
 	gui_windows_deinit();
 	gui_tabs_deinit();
+	gui_windowlist_deinit();
 
 	fe_common_irc_deinit();
 	fe_common_core_deinit();
