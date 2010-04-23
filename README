@@ -10,5 +10,5 @@ with --with-glib2 option. Then the usual:
 	make
 	make install
 
-configure looks for irssi in ../, ../irssi/ and ../../irssi/ directories,
-so if it's in one of those you don't need to give the --with-irssi option.
+You *MUST* specify a direct path to --with-irssi.  Relative paths will fail
+because GNU make won't know what to do with them anymore.
