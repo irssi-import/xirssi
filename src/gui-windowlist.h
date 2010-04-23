@@ -1,12 +1,12 @@
 #ifndef GUI_WINDOWLIST_H
 #define GUI_WINDOWLIST_H
 
-#include "gui-frame.h"
-
 typedef struct {
 	GtkWidget *widget;
 	GtkListStore *store;
 } WindowList;
+
+#include "gui-frame.h"
 
 WindowList *gui_windowlist_new(Frame *frame);
 
