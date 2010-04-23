@@ -28,6 +28,7 @@
 #include "gui-keyboard.h"
 #include "gui-tab.h"
 #include "gui-window.h"
+#include "gui-windowlist.h"
 #include "gui-menu.h"
 
 #include <gdk/gdkkeysyms.h>
@@ -150,7 +151,7 @@ static gboolean event_switch_page(GtkWidget *notebook, GtkNotebookPage *page,
 
 Frame *gui_frame_new(int show)
 {
-	GtkWidget *window, *vbox, *hbox, *notebook, *statusbar;
+	GtkWidget *window, *vbox, *hbox, *notebook, *statusbar, *vbox2;
 	Frame *frame;
 
 	frame = g_new0(Frame, 1);
@@ -179,18 +180,27 @@ Frame *gui_frame_new(int show)
 	frame->menubar = gui_menu_bar_new();
 	gtk_box_pack_start(GTK_BOX(vbox), frame->menubar, FALSE, FALSE, 0);
 
-	/* notebook */
+	/* hbox: channel switcher + notebook */
+	hbox = gtk_hpaned_new();
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
+
+	frame->winlist = gui_windowlist_new(frame);
+	gtk_paned_add1(GTK_PANED(hbox), frame->winlist->widget);
+
+	vbox2 = gtk_vbox_new(FALSE, 0);
+	gtk_paned_add2(GTK_PANED(hbox), vbox2);
+
 	notebook = gtk_notebook_new();
 	g_signal_connect(G_OBJECT(notebook), "switch_page",
 			 G_CALLBACK(event_switch_page), frame);
 	frame->notebook = GTK_NOTEBOOK(notebook);
 	gtk_notebook_set_tab_pos(frame->notebook, GTK_POS_LEFT);
         gtk_notebook_set_scrollable(frame->notebook, TRUE);
-	gtk_box_pack_start(GTK_BOX(vbox), notebook, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox2), notebook, TRUE, TRUE, 0);
 
 	/* itemlist/entry */
 	hbox = gtk_hbox_new(FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox2), hbox, FALSE, FALSE, 0);
 
 	frame->itemlist = gui_itemlist_new(frame);
 	gtk_box_pack_start(GTK_BOX(hbox), frame->itemlist->widget,

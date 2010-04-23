@@ -166,7 +166,7 @@ WindowView *gui_window_view_new(TabPane *pane, WindowGui *window,
 	return view;
 }
 
-static char *window_get_label(Window *window)
+char *window_get_label(Window *window)
 {
 	GString *str;
 	GSList *tmp;

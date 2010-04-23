@@ -57,6 +57,7 @@ xirssi_SOURCES = \
 	gui-window-activity.c \
 	gui-window-context.c \
 	gui-window-view.c \
+	gui-windowlist.c \
 	setup.c \
 	setup-aliases.c \
 	setup-channels.c \
@@ -94,5 +95,6 @@ noinst_HEADERS = \
 	gui-window-context.h \
 	gui-window-item-rec.h \
 	gui-window-view.h \
+	gui-windowlist.h \
 	setup.h \
 	module.h

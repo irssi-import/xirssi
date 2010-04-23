@@ -1,6 +1,8 @@
 #ifndef __GUI_FRAME_H
 #define __GUI_FRAME_H
 
+#include "gui-windowlist.h"
+
 struct _Frame {
 	GtkWidget *widget;
 
@@ -14,6 +16,9 @@ struct _Frame {
 	GSList *focusable_widgets;
 
 	Tab *active_tab;
+
+	WindowList *winlist;
+
 	unsigned int destroying:1;
 };
 
