@@ -47,7 +47,7 @@ static gint gui_windowlist_sort_func(GtkTreeModel *model,
 	pos_a = gtk_notebook_page_num(GTK_NOTEBOOK(tab_a->frame->notebook), tab_a->widget);
 	pos_b = gtk_notebook_page_num(GTK_NOTEBOOK(tab_b->frame->notebook), tab_b->widget);
 
-	return (pos_b - pos_a);
+	return (pos_a - pos_b);
 }
 
 static void tab_id_set_func(GtkTreeViewColumn *column,
@@ -105,6 +105,7 @@ WindowList *gui_windowlist_new(Frame *frame)
         gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(win), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
 	tv = gtk_tree_view_new_with_model(GTK_TREE_MODEL(winlist->store));
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(tv), FALSE);
 	gtk_container_add(GTK_CONTAINER(win), tv);
 
 	col = gtk_tree_view_column_new();
@@ -117,15 +118,44 @@ WindowList *gui_windowlist_new(Frame *frame)
         gtk_tree_view_column_pack_end(col, renderer, TRUE);
 	gtk_tree_view_column_set_cell_data_func(col, renderer, tab_name_set_func, NULL, NULL);
 
+	gtk_tree_view_append_column(GTK_TREE_VIEW(tv), col);
+
 	return winlist;
+}
+
+static void gui_windowlist_new_tab(Tab *tab)
+{
+	GtkTreeIter iter;
+
+	gtk_list_store_append(tab->frame->winlist->store, &iter);	
+	gtk_list_store_set(tab->frame->winlist->store, &iter, 0, tab, -1);
+}
+
+static void gui_windowlist_destroy_tab(Tab *tab)
+{
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	Tab *val_tab;
+
+	model = GTK_TREE_MODEL(tab->frame->winlist->store);
+	gtk_tree_model_get_iter_first(model, &iter);
+	do {
+		gtk_tree_model_get(model, &iter, 0, &val_tab, -1);
+		if (val_tab == tab) {
+			gtk_list_store_remove(tab->frame->winlist->store, &iter);
+			break;
+		}
+	} while (gtk_tree_model_iter_next(model, &iter));
 }
 
 void gui_windowlist_init(void)
 {
-
+	signal_add("gui tab created", (SIGNAL_FUNC) gui_windowlist_new_tab);
+	signal_add("gui tab destroyed", (SIGNAL_FUNC) gui_windowlist_destroy_tab);
 }
 
 void gui_windowlist_deinit(void)
 {
-
+	signal_remove("gui tab created", (SIGNAL_FUNC) gui_windowlist_new_tab);
+	signal_remove("gui tab destroyed", (SIGNAL_FUNC) gui_windowlist_destroy_tab);
 }
