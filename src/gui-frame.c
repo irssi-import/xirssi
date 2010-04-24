@@ -193,6 +193,8 @@ Frame *gui_frame_new(int show)
 	frame->notebook = GTK_NOTEBOOK(notebook);
 	gtk_notebook_set_tab_pos(frame->notebook, GTK_POS_LEFT);
         gtk_notebook_set_scrollable(frame->notebook, TRUE);
+	gtk_notebook_set_show_tabs(frame->notebook, FALSE);
+	gtk_notebook_set_show_border(frame->notebook, FALSE);
 	gtk_box_pack_start(GTK_BOX(vbox2), notebook, TRUE, TRUE, 0);
 
 	/* now add the windowlist. */
