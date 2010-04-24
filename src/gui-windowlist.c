@@ -83,6 +83,23 @@ static void tab_name_set_func(GtkTreeViewColumn *column,
 	g_free(tabid);
 }
 
+static void gui_windowlist_switch_tab(Frame *frame,
+				      GtkTreeSelection *selection)
+{
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	Tab *tab;
+	gint index;
+
+	if (!gtk_tree_selection_get_selected(selection, &model, &iter))
+		return;
+
+	gtk_tree_model_get(model, &iter, 0, &tab, -1);
+
+	index = gtk_notebook_page_num(GTK_NOTEBOOK(tab->frame->notebook), tab->widget);
+	gtk_notebook_set_current_page(tab->frame->notebook, index);
+}
+
 WindowList *gui_windowlist_new(Frame *frame)
 {
 	WindowList *winlist;
@@ -91,6 +108,7 @@ WindowList *gui_windowlist_new(Frame *frame)
 	GtkWidget *tv;
 	GtkTreeViewColumn *col;
 	GtkCellRenderer *renderer;
+	GtkTreeSelection *selection;
 
 	winlist = g_new0(WindowList, 1);
 
@@ -120,6 +138,10 @@ WindowList *gui_windowlist_new(Frame *frame)
 	gtk_tree_view_column_set_cell_data_func(col, renderer, tab_name_set_func, NULL, NULL);
 
 	gtk_tree_view_append_column(GTK_TREE_VIEW(tv), col);
+
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(tv));
+	g_signal_connect_swapped(selection, "changed",
+				 G_CALLBACK(gui_windowlist_switch_tab), frame);
 
 	return winlist;
 }
