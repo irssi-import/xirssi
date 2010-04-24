@@ -83,6 +83,26 @@ static void tab_name_set_func(GtkTreeViewColumn *column,
 	g_free(tabid);
 }
 
+static gboolean gui_windowlist_notebook_page_switched(GtkNotebook *notebook,
+						      GtkNotebookPage *page,
+						      gint index,
+						      Frame *frame)
+{
+	GtkTreePath *path;
+	GtkTreeSelection *sel;
+
+	path = gtk_tree_path_new_from_indices(index, -1);
+	sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(frame->winlist->treeview));
+
+	g_signal_handler_block(sel, frame->winlist->changed_sig);
+	gtk_tree_selection_select_path(sel, path);
+	g_signal_handler_unblock(sel, frame->winlist->changed_sig);
+
+	gtk_tree_path_free(path);
+
+	return TRUE;
+}
+
 static void gui_windowlist_switch_tab(Frame *frame,
 				      GtkTreeSelection *selection)
 {
@@ -112,6 +132,7 @@ WindowList *gui_windowlist_new(Frame *frame)
 
 	winlist = g_new0(WindowList, 1);
 
+	winlist->frame = frame;
 	winlist->store = store = gtk_list_store_new(1, G_TYPE_POINTER);
 	gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(store), 0,
 					gui_windowlist_sort_func, NULL, NULL);
@@ -122,7 +143,7 @@ WindowList *gui_windowlist_new(Frame *frame)
         gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(win), GTK_SHADOW_IN);
         gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(win), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
-	tv = gtk_tree_view_new_with_model(GTK_TREE_MODEL(winlist->store));
+	winlist->treeview = tv = gtk_tree_view_new_with_model(GTK_TREE_MODEL(winlist->store));
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(tv), FALSE);
 	gtk_container_add(GTK_CONTAINER(win), tv);
 
@@ -140,8 +161,10 @@ WindowList *gui_windowlist_new(Frame *frame)
 	gtk_tree_view_append_column(GTK_TREE_VIEW(tv), col);
 
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(tv));
-	g_signal_connect_swapped(selection, "changed",
-				 G_CALLBACK(gui_windowlist_switch_tab), frame);
+	winlist->changed_sig = g_signal_connect_swapped(selection, "changed",
+							G_CALLBACK(gui_windowlist_switch_tab), frame);
+	g_signal_connect(frame->notebook, "switch-page",
+			 G_CALLBACK(gui_windowlist_notebook_page_switched), frame);
 
 	return winlist;
 }

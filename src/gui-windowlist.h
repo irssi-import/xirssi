@@ -3,7 +3,10 @@
 
 typedef struct {
 	GtkWidget *widget;
+	GtkWidget *treeview;
 	GtkListStore *store;
+	Frame *frame;
+	gint changed_sig;
 } WindowList;
 
 #include "gui-frame.h"
