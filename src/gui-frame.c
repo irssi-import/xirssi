@@ -184,9 +184,6 @@ Frame *gui_frame_new(int show)
 	hbox = gtk_hpaned_new();
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
 
-	frame->winlist = gui_windowlist_new(frame);
-	gtk_paned_add1(GTK_PANED(hbox), frame->winlist->widget);
-
 	vbox2 = gtk_vbox_new(FALSE, 0);
 	gtk_paned_add2(GTK_PANED(hbox), vbox2);
 
@@ -197,6 +194,10 @@ Frame *gui_frame_new(int show)
 	gtk_notebook_set_tab_pos(frame->notebook, GTK_POS_LEFT);
         gtk_notebook_set_scrollable(frame->notebook, TRUE);
 	gtk_box_pack_start(GTK_BOX(vbox2), notebook, TRUE, TRUE, 0);
+
+	/* now add the windowlist. */
+	frame->winlist = gui_windowlist_new(frame);
+	gtk_paned_add1(GTK_PANED(hbox), frame->winlist->widget);
 
 	/* itemlist/entry */
 	hbox = gtk_hbox_new(FALSE, 0);
