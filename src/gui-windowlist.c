@@ -115,7 +115,8 @@ WindowList *gui_windowlist_new(Frame *frame)
 	gtk_tree_view_column_set_cell_data_func(col, renderer, tab_id_set_func, NULL, NULL);
 
         renderer = gtk_cell_renderer_text_new();
-        gtk_tree_view_column_pack_end(col, renderer, TRUE);
+	gtk_cell_renderer_set_alignment(renderer, 1.0, 0.5);
+	gtk_tree_view_column_pack_end(col, renderer, TRUE);
 	gtk_tree_view_column_set_cell_data_func(col, renderer, tab_name_set_func, NULL, NULL);
 
 	gtk_tree_view_append_column(GTK_TREE_VIEW(tv), col);
