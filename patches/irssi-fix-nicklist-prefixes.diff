@@ -71,7 +71,7 @@ Index: src/irc/core/irc-nicklist.c
  	rec->send_massjoin = send_massjoin;
  
 +	if (prefixes != NULL) {
-+		memcpy(rec->prefixes, prefixes, sizeof(rec->prefixes));
++		strocpy(rec->prefixes, prefixes, sizeof(rec->prefixes));
 +	}
 +
  	nicklist_insert(CHANNEL(channel), rec);
