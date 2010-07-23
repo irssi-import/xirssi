@@ -76,7 +76,6 @@ static void tab_clear_activity(Tab *tab)
 static void sig_activity_update(Window *window)
 {
 	GSList *tmp;
-	GdkColor color;
 
 	for (tmp = WINDOW_GUI(window)->views; tmp != NULL; tmp = tmp->next) {
 		WindowView *view = tmp->data;
@@ -86,11 +85,6 @@ static void sig_activity_update(Window *window)
 				tab_clear_activity(view->pane->tab);
 			continue;
 		}
-
-		/* set color to view's tab */
-		data_level_get_color(view->widget, window->data_level, &color);
-		gtk_widget_modify_fg(GTK_WIDGET(view->pane->label),
-				     GTK_STATE_NORMAL, &color);
 
 		if (view->pane->tab->data_level < window->data_level) {
 			/* update tab's main label's color too */
