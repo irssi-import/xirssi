@@ -220,14 +220,45 @@ static void gui_windowlist_destroy_tab(Tab *tab)
 	} while (gtk_tree_model_iter_next(model, &iter));
 }
 
+static void gui_windowlist_update_window_activity(Window *window)
+{
+	WindowGui *gui;
+	WindowView *view;
+	TabPane *pane;
+	Tab *tab;
+
+	if (!gui_window_is_visible(window) || window->data_level == 0)
+                return;
+
+	gui = WINDOW_GUI(window);
+	g_return_if_fail(gui != NULL);
+
+	view = gui->views->data;
+	g_return_if_fail(view != NULL);
+
+	pane = view->pane;
+	g_return_if_fail(pane != NULL);
+
+	tab = pane->tab;
+	g_return_if_fail(tab != NULL);
+
+	gtk_widget_queue_draw(tab->frame->winlist->treeview);
+}
+
 void gui_windowlist_init(void)
 {
 	signal_add("gui tab created", (SIGNAL_FUNC) gui_windowlist_new_tab);
 	signal_add("gui tab destroyed", (SIGNAL_FUNC) gui_windowlist_destroy_tab);
+
+	signal_add("window hilight", (SIGNAL_FUNC) gui_windowlist_update_window_activity);
+	signal_add("window changed", (SIGNAL_FUNC) gui_windowlist_update_window_activity);
 }
 
 void gui_windowlist_deinit(void)
 {
 	signal_remove("gui tab created", (SIGNAL_FUNC) gui_windowlist_new_tab);
 	signal_remove("gui tab destroyed", (SIGNAL_FUNC) gui_windowlist_destroy_tab);
+
+	signal_remove("window hilight", (SIGNAL_FUNC) gui_windowlist_update_window_activity);
+	signal_remove("window changed", (SIGNAL_FUNC) gui_windowlist_update_window_activity);
 }
