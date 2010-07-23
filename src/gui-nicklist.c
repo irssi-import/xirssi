@@ -40,6 +40,10 @@ static gint nicklist_sort_func(GtkTreeModel *model,
 	gtk_tree_model_get(model, a, 0, &nick1, 1, &channel_flags, -1);
 	gtk_tree_model_get(model, b, 0, &nick2, 1, &channel_flags, -1);
 
+	/* XXX: this isn't the right solution, but it will have to do. */
+	if (channel_flags == NULL)
+		channel_flags = "~&@%+";
+
 	r = nicklist_compare(nick1, nick2, channel_flags);
 
 	if (r < 0)
