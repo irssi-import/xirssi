@@ -35,11 +35,20 @@ static gint nicklist_sort_func(GtkTreeModel *model,
 {
 	Nick *nick1, *nick2;
 	gpointer channel_flags;
+	gint r;
 
 	gtk_tree_model_get(model, a, 0, &nick1, 1, &channel_flags, -1);
 	gtk_tree_model_get(model, b, 0, &nick2, 1, &channel_flags, -1);
 
-	return nicklist_compare(nick1, nick2, channel_flags);
+	r = nicklist_compare(nick1, nick2, channel_flags);
+
+	if (r < 0)
+		return -1;
+
+	if (r > 0)
+		return 1;
+
+	return 0;
 }
 
 Nicklist *gui_nicklist_new(Channel *channel)
@@ -55,7 +64,6 @@ Nicklist *gui_nicklist_new(Channel *channel)
 					nicklist_sort_func, NULL, NULL);
 	gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(store), 0,
 					     GTK_SORT_ASCENDING);
-
 	signal_emit("gui nicklist created", 1, nicklist);
 	return nicklist;
 }
@@ -108,7 +116,7 @@ static void gui_nicklist_add(Channel *channel, Nick *nick, int update_label)
 	gui->nicklist->nicks++;
 
 	if (channel->server->get_nick_flags != NULL)
-		nick_flags = channel->server->get_nick_flags(channel->server);
+		nick_flags = (gpointer) channel->server->get_nick_flags(channel->server);
 
 	gtk_list_store_append(gui->nicklist->store, &iter);
 	gtk_list_store_set(gui->nicklist->store, &iter,
@@ -188,16 +196,8 @@ static void gui_nicklist_mode_changed(Channel *channel, Nick *nick)
 	gui_nicklist_update_label(gui->nicklist);
 }
 
-static void gui_nicklist_channel_joined(Channel *channel)
-{
-	ChannelGui *gui = CHANNEL_GUI(channel);
-
-	gtk_tree_sortable_sort_column_changed(GTK_TREE_SORTABLE(gui->nicklist->store));
-}
-
 void gui_nicklists_init(void)
 {
-	signal_add("channel joined", (SIGNAL_FUNC) gui_nicklist_channel_joined);
 	signal_add("nicklist new", (SIGNAL_FUNC) gui_nicklist_add);
 	signal_add("nicklist remove", (SIGNAL_FUNC) gui_nicklist_remove);
 	signal_add("nicklist changed", (SIGNAL_FUNC) gui_nicklist_changed);
@@ -206,7 +206,6 @@ void gui_nicklists_init(void)
 
 void gui_nicklists_deinit(void)
 {
-	signal_remove("channel joined", (SIGNAL_FUNC) gui_nicklist_channel_joined);
 	signal_remove("nicklist new", (SIGNAL_FUNC) gui_nicklist_add);
 	signal_remove("nicklist remove", (SIGNAL_FUNC) gui_nicklist_remove);
 	signal_remove("nicklist changed", (SIGNAL_FUNC) gui_nicklist_changed);
