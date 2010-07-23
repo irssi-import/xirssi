@@ -37,7 +37,7 @@
 #include "gui-window.h"
 #include "gui-window-view.h"
 
-#define MAGIC_PADDING 4
+#define MAGIC_PADDING 0
 
 static GtkWidget *arrow_up = NULL, *arrow_down = NULL;
 static GtkWidget *arrow_up_twist = NULL, *arrow_down_twist = NULL;

@@ -34,6 +34,26 @@
 
 extern char *window_get_label(Window *window);
 
+static const gchar *data_level_get_color(int data_level)
+{
+        /* get the color */
+        switch (data_level) {
+        case DATA_LEVEL_NONE:
+		return NULL;
+                break;
+        case DATA_LEVEL_TEXT:
+		return "dark red";
+                break;
+        case DATA_LEVEL_MSG:
+		return "red";
+                break;
+        default:
+                break;
+        }
+
+	return "magenta";
+}
+
 static gint gui_windowlist_sort_func(GtkTreeModel *model,
 				     GtkTreeIter *a, GtkTreeIter *b,
 				     gpointer user_data)
@@ -58,12 +78,15 @@ static void tab_id_set_func(GtkTreeViewColumn *column,
 {
 	Tab *tab;
 	gchar tabid[20];
+	const gchar *color = NULL;
 
 	gtk_tree_model_get(model, iter, 0, &tab, -1);
 
 	g_snprintf(tabid, 20, "%d:", gtk_notebook_page_num(GTK_NOTEBOOK(tab->frame->notebook), tab->widget) + 1);
 
-	g_object_set(G_OBJECT(cell), "text", tabid, NULL);
+	color = data_level_get_color(tab->data_level);
+
+	g_object_set(G_OBJECT(cell), "text", tabid, "foreground", color, NULL);
 }
 
 static void tab_name_set_func(GtkTreeViewColumn *column,
@@ -74,11 +97,14 @@ static void tab_name_set_func(GtkTreeViewColumn *column,
 {
 	Tab *tab;
 	gchar *tabid;
+	const gchar *color = NULL;
 
 	gtk_tree_model_get(model, iter, 0, &tab, -1);
 
 	tabid = window_get_label(tab->active_win);
-	g_object_set(G_OBJECT(cell), "text", tabid, NULL);
+	color = data_level_get_color(tab->data_level);
+
+	g_object_set(G_OBJECT(cell), "text", tabid, "foreground", color, NULL);
 
 	g_free(tabid);
 }
