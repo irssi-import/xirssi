@@ -48,28 +48,6 @@ static void sig_activity(Window *window)
 	signal_stop();
 }
 
-static void data_level_get_color(GtkWidget *widget, int data_level,
-				 GdkColor *color)
-{
-	/* get the color */
-	switch (data_level) {
-	case DATA_LEVEL_NONE:
-		gdk_color_parse("black", color);
-		break;
-	case DATA_LEVEL_TEXT:
-		gdk_color_parse("dark red", color);
-		break;
-	case DATA_LEVEL_MSG:
-		gdk_color_parse("red", color);
-		break;
-	default:
-		gdk_color_parse("magenta", color);
-		break;
-	}
-
-        gdk_color_alloc(gtk_widget_get_colormap(widget), color);
-}
-
 static void tab_update_activity(Tab *tab)
 {
 	GdkColor color;
@@ -86,31 +64,13 @@ static void tab_update_activity(Tab *tab)
 			data_level = pane->view->window->window->data_level;
 	}
 	tab->data_level = data_level;
-
-	/* change the tab's color */
-	data_level_get_color(tab->widget, data_level, &color);
-	gtk_widget_modify_fg(GTK_WIDGET(tab->label), GTK_STATE_NORMAL, &color);
 }
 
 static void tab_clear_activity(Tab *tab)
 {
-	GdkColor color;
 	GList *tmp;
 
-	data_level_get_color(tab->widget, 0, &color);
-
-	/* update tab's label */
 	tab->data_level = 0;
-	gtk_widget_modify_fg(GTK_WIDGET(tab->label),
-			     GTK_STATE_NORMAL, &color);
-
-	/* update panes' labels */
-	for (tmp = tab->panes; tmp != NULL; tmp = tmp->next) {
-		TabPane *pane = tmp->data;
-
-		gtk_widget_modify_fg(GTK_WIDGET(pane->label),
-				     GTK_STATE_NORMAL, &color);
-	}
 }
 
 static void sig_activity_update(Window *window)
