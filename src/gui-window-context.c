@@ -194,7 +194,7 @@ void gui_window_print_mark_context(WindowGui *window, TextDest *dest,
 	line = gtk_text_iter_get_line(iter);
 	index = gtk_text_iter_get_line_index(iter);
 	for (start = text; ; text++) {
-		if (*text != '\0' && *text != '\t' && *text != ' ')
+		if (*text != '\0' && *text != '\t' && *text != ' ' && *text != '\r' && *text != '\n')
 			continue;
 
 		if (text == start)
