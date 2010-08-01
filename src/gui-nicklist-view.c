@@ -335,6 +335,10 @@ void gui_nicklist_views_init(void)
 	/* inspircd/conferenceroom halfvoice... */
 	status_pixbufs['-'] = gdk_pixbuf_new_from_inline(sizeof(ball_orange),
 						  ball_orange, FALSE, NULL);
+
+	/* inspircd operprefix, bleah. */
+	status_pixbufs['*'] = gdk_pixbuf_new_from_inline(sizeof(ball_blue),
+						ball_blue, FALSE, NULL);
 }
 
 void gui_nicklist_views_deinit(void)
