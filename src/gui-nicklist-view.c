@@ -27,11 +27,15 @@
 #include "gui-nicklist-view.h"
 #include "gui-menu.h"
 
+#include "ball-blue.h"
+#include "ball-pink.h"
+#include "ball-red.h"
 #include "ball-green.h"
-#include "ball-orange.h"
 #include "ball-yellow.h"
+#include "ball-lightblue.h"
+#include "ball-orange.h"
 
-static GdkPixbuf *op_pixbuf, *voice_pixbuf, *halfop_pixbuf;
+static GdkPixbuf *status_pixbufs[256];
 
 static gboolean event_destroy(GtkWidget *widget, NicklistView *view)
 {
@@ -198,14 +202,7 @@ static void nick_set_func_pixbuf(GtkTreeViewColumn *column,
 
 	gtk_tree_model_get(model, iter, 0, &nick, -1);
 
-	if (nick->op)
-		pixbuf = op_pixbuf;
-	else if (nick->halfop)
-		pixbuf = halfop_pixbuf;
-	else if (nick->voice)
-		pixbuf = voice_pixbuf;
-	else
-		pixbuf = NULL;
+	pixbuf = status_pixbufs[(unsigned char) *nick->prefixes];
 
 	g_object_set(GTK_CELL_RENDERER(cell), "pixbuf", pixbuf, NULL);
 }
@@ -320,17 +317,33 @@ void gui_nicklist_view_update_label(NicklistView *view, const char *label)
 
 void gui_nicklist_views_init(void)
 {
-	op_pixbuf = gdk_pixbuf_new_from_inline(sizeof(ball_green),
+	memset(&status_pixbufs, 0, sizeof(status_pixbufs));
+
+	status_pixbufs['~'] = gdk_pixbuf_new_from_inline(sizeof(ball_pink),
+						ball_pink, FALSE, NULL);
+	status_pixbufs['!'] = gdk_pixbuf_new_from_inline(sizeof(ball_red),
+						ball_red, FALSE, NULL);
+	status_pixbufs['&'] = gdk_pixbuf_new_from_inline(sizeof(ball_red),
+						ball_red, FALSE, NULL);
+	status_pixbufs['@'] = gdk_pixbuf_new_from_inline(sizeof(ball_green),
 					       ball_green, FALSE, NULL);
-	halfop_pixbuf = gdk_pixbuf_new_from_inline(sizeof(ball_orange),
-						   ball_orange, FALSE, NULL);
-	voice_pixbuf = gdk_pixbuf_new_from_inline(sizeof(ball_yellow),
+	status_pixbufs['%'] = gdk_pixbuf_new_from_inline(sizeof(ball_lightblue),
+						   ball_lightblue, FALSE, NULL);
+	status_pixbufs['+'] = gdk_pixbuf_new_from_inline(sizeof(ball_yellow),
 						  ball_yellow, FALSE, NULL);
+
+	/* inspircd/conferenceroom halfvoice... */
+	status_pixbufs['-'] = gdk_pixbuf_new_from_inline(sizeof(ball_orange),
+						  ball_orange, FALSE, NULL);
 }
 
 void gui_nicklist_views_deinit(void)
 {
-	gdk_pixbuf_unref(op_pixbuf);
-	gdk_pixbuf_unref(halfop_pixbuf);
-	gdk_pixbuf_unref(voice_pixbuf);
+	gint i;
+
+	for (i = 0; i < 256; i++)
+	{
+		if (status_pixbufs[i] != NULL)
+			gdk_pixbuf_unref(status_pixbufs[i]);
+	}
 }
