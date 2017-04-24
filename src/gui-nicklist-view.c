@@ -348,6 +348,6 @@ void gui_nicklist_views_deinit(void)
 	for (i = 0; i < 256; i++)
 	{
 		if (status_pixbufs[i] != NULL)
-			gdk_pixbuf_unref(status_pixbufs[i]);
+			g_object_unref(status_pixbufs[i]);
 	}
 }

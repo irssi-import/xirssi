@@ -550,6 +550,6 @@ void gui_tabs_init(void)
 
 void gui_tabs_deinit(void)
 {
-	gdk_pixbuf_unref(move_pixbuf);
-	gdk_pixbuf_unref(right_pixbuf);
+	g_object_unref(move_pixbuf);
+	g_object_unref(right_pixbuf);
 }

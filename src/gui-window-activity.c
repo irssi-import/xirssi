@@ -50,7 +50,6 @@ static void sig_activity(Window *window)
 
 static void tab_update_activity(Tab *tab)
 {
-	GdkColor color;
 	GList *tmp;
 	int data_level;
 
@@ -68,8 +67,6 @@ static void tab_update_activity(Tab *tab)
 
 static void tab_clear_activity(Tab *tab)
 {
-	GList *tmp;
-
 	tab->data_level = 0;
 }
 

@@ -80,7 +80,7 @@ char *gui_keyboard_get_event_string(GdkEventKey *event)
 	if (event->keyval > 255) {
 		len = cmd->len;
 		g_string_append(cmd, gdk_keyval_name(event->keyval));
-		g_strdown(cmd->str+len);
+		ascii_strdown(cmd->str+len);
 	} else if (event->keyval == ' ')
 		g_string_append(cmd, "space");
 	else if (event->keyval == '\n')

@@ -133,7 +133,7 @@ static void network_remove_with_channels(const char *network)
 
 		next = tmp->next;
 		if (channel->chatnet == NULL ||
-		    g_strcasecmp(channel->chatnet, network) != 0)
+		    g_ascii_strcasecmp(channel->chatnet, network) != 0)
 			continue;
 
                 channel_setup_remove(channel);
@@ -198,7 +198,7 @@ static gboolean store_find_network_func(GtkTreeModel *model, GtkTreePath *path,
 		return FALSE;
 
 	gtk_tree_model_get(model, iter, COL_NAME, &iter_name, -1);
-	if (g_strcasecmp(iter_name, rec->network) == 0) {
+	if (g_ascii_strcasecmp(iter_name, rec->network) == 0) {
 		rec->found = TRUE;
 		memcpy(rec->iter, iter, sizeof(GtkTreeIter));
 	}
@@ -433,7 +433,7 @@ static void sig_channel_added(ChannelConfig *channel)
 			/* we were below a network */
 			gtk_tree_model_get(model, &parent, COL_NAME, &name, -1);
 			if (channel->chatnet == NULL ||
-			    g_strcasecmp(channel->chatnet, name) != 0)
+			    g_ascii_strcasecmp(channel->chatnet, name) != 0)
 				append = TRUE;
 			g_free(name);
 		} else {
@@ -492,7 +492,7 @@ static int network_has_channels(const char *network)
 		CHANNEL_SETUP_REC *rec = tmp->data;
 
 		if (rec->chatnet != NULL &&
-		    g_strcasecmp(rec->chatnet, network) == 0)
+		    g_ascii_strcasecmp(rec->chatnet, network) == 0)
 			return TRUE;
 	}
 

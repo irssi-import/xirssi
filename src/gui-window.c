@@ -309,11 +309,9 @@ static void sig_window_created(Window *window, void *automatic)
 static void sig_window_destroyed(Window *window)
 {
 	WindowGui *gui;
-	GtkWidget *widget;
 	Frame *frame;
 
 	gui = WINDOW_GUI(window);
-	widget = gui->widget;
 
 	signal_emit("gui window destroyed", 1, gui);
 

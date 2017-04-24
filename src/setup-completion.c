@@ -109,7 +109,7 @@ static CONFIG_NODE *completion_find_node(const char *key, int create)
 	if (node == NULL)
 		return NULL;
 
-	return config_node_section(node, key, create ? NODE_TYPE_BLOCK : -1);
+	return iconfig_node_section(node, key, create ? NODE_TYPE_BLOCK : -1);
 }
 
 static void completion_edited(GtkCellRendererText *cell, char *path_string,

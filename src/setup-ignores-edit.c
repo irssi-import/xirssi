@@ -125,7 +125,13 @@ static void ignore_channels_store_fill(GtkListStore *store, Ignore *ignore)
 static void regexp_update_invalid(GtkToggleButton *toggle, GtkEntry *entry,
 				  GtkWidget *label)
 {
-	regex_t preg;
+#ifdef USE_GREGEX
+        GRegex *preg;
+	GError *re_error;
+#else
+        regex_t preg;
+	int regexp_compiled;
+#endif
 	const char *text;
 
 	if (!gtk_toggle_button_get_active(toggle)) {
@@ -135,6 +141,22 @@ static void regexp_update_invalid(GtkToggleButton *toggle, GtkEntry *entry,
 	}
 
 	text = gtk_entry_get_text(entry);
+#ifdef USE_GREGEX
+	re_error = NULL;
+        preg = g_regex_new(text, G_REGEX_OPTIMIZE | G_REGEX_RAW | G_REGEX_CASELESS, 0, &re_error);
+	g_error_free(re_error);
+
+	if (preg != NULL) {
+		/* regexp ok */
+                g_regex_unref(preg);
+
+		gtk_widget_hide(label);
+	} else {
+		/* invalid regexp - show the error label */
+		gtk_widget_show(label);
+	}
+
+#else
 	if (regcomp(&preg, text, REG_EXTENDED|REG_ICASE|REG_NOSUB) == 0) {
 		/* regexp ok */
                 regfree(&preg);
@@ -144,6 +166,7 @@ static void regexp_update_invalid(GtkToggleButton *toggle, GtkEntry *entry,
 		/* invalid regexp - show the error label */
 		gtk_widget_show(label);
 	}
+#endif
 }
 
 static gboolean event_pattern_changed(GtkEntry *entry, GObject *obj)

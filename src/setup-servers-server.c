@@ -64,9 +64,9 @@ static void server_save(GObject *obj, ServerConfig *server)
 
 	entry = g_object_get_data(obj, "ipproto");
 	value = gtk_entry_get_text(entry);
-	if (g_strcasecmp(value, "ipv4") == 0)
+	if (g_ascii_strcasecmp(value, "ipv4") == 0)
 		server->family = AF_INET;
-	else if (g_strcasecmp(value, "ipv6") == 0)
+	else if (g_ascii_strcasecmp(value, "ipv6") == 0)
 		server->family = AF_INET6;
 	else
 		server->family = 0;

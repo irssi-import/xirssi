@@ -227,7 +227,7 @@ static void network_remove_with_servers(NetworkConfig *network)
 
 		next = tmp->next;
 		if (server->chatnet == NULL ||
-		    g_strcasecmp(server->chatnet, network->name) != 0)
+		    g_ascii_strcasecmp(server->chatnet, network->name) != 0)
 			continue;
 
                 server_setup_remove(server);
@@ -349,7 +349,7 @@ static void server_store_fill_network(GtkTreeStore *store, GtkTreeIter *parent,
 			continue;
 
 		if (server->chatnet == NULL ||
-		    g_strcasecmp(server->chatnet, network->name) != 0)
+		    g_ascii_strcasecmp(server->chatnet, network->name) != 0)
 			continue;
 
 		gtk_tree_store_append(store, &iter, parent);
@@ -606,7 +606,7 @@ static void sig_server_added(ServerConfig *server)
 			gtk_tree_model_get(model, &parent, COL_PTR,
 					   &network, -1);
 			if (server->chatnet == NULL ||
-			    g_strcasecmp(server->chatnet, network->name) != 0)
+			    g_ascii_strcasecmp(server->chatnet, network->name) != 0)
 				append = TRUE;
 		} else {
 			/* we didn't have network */

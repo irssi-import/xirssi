@@ -70,7 +70,7 @@ static void create_pixmap_popup(GtkWidget **widget, char **data)
 
 	pixbuf = gdk_pixbuf_new_from_xpm_data((const char **) data);
         gdk_pixbuf_render_pixmap_and_mask(pixbuf, &pixmap, &bitmap, 128);
-        gdk_pixbuf_unref(pixbuf);
+        g_object_unref(pixbuf);
 
 	win = gtk_window_new(GTK_WINDOW_POPUP);
 	image = gtk_image_new_from_pixmap(pixmap, bitmap);
